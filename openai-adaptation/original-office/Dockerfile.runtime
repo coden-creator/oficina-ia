@@ -31,6 +31,7 @@ ENV NODE_ENV=production HOST=0.0.0.0 PORT=3000 OFFICE_VIDEO_DATA_DIR=/data/video
 COPY --chown=node:node server.mjs start.mjs agents-display.json ./
 COPY --chown=node:node public/ ./public/
 COPY --chown=node:node video/ ./video/
+COPY --chown=node:node connections/ ./connections/
 COPY --chown=node:node production/reference-standard.mjs ./production/reference-standard.mjs
 COPY --chown=node:node codex/ ./codex/
 COPY --chown=node:node scripts/ ./scripts/

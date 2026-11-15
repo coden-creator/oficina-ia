@@ -6,6 +6,7 @@ RUN mkdir -p /data/video && chown node:node /data /data/video && chmod 700 /data
 COPY --chown=node:node server.mjs start.mjs agents-display.json ./
 COPY --chown=node:node public/ ./public/
 COPY --chown=node:node video/ ./video/
+COPY --chown=node:node connections/ ./connections/
 COPY --chown=node:node production/reference-standard.mjs ./production/reference-standard.mjs
 USER node
 EXPOSE 3000

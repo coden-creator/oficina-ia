@@ -45,4 +45,9 @@
 !production/reference-standard.mjs
 
 !public/navigation.js
+!public/connections-panel.js
+!connections/
+!connections/store.mjs
+!connections/http.mjs
+!connections/elevenlabs.mjs
 scripts/probe-tool-inventory.mjs

@@ -1,5 +1,7 @@
 # Original shell + protected internal video workflow
 
+> Revisión actual (código, pendiente de despliegue): [recuperación del departamento orgánico](production/RECUPERACION-CONTENIDO-ORGANICO.md) identifica el motor original y lo que falta portar. Se añade [configuración de ElevenLabs en Conexiones](connections/README.md) y descarte de ideas con historial; no se habilita síntesis ni publicación.
+
 > Corrección creativa: Jorge rechazó el acabado de tarjetas y fijó dos referencias como mínimo audiovisual. Ver [directrices vigentes](production/ESTANDAR-AUDIOVISUAL.md). La prueba de conexión sigue siendo evidencia técnica, no aceptación del video.
 
 > Estado verificado (15 noviembre 2026): Jorge completó el login oficial; el trabajador privado de Codex ya está desplegado y Docker lo reportó saludable. La web de revisión y el trabajador están saludables. La ficha Glowfy, versión 2, completó las cinco etapas con Codex real y generó un MP4 silencioso de 9 segundos; descarga, SHA256 y decodificación comprobados. Permanece pendiente de aprobación de Jorge. Ver [evidencia del video real](production/evidence/first-real-video.json). La entrega vigente usa un trabajador Compose y una web Swarm porque CodeNet no es attachable. Consultar [IMPLEMENTACION.md](deployment-review/IMPLEMENTACION.md) para el procedimiento y los límites actuales. Los apartados posteriores conservan evidencia histórica; no describen por sí solos el despliegue vigente.
@@ -11,7 +13,7 @@ Historical local-build notes follow; current deployment status is recorded above
 - Optional video panel saves requests for five separate brands, with objective and CTA.
 - Authenticated HTTP workflow connects to createVideoFlow: create/list/get/run/requestChanges/accept version+hash.
 - API exposes artifact URL only, never absolute file path. Download authenticates, checks brand/job/version, real path confinement, MP4 kind/size and SHA256.
-- Accept means accept_artifact_only, not publication. API has no publisher, credential setup or spending action. Paid calls, voice and cloning unsupported.
+- Accept means accept_artifact_only, not publication. API has no publisher or spending action. Optional credential setup is described above. Paid calls, voice and cloning unsupported.
 - Workflow storage and model runtime are separate. Server starts no model process and uses no adapter by default. Without connected runner, run persists blocked rather than inventing content.
 
 ## Deployment behavior

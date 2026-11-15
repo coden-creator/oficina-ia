@@ -2,6 +2,7 @@
 import {OfficeHQ} from './officehq.js';
 import {mountVideoPanel} from './video-panel.js';
 import {mountNavigation} from './navigation.js';
+import {mountConnectionsPanel} from './connections-panel.js';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const notice=$('#compat-notice');
 const config=await fetch('/api/config').then(r=>{if(!r.ok)throw Error('config');return r.json();}).catch(()=>{notice.textContent='No se pudo cargar la oficina. Revisa la conexión o vuelve a iniciar sesión. Las acciones siguen deshabilitadas.';throw new Error('OFFICE_CONFIG_UNAVAILABLE');});
@@ -30,4 +31,5 @@ notice.textContent=config.provider==='codex-chatgpt-plan'?'Oficina de contenido 
 
 let videoPanel;
 const navigation=mountNavigation({config,office,onBrandChange:brand=>videoPanel?.setBrand(brand)??true});
+mountConnectionsPanel(document.querySelector('[data-view="conexiones"]'));
 if(config.features.videoWorkflow==='internal-workflow-only')videoPanel=mountVideoPanel(document.querySelector('[data-view="estudio"]'),{onBrandChange:brand=>navigation.syncBrand(brand)});
