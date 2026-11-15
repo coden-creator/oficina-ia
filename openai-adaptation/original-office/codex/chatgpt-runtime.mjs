@@ -51,7 +51,11 @@ export class ChatGPTDraftRuntime {
    this.adapter=new OfficeAdapter(this.connection.rpc,{workspace:this.workspace,model:this.model,env:{},readOnlyToolBridge:this.toolBridge});
    this.connection.rpc.on('closed',()=>{if(this.adapter)this.adapter.ready=false;});
    await this.adapter.initialize();return this.status();
-  }catch(e){this.close();throw new Error('CHATGPT_CONNECTION_UNAVAILABLE');}
+  }catch(e){
+   this.close();
+   const localFailures=['ABSOLUTE_PATHS_REQUIRED','ISOLATED_HOME_REQUIRED','HOME_NOT_CLEAN','HOME_SYMLINK_REJECTED','CUSTOM_SKILLS_NOT_ALLOWED','OWNER_CHATGPT_LOGIN_REQUIRED','AUTH_SYMLINK_REJECTED','API_CREDENTIAL_REJECTED','ISOLATED_WORKSPACE_REQUIRED','EMPTY_WORKSPACE_REQUIRED','HOST_ISOLATION_NOT_VERIFIED','EXPLICIT_OPERATOR_ENABLE_REQUIRED'];
+   throw new Error(localFailures.includes(e?.message)?e.message:'CHATGPT_CONNECTION_UNAVAILABLE');
+  }
  }
  async draft(prompt, { outputSchema } = {}){
   if(!this.adapter?.ready)throw new Error('CHATGPT_LOGIN_REQUIRED');

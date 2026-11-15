@@ -10,7 +10,7 @@ f2d604087f8eee9c556831daa25fb8b59b5e3ff84c9f8c3c2fc65ac5e587921c  ./Dockerfile
 22beff9f2a129722754b9f883c44dbac589ab28ced3fc167edab584fb4ba2db0  ./TEST-RESULTS.txt
 71e1b74c2e6eee5797ab268530d1919d64ea976edd66c33f8856bb0f1fdb633d  ./agents-display.json
 66bf8b074ddaacbcc9ef176def1110cd88d18930244ae403bb56eddb2377db57  ./codex/adapter.mjs
-7dff7af28b9e766384433504945e062b7e770ccd982169a17a3e1aeb74298f78  ./codex/chatgpt-runtime.mjs
+19abb0f4d001a0a8d202e20f8fde943651458f92c120f5f8ff7bbee47198985c  ./codex/chatgpt-runtime.mjs
 4ab657044143a8f1860b564be9da3c58f3eafd4482da000bf6149732fb48a676  ./codex/event-stream.mjs
 16ef518f93979ccc6e3033e2af3ee89b83ba682292fb3d4ceb3020dbd6b405dc  ./codex/read-only-tools.mjs
 4d7286a7f0941727aa57975c2c2023219dfbbfd235723adc334494e9e4d87d10  ./codex/stdio-transport.mjs
@@ -80,13 +80,13 @@ aa2eecd9f9748da3c23b6e91e7efaf1f3864406633fe5214890cd6e0ee32d185  ./video/storag
 de34bd5baf54cd341d8795ee24e1506b9efb47d1dc433dafc2ab89c3a424ecf5  ./production/evidence/container-offline-check.md
 5501ff7d786495f99189c0c4b24a5de085de842ce308475a36ac48d01db370be  ./scripts/probe-tool-inventory.mjs
 37c74fb83d73be8fa9d735818d8660885a3e668ca2921b1d5562bdd99f32dbf4  ./codex/broker.mjs
-186f63757dfc51a7804cf8b1f5b7d67c2ec8d4f03da8f7aa744388ef41f17b06  ./codex/start-broker.mjs
+41e683dd5a41e85d7461460743caa83042ece30ff81ff93579698e3a7b0ae15a  ./codex/start-broker.mjs
 95fa8d0f0f88fe636d068d37f55345ffb03c05ff12679960f00f2c73d627241c  ./video/remote-runner.mjs
 3bbf6699e734911295b61d4857fa68831dd44bccf0e1e7d3379f00460eb64355  ./test/remote-runner.test.mjs
 137bf2f0bfcffb695de7ee8707962794215375e2c80c4557c42066a69672e299  ./test/fixtures/synthetic-broker.mjs
 be975a660b27d6ad015fc2be01ee5a635ddbcf251f52ff3bdd195ea931e8b173  ./scripts/verify-runtime-container.sh
 651eddec731592f20cb7b3f654bed05114324240f734674a0a669390cef6f12a  ./scripts/probe-separated-containers.py
-1cad40fb505c17c8f320c0a88bbc8f647ab82e1cb5c7cbc37963c07d5542f211  ./deployment-review/IMPLEMENTACION.md
+2c026fb1676e3dbae6ab771b9f6a96cb1a78fd15e90ed9cee5891a27814ffd46  ./deployment-review/IMPLEMENTACION.md
 5cee47921f1dcf3fb686e14be3e5e45f8630402534919f8b7d5f78ac05483cab  ./deployment-review/compose.review.yml
 07344abcf5b0146331d1378fc8509682f73752f077e5e83384647cafb359abb2  ./production/evidence/release-local-checks.json
 7abca1cdcdc8a23d1a0499815c09d2a79728be95d85f0bfa6bb9125e1a88abea  ./scripts/login-codex.sh

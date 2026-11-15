@@ -3,13 +3,20 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {validateRuntimeHomeEntries as packaged,launchIsolatedCodex} from '../original-office/codex/chatgpt-runtime.mjs';
+import {validateRuntimeHomeEntries as packaged,launchIsolatedCodex,ChatGPTDraftRuntime} from '../original-office/codex/chatgpt-runtime.mjs';
 
 function home(t){
  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'office-home-test-'));
  t.after(()=>fs.rmSync(dir,{recursive:true,force:true}));
  return dir;
 }
+test('packaged connection preserves only allowlisted local startup diagnostics',async()=>{
+ for(const [message,expected] of [['HOME_NOT_CLEAN','HOME_NOT_CLEAN'],['HOST_ISOLATION_NOT_VERIFIED','HOST_ISOLATION_NOT_VERIFIED'],['private-token /private/path','CHATGPT_CONNECTION_UNAVAILABLE']]){
+  const runtime=new ChatGPTDraftRuntime({workspace:'/tmp/fixture-only',model:'fixture',childFactory:()=>{throw Error(message);}});
+  await assert.rejects(runtime.connect(),error=>error.message===expected);
+  assert.equal(runtime.status().transportConnected,false);
+ }
+});
 test('packaged runtime still refuses to launch without verified isolation after official login files exist',t=>{
  const dir=home(t),workspace=home(t);
  fs.writeFileSync(path.join(dir,'auth.json'),'{}');
