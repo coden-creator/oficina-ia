@@ -11,7 +11,7 @@ export function createVideoHttpHandler({flow,dataDir,origin}){
  return async(req,res)=>{
   if(!req.url.startsWith('/api/video-workflows'))return false;
   try{
-   if(req.url==='/api/video-workflows/capabilities'&&req.method==='GET'){send(res,200,{...flow.capabilities(),brandProfiles:brands});return true;}
+   if(req.url==='/api/video-workflows/capabilities'&&req.method==='GET'){await flow.refreshConnection?.();send(res,200,{...flow.capabilities(),brandProfiles:brands});return true;}
    const match=/^\/api\/video-workflows\/([a-z]+)(?:\/([a-z0-9-]{1,80})(?:\/(run|approve|changes|artifact))?)?(?:\?v=(\d+))?$/.exec(req.url);
    if(!match){send(res,404,{error:'NOT_FOUND'});return true;}
    const [,brand,id,action,version]=match;

@@ -17,6 +17,7 @@
 !video/http.mjs
 !video/video-flow.mjs
 !video/storage-preflight.mjs
+!video/remote-runner.mjs
 
 !Dockerfile.runtime
 !runtime-package/

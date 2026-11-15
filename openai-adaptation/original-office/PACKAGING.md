@@ -1,5 +1,7 @@
 # Runtime packaging: prepared, not deployed or authenticated
 
+> Actualización de esta rama (15 noviembre 2026): existe una conexión opt-in a un trabajador Codex por socket Unix. La imagen de runtime se construyó localmente y pasó comprobaciones sin cuenta real. Los párrafos históricos de abajo describen etapas anteriores; consultar [la entrega de implementación](deployment-review/IMPLEMENTACION.md) y [la evidencia actual](production/evidence/container-offline-check.md). No se desplegó esta entrega ni se realizó inferencia autenticada.
+
 ## Verified inputs
 - Official npm `@openai/codex@0.167.0-alpha.4`; package-lock includes platform packages with SHA512 integrity. `npm ci --ignore-scripts` succeeded in the build investigation environment.
 - Exact binary from that downloaded npm package responded `codex-cli 0.167.0-alpha.4`; fresh-home app-server initialize and account/read succeeded with account:null. No login, thread turn or inference performed.

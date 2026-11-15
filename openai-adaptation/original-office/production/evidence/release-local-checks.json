@@ -1,0 +1,153 @@
+{
+  "imageId": "sha256:da248f4a392dbc43ffa2ee565db92de679b7381eccf51c68034a7a3b1552d96a",
+  "productionDeployed": false,
+  "authenticatedInference": false,
+  "checks": [
+    {
+      "configurationGatePassed": true,
+      "enabledOrMissing": [],
+      "authAttempted": false,
+      "inferenceAttempted": false,
+      "adversarialToolIsolationVerified": false
+    },
+    {
+      "version": "codex-cli 0.167.0-alpha.4",
+      "initialize": true,
+      "account": null,
+      "authenticationRequired": true,
+      "loginPerformed": false,
+      "inferencePerformed": false,
+      "toolIsolationVerified": false
+    },
+    {
+      "passed": true,
+      "mode": "app-server",
+      "attack": "request_user_input",
+      "exitCode": 0,
+      "syntheticRequests": 2,
+      "announcedTools": [
+        "request_user_input"
+      ],
+      "forbiddenTools": [],
+      "blockedRequests": [],
+      "toolResults": [
+        "request_user_input is unavailable in Default mode"
+      ],
+      "canaryLeaked": false,
+      "unexpectedFileChange": false,
+      "authUsed": false,
+      "realInference": false,
+      "adversarialIsolationVerified": false
+    },
+    {
+      "passed": true,
+      "mode": "app-server",
+      "attack": "view_image",
+      "exitCode": 0,
+      "syntheticRequests": 2,
+      "announcedTools": [
+        "request_user_input"
+      ],
+      "forbiddenTools": [],
+      "blockedRequests": [],
+      "toolResults": [
+        "unsupported call: view_image"
+      ],
+      "canaryLeaked": false,
+      "unexpectedFileChange": false,
+      "authUsed": false,
+      "realInference": false,
+      "adversarialIsolationVerified": false
+    },
+    {
+      "passed": true,
+      "mode": "app-server",
+      "attack": "shell",
+      "exitCode": 0,
+      "syntheticRequests": 2,
+      "announcedTools": [
+        "request_user_input"
+      ],
+      "forbiddenTools": [],
+      "blockedRequests": [],
+      "toolResults": [
+        "unsupported call: shell"
+      ],
+      "canaryLeaked": false,
+      "unexpectedFileChange": false,
+      "authUsed": false,
+      "realInference": false,
+      "adversarialIsolationVerified": false
+    },
+    {
+      "passed": true,
+      "mode": "app-server",
+      "attack": "exec_command",
+      "exitCode": 0,
+      "syntheticRequests": 2,
+      "announcedTools": [
+        "request_user_input"
+      ],
+      "forbiddenTools": [],
+      "blockedRequests": [],
+      "toolResults": [
+        "unsupported call: exec_command"
+      ],
+      "canaryLeaked": false,
+      "unexpectedFileChange": false,
+      "authUsed": false,
+      "realInference": false,
+      "adversarialIsolationVerified": false
+    },
+    {
+      "passed": true,
+      "mode": "app-server",
+      "attack": "apply_patch",
+      "exitCode": 0,
+      "syntheticRequests": 2,
+      "announcedTools": [
+        "request_user_input"
+      ],
+      "forbiddenTools": [],
+      "blockedRequests": [],
+      "toolResults": [
+        "unsupported call: apply_patch"
+      ],
+      "canaryLeaked": false,
+      "unexpectedFileChange": false,
+      "authUsed": false,
+      "realInference": false,
+      "adversarialIsolationVerified": false
+    },
+    {
+      "passed": true,
+      "mode": "app-server",
+      "attack": "unknown_tool",
+      "exitCode": 0,
+      "syntheticRequests": 2,
+      "announcedTools": [
+        "request_user_input"
+      ],
+      "forbiddenTools": [],
+      "blockedRequests": [],
+      "toolResults": [
+        "unsupported call: unknown_tool"
+      ],
+      "canaryLeaked": false,
+      "unexpectedFileChange": false,
+      "authUsed": false,
+      "realInference": false,
+      "adversarialIsolationVerified": false
+    }
+  ],
+  "syntheticContainerFlow": {
+    "id": "f3790335-2f44-42d3-aff4-0a19f054be8a",
+    "sha256": "4d0224f838bef3c155429aeb7a6b67de45890aa5129a517b3b8fe8219d64317e",
+    "bytes": 145229,
+    "state": "approved",
+    "model": "synthetic",
+    "publishing": false
+  },
+  "persistedAfterRestart": true,
+  "sourceTestsPassed": 91
+}

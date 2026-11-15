@@ -26,7 +26,7 @@ for(const view of $$('.view'))if(view.dataset.view!=='oficina'){
  banner.append(title,detail);view.prepend(banner);
 }
 $('#clock').textContent=new Date().toLocaleString('es-MX',{timeZone:config.timezone});
-notice.textContent='Interfaz original recuperada · Sin IA ni servicios conectados. La animación es visual, no trabajo real.';
+notice.textContent=config.provider==='codex-chatgpt-plan'?'Oficina de contenido · Codex conectado para solicitudes. La animación de la oficina es ambiental. Cada pieza requiere tu revisión.':'Interfaz original recuperada · Sin IA ni servicios conectados. La animación es visual, no trabajo real.';
 
 let videoPanel;
 const navigation=mountNavigation({config,office,onBrandChange:brand=>videoPanel?.setBrand(brand)??true});

@@ -3,7 +3,9 @@
 FROM node:22.16.0-bookworm-slim AS codex-install
 WORKDIR /install
 COPY runtime-package/package.json runtime-package/package-lock.json ./
-RUN npm ci --omit=dev --ignore-scripts --no-audit --no-fund \
+RUN --mount=type=secret,id=npm_ca \
+    if [ -f /run/secrets/npm_ca ]; then export npm_config_cafile=/run/secrets/npm_ca; fi \
+ && npm ci --omit=dev --ignore-scripts --no-audit --no-fund \
  && node node_modules/@openai/codex/bin/codex.js --version | grep -Fx 'codex-cli 0.167.0-alpha.4' \
  && bin="$(find node_modules/@openai -type f -path '*/vendor/*/bin/codex')" \
  && test "$(printf '%s\n' "$bin" | wc -l)" -eq 1 \
@@ -19,9 +21,9 @@ RUN apt-get update \
 COPY --from=codex-install --chmod=755 /codex-vendor/ /opt/codex-vendor/
 RUN ln -s /opt/codex-vendor/bin/codex /usr/local/bin/codex
 RUN /usr/local/bin/codex --version | grep -Fx 'codex-cli 0.167.0-alpha.4' \
- && mkdir -p /data/video /home/node/codex-isolated /home/node/empty-workspace \
- && chown -R node:node /data /home/node/codex-isolated /home/node/empty-workspace \
- && chmod 700 /data /data/video /home/node/codex-isolated /home/node/empty-workspace
+ && mkdir -p /data/video /run/office /home/node/codex-isolated /home/node/empty-workspace \
+ && chown -R node:node /data /run/office /home/node/codex-isolated /home/node/empty-workspace \
+ && chmod 700 /data /data/video /run/office /home/node/codex-isolated /home/node/empty-workspace
 COPY runtime-package/requirements.toml /etc/codex/requirements.toml
 RUN chown root:root /etc/codex/requirements.toml && chmod 644 /etc/codex/requirements.toml
 WORKDIR /app

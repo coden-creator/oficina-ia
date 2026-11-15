@@ -1,0 +1,73 @@
+# Prepared for a NEW, isolated review stack. Do not deploy alongside a router
+# serving the same hostname. Existing EasyPanel service/volumes are not adopted.
+version: '3.8'
+services:
+  office:
+    image: ${OFFICE_IMAGE:?Set reviewed image digest or immutable tag}
+    user: '1000:1000'
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs: ['/tmp:size=134217728,mode=1777']
+    environment:
+      OFFICE_ORIGIN: https://${OFFICE_HOST:?Set separate review hostname}
+      OFFICE_PASSWORD_FILE: /run/secrets/office_password
+      OFFICE_ENABLE_VIDEO_WORKFLOW: '1'
+      OFFICE_ENABLE_LOCAL_RENDER: '1'
+      OFFICE_VIDEO_DATA_DIR: /data/video
+      OFFICE_CODEX_SOCKET: /run/office/codex.sock
+    secrets: [office_password]
+    volumes:
+      - video:/data/video
+      - ipc:/run/office
+    networks: [CodeNet]
+    deploy:
+      replicas: 1
+      placement:
+        constraints: ['node.hostname == ${OFFICE_NODE:?Set target VPS hostname}']
+      resources:
+        limits: {cpus: '1.0', memory: 768M}
+      labels:
+        traefik.enable: 'true'
+        traefik.swarm.network: CodeNet
+        traefik.http.routers.office_review.rule: Host(`${OFFICE_HOST}`)
+        traefik.http.routers.office_review.entrypoints: websecure
+        traefik.http.routers.office_review.tls.certresolver: letsencryptresolver
+        traefik.http.routers.office_review.service: office_review
+        traefik.http.services.office_review.loadbalancer.server.port: '3000'
+        traefik.http.services.office_review.loadbalancer.passHostHeader: 'true'
+  codex:
+    image: ${OFFICE_IMAGE}
+    command: [node, codex/start-broker.mjs]
+    user: '1000:1000'
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs: ['/tmp:size=134217728,mode=1777']
+    healthcheck:
+      disable: true
+    environment:
+      OFFICE_CODEX_ENABLE: '1'
+      OFFICE_CODEX_ISOLATION_VERIFIED: ${OFFICE_CODEX_ISOLATION_VERIFIED:-0}
+      OFFICE_CODEX_MODEL: ${OFFICE_CODEX_MODEL:-}
+      OFFICE_CODEX_SOCKET: /run/office/codex.sock
+    volumes:
+      - auth:/home/node/codex-isolated
+      - ipc:/run/office
+    deploy:
+      replicas: ${OFFICE_CODEX_REPLICAS:-0}
+      placement:
+        constraints: ['node.hostname == ${OFFICE_NODE}']
+      resources:
+        limits: {cpus: '1.0', memory: 768M}
+volumes:
+  video: {}
+  auth: {}
+  ipc: {}
+networks:
+  CodeNet:
+    external: true
+secrets:
+  office_password:
+    external: true
+    name: ${OFFICE_PASSWORD_SECRET:?Set separately provisioned Docker secret name}
