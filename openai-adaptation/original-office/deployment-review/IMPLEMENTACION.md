@@ -2,6 +2,12 @@
 
 ## Estado verificado y siguiente despliegue — 15 noviembre 2026
 
+**Estado actual comprobado:** trabajador `service/oficina-codex` en `codex/worker-r4` (`fc4e8b99b765aec87ead7988306e90a433e1621b`), saludable después de reiniciar y generar; web Swarm de revisión saludable. La sesión original se conservó. La ficha Glowfy `3c2cd214-41cf-4126-a41f-5d0647a7ad6c`, **versión 2**, completó las cinco etapas con Codex real y quedó en `awaiting_review`, sin aprobación ni publicación. El MP4 descargado tiene 256363 bytes y SHA256 `3cf27039185076ac8e7e36ba7266c6ef3ba18fe5fdc92367468afd15637fabde`; se verificaron hash, decodificación completa y tres fotogramas. Es una animática técnica silenciosa de 9 segundos, 360×640, H.264 a 30 fps; no se acredita calidad comercial final. [Evidencia](../production/evidence/first-real-video.json).
+
+Acceso: `https://service-oficina-review.flb2mp.easypanel.host/#/estudio`, marca Glowfy. La versión 1 se conserva en el historial interno de la ficha; la revisión 2 se pidió explícitamente después de corregir la instrucción del revisor. El flujo normal volvió a ejecutar las etapas para esa nueva versión. No se habilitó un bucle de corrección automática ni se llamó al endpoint de aprobación. La oficina pública anterior, la red y el proxy compartidos permanecen independientes.
+
+Los párrafos siguientes son el registro de diagnóstico y recuperación; sus estados pendientes anteriores no sustituyen el resultado comprobado de arriba.
+
 Recuperación con `worker-r3` comprobada: el trabajador volvió a estar saludable y la web reconoció la cuenta. Se reanudó una vez la ficha original, preservando investigación, estrategia y versión. Codex completó guion y revisión creativa reales; el revisor pidió mover la tarjeta final a `closingScene`, aunque confirmó texto, tiempos y CTA correctos. Esa petición confundía el formato de respuesta del generador con el formato canónico que el trabajador ya había normalizado. `worker-r4` separa las instrucciones por etapa y explica al revisor y al director de arte que los guiones guardados tienen todas las tarjetas en `script.scenes`. No fuerza un veredicto favorable. La versión 1 se conserva; una revisión explícita por el flujo normal permite volver a evaluar con la instrucción corregida. Este cambio todavía necesita comprobar el MP4 real.
 
 Diagnóstico del reinicio confirmado por Jorge: el socket no existe y el HOME contiene `.sandbox_migration` y `.sqlite-maintenance.lock`. Ambos son archivos oficiales de la CLI fijada: `execpolicy/src/sandbox_migration.rs` escribe el marcador `v1\n`, y `state/src/runtime/reclamation.rs` abre el archivo de bloqueo para mantenimiento SQLite. Nuestra lista permitida anterior rechazaba esos dos nombres y reproducía `HOME_NOT_CLEAN` después del primer uso real. `codex/worker-r3` admite únicamente esos nombres como archivos regulares; conserva el rechazo de enlaces, tipos incorrectos, configuraciones, plugins y entradas desconocidas. No elimina ni modifica archivos de sesión y no cambia límites, herramientas o permisos. Incluye la corrección del guion y los códigos seguros de arranque ya preparados. Evidencia: `production/evidence/post-turn-home-regression.json`. La recuperación real se comprobará después de aplicar esta entrega; los registros de incidente que siguen describen lo ocurrido antes de ella.
@@ -139,7 +145,7 @@ Si el socket quedó tras una caída, detener y verificar que no existe un trabaj
 
 ## Pendiente para aceptar producción
 
-- Conexión de la web con el trabajador ya autenticado y una generación real sin API de pago.
+- Revisión visual y aceptación de Jorge de la primera animática real; ampliar la prueba a contenido autorizado de Glowfy/Velforce.
 - Verificación de separación de procesos, red y permisos en el VPS real; las pruebas locales no sustituyen esa revisión.
 - Integración visual completa del motor original, recursos autorizados de Glowfy/Velforce y revisión de calidad de Jorge.
 - Cola durable con recuperación de trabajos interrumpidos y progreso visible; el flujo actual se ejecuta en la solicitud HTTP y requiere reintento manual tras una caída.
