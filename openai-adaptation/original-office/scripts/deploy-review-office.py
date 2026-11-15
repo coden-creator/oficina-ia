@@ -281,7 +281,7 @@ def test_video(password):
         emit(step='video', reusedExistingTest=True, jobId=job['id'], state=job['state'])
     else:
         resource_check()
-        job = request(route, password, {'objective':TEST_OBJECTIVE, 'cta':'Revisar borrador',
+        job = request(route, password, {'objective':TEST_OBJECTIVE, 'cta':'Revisar borrador', 'qualityStandard':'technical-test',
             'audience':'Jorge; prueba interna', 'channel':'instagram',
             'evidence':[{'id':'brief_owner', 'text':'Prueba interna autorizada por Jorge para comprobar su oficina. Solo se muestran solicitud, borrador y revisión humana; no se presentan funciones comerciales de Glowfy.'}]})
         require(re.fullmatch(r'[a-z0-9-]{1,80}', job['id']) is not None, 'ID de prueba inválido.')

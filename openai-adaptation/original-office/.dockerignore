@@ -41,6 +41,8 @@
 !video/canvas-demo/DEPENDENCIES.json
 
 !video/visual-contract.mjs
+!production/
+!production/reference-standard.mjs
 
 !public/navigation.js
 scripts/probe-tool-inventory.mjs

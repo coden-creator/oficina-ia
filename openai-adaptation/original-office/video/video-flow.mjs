@@ -1,4 +1,5 @@
 import {validateScriptForRenderer,validateVisualPlan} from './visual-contract.mjs';
+import {DIAGNOSTIC_STANDARD,validateQualityStandard,requireProductionCapability,productionCapability} from '../production/reference-standard.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { constants } from 'node:fs';
@@ -18,8 +19,9 @@ const validId=x=>typeof x==='string'&&/^[a-z0-9-]{1,80}$/.test(x);
 function ensureBrand(b){if(!Object.hasOwn(brands,b))throw new Error('Marca no admitida');}
 function validateBrief(b){
  if(!b||typeof b!=='object'||Array.isArray(b))throw new Error('Brief requerido');
- const allowed=new Set(['objective','cta','voice','evidence','feedback','audience','channel','format','style','reference','paid','publish']);
+ const allowed=new Set(['objective','cta','voice','evidence','feedback','audience','channel','format','style','reference','qualityStandard','paid','publish']);
  for(const k of Object.keys(b))if(!allowed.has(k))throw new Error(`Campo de brief no admitido: ${k}`);
+ if(b.qualityStandard!==undefined)validateQualityStandard(b.qualityStandard);
  for(const k of ['objective','cta'])if(typeof b[k]!=='string'||!b[k].trim()||b[k].length>2000)throw new Error(`Brief inválido: ${k}`);
  for(const k of ['feedback','audience','channel','format','style','reference'])if(b[k]!==undefined&&(typeof b[k]!=='string'||b[k].length>4000))throw new Error(`Brief inválido: ${k}`);
  if(b.voice&&b.voice!=='none')throw new Error('Esta versión solo admite animática sin voz; no clona ni genera voz');
@@ -88,6 +90,8 @@ export function createVideoFlow({dataDir,adapters={},creativeRevision={}}){
  }
  async function runInternal(b,id){const j=await get(b,id);if(['approved','awaiting_review','changes_requested'].includes(j.state))return j;j.state='running';j.blocker=null;event(j,'run','Single-worker queue');await save(j);
  try{
+ if(j.brief.qualityStandard&&j.brief.qualityStandard!==DIAGNOSTIC_STANDARD)j.stage='production';
+ requireProductionCapability(j.brief.qualityStandard??DIAGNOSTIC_STANDARD);
  creativeCycle: while(true){
  for(const stage of Object.keys(roles)){
   j.stage=stage;
@@ -116,5 +120,5 @@ export function createVideoFlow({dataDir,adapters={},creativeRevision={}}){
  await save(j);return publicJob(j);}
  async function approve(b,id,a){return serial(async()=>{const j=await get(b,id);if(j.state!=='awaiting_review'||!j.artifact)throw new Error('No hay artefacto revisable');if(!a||a.version!==j.version||a.artifactHash!==j.artifact.sha256||!a.actor||!a.source)throw new Error('Aprobación requiere versión/hash/autor/fuente exactos');if(digest(await safeRead(j.artifact.file,256*1024*1024))!==j.artifact.sha256)throw new Error('Artefacto cambió desde QA');j.approval={version:j.version,artifactHash:a.artifactHash,actor:String(a.actor),source:String(a.source),at:new Date().toISOString(),scope:'accept_artifact_only'};j.state='approved';event(j,'approved','No autoriza publicación');await save(j);return j;});}
  async function requestChanges(b,id,{feedback}){return serial(async()=>{if(typeof feedback!=='string'||!feedback.trim()||feedback.length>4000)throw new Error('Corrección requerida');const j=await get(b,id);if(j.version>=100)throw new Error('Límite de 100 revisiones alcanzado');j.revisions||=[];j.revisions.push({version:j.version,outputs:j.outputs,artifact:j.artifact,approval:j.approval});j.version++;j.brief.feedback=feedback;j.outputs={};j.artifact=null;j.approval=null;j.draftHash=null;j.creativeFeedback=null;j.state='queued';j.stage=stages[0];event(j,'revision',feedback);await save(j);return j;});}
- return {refreshConnection:()=>adapters.runner?.refresh?.(),create:args=>serial(()=>createInternal(args)),list,get,run:(b,id)=>serial(()=>runInternal(b,id)),approve,requestChanges,capabilities:()=>({brands:Object.keys(brands),stages,runnerConfigured:!!adapters.runner?.run,runnerConnected:adapters.runner?.status?.()?.connected===true,rendererConfigured:!!adapters.renderer?.render,rendererVerified:false,automaticCreativeRevision:{configuredMax:revisionPolicy.maxAttempts,authorized:revisionPolicy.authorized,finalHumanApprovalRequired:true},publish:false,paid:false,voice:false})};
+ return {refreshConnection:()=>adapters.runner?.refresh?.(),create:args=>serial(()=>createInternal(args)),list,get,run:(b,id)=>serial(()=>runInternal(b,id)),approve,requestChanges,capabilities:()=>({brands:Object.keys(brands),stages,runnerConfigured:!!adapters.runner?.run,runnerConnected:adapters.runner?.status?.()?.connected===true,rendererConfigured:!!adapters.renderer?.render,rendererVerified:false,production:productionCapability(),automaticCreativeRevision:{configuredMax:revisionPolicy.maxAttempts,authorized:revisionPolicy.authorized,finalHumanApprovalRequired:true},publish:false,paid:false,voice:false})};
 }

@@ -43,5 +43,11 @@
   "paidApiEnabled": false,
   "publishingEnabled": false,
   "commercialQualityAccepted": false,
-  "revisionNote": "Version 1 retained by normal changes workflow; version 2 explicitly requested after correcting the reviewer canonical-format instruction. No automatic repair loop enabled."
+  "revisionNote": "Version 1 retained by normal changes workflow; version 2 explicitly requested after correcting the reviewer canonical-format instruction. No automatic repair loop enabled.",
+  "ownerFeedback": {
+    "date": "2026-11-15",
+    "creativeResult": "rejected",
+    "reason": "Jorge rechazó las tarjetas y aportó dos referencias como mínimo audiovisual.",
+    "recordedIn": "repository only; live job state not changed in this revision"
+  }
 }

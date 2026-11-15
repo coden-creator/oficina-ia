@@ -1,0 +1,60 @@
+{
+  "standard": "cresova-reference-v1",
+  "instruction": "Jorge: las dos referencias son el mínimo visual y audiovisual; calidad sobre velocidad.",
+  "date": "2026-11-15",
+  "references": [
+    {
+      "file": "Final 2026-11-15-16-32.mp4",
+      "sha256": "96a4093dfc006adc28198b4c6146132091e7347468a5e66f2f3478c3650a02ee",
+      "audio": {
+        "input_i": "-16.19",
+        "input_tp": "-3.30",
+        "input_lra": "1.50",
+        "input_thresh": "-27.67"
+      },
+      "durationSeconds": 19.8,
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "codec": "h264",
+      "audioFormat": {
+        "codec": "aac",
+        "sampleRate": 48000,
+        "channels": 2
+      },
+      "rights": "provided for study; no redistribution, soundtrack reuse or voice cloning authorized"
+    },
+    {
+      "file": "Final 2026-11-15-16-47.mp4",
+      "sha256": "d7a6a8269cb55a7fc795067acef6c4c8e987dbfae2f3e7b4c16ba5675fadf003",
+      "audio": {
+        "input_i": "-16.30",
+        "input_tp": "-3.40",
+        "input_lra": "1.60",
+        "input_thresh": "-27.46"
+      },
+      "durationSeconds": 21.133333,
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "codec": "h264",
+      "audioFormat": {
+        "codec": "aac",
+        "sampleRate": 48000,
+        "channels": 2
+      },
+      "rights": "provided for study; no redistribution, soundtrack reuse or voice cloning authorized"
+    }
+  ],
+  "analysis": {
+    "fullDurationSampleFps": 4,
+    "openingFramesPerVideo": 90,
+    "openingFps": 30,
+    "fullMixMeasured": true,
+    "subjectiveListeningVerified": false,
+    "voiceSfxSeparationPerformed": false,
+    "paidRequests": 0
+  },
+  "productionEquivalentVerified": false,
+  "liveDeploymentChanged": false
+}

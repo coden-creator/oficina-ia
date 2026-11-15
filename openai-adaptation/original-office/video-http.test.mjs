@@ -2,7 +2,22 @@ import test from 'node:test';import assert from 'node:assert/strict';import fs f
 const pw='fixture-only-http-video-password';
 async function setup(adapters={}){const dir=await fs.mkdtemp(path.join(os.tmpdir(),'office-http-video-'));const flow=createVideoFlow({dataDir:dir,adapters});const make=()=>createOriginalShell({password:pw,origin:'https://office.example.com',videoFlow:flow,videoDataDir:dir});let server=make();await new Promise(r=>server.listen(0,'127.0.0.1',r));return {flow,dir,get port(){return server.address().port;},async restart(){await new Promise(r=>server.close(r));server=make();await new Promise(r=>server.listen(0,'127.0.0.1',r));},async close(){await new Promise(r=>server.close(r));await fs.rm(dir,{recursive:true,force:true});}};}
 const request=(s,url,body,extra={})=>new Promise((resolve,reject)=>{const r=http.request({host:'127.0.0.1',port:s.port,path:url,method:body===undefined?'GET':'POST',headers:{Host:'office.example.com',Authorization:'Basic '+Buffer.from('jorge:'+pw).toString('base64'),'Content-Type':'application/json',...extra}},res=>{const chunks=[];res.on('data',b=>chunks.push(b));res.on('end',()=>{const bytes=Buffer.concat(chunks);let json;try{json=JSON.parse(bytes);}catch{}resolve({status:res.statusCode,json,bytes,headers:res.headers});});});r.on('error',reject);r.end(body===undefined?undefined:JSON.stringify(body));});
-const brief={objective:'Prueba técnica interna',cta:'Conoce más'};
+const brief={objective:'Prueba técnica interna',cta:'Conoce más',qualityStandard:'technical-test'};
+test('ordinary office requests require reference production before consuming inference or rendering',async()=>{
+ let calls=0;const s=await setup({runner:{async run(){calls++;throw Error('must not call')}},renderer:{profile:{id:'ffmpeg_text',productionReady:true},async render(){calls++;throw Error('must not render')}}});
+ try{
+  const j=(await request(s,'/api/video-workflows/glowfy',{objective:'Video de marca con el acabado de referencia',cta:'Conoce Glowfy'})).json;
+  assert.equal(j.brief.qualityStandard,'cresova-reference-v1');
+  const result=(await request(s,`/api/video-workflows/glowfy/${j.id}/run`,{})).json;
+  assert.equal(result.state,'blocked');assert.equal(result.stage,'production');assert.equal(result.artifact,null);assert.equal(calls,0);
+  assert.match(result.blocker,/acabado audiovisual/);assert.equal(result.quality.technical,'not-verified');
+  await s.restart();assert.equal((await request(s,`/api/video-workflows/glowfy/${j.id}`)).json.brief.qualityStandard,'cresova-reference-v1');
+  const revision=(await request(s,`/api/video-workflows/glowfy/${j.id}/changes`,{feedback:'Mantener el acabado de las referencias'})).json;
+  assert.equal(revision.brief.qualityStandard,'cresova-reference-v1');
+  assert.equal((await request(s,'/api/video-workflows/glowfy',{...brief,qualityStandard:'pretend-final'})).status,409);
+  assert.equal((await request(s,'/api/video-workflows/capabilities')).json.production.ready,false);
+ }finally{await s.close()}
+});
 test('HTTP creates brand isolated request, persists restart, and no connected Codex is honest blocked',async()=>{
  let launched=false;const runtime=new ChatGPTDraftRuntime({childFactory:()=>{launched=true;throw Error('must not launch');},workspace:'/tmp/not-used',model:'explicit-test-model'});const s=await setup({runner:new CodexVideoSpecialist({runtime})});try{
  const bad=await request(s,'/api/video-workflows/glowfy',brief,{Origin:'https://other.example.com'});assert.equal(bad.status,403);

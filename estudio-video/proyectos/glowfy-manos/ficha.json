@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "campaign_id": "glowfy-manos-exploracion-01",
+  "brand": "glowfy",
+  "updated_at": "2026-11-15",
+  "objective": "Explorar una escena de manicura y respuesta a mensajes; revisar contra el mínimo audiovisual posterior de Jorge",
+  "audience": "Manicuristas",
+  "status": "proposal",
+  "current_version": "v1",
+  "sources": [
+    {
+      "source": "https://getglowfy.com/",
+      "checked_at": "2026-11-15",
+      "purpose": "Identidad y contexto público de producto"
+    },
+    {
+      "source": "Jorge, instrucciones de esta conversación del 15 de noviembre de 2026",
+      "purpose": "Dos referencias de Cresova son el mínimo; calidad sobre velocidad"
+    }
+  ],
+  "assets": [
+    {
+      "location": "manifest.json",
+      "access_checked_at": "2026-11-15",
+      "access_evidence": "archivos locales leídos y usados en render",
+      "rights_source": "OFL incluido en repositorio; identidad pública del proyecto de Jorge; ilustración y síntesis propias"
+    }
+  ],
+  "decisions": [
+    "Conservar el ensayo, no entregarlo como equivalente a las referencias",
+    "No desplegar cambios de producción todavía"
+  ],
+  "approvals": [],
+  "deliverables": [
+    {
+      "version": "v1",
+      "location": "renders/previews/Glowfy - Propuesta visual v1.mp4",
+      "sha256": "687be5b4f5c94bd8950b1881a218e34884e809d2c7af06e7c79161759e5585c9",
+      "status": "local exploratory render, below current reference standard"
+    }
+  ],
+  "qa": [
+    {
+      "version": "v1",
+      "evidence": "96 cuadros inspeccionados, seeks deterministas, export 1080x1920/30; no revisión auditiva humana; no equivalencia verificada"
+    }
+  ],
+  "publication": null,
+  "consumption": {
+    "credits": 0,
+    "currency": null,
+    "cost": null,
+    "evidence": "Render, síntesis y análisis locales; no llamadas de generación pagada"
+  },
+  "next_action": "Implementar storyboard de escenas, narración autorizada y alineación antes de siguiente candidato audiovisual",
+  "blockers": [
+    "Sin pista de narración autorizada para esta propuesta",
+    "Motor audiovisual aún no conectado al flujo"
+  ],
+  "storage": {
+    "location": "estudio-video/proyectos/glowfy-manos",
+    "retrieved_at": "2026-11-15",
+    "evidence": "Lectura local de fuentes y artefacto; el MP4 no se incluye en Git"
+  },
+  "validation": {
+    "skill_validator": "unavailable resource when requested",
+    "json_parsed": true,
+    "aestheticApproval": false
+  }
+}
