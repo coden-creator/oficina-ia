@@ -19,6 +19,7 @@ services:
       traefik.enable: 'false'
       office.purpose: jorge-codex-worker
     environment:
+      OFFICE_WORKER_RELEASE: specialist-output-v2
       OFFICE_CODEX_ENABLE: '1'
       OFFICE_CODEX_ISOLATION_VERIFIED: '1'
       OFFICE_CODEX_MODEL: ${OFFICE_CODEX_MODEL:-gpt-6.1-sol}

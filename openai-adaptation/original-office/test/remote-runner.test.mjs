@@ -27,7 +27,7 @@ test('real socket + validated specialist + real MP4 + approval (model responses 
  const runtime={status:()=>({transportConnected:true,chatgptAccountObserved:true,accountKind:'chatgpt',paidApiEnabled:false}),async draft(prompt){
   const q=JSON.parse(prompt.split('\nDATA:\n')[1]);
   const output={brand:q.brand,stage:q.stage,summary:'SIMULATED MODEL FOR INTEGRATION TEST',evidence:[],verdict:q.stage==='creative_review'?'pass':'not_applicable',cta:q.input.brief.cta,scenes:q.stage==='script'?[{text:'Prueba local',durationSeconds:2},{text:q.input.brief.cta,durationSeconds:2}]:[],visualPlan:q.stage==='art_direction'?{template:'text-cards',palette:'neutral-warm',motion:'soft',scenes:[{index:0,composition:'centered-text'},{index:1,composition:'centered-text'}]}:null};
-  return {source:'chatgpt-app-server',text:JSON.stringify(output)};
+  return {source:'chatgpt-app-server',text:JSON.stringify(q.stage==='script'?{...output,scenes:output.scenes.slice(0,-1),closingScene:output.scenes.at(-1)}:output)};
  }};
  const s=await setup(new CodexVideoSpecialist({runtime}));try{
   const dataDir=path.join(s.dir,'jobs');const flow=createVideoFlow({dataDir,adapters:{runner:s.runner,renderer:createLocalRenderer()}});
@@ -47,4 +47,27 @@ test('office configuration reflects live worker connectivity and disconnection',
  await new Promise(r=>web.listen(0,'127.0.0.1',r));
  const get=()=>new Promise((resolve,reject)=>{http.get({host:'127.0.0.1',port:web.address().port,path:'/api/config',headers:{Host:'office.example.com',Authorization:'Basic '+Buffer.from('jorge:fixture-only-office-password').toString('base64')}},res=>{let text='';res.on('data',b=>text+=b);res.on('end',()=>resolve(JSON.parse(text)));}).on('error',reject);});
  try{const health=await fetch(`http://127.0.0.1:${web.address().port}/health`);assert.deepEqual(await health.json(),{alive:true,mode:'original-visual-shell',deploymentMarker:'test-deployment-marker'});assert.equal((await get()).provider,'codex-chatgpt-plan');await new Promise(r=>s.server.close(r));assert.equal((await get()).provider,'not-connected');}finally{await new Promise(r=>web.close(r));await s.close();}
+});
+
+test('retrying a rejected script keeps completed stages and version, with no automatic retry or approval',async()=>{
+ const calls=[];
+ const runtime={status:()=>({transportConnected:true,chatgptAccountObserved:true,accountKind:'chatgpt',paidApiEnabled:false}),async draft(prompt){
+  const q=JSON.parse(prompt.split('\nDATA:\n')[1]);calls.push(q.stage);
+  const output={brand:q.brand,stage:q.stage,summary:'SIMULATED MODEL, RETRY REGRESSION',evidence:[],verdict:q.stage==='creative_review'?'pass':'not_applicable',cta:q.input.brief.cta,scenes:q.stage==='script'?[{text:'Borrador interno',durationSeconds:2}]:[],visualPlan:q.stage==='art_direction'?{template:'text-cards',palette:'neutral-slate',motion:'soft',scenes:[{index:0,composition:'centered-text'},{index:1,composition:'centered-text'}]}:null};
+  if(q.stage==='script')output.closingScene={text:calls.filter(x=>x==='script').length===1?'Cierre incorrecto':q.input.brief.cta,durationSeconds:2};
+  return {source:'chatgpt-app-server',text:JSON.stringify(output)};
+ }};
+ const s=await setup(new CodexVideoSpecialist({runtime}));
+ try{
+  const flow=createVideoFlow({dataDir:path.join(s.dir,'jobs'),adapters:{runner:s.runner,renderer:createLocalRenderer()}});
+  const job=await flow.create({brandId:'glowfy',brief:{objective:'Fixture de recuperación',cta:'Revisar borrador',voice:'none',paid:false,publish:false}});
+  const blocked=await flow.run('glowfy',job.id);
+  assert.equal(blocked.state,'blocked');assert.equal(blocked.blocker,'INVALID_SPECIALIST_OUTPUT_CLOSING_CTA');
+  assert.deepEqual(calls,['research','strategy','script']);
+  const resumed=await flow.run('glowfy',job.id);
+  assert.deepEqual(calls,['research','strategy','script','script','creative_review','art_direction']);
+  assert.deepEqual(resumed.outputs.research,blocked.outputs.research);assert.deepEqual(resumed.outputs.strategy,blocked.outputs.strategy);
+  assert.equal(resumed.version,blocked.version);assert.equal(resumed.state,'awaiting_review');assert.equal(resumed.approval,null);
+  assert.equal(resumed.outputs.qa.technical.passed,true);assert.ok(resumed.artifact.bytes>1000);
+ }finally{await s.close();}
 });
