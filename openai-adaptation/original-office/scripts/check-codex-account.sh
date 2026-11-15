@@ -21,4 +21,5 @@ docker run --rm --no-healthcheck --user 1000:1000 --read-only \
   --tmpfs /tmp:rw,nosuid,nodev,size=64m \
   --mount "type=volume,src=$office_auth_volume,dst=/home/node/codex-isolated" \
   --mount "type=bind,src=$office_script_dir/check-codex-account.mjs,dst=/app/scripts/check-codex-account.mjs,readonly" \
+  --mount "type=bind,src=$office_script_dir/../codex/chatgpt-runtime.mjs,dst=/app/codex/chatgpt-runtime.mjs,readonly" \
   "$office_image" node scripts/check-codex-account.mjs

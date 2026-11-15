@@ -1,0 +1,30 @@
+{
+  "network": "none",
+  "officialLoginEntries": [
+    "auth.json.lock",
+    "auth.lock",
+    "log",
+    "tmp"
+  ],
+  "updatedValidatorAccepted": true,
+  "oldImageWithPatchedRuntime": true,
+  "authFileIsEmptyTestFixture": true,
+  "fixtureRejection": "Account has no ChatGPT plan: expected RPC_REMOTE_ERROR",
+  "diagnostic": {
+    "ok": false,
+    "error": "RPC_REMOTE_ERROR",
+    "inferencePerformed": false,
+    "creditsRedeemed": false,
+    "officeConnected": false
+  },
+  "regressionPassed": true,
+  "cliVersion": "0.167.0-alpha.4",
+  "unitTestsPassed": 16,
+  "realCredentialsUsed": false,
+  "vpsServicesChanged": false,
+  "originalAuthFilesDeleted": false,
+  "modelCacheSource": "https://github.com/openai/codex/blob/fb036d4ebd89f263d34a1f888c279ce85bb383c6/codex-rs/models-manager/src/manager.rs#L42",
+  "scope": "Local regression only. A deliberately empty auth fixture reaches account/read and is refused for missing plan metadata. Actual owner account/model lookup remains pending on the VPS.",
+  "packagedIsolationGuardRetainedAndTested": true,
+  "manualPrototypeUnchanged": true
+}

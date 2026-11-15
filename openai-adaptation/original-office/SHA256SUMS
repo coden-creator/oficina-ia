@@ -10,7 +10,7 @@ b1de5342e2d59201d465c7595e191697eb1f5d3a9ab73e63563bb261e7ae666a  ./README.md
 22beff9f2a129722754b9f883c44dbac589ab28ced3fc167edab584fb4ba2db0  ./TEST-RESULTS.txt
 71e1b74c2e6eee5797ab268530d1919d64ea976edd66c33f8856bb0f1fdb633d  ./agents-display.json
 66bf8b074ddaacbcc9ef176def1110cd88d18930244ae403bb56eddb2377db57  ./codex/adapter.mjs
-c010849952565145a31dac3fb69948d3377fd1ce99f57744dd2198b2801465fe  ./codex/chatgpt-runtime.mjs
+7dff7af28b9e766384433504945e062b7e770ccd982169a17a3e1aeb74298f78  ./codex/chatgpt-runtime.mjs
 4ab657044143a8f1860b564be9da3c58f3eafd4482da000bf6149732fb48a676  ./codex/event-stream.mjs
 16ef518f93979ccc6e3033e2af3ee89b83ba682292fb3d4ceb3020dbd6b405dc  ./codex/read-only-tools.mjs
 4d7286a7f0941727aa57975c2c2023219dfbbfd235723adc334494e9e4d87d10  ./codex/stdio-transport.mjs
@@ -86,11 +86,12 @@ cc51c13d65cbfc3acc0b146b0a3b7cd1bf75e6bdf939d22d3b289666782703a6  ./test/remote-
 bb5a395ae68a226da4742ab42fb3238390cc8a7a85eca8618392484d7c1b50f5  ./test/fixtures/synthetic-broker.mjs
 be975a660b27d6ad015fc2be01ee5a635ddbcf251f52ff3bdd195ea931e8b173  ./scripts/verify-runtime-container.sh
 81b57c369614e4b9ef693ee914add3956631cb8f34f15c9d96e82773d12ddc9c  ./scripts/probe-separated-containers.py
-532aec50c05730c1557490855b5dc6a9ecafe47d1b25c0da3d9655d196481cce  ./deployment-review/IMPLEMENTACION.md
+5489d4ab0c8f65c8eeb1d113deb18fb90af0f02684de68ad327cf8ceac06eba9  ./deployment-review/IMPLEMENTACION.md
 0ed5ce750bebfcf60fa58fa4f466dc1d5371d8df1dce36bf2dcf56496b0b9e0f  ./deployment-review/compose.review.yml
 07344abcf5b0146331d1378fc8509682f73752f077e5e83384647cafb359abb2  ./production/evidence/release-local-checks.json
 7abca1cdcdc8a23d1a0499815c09d2a79728be95d85f0bfa6bb9125e1a88abea  ./scripts/login-codex.sh
 cae675ed2a177e005f5ae4dbda0ec3fdf41af35ab7d941228a3036ec36ec6af0  ./production/evidence/login-container-check.json
-6b005eb68827f232e2658cbe567d76dcdad615d1bffce7721871fd846cc06eb0  ./scripts/check-codex-account.sh
+83f1b8aa6835e76571dd236d5318c434511a011bfdec84cc6c83653d7636a176  ./scripts/check-codex-account.sh
 f0e8690f4e38a9de5a9e39f43f3dacd539cfb75b25b62396083b60a9a90d9630  ./scripts/check-codex-account.mjs
 d0fbbd356f3f4d3aeab4b00c8fdc149a10a5cef3595aee928d41da2f86b0b22c  ./production/evidence/account-usage-checks.json
+45f6ca6221116cd8a8671679078a30f9421f7255d0c37db1ddfd57f42bec4529  ./production/evidence/login-home-regression.json
