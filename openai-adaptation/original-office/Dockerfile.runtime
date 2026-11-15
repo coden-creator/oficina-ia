@@ -19,9 +19,9 @@ RUN apt-get update \
 COPY --from=codex-install /codex-vendor/ /opt/codex-vendor/
 RUN ln -s /opt/codex-vendor/bin/codex /usr/local/bin/codex
 RUN /usr/local/bin/codex --version | grep -Fx 'codex-cli 0.167.0-alpha.4' \
- && mkdir -p /data /home/node/codex-isolated /home/node/empty-workspace \
+ && mkdir -p /data/video /home/node/codex-isolated /home/node/empty-workspace \
  && chown -R node:node /data /home/node/codex-isolated /home/node/empty-workspace \
- && chmod 700 /data /home/node/codex-isolated /home/node/empty-workspace
+ && chmod 700 /data /data/video /home/node/codex-isolated /home/node/empty-workspace
 COPY runtime-package/requirements.toml /etc/codex/requirements.toml
 RUN chown root:root /etc/codex/requirements.toml && chmod 644 /etc/codex/requirements.toml
 WORKDIR /app

@@ -12,6 +12,7 @@ Review-only build for a separate non-deployment branch. No deployed build, logge
 
 ## Deployment behavior
 - Default: visual shell only, no video records. Enable internal workflow explicitly with OFFICE_ENABLE_VIDEO_WORKFLOW=1, OFFICE_VIDEO_DATA_DIR=/data/video on a dedicated UID1000 writable persistent volume. Preserve existing volumes; never share another service's data or tokens.
+- When the workflow is enabled, startup checks that the configured directory already exists, has no symlink components and is writable. This does not establish that a volume is mounted or persistent; verify persistence separately. A new Docker-managed volume initialized from the image can inherit the directory ownership; existing volumes and bind mounts must already be writable by UID1000, and must never be re-owned without reviewing their contents.
 - Mandatory private OFFICE_PASSWORD>=16, exact HTTPS OFFICE_ORIGIN; HOST0.0.0.0 PORT3000. TLS still requires actual proxy/certificate verification. Dockerfile health is liveness only.
 - Docker context this directory and Dockerfile. Image copies the visual shell and video source, including renderer modules, excluding tests, but no model runtime, credentials or installed renderer binaries. Tests are not run by startup. No npm install, paid SDK, model binary or outbound dependency.
 - Codex adapter source included in review archive only for future integration/tests. Runtime activation is NOT wired into production start. Owner official login, process isolation and deployment-specific review remain required.
