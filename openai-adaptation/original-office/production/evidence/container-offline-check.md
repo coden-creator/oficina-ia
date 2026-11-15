@@ -1,0 +1,7 @@
+# Offline container check (2026-11-15)
+
+An isolated local Node 22.16.0 Bookworm container ran as UID 1000, with no network, a read-only root filesystem and a temporary writable /tmp. The environment's Codex 0.167.0-alpha.4 binaries and the repository's managed requirements were mounted read-only. No user credentials, VPS data, model requests or paid services were used.
+
+`verify-tool-restrictions.mjs` returned `configurationGatePassed:true` and an empty `enabledOrMissing` list for the 22 configured features. `probe-packaged-unauthenticated.mjs` initialized the app server, reported `account:null`, and confirmed that no authentication or inference was performed. The CLI reported a read-only PATH-alias warning, but the probe completed.
+
+This is a test of the mounted binary and configuration, not a successful build of `Dockerfile.runtime` or an adversarial tool-isolation acceptance test. The full image build initially failed on the local container registry TLS chain; a separate diagnostic build using locally installed, lockfile-verified packages revealed that copied vendor directories could be inaccessible to UID 1000. A subsequent diagnostic build ran out of local disk space before reaching its gate. `COPY --chmod=755` now specifies readable and traversable program files in the image, but the final image still needs an end-to-end build and inspection. No authentication or deployment is authorized by this evidence.

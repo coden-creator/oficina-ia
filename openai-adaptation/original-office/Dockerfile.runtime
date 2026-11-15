@@ -16,7 +16,7 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends ffmpeg=7:5.1.9-0+deb12u1 fonts-dejavu-core ca-certificates \
  && test "$(dpkg-query -W -f='${Version}' ffmpeg)" = '7:5.1.9-0+deb12u1' \
  && rm -rf /var/lib/apt/lists/*
-COPY --from=codex-install /codex-vendor/ /opt/codex-vendor/
+COPY --from=codex-install --chmod=755 /codex-vendor/ /opt/codex-vendor/
 RUN ln -s /opt/codex-vendor/bin/codex /usr/local/bin/codex
 RUN /usr/local/bin/codex --version | grep -Fx 'codex-cli 0.167.0-alpha.4' \
  && mkdir -p /data/video /home/node/codex-isolated /home/node/empty-workspace \
