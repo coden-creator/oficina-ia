@@ -2,7 +2,7 @@
 FROM node:22.16.0-bookworm-slim
 WORKDIR /app
 ENV NODE_ENV=production HOST=0.0.0.0 PORT=3000 OFFICE_VIDEO_DATA_DIR=/data/video
-RUN mkdir -p /data && chown node:node /data && chmod 700 /data
+RUN mkdir -p /data/video && chown node:node /data /data/video && chmod 700 /data /data/video
 COPY --chown=node:node server.mjs start.mjs agents-display.json ./
 COPY --chown=node:node public/ ./public/
 COPY --chown=node:node video/ ./video/
