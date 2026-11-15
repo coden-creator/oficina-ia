@@ -86,6 +86,8 @@ cc51c13d65cbfc3acc0b146b0a3b7cd1bf75e6bdf939d22d3b289666782703a6  ./test/remote-
 bb5a395ae68a226da4742ab42fb3238390cc8a7a85eca8618392484d7c1b50f5  ./test/fixtures/synthetic-broker.mjs
 be975a660b27d6ad015fc2be01ee5a635ddbcf251f52ff3bdd195ea931e8b173  ./scripts/verify-runtime-container.sh
 81b57c369614e4b9ef693ee914add3956631cb8f34f15c9d96e82773d12ddc9c  ./scripts/probe-separated-containers.py
-4b70fa7c08d27fa9451f83884043d636900418485bec780ff76efbc008436784  ./deployment-review/IMPLEMENTACION.md
-0520e40ad9a99fff2bd7813b483e2f11bc2c45ae26e6f35d612e5abefa272754  ./deployment-review/compose.review.yml
+41316d0ae6f969ee27c1750433a502d012fdbde5a97a13c1f3a618eac6b014db  ./deployment-review/IMPLEMENTACION.md
+0ed5ce750bebfcf60fa58fa4f466dc1d5371d8df1dce36bf2dcf56496b0b9e0f  ./deployment-review/compose.review.yml
 07344abcf5b0146331d1378fc8509682f73752f077e5e83384647cafb359abb2  ./production/evidence/release-local-checks.json
+7abca1cdcdc8a23d1a0499815c09d2a79728be95d85f0bfa6bb9125e1a88abea  ./scripts/login-codex.sh
+cae675ed2a177e005f5ae4dbda0ec3fdf41af35ab7d941228a3036ec36ec6af0  ./production/evidence/login-container-check.json

@@ -26,6 +26,19 @@ docker build -f Dockerfile.runtime -t oficina-runtime:review .
 bash scripts/verify-runtime-container.sh oficina-runtime:review
 ```
 
+En el VPS compartido, usar un constructor independiente limitado a 1 CPU y 1 GiB, después de comprobar el consumo global. No cambiar el constructor predeterminado ni reconstruir el servicio público de EasyPanel:
+
+```bash
+docker buildx create --name oficina-codex-builder --driver docker-container \
+  --driver-opt cpu-period=100000 --driver-opt cpu-quota=100000 --driver-opt memory=1g
+docker buildx build --builder oficina-codex-builder --load \
+  -f Dockerfile.runtime -t oficina-runtime:jorge .
+docker buildx stop oficina-codex-builder
+bash scripts/verify-runtime-container.sh oficina-runtime:jorge
+```
+
+Se necesita Docker Buildx en la consola del VPS (`docker buildx version`). Si ya existe ese constructor, inspeccionarlo y verificar sus límites antes de reutilizarlo. No eliminar constructores ajenos. La construcción y las pruebas no inician sesión ni consumen inferencia.
+
 Si la red de construcción usa una CA propia, se admite proporcionar el archivo de CA confiable únicamente durante la descarga, sin desactivar TLS:
 
 ```bash
@@ -36,7 +49,7 @@ La CA no se copia en la imagen. No usar certificados desconocidos. El lock de np
 
 ## Parámetros de implementación (NO desplegados)
 
-`compose.review.yml` requiere `OFFICE_IMAGE`, `OFFICE_HOST` (dominio de revisión), `OFFICE_NODE` (hostname del nodo) y `OFFICE_PASSWORD_SECRET` (secreto Docker independiente ya creado). El servicio web usa ese secreto; no escribir contraseñas en el repositorio ni en el chat. La imagen inicializa los volúmenes nuevos con UID1000. No cambiar permisos de volúmenes existentes sin inspeccionarlos.
+`compose.review.yml` requiere `OFFICE_IMAGE`, `OFFICE_HOST` (dominio de revisión), `OFFICE_NODE` (hostname del nodo), `OFFICE_PASSWORD_SECRET` (secreto Docker independiente ya creado) y `OFFICE_AUTH_VOLUME` (volumen privado creado por el login oficial). El servicio web usa el secreto de acceso, pero no monta el volumen de Codex. No escribir contraseñas en el repositorio ni en el chat. La imagen inicializa los volúmenes nuevos con UID1000. No cambiar permisos de volúmenes existentes sin inspeccionarlos.
 
 Los límites máximos propuestos son 1 CPU/768MiB para la web/render y 1 CPU/768MiB para Codex, una réplica de cada uno. Deben comprobarse el uso global <70%, el límite de 5 CPU y los límites efectivos de Swarm en el VPS antes de habilitar el trabajador. Una lectura histórica de recursos no certifica capacidad futura.
 
@@ -44,7 +57,17 @@ Codex tiene cero réplicas por defecto. Las variables `OFFICE_CODEX_ISOLATION_VE
 
 ## Inicio de sesión oficial pendiente
 
-Después de comprobar el entorno destino, Jorge debe completar el inicio de sesión oficial de Codex (por ejemplo `codex login --device-auth` si está disponible para su cuenta) usando únicamente el volumen privado del trabajador. Nunca copiar el login de este entorno de desarrollo, compartir auth.json o pedir tokens en el chat. La web no recibe esas credenciales. Hay que elegir un modelo que la cuenta permita en `OFFICE_CODEX_MODEL`; no deducir su identificador de los nombres del selector de esta conversación.
+En la inspección del 15/11/2026, la oficina visual instalada en EasyPanel usaba el Dockerfile básico y no tenía un trabajador ni un volumen privado de Codex. No ejecutar el login dentro de ese contenedor. Después de construir y verificar `Dockerfile.runtime` en el VPS, desde `openai-adaptation/original-office` ejecutar:
+
+```bash
+bash scripts/login-codex.sh oficina-runtime:jorge oficina-jorge-codex-auth
+```
+
+El script crea un contenedor temporal de esa imagen, con UID1000, 1 CPU y 512 MiB, sin puertos publicados. Monta únicamente el volumen de autenticación en `/home/node/codex-isolated` y ejecuta el login oficial `codex login --device-auth`. Jorge abre el enlace oficial mostrado en su navegador y autoriza su cuenta. Si el flujo de dispositivo no está habilitado para su cuenta, resolver esa opción en la configuración oficial de Codex; no sustituirlo por una API de pago. La sesión queda en el volumen al terminar y eliminarse el contenedor temporal. `codex login status` comprueba el resultado sin ejecutar un modelo. El script se detiene ante un volumen existente que no tenga su etiqueta `office.purpose=jorge-codex-auth`.
+
+Para el despliegue posterior, configurar `OFFICE_AUTH_VOLUME=oficina-jorge-codex-auth` y fijar el trabajador al mismo nodo del VPS. El volumen es externo: Compose no crea silenciosamente otro volumen vacío para la sesión. Completar el login no conecta por sí solo la oficina pública ni activa el trabajador.
+
+Nunca copiar el login de este entorno de desarrollo, compartir códigos, auth.json o pedir tokens en el chat. La web no recibe esas credenciales. Hay que elegir un modelo que la cuenta permita en `OFFICE_CODEX_MODEL`; no deducir su identificador de los nombres del selector de esta conversación.
 
 El trabajador arranca solo cuando están presentes el login oficial, el modelo y la autorización de activación. Rechaza cuentas de API y no tiene fallback pagado. La disponibilidad y los límites concretos del plan se comprueban con la primera solicitud auténtica; las pruebas sintéticas no los demuestran.
 

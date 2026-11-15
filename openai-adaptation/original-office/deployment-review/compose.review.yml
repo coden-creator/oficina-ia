@@ -62,7 +62,9 @@ services:
         limits: {cpus: '1.0', memory: 768M}
 volumes:
   video: {}
-  auth: {}
+  auth:
+    external: true
+    name: ${OFFICE_AUTH_VOLUME:?Set the private volume used for official Codex login}
   ipc: {}
 networks:
   CodeNet:
