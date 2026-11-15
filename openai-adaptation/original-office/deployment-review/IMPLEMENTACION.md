@@ -1,5 +1,15 @@
 # Entrega preparada: solicitudes y conexión privada de Codex
 
+## Corrección de destino de despliegue — servicio existente de EasyPanel
+
+Jorge confirmó que la oficina debe seguir usando el servicio existente `service/oficina-jorge`, con Deploy/Rebuild desde EasyPanel o su MCP. La web Swarm separada fue una decisión de la adaptación que dejó el cambio de versión fuera de ese flujo. No continuar publicando cambios del producto en ese destino como solución permanente.
+
+Inspección del MCP: el App existente sigue apuntando a `junie/review-office-workflow-20261115`, build path `/openai-adaptation/original-office`, `Dockerfile`, 1 CPU y 512 MiB, sin montajes. `inspectAppService`, `updateAppBuild`, `updateAppDeploy`, `createMount` y el despliegue App están disponibles. El MCP sí puede desplegar ese App. El servicio `easypanel-traefik` no tiene contenedores activos; el dominio actual depende del Traefik Swarm compartido y de etiquetas/red añadidas manualmente al App. Las búsquedas de operaciones de etiquetas/red Swarm no devolvieron una operación utilizable.
+
+La corrección debe conservar el App como único servidor web que procesa las fichas, el trabajador de Codex separado, y los datos de `oficina-jorge-videos-review-r1`. Rebuild debe reconstruir la fuente vigente sin reconfigurar manualmente la ruta después de cada cambio. Antes de cambiar fuente/montajes o desplegar: respaldar configuración, verificar el almacenamiento existente y resolver una ruta persistente que no dependa de etiquetas efímeras del App. No montar la sesión de Codex ni el socket Docker en la web. Evitar dos procesos escribiendo simultáneamente las mismas fichas durante la transición. Preservar el servicio anterior y su configuración para volver atrás; no eliminar volúmenes.
+
+Esta corrección todavía no está aplicada. No presentar el actualizador de configs de la web Swarm como automatización de EasyPanel. Tampoco activar el Compose de bootstrap deshabilitado: no puede adjuntarse a CodeNet, cuya configuración compartida se conserva.
+
 ## Estado verificado y siguiente despliegue — 15 noviembre 2026
 
 **Estado actual comprobado:** trabajador `service/oficina-codex` en `codex/worker-r4` (`fc4e8b99b765aec87ead7988306e90a433e1621b`), saludable después de reiniciar y generar; web Swarm de revisión saludable. La sesión original se conservó. La ficha Glowfy `3c2cd214-41cf-4126-a41f-5d0647a7ad6c`, **versión 2**, completó las cinco etapas con Codex real y quedó en `awaiting_review`, sin aprobación ni publicación. El MP4 descargado tiene 256363 bytes y SHA256 `3cf27039185076ac8e7e36ba7266c6ef3ba18fe5fdc92367468afd15637fabde`; se verificaron hash, decodificación completa y tres fotogramas. Es una animática técnica silenciosa de 9 segundos, 360×640, H.264 a 30 fps. **Jorge rechazó su acabado visual** y fijó dos referencias como mínimo; se registró ese feedback en el repositorio, sin alterar la ficha viva. [Evidencia](../production/evidence/first-real-video.json).
