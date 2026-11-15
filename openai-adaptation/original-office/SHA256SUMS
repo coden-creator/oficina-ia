@@ -54,7 +54,7 @@ ab12c32c8a524a532e0819ec4a26d149de06171c570bd0e4af7207b4b07ded59  ./renderer-sel
 6615fc23369d5676099774647870693aabd5dec79e23594f6a899b4f719e21b5  ./runtime-package/package.json
 ea3cca72737c49e79e18e08b1e188f52a7eae778d0a65e00f71a90b826b1edae  ./runtime-package/requirements.toml
 0591d4470c376c8cdfba982c916b31985798bfb0ab2d404efafabbe6df3c8b91  ./scripts/probe-packaged-unauthenticated.mjs
-3f293ddc2954c92ba086732357abe14fd185b60e56580e1343c7f29c6b5639a9  ./scripts/verify-tool-restrictions.mjs
+28b7f089b740a687a8ef61b2412ff1c0aabe3201e638d89c8bc0f1c7f8b1a238  ./scripts/verify-tool-restrictions.mjs
 ebff3d16aefdca5f593845402e47ea0a954f821cfe944366fea52088b4ca61cd  ./server.mjs
 7ce1584e92c42da3affc77886560afd7dc54304bf95caba96cdb5972c9c196d0  ./start.mjs
 69a9f21d31e1baa5b95dd946bd5665bcc50885cac58708f7bd641e5752e413d4  ./test.mjs
