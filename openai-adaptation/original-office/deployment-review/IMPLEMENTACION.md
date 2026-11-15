@@ -55,7 +55,7 @@ Los límites máximos propuestos son 1 CPU/768MiB para la web/render y 1 CPU/768
 
 Codex tiene cero réplicas por defecto. Las variables `OFFICE_CODEX_ISOLATION_VERIFIED=1` y `OFFICE_CODEX_REPLICAS=1` solo se aplican tras verificar en el VPS el montaje privado, los límites, la separación de credenciales y las restricciones efectivas. Algunas opciones de Compose pueden ser ignoradas por Swarm; inspeccionar el servicio resultante. Estas variables son declaraciones, no pruebas.
 
-## Inicio de sesión oficial pendiente
+## Inicio de sesión oficial y verificación posterior
 
 En la inspección del 15/11/2026, la oficina visual instalada en EasyPanel usaba el Dockerfile básico y no tenía un trabajador ni un volumen privado de Codex. No ejecutar el login dentro de ese contenedor. Después de construir y verificar `Dockerfile.runtime` en el VPS, desde `openai-adaptation/original-office` ejecutar:
 
@@ -70,6 +70,18 @@ Para el despliegue posterior, configurar `OFFICE_AUTH_VOLUME=oficina-jorge-codex
 Nunca copiar el login de este entorno de desarrollo, compartir códigos, auth.json o pedir tokens en el chat. La web no recibe esas credenciales. Hay que elegir un modelo que la cuenta permita en `OFFICE_CODEX_MODEL`; no deducir su identificador de los nombres del selector de esta conversación.
 
 El trabajador arranca solo cuando están presentes el login oficial, el modelo y la autorización de activación. Rechaza cuentas de API y no tiene fallback pagado. La disponibilidad y los límites concretos del plan se comprueban con la primera solicitud auténtica; las pruebas sintéticas no los demuestran.
+
+Después del login, se puede consultar la cuenta y el catálogo sin generar contenido ni reconstruir la imagen existente:
+
+```bash
+bash scripts/check-codex-account.sh oficina-runtime:33a3edc oficina-jorge-codex-auth
+```
+
+El diagnóstico usa `account/read`, `model/list` y `account/rateLimits/read` del protocolo oficial. Devuelve únicamente el tipo de cuenta, plan, identificadores públicos de modelos y campos seleccionados de uso. No devuelve correo, identificador de cuenta, tokens, saldo ni datos de créditos de reinicio. No llama `thread/start`, `turn/start` ni operaciones de canje. Usa el volumen existente identificado por su etiqueta y monta solo el archivo del diagnóstico como código de lectura. No conecta la oficina ni cambia el servicio público.
+
+El adaptador actualizado comprueba `ordinaryUsageAllowed === true` antes de cada turno. Si el backend no confirma el uso incluido, o la consulta falla, no envía el turno. Un saldo de créditos o un porcentaje bajo no sustituye esa confirmación. Esta señal está documentada en el esquema generado por la CLI fijada; no habilitamos recuperación automática por otro modelo ni canje de créditos. El control depende de la respuesta del proveedor y no configura la facturación de la cuenta. Este cambio requiere reconstruir el trabajador: no está presente en la imagen anterior `oficina-runtime:33a3edc`.
+
+Las pruebas del control de uso y del filtrado del diagnóstico están en `../test/included-usage.test.mjs`. Son pruebas de protocolo simuladas; el diagnóstico ejecutado por Jorge en el VPS aporta la comprobación de su sesión real.
 
 Si el socket quedó tras una caída, detener y verificar que no existe un trabajador activo antes de recuperar exclusivamente el socket. El programa no borra sockets o bloqueos de datos automáticamente. No montar el socket Docker en ninguno de los procesos.
 

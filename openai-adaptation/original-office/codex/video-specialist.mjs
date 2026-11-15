@@ -84,6 +84,6 @@ export class CodexVideoSpecialist {
    let output;try{output=JSON.parse(response.text);}catch{return fail('INVALID_SPECIALIST_JSON');}
    if(!validateOutput(output,q))return fail('INVALID_SPECIALIST_OUTPUT');
    return {status:'completed',output,provenance:{provider:'codex-chatgpt-plan',stage:q.stage,jobId:q.jobId,brand:q.brand,evidenceCoverage:'supplied-only',publicationApproved:false}};
-  }catch(e){return fail(['CHATGPT_LOGIN_REQUIRED','DRAFT_ALREADY_RUNNING','TURN_TIMEOUT','TRANSPORT_CLOSED','ABORTED','OUTPUT_TOO_LARGE'].includes(e?.message)?e.message:'CODEX_STAGE_FAILED');}
+  }catch(e){return fail(['CHATGPT_LOGIN_REQUIRED','INCLUDED_USAGE_NOT_CONFIRMED','DRAFT_ALREADY_RUNNING','TURN_TIMEOUT','TRANSPORT_CLOSED','ABORTED','OUTPUT_TOO_LARGE'].includes(e?.message)?e.message:'CODEX_STAGE_FAILED');}
  }
 }

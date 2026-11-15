@@ -71,6 +71,9 @@ export class OfficeAdapter {
     if (!this.ready || !this.threads.has(threadId)) throw new Error('UNKNOWN_THREAD');
     if (typeof text !== 'string' || !text.trim()) throw new Error('TEXT_REQUIRED');
     await this.checkAccount();
+    // Never infer included usage from remaining credits or percentage snapshots.
+    const usage = await this.client.request('account/rateLimits/read', { excludeResetCreditDetails: true, supportsLunaReserve: false });
+    if (usage?.ordinaryUsageAllowed !== true) throw new Error('INCLUDED_USAGE_NOT_CONFIRMED');
     return this.client.request('turn/start', { threadId, input: [{ type: 'text', text }] });
   }
   async interrupt(threadId, turnId) {

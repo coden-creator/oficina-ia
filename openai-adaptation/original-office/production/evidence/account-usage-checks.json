@@ -1,0 +1,21 @@
+{
+  "protocolVersion": "codex-cli 0.167.0-alpha.4",
+  "protocolEvidence": "Official app-server generate-json-schema output inspected locally",
+  "diagnosticMethods": ["initialize", "account/read", "model/list", "account/rateLimits/read"],
+  "gate": "ordinaryUsageAllowed must be the boolean true immediately before each turn/start",
+  "testResults": {
+    "adapterSuitePassed": 77,
+    "packagedOfficeChecksPassed": 20,
+    "bashSyntaxPassed": true,
+    "javascriptSyntaxPassed": true,
+    "containerWithoutCredentialsRefused": true
+  },
+  "ownerReportedChatgptLogin": true,
+  "authenticatedProtocolCheckPerformed": false,
+  "realInferencePerformed": false,
+  "creditResetRequested": false,
+  "vpsServicesChanged": false,
+  "usageGateDeployed": false,
+  "existingImage": "oficina-runtime:33a3edc",
+  "note": "Diagnostic is compatible with the existing image. The included-usage gate requires rebuilding and deploying the updated worker. Account/model replies in automated tests are synthetic."
+}
