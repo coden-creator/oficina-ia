@@ -45,6 +45,7 @@
 !production/reference-standard.mjs
 
 !public/navigation.js
+!public/brand-context.js
 !public/connections-panel.js
 !connections/
 !connections/store.mjs

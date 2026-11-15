@@ -6,7 +6,7 @@ import fs from 'node:fs';
 import {createHash,timingSafeEqual} from 'node:crypto';
 const digest=s=>createHash('sha256').update(s).digest();
 export const capabilities=Object.freeze({ui:'original-visual-shell',functionalOffice:false,provider:'not-connected',autonomous:false,externalActionsEnabled:false,paidApiEnabled:false,features:{chat:'unavailable',tasks:'unavailable',crm:'not-connected',ads:'not-connected',render:'not-connected',voice:'not-connected',publication:'unavailable'}});
-const files=new Map([['/','index.html'],...['style.css','negocio.css','officehq.js','sprites.js','compat-app.js','navigation.js','compat.css','video-panel.js','material-import.js','connections-panel.js'].map(f=>['/'+f,f])]);
+const files=new Map([['/','index.html'],...['style.css','negocio.css','officehq.js','sprites.js','compat-app.js','navigation.js','brand-context.js','compat.css','video-panel.js','material-import.js','connections-panel.js'].map(f=>['/'+f,f])]);
 const types={html:'text/html; charset=utf-8',js:'text/javascript; charset=utf-8',css:'text/css; charset=utf-8'};
 export function createOriginalShell({password,origin,videoFlow=null,videoDataDir=null,deploymentMarker=null,connectionStore=null}){
  if(typeof password!=='string'||password.length<16)throw new Error('PASSWORD_REQUIRED');
@@ -30,8 +30,9 @@ export function createOriginalShell({password,origin,videoFlow=null,videoDataDir
   if(req.url==='/api/state')return send(200,state);
   if(req.url==='/api/capabilities'||req.url==='/api/status'){await videoFlow?.refreshConnection?.();return send(200,currentCapabilities());}
   if(req.url==='/events'){res.writeHead(200,{'Content-Type':'text/event-stream','Cache-Control':'no-store','X-Accel-Buffering':'no'});res.end('data: '+JSON.stringify({type:'snapshot',state})+'\n\n');return;}
-  if(files.has(req.url)){
-   const file=files.get(req.url);res.writeHead(200,{'Content-Type':types[file.split('.').at(-1)],'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Cross-Origin-Resource-Policy':'same-origin','Content-Security-Policy':"default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; media-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"});res.end(fs.readFileSync(new URL('./public/'+file,import.meta.url)));return;
+  const staticPath=req.url.split('?')[0];
+  if(files.has(staticPath)){
+   const file=files.get(staticPath);res.writeHead(200,{'Content-Type':types[file.split('.').at(-1)],'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Cross-Origin-Resource-Policy':'same-origin','Content-Security-Policy':"default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; media-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"});res.end(fs.readFileSync(new URL('./public/'+file,import.meta.url)));return;
   }
   return send(req.url.startsWith('/api/')?503:404,{error:req.url.startsWith('/api/')?'FEATURE_NOT_CONNECTED':'NOT_FOUND'});
  });

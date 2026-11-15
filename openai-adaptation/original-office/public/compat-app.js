@@ -2,6 +2,7 @@
 import {OfficeHQ} from './officehq.js';
 import {mountVideoPanel} from './video-panel.js';
 import {mountNavigation} from './navigation.js';
+import {createBrandContext} from './brand-context.js';
 import {mountConnectionsPanel} from './connections-panel.js';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const notice=$('#compat-notice');
@@ -29,7 +30,7 @@ for(const view of $$('.view'))if(view.dataset.view!=='oficina'){
 $('#clock').textContent=new Date().toLocaleString('es-MX',{timeZone:config.timezone});
 notice.textContent=config.provider==='codex-chatgpt-plan'?'Oficina de contenido · Codex conectado para solicitudes. La animación de la oficina es ambiental. Cada pieza requiere tu revisión.':'Interfaz original recuperada · Sin IA ni servicios conectados. La animación es visual, no trabajo real.';
 
-let videoPanel;
-const navigation=mountNavigation({config,office,onBrandChange:brand=>videoPanel?.setBrand(brand)??true});
+const brandContext=createBrandContext(new URL(location.href).searchParams.get('brand'));
+mountNavigation({config,office,brandContext});
 mountConnectionsPanel(document.querySelector('[data-view="conexiones"]'));
-if(config.features.videoWorkflow==='internal-workflow-only')videoPanel=mountVideoPanel(document.querySelector('[data-view="estudio"]'),{onBrandChange:brand=>navigation.syncBrand(brand)});
+if(config.features.videoWorkflow==='internal-workflow-only')mountVideoPanel(document.querySelector('[data-view="estudio"]'),{brandContext});
