@@ -1,0 +1,60 @@
+{
+  "services": {
+    "office": {
+      "image": "oficina-runtime:33a3edc",
+      "pull_policy": "never",
+      "user": "1000:1000",
+      "read_only": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "cpus": "0.25",
+      "mem_limit": "128m",
+      "pids_limit": 64,
+      "restart": "on-failure:3",
+      "tmpfs": [
+        "/tmp:rw,nosuid,nodev,size=33554432,mode=1777"
+      ],
+      "command": [
+        "node",
+        "-e",
+        "require('http').createServer((q,s)=>{if(q.url==='/health'){s.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store'});s.end(JSON.stringify({status:'ok',service:'office-review-bootstrap',credentialsConfigured:false}));}else{s.writeHead(503,{'Content-Type':'text/plain; charset=utf-8','Cache-Control':'no-store'});s.end('Preparando la oficina de revisión.');}}).listen(3000,'0.0.0.0');"
+      ],
+      "networks": [
+        "CodeNet"
+      ],
+      "labels": {
+        "traefik.enable": "true",
+        "traefik.docker.network": "CodeNet",
+        "traefik.http.routers.office_codex_review_r1.rule": "Host(`service-oficina-review.flb2mp.easypanel.host`)",
+        "traefik.http.routers.office_codex_review_r1.entrypoints": "websecure",
+        "traefik.http.routers.office_codex_review_r1.tls": "true",
+        "traefik.http.routers.office_codex_review_r1.tls.certresolver": "letsencryptresolver",
+        "traefik.http.routers.office_codex_review_r1.service": "office_codex_review_r1",
+        "traefik.http.services.office_codex_review_r1.loadbalancer.server.port": "3000",
+        "traefik.http.services.office_codex_review_r1.loadbalancer.passHostHeader": "true",
+        "office.purpose": "jorge-office-review"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "node",
+          "-e",
+          "require('http').get('http://127.0.0.1:3000/health',r=>{r.resume();process.exit(r.statusCode===200?0:1)}).on('error',()=>process.exit(1))"
+        ],
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 3,
+        "start_period": "5s"
+      }
+    }
+  },
+  "networks": {
+    "CodeNet": {
+      "external": true
+    }
+  }
+}

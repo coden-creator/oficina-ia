@@ -98,3 +98,4 @@ d0fbbd356f3f4d3aeab4b00c8fdc149a10a5cef3595aee928d41da2f86b0b22c  ./production/e
 1abc775d737ecd6ea66ecf452c0c4352b22b4268c93f1debef636280512ccef6  ./codex/worker-isolation.mjs
 0912742901c82bf6d9135495c0e169ff2cc7502f926ec4f301413c657e59f8b5  ./deployment-review/compose.codex-worker.yml
 a411eb9d2de76e143d9faeb4cc3a152bfa85b9199cccabccb13089f475bfd0c1  ./test/worker-isolation.test.mjs
+64a485489ecb1d4b828ea27f7bd0bf1231f75c7baa7a1ea4a75ae5acbe59e449  ./deployment-review/compose.review-bootstrap.yml
