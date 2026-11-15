@@ -80,13 +80,13 @@ aa2eecd9f9748da3c23b6e91e7efaf1f3864406633fe5214890cd6e0ee32d185  ./video/storag
 de34bd5baf54cd341d8795ee24e1506b9efb47d1dc433dafc2ab89c3a424ecf5  ./production/evidence/container-offline-check.md
 5501ff7d786495f99189c0c4b24a5de085de842ce308475a36ac48d01db370be  ./scripts/probe-tool-inventory.mjs
 37c74fb83d73be8fa9d735818d8660885a3e668ca2921b1d5562bdd99f32dbf4  ./codex/broker.mjs
-b6b57d5476cb1dc4ecc60653e46f9ef9daa27aef6607ed735cb80ec1d7284f3c  ./codex/start-broker.mjs
+186f63757dfc51a7804cf8b1f5b7d67c2ec8d4f03da8f7aa744388ef41f17b06  ./codex/start-broker.mjs
 95fa8d0f0f88fe636d068d37f55345ffb03c05ff12679960f00f2c73d627241c  ./video/remote-runner.mjs
 cc51c13d65cbfc3acc0b146b0a3b7cd1bf75e6bdf939d22d3b289666782703a6  ./test/remote-runner.test.mjs
 bb5a395ae68a226da4742ab42fb3238390cc8a7a85eca8618392484d7c1b50f5  ./test/fixtures/synthetic-broker.mjs
 be975a660b27d6ad015fc2be01ee5a635ddbcf251f52ff3bdd195ea931e8b173  ./scripts/verify-runtime-container.sh
 81b57c369614e4b9ef693ee914add3956631cb8f34f15c9d96e82773d12ddc9c  ./scripts/probe-separated-containers.py
-5489d4ab0c8f65c8eeb1d113deb18fb90af0f02684de68ad327cf8ceac06eba9  ./deployment-review/IMPLEMENTACION.md
+b194aa2f30034a8b58336488ea33be4b27ac896159dc2e8ee1203827f981ce52  ./deployment-review/IMPLEMENTACION.md
 0ed5ce750bebfcf60fa58fa4f466dc1d5371d8df1dce36bf2dcf56496b0b9e0f  ./deployment-review/compose.review.yml
 07344abcf5b0146331d1378fc8509682f73752f077e5e83384647cafb359abb2  ./production/evidence/release-local-checks.json
 7abca1cdcdc8a23d1a0499815c09d2a79728be95d85f0bfa6bb9125e1a88abea  ./scripts/login-codex.sh
@@ -95,3 +95,6 @@ cae675ed2a177e005f5ae4dbda0ec3fdf41af35ab7d941228a3036ec36ec6af0  ./production/e
 f0e8690f4e38a9de5a9e39f43f3dacd539cfb75b25b62396083b60a9a90d9630  ./scripts/check-codex-account.mjs
 d0fbbd356f3f4d3aeab4b00c8fdc149a10a5cef3595aee928d41da2f86b0b22c  ./production/evidence/account-usage-checks.json
 45f6ca6221116cd8a8671679078a30f9421f7255d0c37db1ddfd57f42bec4529  ./production/evidence/login-home-regression.json
+1abc775d737ecd6ea66ecf452c0c4352b22b4268c93f1debef636280512ccef6  ./codex/worker-isolation.mjs
+0912742901c82bf6d9135495c0e169ff2cc7502f926ec4f301413c657e59f8b5  ./deployment-review/compose.codex-worker.yml
+a411eb9d2de76e143d9faeb4cc3a152bfa85b9199cccabccb13089f475bfd0c1  ./test/worker-isolation.test.mjs

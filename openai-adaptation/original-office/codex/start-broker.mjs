@@ -1,12 +1,14 @@
 import {ChatGPTDraftRuntime,launchIsolatedCodex} from './chatgpt-runtime.mjs';
 import {CodexVideoSpecialist} from './video-specialist.mjs';
 import {createSpecialistBroker,listenPrivate} from './broker.mjs';
+import {checkWorkerIsolation} from './worker-isolation.mjs';
 const env=process.env;
 let runtime,server;
 try{
  if(env.OFFICE_CODEX_ENABLE!=='1'||env.OFFICE_CODEX_ISOLATION_VERIFIED!=='1')throw Error('OPERATOR_ENABLE_REQUIRED');
  if(['OPENAI_API_KEY','ANTHROPIC_API_KEY','OPENROUTER_API_KEY','AZURE_OPENAI_API_KEY'].some(k=>env[k]))throw Error('API_KEYS_FORBIDDEN');
  if(!env.OFFICE_CODEX_MODEL)throw Error('MODEL_REQUIRED');
+ checkWorkerIsolation();
  runtime=new ChatGPTDraftRuntime({workspace:'/home/node/empty-workspace',model:env.OFFICE_CODEX_MODEL,childFactory:()=>launchIsolatedCodex({binary:'/usr/local/bin/codex',home:'/home/node/codex-isolated',workspace:'/home/node/empty-workspace',enabled:true,isolationVerified:true})});
  await runtime.connect();
  server=createSpecialistBroker({specialist:new CodexVideoSpecialist({runtime}),refreshAccount:()=>runtime.adapter.checkAccount()});
