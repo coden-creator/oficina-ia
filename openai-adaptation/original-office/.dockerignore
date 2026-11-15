@@ -42,3 +42,4 @@
 !video/visual-contract.mjs
 
 !public/navigation.js
+scripts/probe-tool-inventory.mjs

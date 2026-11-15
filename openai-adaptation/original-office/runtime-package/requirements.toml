@@ -22,3 +22,4 @@ request_permissions_tool = false
 skill_mcp_dependency_install = false
 skill_search = false
 goals = false
+view_image = false

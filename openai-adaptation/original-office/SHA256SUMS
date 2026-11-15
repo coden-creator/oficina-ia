@@ -1,4 +1,4 @@
-32a1e4726c4cecb2ff878c190453a1b0259a15e305d0be688fd2f5cb016e2b1e  ./.dockerignore
+01afc79dce54ac2dd61ffeae98eb8c1be18a87ede72ff39c3ae916b6b9077a3c  ./.dockerignore
 f2d604087f8eee9c556831daa25fb8b59b5e3ff84c9f8c3c2fc65ac5e587921c  ./Dockerfile
 33c9972648e2f7c832181dfb7e036df4f84903fca6a7018f9755c6f73fd60e89  ./Dockerfile.runtime
 745cb3afb8753cd05056081cec2fdefb5b0f1d859f6c0042a78e593bca541b20  ./INTEGRATION.md
@@ -14,7 +14,7 @@ c010849952565145a31dac3fb69948d3377fd1ce99f57744dd2198b2801465fe  ./codex/chatgp
 4ab657044143a8f1860b564be9da3c58f3eafd4482da000bf6149732fb48a676  ./codex/event-stream.mjs
 16ef518f93979ccc6e3033e2af3ee89b83ba682292fb3d4ceb3020dbd6b405dc  ./codex/read-only-tools.mjs
 4d7286a7f0941727aa57975c2c2023219dfbbfd235723adc334494e9e4d87d10  ./codex/stdio-transport.mjs
-1443e1dbc5c7c34f1e2c8b5d10fe47957664a2df5b64d9da798e95af35ff9f83  ./codex/text-only-config.mjs
+898e67ebb8e8ad89e0f6f06c6695fbd105e211640439315c8f2d627d82f0f9eb  ./codex/text-only-config.mjs
 fba75b3372e37cf2b812b89f8c6a2885ef989a4b36e514b0d721b02c536ebdc2  ./codex/video-specialist.mjs
 54651a5647cebcd16f955c6a11e2b91b339c2948ce2fae3c836b7e9dd73385d6  ./connectors/README.md
 8393a7bb6fff2a968fd260fec7b04353ac0206ae3833a55e23fbeb6e4b58047b  ./connectors/VOICE-ADAPTER.md
@@ -52,7 +52,7 @@ ab12c32c8a524a532e0819ec4a26d149de06171c570bd0e4af7207b4b07ded59  ./renderer-sel
 4d83296699d79aa131ed22f698f476b4e50147ce2f0b841958f53ec3ee21b4f9  ./runtime-package/ADVERSARIAL-GATE.md
 3ef03f5670ef6683d568edb475b8ef23d8a642f7661d6511ad273517bc170106  ./runtime-package/package-lock.json
 6615fc23369d5676099774647870693aabd5dec79e23594f6a899b4f719e21b5  ./runtime-package/package.json
-ea3cca72737c49e79e18e08b1e188f52a7eae778d0a65e00f71a90b826b1edae  ./runtime-package/requirements.toml
+1e0b230c445c93da295552e31a2c9ec55aa1668e4d3273e1c3dde3251ec01b44  ./runtime-package/requirements.toml
 0591d4470c376c8cdfba982c916b31985798bfb0ab2d404efafabbe6df3c8b91  ./scripts/probe-packaged-unauthenticated.mjs
 28b7f089b740a687a8ef61b2412ff1c0aabe3201e638d89c8bc0f1c7f8b1a238  ./scripts/verify-tool-restrictions.mjs
 ebff3d16aefdca5f593845402e47ea0a954f821cfe944366fea52088b4ca61cd  ./server.mjs
@@ -77,4 +77,5 @@ dca55722d69731501420220238c977b589f19e5299980f3f864f93e0f8b2c93c  ./video/visual
 fbddf3672ae648933f33053ef4d3960be8a5ef2068c1b086a05a4cd48eb352f0  ./visual-contract.test.mjs
 af4ff890ff0d644d2f9e33db3e48b6f273be1ea54e3eaf673c5e9c5ce9560aa3  ./video/storage-preflight.mjs
 aa2eecd9f9748da3c23b6e91e7efaf1f3864406633fe5214890cd6e0ee32d185  ./video/storage-preflight.test.mjs
-d9cfc929e66c2713c58f71ca0497828e0a0ae52e451dd9c019f4e480b105fcde  ./production/evidence/container-offline-check.md
+bcf87a365df57ee00bcd59077fd0020d63cd33533b1a26637c15df613c5ca361  ./production/evidence/container-offline-check.md
+f1eb3c543b152602e017b6f678ae10a33f95e4495195b1a2cb807153b8284865  ./scripts/probe-tool-inventory.mjs
