@@ -7,7 +7,7 @@ const digest=s=>createHash('sha256').update(s).digest();
 export const capabilities=Object.freeze({ui:'original-visual-shell',functionalOffice:false,provider:'not-connected',autonomous:false,externalActionsEnabled:false,paidApiEnabled:false,features:{chat:'unavailable',tasks:'unavailable',crm:'not-connected',ads:'not-connected',render:'not-connected',voice:'not-connected',publication:'unavailable'}});
 const files=new Map([['/','index.html'],...['style.css','negocio.css','officehq.js','sprites.js','compat-app.js','navigation.js','compat.css','video-panel.js','material-import.js'].map(f=>['/'+f,f])]);
 const types={html:'text/html; charset=utf-8',js:'text/javascript; charset=utf-8',css:'text/css; charset=utf-8'};
-export function createOriginalShell({password,origin,videoFlow=null,videoDataDir=null}){
+export function createOriginalShell({password,origin,videoFlow=null,videoDataDir=null,deploymentMarker=null}){
  if(typeof password!=='string'||password.length<16)throw new Error('PASSWORD_REQUIRED');
  const publicURL=new URL(origin);if(publicURL.protocol!=='https:'||publicURL.username||publicURL.password||publicURL.pathname!=='/'||publicURL.search||publicURL.hash)throw new Error('HTTPS_ORIGIN_REQUIRED');
  const currentCapabilities=()=>{const flow=videoFlow?.capabilities();return {...capabilities,provider:flow?.runnerConnected?'codex-chatgpt-plan':'not-connected',features:{...capabilities.features,render:flow?.rendererConfigured?'configured-unverified':'not-connected',videoWorkflow:videoFlow?'internal-workflow-only':'unavailable'},video:flow||null};};
@@ -17,7 +17,7 @@ export function createOriginalShell({password,origin,videoFlow=null,videoDataDir
  const state={agents:Object.fromEntries(agents.map(a=>[a.id,{status:'unavailable',text:'Sin IA conectada',lastRun:null}])),approvals:[],log:[],deliverables:[],costs:null,chats:{},tasks:[],group:[],provenance:'fresh-shell-no-data-imported'};
  return http.createServer(async(req,res)=>{
   const send=(status,value)=>{res.writeHead(status,{'Content-Type':'application/json','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Cross-Origin-Resource-Policy':'same-origin'});res.end(JSON.stringify(value));};
-  if(req.method==='GET'&&req.url==='/health')return send(200,{alive:true,mode:'original-visual-shell'});
+  if(req.method==='GET'&&req.url==='/health')return send(200,{alive:true,mode:'original-visual-shell',...(deploymentMarker?{deploymentMarker}:{})});
   const raw=req.headers.authorization||'';
   if(!raw.startsWith('Basic ')||!timingSafeEqual(digest(Buffer.from(raw.slice(6),'base64').toString()),digest('jorge:'+password))){res.setHeader('WWW-Authenticate','Basic realm="Oficina", charset="UTF-8"');return send(401,{error:'AUTHENTICATION_REQUIRED'});}
   if(req.headers.host!==publicURL.host)return send(403,{error:'HOST_NOT_ALLOWED'});

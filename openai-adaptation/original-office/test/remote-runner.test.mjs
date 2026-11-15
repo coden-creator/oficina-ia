@@ -43,8 +43,8 @@ test('office configuration reflects live worker connectivity and disconnection',
  const {createOriginalShell}=await import('../server.mjs');
  const s=await setup({status:connected,run:async()=>({status:'blocked'})});
  const flow=createVideoFlow({dataDir:path.join(s.dir,'data'),adapters:{runner:s.runner}});
- const web=createOriginalShell({password:'fixture-only-office-password',origin:'https://office.example.com',videoFlow:flow,videoDataDir:path.join(s.dir,'data')});
+ const web=createOriginalShell({password:'fixture-only-office-password',origin:'https://office.example.com',videoFlow:flow,videoDataDir:path.join(s.dir,'data'),deploymentMarker:'test-deployment-marker'});
  await new Promise(r=>web.listen(0,'127.0.0.1',r));
  const get=()=>new Promise((resolve,reject)=>{http.get({host:'127.0.0.1',port:web.address().port,path:'/api/config',headers:{Host:'office.example.com',Authorization:'Basic '+Buffer.from('jorge:fixture-only-office-password').toString('base64')}},res=>{let text='';res.on('data',b=>text+=b);res.on('end',()=>resolve(JSON.parse(text)));}).on('error',reject);});
- try{assert.equal((await get()).provider,'codex-chatgpt-plan');await new Promise(r=>s.server.close(r));assert.equal((await get()).provider,'not-connected');}finally{await new Promise(r=>web.close(r));await s.close();}
+ try{const health=await fetch(`http://127.0.0.1:${web.address().port}/health`);assert.deepEqual(await health.json(),{alive:true,mode:'original-visual-shell',deploymentMarker:'test-deployment-marker'});assert.equal((await get()).provider,'codex-chatgpt-plan');await new Promise(r=>s.server.close(r));assert.equal((await get()).provider,'not-connected');}finally{await new Promise(r=>web.close(r));await s.close();}
 });

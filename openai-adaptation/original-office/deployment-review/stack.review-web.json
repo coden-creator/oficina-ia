@@ -1,0 +1,55 @@
+{
+  "version": "3.8",
+  "services": {
+    "office": {
+      "image": "oficina-runtime:33a3edc",
+      "user": "1000:1000",
+      "read_only": true,
+      "cap_drop": ["ALL"],
+      "tmpfs": ["/tmp:rw,nosuid,nodev,size=134217728,mode=1777"],
+      "command": ["node", "start.mjs"],
+      "environment": {
+        "OFFICE_ORIGIN": "https://service-oficina-review.flb2mp.easypanel.host",
+        "OFFICE_PASSWORD_FILE": "/run/secrets/office_password",
+        "OFFICE_ENABLE_VIDEO_WORKFLOW": "1",
+        "OFFICE_ENABLE_LOCAL_RENDER": "1",
+        "OFFICE_VIDEO_DATA_DIR": "/data/video",
+        "OFFICE_CODEX_SOCKET": "/run/office/codex.sock"
+      },
+      "secrets": [{"source":"office_password","target":"office_password","uid":"1000","gid":"1000","mode":256}],
+      "volumes": ["video:/data/video", "ipc:/run/office:ro"],
+      "configs": [
+        {"source":"server","target":"/app/server.mjs"},
+        {"source":"start","target":"/app/start.mjs"}
+      ],
+      "networks": ["CodeNet"],
+      "deploy": {
+        "replicas": 1,
+        "resources": {"limits":{"cpus":"1.0","memory":"768M"}},
+        "restart_policy": {"condition":"on-failure","delay":"10s","max_attempts":3},
+        "update_config": {"parallelism":1,"order":"stop-first","failure_action":"pause"},
+        "labels": {
+          "office.purpose":"jorge-review-web-r1",
+          "traefik.enable":"true",
+          "traefik.swarm.network":"CodeNet",
+          "traefik.http.routers.office_codex_review_r1.rule":"Host(`service-oficina-review.flb2mp.easypanel.host`)",
+          "traefik.http.routers.office_codex_review_r1.entrypoints":"websecure",
+          "traefik.http.routers.office_codex_review_r1.tls.certresolver":"letsencryptresolver",
+          "traefik.http.routers.office_codex_review_r1.service":"office_codex_review_r1",
+          "traefik.http.services.office_codex_review_r1.loadbalancer.server.port":"3000",
+          "traefik.http.services.office_codex_review_r1.loadbalancer.passHostHeader":"true"
+        }
+      }
+    }
+  },
+  "networks": {"CodeNet":{"external":true}},
+  "volumes": {
+    "video":{"external":true,"name":"oficina-jorge-videos-review-r1"},
+    "ipc":{"external":true,"name":"oficina-jorge-codex-ipc-r1"}
+  },
+  "secrets": {"office_password":{"external":true,"name":"oficina-jorge-review-access-r1"}},
+  "configs": {
+    "server":{"file":"../server.mjs"},
+    "start":{"file":"../start.mjs"}
+  }
+}

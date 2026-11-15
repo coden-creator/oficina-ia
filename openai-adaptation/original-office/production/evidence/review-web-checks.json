@@ -1,0 +1,22 @@
+{
+  "scope": "local review-web deployment validation; not a live VPS acceptance",
+  "pythonDeploymentTests": {"passed": 15, "inferencePerformed": false},
+  "httpAndSocketTests": {"passed": 9, "specialists": "simulated", "ffmpegRender": "real"},
+  "shellAuthTests": {"passed": 7},
+  "dockerStackConfig": {"bootstrap": "passed", "connectedWeb": "passed"},
+  "twoContainerProbe": {
+    "webCode": "current server.mjs and start.mjs mounted read-only",
+    "ipcVolumeMountedReadOnlyInWeb": true,
+    "specialists": "simulated",
+    "mp4Downloaded": true,
+    "sha256": "4d0224f838bef3c155429aeb7a6b67de45890aa5129a517b3b8fe8219d64317e",
+    "bytes": 145229,
+    "fixtureApprovalOnly": true,
+    "persistedAfterWebRestart": true,
+    "accountVolumeNotMountedInWeb": true,
+    "jobsNotMountedInWorker": true
+  },
+  "realOwnerInferencePerformed": false,
+  "vpsReviewWebDeployed": false,
+  "publishingPerformed": false
+}

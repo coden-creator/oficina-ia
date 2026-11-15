@@ -1,3 +1,5 @@
+# HISTORICAL PROPOSAL: replaced by compose.codex-worker.yml + stack.review-web.json.
+# Do not launch a second worker. See IMPLEMENTACION.md for the current procedure.
 # Prepared for a NEW, isolated review stack. Do not deploy alongside a router
 # serving the same hostname. Existing EasyPanel service/volumes are not adopted.
 version: '3.8'

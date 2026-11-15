@@ -1,6 +1,6 @@
 # Runtime packaging: prepared, not deployed or authenticated
 
-> Actualización de esta rama (15 noviembre 2026): existe una conexión opt-in a un trabajador Codex por socket Unix. La imagen de runtime se construyó localmente y pasó comprobaciones sin cuenta real. Los párrafos históricos de abajo describen etapas anteriores; consultar [la entrega de implementación](deployment-review/IMPLEMENTACION.md) y [la evidencia actual](production/evidence/container-offline-check.md). No se desplegó esta entrega ni se realizó inferencia autenticada.
+> Estado verificado (15 noviembre 2026): Jorge completó el login oficial; el trabajador privado de Codex ya está desplegado y Docker lo reportó saludable. La web conectada y la primera inferencia siguen pendientes de verificación. La entrega vigente usa un trabajador Compose y una web Swarm porque CodeNet no es attachable. Consultar [IMPLEMENTACION.md](deployment-review/IMPLEMENTACION.md) para el procedimiento y los límites actuales. Los apartados posteriores conservan evidencia histórica; no describen por sí solos el despliegue vigente.
 
 ## Verified inputs
 - Official npm `@openai/codex@0.167.0-alpha.4`; package-lock includes platform packages with SHA512 integrity. `npm ci --ignore-scripts` succeeded in the build investigation environment.

@@ -1,5 +1,29 @@
 # Entrega preparada: solicitudes y conexión privada de Codex
 
+## Estado verificado y siguiente despliegue — 15 noviembre 2026
+
+Jorge completó el login oficial en `oficina-jorge-codex-auth`. Su diagnóstico real devolvió cuenta ChatGPT, uso incluido permitido y modelo predeterminado `gpt-6.1-sol`, sin inferencia ni créditos canjeados. El trabajador privado `service/oficina-codex` se desplegó mediante EasyPanel desde la referencia fijada `codex/worker-r1` (`4314ffc3b2f918ee84ba1c6e7c123e5e1849965b`); Docker lo reportó **healthy**, con el socket en `oficina-jorge-codex-ipc-r1`. Esto acredita conexión de cuenta y comprobaciones de aislamiento, no un video generado.
+
+La web de revisión necesita **Swarm**: Jorge verificó `CodeNet: driver=overlay scope=swarm attachable=false`. El intento de web mediante Compose nativo no pudo conectar esa red y quedó deshabilitado en EasyPanel, sin contenedores en ejecución. No cambiar la red compartida ni activar otra vez ese intento. La oficina pública `service_oficina-jorge` sigue independiente.
+
+La entrega vigente para conectar la web es `stack.review-web.json` con `scripts/deploy-review-office.py`. Se ejecuta desde la consola del VPS en un checkout fijado:
+
+```bash
+python3 scripts/deploy-review-office.py --test-video
+```
+
+El script usa únicamente Docker y Python 3 estándar. Crea el stack nuevo `oficina_codex_review_r1`, en el nodo donde existe el trabajador, con el dominio `https://service-oficina-review.flb2mp.easypanel.host`. Conserva las etiquetas del router y `CodeNet` en el manifiesto Swarm. No reconstruye la imagen ni modifica la oficina original, el trabajador, su login o el proxy compartido.
+
+Primero despliega una página sin credenciales ni volúmenes privados. Verifica desde el VPS el certificado del origen y un identificador único de esa revisión mediante HTTPS directo, sin proxy de entorno, redirecciones ni desactivar TLS. Solo después usa la contraseña ya configurada en la oficina existente y crea un secreto Docker independiente por entrada estándar. No imprime la contraseña ni la escribe en Git, argumentos de comandos o archivos temporales. El acceso de la revisión sigue siendo usuario `jorge` y la contraseña que ya tiene la oficina.
+
+La web monta solamente el socket (volumen de solo lectura) y el volumen persistente nuevo `oficina-jorge-videos-review-r1`; **no monta el login de Codex**. Usa raíz de solo lectura, UID1000, ninguna capacidad Linux, máximo 1 CPU/768 MiB, y no publica puertos fuera de Traefik. El trabajador mantiene sus límites propios y Compose nativo, que sí aplica `NoNewPrivs` y el límite de procesos. No convertir el trabajador a Swarm.
+
+Antes de desplegar, el script comprueba recursos, deja margen para web/trabajador bajo el 70% del VPS y exige máximo 5 CPU declaradas entre los servicios de oficina. Es una comprobación de capacidad al ejecutar, no un control continuo del uso global de otros servicios. No adopta recursos ajenos con nombres coincidentes ni borra datos para recuperarse de errores. Si se interrumpe, conserva recursos; al repetir reconoce sus recursos por etiqueta y no vuelve a desplegar una web ya conectada.
+
+Con `--test-video`, solicita una sola animática interna de Glowfy, usando exclusivamente el plan conectado. Verifica la procedencia de las cinco etapas de Codex, QA técnico y descarga autenticada/hash del MP4. **No aprueba, programa ni publica la pieza.** Si la revisión creativa pide cambios o una etapa falla, conserva la ficha y muestra ese estado. Una segunda ejecución identifica la ficha existente y no repite automáticamente inferencia. Sin ese argumento solo verifica la conexión. Si se perdió la respuesta durante la generación, consultar la ficha antes de reintentar desde la interfaz.
+
+Validación local de esta entrega: 15 pruebas Python de despliegue/TLS/idempotencia sin VPS, 9 pruebas Node de HTTP/socket/MP4 con especialistas simulados 7 pruebas de autenticación de la web y validación de ambos manifiestos mediante `docker stack config`. Dos contenedores locales con el socket montado de solo lectura en la web generaron y descargaron un MP4 con especialista simulado y conservaron su ficha tras reiniciar la web. Ver `production/evidence/review-web-checks.json`. La web Swarm real, su certificado, el almacenamiento en el VPS y la primera inferencia quedan pendientes de ejecutar este procedimiento. Un MP4 técnico válido tampoco acredita calidad comercial ni aceptación visual de Jorge.
+
 ## Qué se implementó
 
 El servidor web puede guardar solicitudes por marca en un volumen independiente y comunicarse con el proceso de especialistas mediante un socket Unix privado. El proceso de Codex conserva el inicio de sesión en otro volumen que el servidor web no monta. Solo se admiten consultas de estado y ejecución de etapas de video; no se expone el protocolo de Codex, login, shell ni configuración al navegador.
@@ -47,7 +71,7 @@ docker build --secret id=npm_ca,src=/ruta/a/ca-confiable.crt -f Dockerfile.runti
 
 La CA no se copia en la imagen. No usar certificados desconocidos. El lock de npm conserva la integridad de los paquetes. Registrar el digest del resultado antes de implementarlo. No se afirma que todas las dependencias del sistema operativo sean reproducibles por snapshot.
 
-## Parámetros de implementación (NO desplegados)
+## Parámetros de implementación
 
 ### Trabajador privado administrable con EasyPanel
 
@@ -59,7 +83,9 @@ Antes de leer las credenciales, `codex/worker-isolation.mjs` comprueba el UID, r
 
 En EasyPanel, usar un servicio Compose nuevo, proyecto `service`, nombre `oficina-codex`, origen Git del repositorio, una referencia de entrega fijada, raíz `/openai-adaptation/original-office` y archivo `deployment-review/compose.codex-worker.yml`. Verificar recursos globales antes de crearlo. No reutilizar ese nombre si ya pertenece a otro servicio. La oficina pública anterior sigue siendo un despliegue independiente.
 
-### Stack de revisión original
+### Stack de revisión original — propuesta histórica, no ejecutar
+
+`compose.review.yml` es la propuesta anterior con ambos procesos. Fue sustituida por el trabajador Compose independiente y `stack.review-web.json`, que reutiliza su socket. `compose.review-bootstrap.yml` también es histórico: Compose nativo no puede adjuntarse a la red CodeNet actual. No ejecutar estas propuestas junto con la entrega vigente ni duplicar trabajadores.
 
 `compose.review.yml` requiere `OFFICE_IMAGE`, `OFFICE_HOST` (dominio de revisión), `OFFICE_NODE` (hostname del nodo), `OFFICE_PASSWORD_SECRET` (secreto Docker independiente ya creado) y `OFFICE_AUTH_VOLUME` (volumen privado creado por el login oficial). El servicio web usa el secreto de acceso, pero no monta el volumen de Codex. No escribir contraseñas en el repositorio ni en el chat. La imagen inicializa los volúmenes nuevos con UID1000. No cambiar permisos de volúmenes existentes sin inspeccionarlos.
 
@@ -101,7 +127,7 @@ Si el socket quedó tras una caída, detener y verificar que no existe un trabaj
 
 ## Pendiente para aceptar producción
 
-- Primera conexión con la cuenta de Jorge y una generación real sin API de pago.
+- Conexión de la web con el trabajador ya autenticado y una generación real sin API de pago.
 - Verificación de separación de procesos, red y permisos en el VPS real; las pruebas locales no sustituyen esa revisión.
 - Integración visual completa del motor original, recursos autorizados de Glowfy/Velforce y revisión de calidad de Jorge.
 - Cola durable con recuperación de trabajos interrumpidos y progreso visible; el flujo actual se ejecuta en la solicitud HTTP y requiere reintento manual tras una caída.

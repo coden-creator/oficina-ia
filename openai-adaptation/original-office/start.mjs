@@ -13,8 +13,8 @@ try{
  const runner=process.env.OFFICE_CODEX_SOCKET?createRemoteRunner({socketPath:process.env.OFFICE_CODEX_SOCKET}):null;
  const videoFlow=process.env.OFFICE_ENABLE_VIDEO_WORKFLOW==='1'?createVideoFlow({dataDir:videoDataDir,adapters:{...(renderer?{renderer}:{}),...(runner?{runner}:{})}}):null;
  const password=process.env.OFFICE_PASSWORD_FILE?fs.readFileSync(process.env.OFFICE_PASSWORD_FILE,'utf8').trim():process.env.OFFICE_PASSWORD;
- const server=createOriginalShell({password,origin:process.env.OFFICE_ORIGIN,videoFlow,videoDataDir});
+ const server=createOriginalShell({password,origin:process.env.OFFICE_ORIGIN,videoFlow,videoDataDir,deploymentMarker:process.env.OFFICE_DEPLOYMENT_MARKER||null});
  server.on('error',()=>{console.error('Office shell refused to start. Check private configuration.');process.exit(1);});
- server.listen(port,process.env.HOST||'0.0.0.0',()=>console.log('Original visual shell ready. No AI or external services connected.'));
+ server.listen(port,process.env.HOST||'0.0.0.0',()=>console.log('Office web ready. Check /api/config for the current private worker connection.'));
  for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>{const timer=setTimeout(()=>process.exit(1),10000);timer.unref();server.close(()=>process.exit(0));server.closeIdleConnections();});
 }catch{console.error('Office startup failed. Check private configuration and the dedicated writable video storage; model credentials are forbidden.');process.exit(1);}
