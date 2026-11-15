@@ -3,9 +3,11 @@ import {ReadOnlyToolBridge} from './read-only-tools.mjs';
 import path from 'node:path';import fs from 'node:fs';import {spawn} from 'node:child_process';
 import {attachStdio} from './stdio-transport.mjs';import {OfficeAdapter} from './adapter.mjs';import {OfficeEventStream} from './event-stream.mjs';
 // Entries from pinned official app-server/login probes and its documented model cache.
+// The official CLI also writes the migration marker and SQLite maintenance lock
+// after starting real threads. Both must remain ordinary files, never symlinks.
 // Configuration, plugins, custom skills and unknown entries still fail closed.
 export function validateRuntimeHomeEntries(home) {
- const allowed=new Set(['auth.json','auth.json.lock','auth.lock','installation_id','models_cache.json','.tmp','tmp','skills','log']);
+ const allowed=new Set(['auth.json','auth.json.lock','auth.lock','installation_id','models_cache.json','.sandbox_migration','.sqlite-maintenance.lock','.tmp','tmp','skills','log']);
  for(const name of fs.readdirSync(home)) {
   if(!allowed.has(name)&&!/^(queue|memories|goals|logs|state)_\d+\.sqlite(?:-shm|-wal)?$/.test(name))throw new Error('HOME_NOT_CLEAN');
   const p=path.join(home,name);const st=fs.lstatSync(p);

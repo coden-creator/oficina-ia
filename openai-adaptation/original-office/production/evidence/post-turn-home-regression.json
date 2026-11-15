@@ -1,0 +1,18 @@
+{
+  "scope": "Compatibility with state created by the pinned official Codex after real threads",
+  "officialCodexVersion": "0.167.0-alpha.4",
+  "officialSourceCommit": "fb036d4ebd89f263d34a1f888c279ce85bb383c6",
+  "officialFiles": {
+    ".sandbox_migration": "codex-rs/execpolicy/src/sandbox_migration.rs:10,32-42; atomic regular-file marker v1 newline",
+    ".sqlite-maintenance.lock": "codex-rs/state/src/runtime/reclamation.rs:123-132; regular-file maintenance lock"
+  },
+  "ownerObservedBothFiles": true,
+  "ownerObservedStaleSocket": false,
+  "syntheticRegressionBefore": "HOME_NOT_CLEAN",
+  "syntheticRegressionAfter": "accepted with files unchanged",
+  "testsPassed": 36,
+  "checksRetained": ["reject symlinks", "reject directories for marker/lock", "reject config/plugins/unknown entries", "require verified isolation", "require included usage before every turn"],
+  "credentialsReadByTests": false,
+  "inferencePerformedByTests": false,
+  "liveRestartVerifiedAtThisCommit": false
+}
