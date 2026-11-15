@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Oficina · Adaptación en curso</title>
+  <title>Oficina de contenido · Jorge</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="negocio.css">
 <link rel="stylesheet" href="compat.css"></head>
 <body><div id="compat-notice" role="status">Interfaz original · Integración en curso. Sin IA conectada ni acciones externas. La animación es visual, no actividad real.</div>
   <header class="topbar">
-    <a class="brand" href="#/oficina" aria-label="Oficina">
+    <a class="brand" href="#/inicio" aria-label="Inicio de la oficina">
       <span class="logo">C</span>
       <span class="brand-text"><b>Oficina</b><small>Oficina IA</small></span>
     </a>
@@ -25,7 +25,7 @@
 
 <div class="shell">
       <aside class="sidebar">
-      <nav class="tabs" id="tabs" aria-label="Secciones">
+      <nav class="tabs legacy-navigation" id="tabs" aria-label="Secciones anteriores ocultas" hidden inert>
         <a class="tab" href="#/bandeja" data-tab="hoy">
           <svg class="ic" viewBox="0 0 24 24"><path d="M3 13l3-8h12l3 8v6H3z"/><path d="M3 13h5l1 3h6l1-3h5"/></svg>
           <span>Hoy</span><i class="tbadge" id="badge-sec-hoy"></i>
@@ -53,7 +53,7 @@
       </nav>
     </aside>
 <div class="content">
-  <div id="subnavs">
+  <div id="subnavs" class="legacy-navigation" hidden inert>
     <nav class="subnav" data-sec="hoy" hidden aria-label="hoy"><a href="#/bandeja" data-sub="bandeja">Bandeja<i class="tbadge bad" id="badge-bandeja"></i></a><a href="#/pendientes" data-sub="pendientes">Pendientes<i class="tbadge " id="badge-pendientes"></i></a></nav>
     <nav class="subnav" data-sec="ventas" hidden aria-label="ventas"><a href="#/ventas" data-sub="ventas">Pipeline</a><a href="#/ventas/seguimientos" data-sub="ventas/seguimientos">Seguimientos<i class="tbadge " id="v-badge-seg"></i></a><a href="#/llamadas" data-sub="llamadas">Llamadas<i class="tbadge " id="badge-llamadas"></i></a><a href="#/cotizaciones" data-sub="cotizaciones">Cotizaciones</a><a href="#/clientes" data-sub="clientes">Clientes</a><a href="#/prospeccion" data-sub="prospeccion">Prospección</a><a href="#/ventas/lab" data-sub="ventas/lab">Ajustes de ventas</a></nav>
     <nav class="subnav" data-sec="proyectos" hidden aria-label="proyectos"><a href="#/proyectos" data-sub="proyectos">Tablero</a><a href="#/desarrollo" data-sub="desarrollo">Demos y sitios</a></nav>

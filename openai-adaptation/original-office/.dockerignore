@@ -39,3 +39,5 @@
 !video/canvas-demo/DEPENDENCIES.json
 
 !video/visual-contract.mjs
+
+!public/navigation.js
