@@ -1,4 +1,46 @@
-# Revisión de interfaz: selección de marca
+# Revisión de interfaz de la oficina
+
+## Segunda intervención: estructura visual del sistema
+
+Jorge amplió el alcance: mejorar la estructura visual de las pantallas existentes y después revisar su publicación. Esta intervención no despliega por sí sola.
+
+Plan previo: conservar la identidad oscura de la oficina y el selector global. Usar fondo `#0d0e12`, superficies `#171a22`, divisores `#303644`, texto `#eef0f5`, secundario `#aeb7c7` y acento `#b7a3ff`. Tipografía del sistema existente; títulos de 30/24 px, texto de 15 px y metadatos de 13 px. Espaciado de 8/16/24/32 px. El énfasis visual se dedica a la pieza y su decisión; sin hero de marketing, cifras de rendimiento inventadas ni tarjetas idénticas para todo.
+
+```text
+Cabecera: oficina / marca                                  menú móvil
+Navegación lateral       Estudio                    Nueva solicitud
+                         Para revisar | En proceso | Archivo
+                         Fichas reales de la marca / estado vacío
+
+Ficha:                   vista del video | decisión y comentario
+                         proceso y evidencia, desplegables
+```
+
+Inicio muestra los trabajos que necesitan una decisión y un resumen del circuito real. Estudio prioriza las piezas; el formulario pasa a un diálogo con contexto opcional. Marcas muestra el perfil que ya devuelve el backend. Calendario explica la conexión pendiente y no inventa publicaciones. Oficina conserva el escenario original con indicación de su carácter visual. Conexiones reúne los servicios con una misma estructura, destacando la configuración de ElevenLabs.
+
+Revisión del plan: reemplazar seis pantallas por seis paneles decorativos no resolvería el problema. Por eso cada vista mantiene una tarea distinta, mientras comparte títulos, acciones, estados, espacios y tratamiento de errores. Los detalles técnicos se muestran al abrirlos; los límites que afectan una decisión siguen visibles.
+
+
+## Resultado y validación de la segunda intervención
+
+- Inicio prioriza la siguiente decisión y los trabajos recientes de la marca actual. Los nombres del circuito original se muestran como roles previstos, no como trabajadores ejecutándose.
+- Estudio ofrece Para revisar / En proceso / Archivo / Todos, con cantidades de trabajos reales. La solicitud se abre aparte; objetivo y llamada a la acción primero, contexto y archivo de texto como opciones.
+- La ficha reúne reproducción del archivo existente, aceptación por versión, comentario, cambios y descarte con motivo. Las pruebas técnicas mantienen su advertencia y no se presentan como videos comerciales. Proceso y procedencia se consultan en un desplegable.
+- Marcas usa los perfiles del backend; Conexiones reúne la configuración de voz y el estado comprobado de Codex. Si falla la consulta, muestra Sin verificar. Calendario conserva su estado pendiente.
+- Cabecera y navegación consistentes, un selector global, menú móvil, foco visible y enlace para saltar al contenido. El escenario original conserva sus archivos; se ocultan globos repetidos de chats inactivos y se añade pausa de animación.
+- La carga compartida elimina consultas duplicadas entre Inicio y Estudio, descarta respuestas antiguas y rechaza resultados de otra marca. Los enlaces de ficha y filtro se pueden abrir directamente.
+
+Verificación: 37 pruebas Node aprobadas para navegación, datos compartidos, shell, empaquetado, conexiones, importación y flujo HTTP. Las 18 pruebas de shell/navegación/datos se repitieron tras los últimos ajustes, también aprobadas. Pruebas Python del actualizador y del despliegue: 20 aprobadas; todo Docker/proveedor simulado. SHA256SUMS actualizado y verificado.
+
+Chromium local autenticado, a 1440×1000, 390×844 y 320×844: seis rutas, selector único, protección de borrador, cambio de marca y recarga, nueva solicitud, aceptación de prueba, revisión que crea otra versión y descarte persistidos por el backend real de la adaptación. También se comprobó reproducción MP4, historial Atrás/Adelante de la ficha, cierre con Escape, salto al título por teclado, pausa con movimiento reducido, estado vacío y ausencia de desbordamiento horizontal. Sin errores JavaScript.
+
+Las capturas contienen datos sintéticos identificados como prueba. El especialista y la verificación ElevenLabs se simularon localmente; no se consultaron proveedores ni se generó voz. Esto valida la interfaz y sus operaciones locales, no una producción audiovisual autónoma.
+
+Revisión visual: se corrigieron filtros recortados a 320 px, nombre accesible del menú, foco en títulos ocultos del DOM original y una carrera al cerrar una ficha y abrir la siguiente durante la actualización. No se certifica accesibilidad completa del escenario canvas original. La gestión de recursos de marca y el departamento orgánico siguen pendientes de integración.
+
+Publicación: código preparado en la rama recuperable de revisión. El actualizador incluye los nuevos módulos del navegador. Esta intervención no ejecuta el despliegue del VPS, conforme al pedido de mejorar primero la estructura y luego revisar su publicación. Las capturas son una vista local; la URL del VPS sigue mostrando su versión anterior.
+
+## Historial: primera intervención, selección de marca
 
 Pedido de Jorge: corregir duplicación y mal diseño en la interfaz existente. No sustituirlo por una propuesta de navegación nueva.
 
@@ -49,7 +91,7 @@ Instaladas para Codex dentro de `.agents/skills/`, con procedencia en `skills-lo
 - Capturas de escritorio y móvil inspeccionadas. Proveedores sin conexión en el entorno de prueba; no hubo inferencia, voz ni publicación.
 - Cambios preparados en la rama de revisión, pendientes de desplegar.
 
-## Alcance pendiente de la revisión de interfaz
+## Pendientes detectados en la primera revisión
 
-- `public/video-panel.js:31` — el bloque de disponibilidad sigue siendo extenso y algunos estados internos aparecen en inglés. Requiere otra intervención de contenido y jerarquía; no se presenta toda la interfaz como rediseñada.
+- Resuelto en la segunda intervención: disponibilidad compacta, etiquetas de estado en español y proceso técnico desplegable en `public/video-panel.js`.
 - `public/navigation.js:11` y `public/compat.css:75` — selector unificado, nombre accesible, foco visible, estado deshabilitado y presentación móvil revisados.

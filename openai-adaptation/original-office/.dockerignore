@@ -46,6 +46,8 @@
 
 !public/navigation.js
 !public/brand-context.js
+!public/ui.js
+!public/workspace-pages.js
 !public/connections-panel.js
 !connections/
 !connections/store.mjs

@@ -27,7 +27,7 @@ FILES = ['server.mjs', 'start.mjs', 'connections/store.mjs', 'connections/http.m
          'video/http.mjs', 'video/video-flow.mjs', 'video/remote-runner.mjs',
          'video/renderer-selection.mjs', 'video/storage-preflight.mjs',
          'video/visual-contract.mjs', 'video/local-renderer.mjs',
-         'public/compat-app.js', 'public/navigation.js', 'public/brand-context.js', 'public/compat.css',
+         'public/compat-app.js', 'public/navigation.js', 'public/brand-context.js', 'public/ui.js', 'public/workspace-pages.js', 'public/compat.css',
          'public/connections-panel.js', 'public/video-panel.js', 'public/material-import.js']
 
 

@@ -1,5 +1,7 @@
 # Original shell + protected internal video workflow
 
+> Interfaz de revisión: selector global, Estudio por estados, formulario independiente y ficha de decisiones. Ver [estructura visual y validación](UI-DESIGN-REVIEW.md). Estos cambios todavía no están desplegados en el VPS.
+
 > Revisión actual (código, pendiente de despliegue): [recuperación del departamento orgánico](production/RECUPERACION-CONTENIDO-ORGANICO.md) identifica el motor original y lo que falta portar. Se añade [configuración de ElevenLabs en Conexiones](connections/README.md) y descarte de ideas con historial; no se habilita síntesis ni publicación.
 
 > Corrección creativa: Jorge rechazó el acabado de tarjetas y fijó dos referencias como mínimo audiovisual. Ver [directrices vigentes](production/ESTANDAR-AUDIOVISUAL.md). La prueba de conexión sigue siendo evidencia técnica, no aceptación del video.
