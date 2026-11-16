@@ -1,0 +1,247 @@
+{
+  "at": "2026-11-16T23:54:04.300501+00:00",
+  "userTimezone": "America/Guatemala",
+  "request": "Tres nuevos ejemplos de Glowfy terminados; la oficina desarrolla el proceso y Jorge revisa únicamente MP4 finales.",
+  "realProduction": true,
+  "videos": [
+    {
+      "id": "a3c879dc-ba2d-46f8-8115-3174dd486cda",
+      "title": "El trazo continúa",
+      "version": 7,
+      "sha256": "25782874eef1689ebee78275afc19be3ad9820e1836497f28e476e0ad4277317",
+      "bytes": 1255651,
+      "duration": 20.733333,
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "audioCodec": "aac",
+      "integratedLufs": -16.02,
+      "truePeakDbtp": -3.04,
+      "voiceModel": "eleven_v4",
+      "submittedVoiceCharacters": 333,
+      "music": "glowfy-b",
+      "modelsByStage": {
+        "research": "gpt-6.1-sol",
+        "strategy": "gpt-6.1-sol",
+        "script": "gpt-6-astra",
+        "creative_review": "gpt-6-astra",
+        "art_direction": "gpt-6-astra",
+        "edit_plan": "gpt-6-astra"
+      },
+      "creativeModel": "gpt-6-astra",
+      "reasoning": "high",
+      "internalImageReview": {
+        "verdict": "pass",
+        "rendererRevision": "clean-brand-v3",
+        "rounds": 4,
+        "models": [
+          "gpt-6-astra"
+        ],
+        "scenes": [
+          {
+            "scene": 1,
+            "nodeCount": 53,
+            "attempt": 1,
+            "graphHash": "a7cf380b95cc18edd15670c4ddd86fc1794dd4cee4df71c4689cf132b22329f3"
+          },
+          {
+            "scene": 2,
+            "nodeCount": 73,
+            "attempt": 3,
+            "graphHash": "9021d1c2e8995ecee40c265daa23e77a07c8477343bee5ac94d26c2ee060c9ff"
+          },
+          {
+            "scene": 3,
+            "nodeCount": 71,
+            "attempt": 2,
+            "graphHash": "8b85b14aaca9bce4ea9c6617277ec0a852667785ccbcdd106019227439c7214d"
+          },
+          {
+            "scene": 4,
+            "nodeCount": 58,
+            "attempt": 3,
+            "graphHash": "ae94098496dae5f8b715d90eaf683af3742a75dd1c5bca0f17bc1cfc2b97baa6"
+          }
+        ]
+      },
+      "browser": {
+        "id": "a3c879dc-ba2d-46f8-8115-3174dd486cda",
+        "duration": 20.733333,
+        "width": 1080,
+        "height": 1920,
+        "error": null,
+        "playback": true,
+        "seek": true,
+        "mobileOverflow": false,
+        "mutedBrowserTest": true
+      },
+      "renderCodeCommit": "17703b35ea69c1ff489703c4dc4c3de4e3f694de",
+      "approved": false,
+      "published": false
+    },
+    {
+      "id": "0515e9c0-4c58-4420-a19f-61e94b6cf8f1",
+      "title": "La cita, por dentro",
+      "version": 2,
+      "sha256": "e9ea0ad5f053cc965d2c3e443ae918eb1738f0a2ab62808af34297b359311ed4",
+      "bytes": 1399365,
+      "duration": 21.2,
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "audioCodec": "aac",
+      "integratedLufs": -16.13,
+      "truePeakDbtp": -3.2,
+      "voiceModel": "eleven_v4",
+      "submittedVoiceCharacters": 334,
+      "music": "glowfy-b",
+      "modelsByStage": {
+        "research": "gpt-6.1-sol",
+        "strategy": "gpt-6.1-sol",
+        "script": "gpt-6.1-sol",
+        "creative_review": "gpt-6.1-sol",
+        "art_direction": "gpt-6.1-sol",
+        "edit_plan": "gpt-6-astra"
+      },
+      "creativeModel": "gpt-6-astra",
+      "reasoning": "high",
+      "internalImageReview": {
+        "verdict": "pass",
+        "rendererRevision": "isolated-tiles-v2",
+        "rounds": 1,
+        "models": [
+          "gpt-6-astra"
+        ],
+        "scenes": [
+          {
+            "scene": 1,
+            "nodeCount": 62,
+            "attempt": 0,
+            "graphHash": "be6e781bc1dab7377dcdae67884b9a15b0d4da281878823e58874683a4b3aebc"
+          },
+          {
+            "scene": 2,
+            "nodeCount": 64,
+            "attempt": 0,
+            "graphHash": "426881e1de7af723d7578d9f912f157a7f84dcbbb5a3f4d287ed1c6f836f7a83"
+          },
+          {
+            "scene": 3,
+            "nodeCount": 55,
+            "attempt": 0,
+            "graphHash": "3de722173defd70a2c72521e8fa0276ec4f85156413d8ee8d93c2a29b487cc18"
+          },
+          {
+            "scene": 4,
+            "nodeCount": 54,
+            "attempt": 0,
+            "graphHash": "22a29589b2fda50d076bb48fb2f61cb3d768ab758f73da2ef1cf2b1df4b3da6d"
+          }
+        ]
+      },
+      "browser": {
+        "id": "0515e9c0-4c58-4420-a19f-61e94b6cf8f1",
+        "duration": 21.2,
+        "width": 1080,
+        "height": 1920,
+        "error": null,
+        "playback": true,
+        "seek": true,
+        "mobileOverflow": false,
+        "mutedBrowserTest": true
+      },
+      "renderCodeCommit": "483c40591d91fd05a6130b6f5e48dc6961a2f2e9",
+      "approved": false,
+      "published": false
+    },
+    {
+      "id": "d860512f-d525-44f7-a6fe-a6252753db13",
+      "title": "La puerta y el vínculo",
+      "version": 5,
+      "sha256": "b7d1d342fbba41d90d5140cf953a8b4de1af7d4d2b981ca0aa1c14142a5a1c11",
+      "bytes": 1750462,
+      "duration": 21.066667,
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "audioCodec": "aac",
+      "integratedLufs": -16.12,
+      "truePeakDbtp": -3.16,
+      "voiceModel": "eleven_v4",
+      "submittedVoiceCharacters": 327,
+      "music": "glowfy-b",
+      "modelsByStage": {
+        "research": "gpt-6-astra",
+        "strategy": "gpt-6-astra",
+        "script": "gpt-6-astra",
+        "creative_review": "gpt-6-astra",
+        "art_direction": "gpt-6-astra",
+        "edit_plan": "gpt-6-astra"
+      },
+      "creativeModel": "gpt-6-astra",
+      "reasoning": "high",
+      "internalImageReview": {
+        "verdict": "pass",
+        "rendererRevision": "clean-brand-v3",
+        "rounds": 3,
+        "models": [
+          "gpt-6-astra"
+        ],
+        "scenes": [
+          {
+            "scene": 1,
+            "nodeCount": 78,
+            "attempt": 0,
+            "graphHash": "a4e115aa8e54dc810efe20a1dcf44dec6e2e3951f736331d4721a00299c21df5"
+          },
+          {
+            "scene": 2,
+            "nodeCount": 91,
+            "attempt": 1,
+            "graphHash": "9cdbd46aa95e7c923735e16f2ba48bc4d228ac38b435c3d8bc1ba324b36a09dd"
+          },
+          {
+            "scene": 3,
+            "nodeCount": 100,
+            "attempt": 1,
+            "graphHash": "06e9e3d80eb8cde2940dbbd7affa81842304625444acc95de7a813d67c83f06a"
+          },
+          {
+            "scene": 4,
+            "nodeCount": 93,
+            "attempt": 2,
+            "graphHash": "a34838a645ce4ba7f5cc40b12c2381d463e8796417e940097806bef95d570819"
+          }
+        ]
+      },
+      "browser": {
+        "id": "d860512f-d525-44f7-a6fe-a6252753db13",
+        "duration": 21.066667,
+        "width": 1080,
+        "height": 1920,
+        "error": null,
+        "playback": true,
+        "seek": true,
+        "mobileOverflow": false,
+        "mutedBrowserTest": true
+      },
+      "renderCodeCommit": "db3c381449a8c0b4fc9cd9b7cfab9a56615fa294",
+      "approved": false,
+      "published": false
+    }
+  ],
+  "previousVideosPreserved": 9,
+  "paidModelApiEnabled": false,
+  "newMusicGenerated": false,
+  "newSfxGenerated": false,
+  "voiceCloningPerformed": false,
+  "subjectiveListeningVerified": false,
+  "imageInspection": "Final MP4 overview at 1 fps and selected dense windows at 4 fps; internal office image sequences inspected by Astra. Browser playback test muted.",
+  "renderConcurrency": 1,
+  "appCpuLimit": 1,
+  "workerCpuLimit": 1,
+  "targetedTestsPassed": 15,
+  "historicalEarlyStages": "The first two jobs began research/strategy with Sol; stage provenance is retained. Scene authoring and image review use Astra/high.",
+  "ownerApproval": false,
+  "published": false
+}

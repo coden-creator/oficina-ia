@@ -48,3 +48,9 @@ Jorge rechaza las tres piezas dirigidas por repetición y aporta Motion Video Di
 
 ### Tres nuevas piezas con escenas por proyecto · 16/11/2026
 Se implementa autoría vectorial mediante especialistas reales de la oficina, revisión multimodal de secuencias renderizadas y correcciones acotadas. Trabajador fijado a Astra/high, incluido en la cuenta. Se conserva la procedencia real por etapa: las primeras etapas de dos fichas fueron Sol. Nuevas imágenes de revisión independientes a resolución de producción, cierre automático condicional y caché de revisión versionado para no repetir diseños ni audio al corregir el renderer. Doce pruebas pertinentes pasan, incluidas aislamiento de cuadros, cierre y reanudación sin inferencia de diseño duplicada. Producción aún en curso; no se declara estética aprobada ni tres MP4 entregados.
+
+### Lote de tres escenas por proyecto terminado · 16/11/2026, America/Guatemala
+- El trazo continúa · v7 · 20.73 s · SHA256 `25782874eef1689ebee78275afc19be3ad9820e1836497f28e476e0ad4277317` · -16.02 LUFS / -3.04 dBTP.
+- La cita, por dentro · v2 · 21.20 s · SHA256 `e9ea0ad5f053cc965d2c3e443ae918eb1738f0a2ab62808af34297b359311ed4` · -16.13 LUFS / -3.2 dBTP.
+- La puerta y el vínculo · v5 · 21.07 s · SHA256 `b7d1d342fbba41d90d5140cf953a8b4de1af7d4d2b981ca0aa1c14142a5a1c11` · -16.12 LUFS / -3.16 dBTP.
+MP4 y controles reales, inspector multimodal Astra/high, voz Eleven v4, música B y efectos existentes. Comparación de hashes conserva las nueve piezas anteriores. Reproducción y seek comprobados en navegador; pruebas silenciadas, sin escucha subjetiva. Observaciones internas registradas, sin aprobación ni publicación. Se corrigen aislamiento de imágenes, composición de cierres, transmisión de revisión previa y selección estricta de sonidos. Quince pruebas de contrato/render/reanudación pasan. Ver evidencia glowfy-authored-astra-3.json.
