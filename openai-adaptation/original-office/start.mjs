@@ -10,6 +10,7 @@ import {createElevenLabsSpeech} from './connections/elevenlabs-speech.mjs';
 import {createElevenLabsSfx} from './connections/elevenlabs-sfx.mjs';
 import {createSfxReviewBatch} from './production/sfx-review-batch.mjs';
 import {SFX_BATCH} from './production/sfx-review-plan.mjs';
+import {applyUniqueDirection,VISUAL_REVISION} from './production/glowfy/unique-direction.mjs';
 import {createGlowfyProduction} from './production/glowfy-production.mjs';
 import {createOfficeCoordinator} from './video/office-coordinator.mjs';
 try{
@@ -24,7 +25,7 @@ try{
  const production=connectionStore&&videoFlow?createGlowfyProduction({dataDir:videoDataDir,connectionStore,authorizedJobId:process.env.OFFICE_VOICE_TEST_JOB_ID,authorizedJobIds:(process.env.OFFICE_VOICE_JOB_IDS||'').split(',').filter(Boolean),voiceId:process.env.OFFICE_VOICE_ID,voiceTake:Number(process.env.OFFICE_VOICE_TEST_TAKE||1),voiceProfile:process.env.OFFICE_VOICE_PROFILE||'standard'}):null;
  const officeCoordinator=videoFlow?createOfficeCoordinator({flow:videoFlow,runner,production,enabled:process.env.OFFICE_AUTONOMY_ENABLED==='1',allowedJobIds:(process.env.OFFICE_AUTONOMY_JOB_IDS||'').split(',').filter(Boolean)}):null;
  if(production)videoFlow.setProductionCapability(()=>({scopedTest:{brand:'glowfy',jobId:process.env.OFFICE_VOICE_TEST_JOB_ID||null,voiceConfigured:production.voiceConfigured}}));
- if(officeCoordinator){await officeCoordinator.recover();videoFlow.setReferenceRunner(officeCoordinator.manualRun);officeCoordinator.start();}
+ if(officeCoordinator){await officeCoordinator.recover();await applyUniqueDirection(videoFlow,process.env.OFFICE_BATCH_VISUAL_REVISION===VISUAL_REVISION);videoFlow.setReferenceRunner(officeCoordinator.manualRun);officeCoordinator.start();}
  const password=process.env.OFFICE_PASSWORD_FILE?fs.readFileSync(process.env.OFFICE_PASSWORD_FILE,'utf8').trim():process.env.OFFICE_PASSWORD;
 
  const sfxReview=videoFlow&&connectionStore?createSfxReviewBatch({dataDir:videoDataDir,store:connectionStore,enabled:process.env.OFFICE_SFX_REVIEW_BATCH===SFX_BATCH}):null;

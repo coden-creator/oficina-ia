@@ -19,3 +19,5 @@
 - Revisión de siete efectos desplegada en el mismo App con 27ae667. Comprobados HTTPS, capítulos, descarga SHA, vuelta al catálogo original, teclado y móvil. Codex conectado; la pieza v3 y sus decisiones no cambiaron. CPU 13,57%, RAM 34,65%. Propuestas pendientes de revisión de Jorge.
 
 - 2026-11-16 · Jorge solicita tres videos adicionales. Creadas tres fichas, preproducción real activada solo para esos IDs. Cuota consultada 61980, sobreconsumo desactivado. Preparadas variantes de escenas y selección A/B/D; no se generan música/efectos. Previews locales con tiempos sintéticos, sin voz, para verificar composición; no son entregables finales.
+
+- 2026-11-16 · Jorge exige producción y animaciones únicas por video. Cola pausada; la primera voz quedó guardada y se reutiliza. Sustituidas las variantes paramétricas por tres módulos de escena y tres mapas sonoros. Corrección persistida en instrucciones de guion y arte. Migración limitada a los tres IDs, con versiones preservadas y guiones intactos. 31 pruebas pasaron; previews aún sin voz real.

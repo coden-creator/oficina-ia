@@ -13,3 +13,14 @@ test('three distinct music selections and the reviewed effect revisions are actu
 test('unrenderable batch text is rejected before narration',()=>{
  const plan=plans[0],s={narration:'Texto válido.',closing:'Conocé Glowfy',scenes:Array.from({length:4},()=>({text:'Título breve'}))};validateBatchScript(s,plan);assert.throws(()=>validateBatchScript({...s,narration:'x'.repeat(481)},plan),/BATCH_SCRIPT_LIMIT/);assert.throws(()=>validateBatchScript({...s,closing:'Otro'},plan),/BATCH_SCRIPT_LIMIT/);
 });
+
+test('unique visual direction preserves paid voice text and revisions and is applied once',async()=>{
+ const {applyUniqueDirection,VISUAL_REVISION,uniqueSoundCues}=await import('./unique-direction.mjs');
+ const original={narration:'Guion ya narrado',scenes:[],closing:'Conocé Glowfy'};
+ const jobs=new Map(plans.map(p=>[p.id,{id:p.id,brandId:'glowfy',version:2,state:'blocked',brief:{evidence:[{id:'piece_direction',text:'old'}]},outputs:{script:{detail:structuredClone(original)},creative_review:{detail:{verdict:'pass'}},art_direction:{detail:{old:true}}},artifact:null,approval:null}]));let writes=0;
+ const flow={get:async(_,id)=>structuredClone(jobs.get(id)),updateOffice:async(_,id,version,fn)=>{const j=jobs.get(id);assert.equal(j.version,version);fn(j);writes++}};
+ assert.deepEqual(await applyUniqueDirection(flow,false),[]);assert.equal((await applyUniqueDirection(flow,true)).length,3);
+ for(const j of jobs.values()){assert.equal(j.version,3);assert.deepEqual(j.outputs.script.detail,original);assert.equal(j.outputs.art_direction,undefined);assert.equal(j.revisions[0].version,2);assert.equal(j.uniqueVisualRevision,VISUAL_REVISION);assert.equal(j.stage,'art_direction');}
+ assert.deepEqual(await applyUniqueDirection(flow,true),[]);assert.equal(writes,3);
+ const e={phoneFocus:4,assistant:6,reply:9,calendar:12,reminder:14,closing:17};const signatures=plans.map(p=>JSON.stringify(uniqueSoundCues({variant:p.variant,events:e,duration:21})));assert.equal(new Set(signatures).size,3);
+});

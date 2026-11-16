@@ -48,3 +48,7 @@ El ensayo local `estudio-video/proyectos/glowfy-manos` se conserva como trabajo 
 ## Criterio de aceptación
 
 La pregunta de revisión es: «¿Esta pieza sostiene el nivel de elaboración, claridad, movimiento y sonido de los dos archivos de referencia, usando la identidad y los hechos de esta marca?». Si falta una dimensión, registrar el cambio requerido y producir otra versión. No reducir el estándar para cerrar una prueba técnica; tampoco afirmar equivalencia por resolución, cantidad de agentes, duración o puntaje automático.
+
+## Variedad exigida por Jorge · 16 de noviembre de 2026
+
+Cada pieza necesita una dirección de arte y coreografía propias. Reutilizar exactamente una secuencia de objetos y sustituir sus textos no satisface el pedido. Antes de exportar, comparar entre las piezas del lote: concepto, objeto protagonista, composición, acciones, transiciones, cámara y sonido. La consistencia de marca no exige repetir la producción. El lote Glowfy de tres piezas dispone de tres módulos locales independientes; futuros conceptos requieren su diseño e implementación, no se promete generación ilimitada de escenas arbitrarias por Codex.

@@ -1,3 +1,4 @@
+import {uniqueSoundCues} from './unique-direction.mjs';
 import fs from 'node:fs';import {createHash} from 'node:crypto';
 import path from 'node:path';import {fileURLToPath} from 'node:url';
 import {selectGlowfyMusic} from '../music-library.mjs';
@@ -6,8 +7,9 @@ const audio=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../audio'
 export function socialSoundtrack(beats,job,{musicId=null,updatedEffects=false}={}){
  const music=selectGlowfyMusic(job,musicId);
  const e=beats.events;
- const cues=[['golpe-grave-01',0,-9],['burbuja-mensaje-01',e.messageOne,-10],['pop-ui-01',e.messageTwo,-11],['tick-cursor-01',e.messageThree,-12],['whoosh-corto-01',e.phoneFocus,-11],['pop-ui-01',e.customer,-11],['burbuja-mensaje-01',e.assistant,-10],['clic-boton-01',e.reply,-10],['ding-confirmacion-01',e.appointment,-10],['whoosh-corto-01',e.calendar,-12],['pop-ui-01',e.calendar+.65,-10],['ding-confirmacion-01',e.reminder,-11],['whoosh-corto-01',e.closing,-11],['clic-boton-01',e.cta,-10]].filter(([,t])=>t>=0&&t<beats.duration-.5).map(([name,time,gainDb])=>({name,time,gainDb}));
- if(updatedEffects)cues.push({name:'destello-particulas-01',time:e.closing+.18,gainDb:-10});
+ let cues=[['golpe-grave-01',0,-9],['burbuja-mensaje-01',e.messageOne,-10],['pop-ui-01',e.messageTwo,-11],['tick-cursor-01',e.messageThree,-12],['whoosh-corto-01',e.phoneFocus,-11],['pop-ui-01',e.customer,-11],['burbuja-mensaje-01',e.assistant,-10],['clic-boton-01',e.reply,-10],['ding-confirmacion-01',e.appointment,-10],['whoosh-corto-01',e.calendar,-12],['pop-ui-01',e.calendar+.65,-10],['ding-confirmacion-01',e.reminder,-11],['whoosh-corto-01',e.closing,-11],['clic-boton-01',e.cta,-10]].filter(([,t])=>t>=0&&t<beats.duration-.5).map(([name,time,gainDb])=>({name,time,gainDb}));
+ if(beats.uniqueProduction)cues=uniqueSoundCues(beats);
+ if(updatedEffects&&!beats.uniqueProduction)cues.push({name:'destello-particulas-01',time:e.closing+.18,gainDb:-10});
  const replacements=updatedEffects?JSON.parse(fs.readFileSync(path.join(audio,'glowfy-sfx-production.json'),'utf8')).assets:[];
  const map={'golpe-grave-01':'golpe-grave-02','clic-boton-01':'clic-boton-02'};
  for(const cue of cues){const a=replacements.find(a=>a.id===(map[cue.name]||cue.name));if(a){const bytes=fs.readFileSync(path.join(audio,a.file));if(createHash('sha256').update(bytes).digest('hex')!==a.sha256)throw Error('SFX_ASSET_INTEGRITY_FAILED');cue.file=a.file;cue.revision=a.revision;}}

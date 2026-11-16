@@ -18,7 +18,7 @@ export function createGlowfyProduction({dataDir,connectionStore,authorizedJobId,
   if(![1,2].includes(take))throw Error('VOICE_TEST_NOT_AUTHORIZED');
   const voiceDir=take===1?jobDir:path.join(jobDir,'voice-take-'+take);await fs.mkdir(voiceDir,{recursive:true,mode:0o700});
   const voice=await obtainNarration({store:connectionStore,jobDir:voiceDir,text,voiceId,profile:voiceProfile,...(plan?{authorization:plan.authorization}: {})});
-  const beats=buildTiming(script,voice.alignment,{social:voiceProfile==='social-v2'});if(plan){beats.variant=plan.variant;beats.sceneTitles=script.scenes.map(s=>s.text);beats.cta=script.closing;}await fs.writeFile(path.join(outDir,'beats.json'),JSON.stringify(beats),{mode:0o600});
+  const beats=buildTiming(script,voice.alignment,{social:voiceProfile==='social-v2'});if(plan){beats.uniqueProduction=true;beats.events.assistant=Math.min(beats.events.assistant,beats.events.phoneFocus+1);beats.variant=plan.variant;beats.sceneTitles=script.scenes.map(s=>s.text);beats.cta=script.closing;}await fs.writeFile(path.join(outDir,'beats.json'),JSON.stringify(beats),{mode:0o600});
   if(voiceProfile!=='social-v2'){const sfx=interfaceSounds(beats);await fs.writeFile(path.join(outDir,'ui-sounds.wav'),sfx.bytes);await fs.writeFile(path.join(outDir,'sound-cues.json'),JSON.stringify(sfx.cues));}
   await onStage('production','Animando las cuatro escenas y sus subtítulos');
   const config=path.join(outDir,'render.json');await fs.writeFile(config,JSON.stringify({outDir,beats,social:voiceProfile==='social-v2'}),{mode:0o600});

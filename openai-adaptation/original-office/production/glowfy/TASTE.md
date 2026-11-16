@@ -13,3 +13,9 @@ Música instrumental y siete efectos tomados de la biblioteca suministrada en el
 Alineación real de caracteres y escenas desde ElevenLabs. Sin aprobación, programación ni publicación automática. Conservar cada versión y sus comprobaciones; una revisión técnica no equivale a escucha subjetiva ni aprobación de Jorge.
 
 Lote de tres autorizado el 16 de noviembre: reserva, recordatorio y cambio de horario, con tres músicas elegidas de la biblioteca aprobada (A/B/D). Los titulares proceden del guion y cada variante adapta mensajes y movimiento de agenda; los ejemplos no son capturas del producto. Una narración con voz Jorge Q por ficha, tres IDs concretos. Mantener originales de audio; producción incorpora copias versionadas del clic 02, golpe 02 y ticks/destellos revisados. Jorge indica «está mejor, luego veremos más adelante» y pide continuar: aceptación para este lote, no afirmación de perfección sonora.
+
+## Corrección de Jorge · producción única por pieza
+
+Jorge rechazó variar textos sobre una misma estructura: «CADA VIDEO debería tener una producción increíble y único». La mano/teléfono/agenda del primer video es una solución histórica, no la plantilla universal. Cada nueva idea requiere concepto visual, composición, animación, transiciones y sonido propios. La marca, los recursos aprobados y los subtítulos pueden ser coherentes entre piezas; la historia visual debe cambiar.
+
+El lote actual reemplaza las variantes iniciales por tres módulos independientes: conversaciones que se transforman en reserva (`scene-reserva.mjs`); escritorio de papeles, reloj y sobre (`scene-recordatorio.mjs`); agenda en perspectiva con dígitos y cita desplazable (`scene-horario.mjs`). Cada uno tiene su mapa de contactos sonoros. Revisar acciones completas, no solo cuadros aislados. Estas decisiones no acreditan equivalencia estética con las referencias ni sustituyen la revisión de Jorge.

@@ -23,7 +23,7 @@ export function buildTiming(script,alignment,{social=false}={}){
  if(social){
  const within=(n,re,fallback)=>words.find(w=>w.start>=scenes[n].start&&w.start<=scenes[n].end&&re.test(w.text))?.start??fallback;
  const focus=scenes[1].start,span=scenes[1].end-focus;
- return {duration,fps:30,width:1080,height:1920,scenes,words,captions,events:{messageOne:.25,messageTwo:Math.min(1.15,focus-.55),messageThree:Math.min(2.05,focus-.28),phoneFocus:focus,customer:focus+.22,assistant:Math.max(focus+.8,within(1,/responde|contesta|disponibilidad/i,focus+span*.4)),reply:focus+span*.72,appointment:scenes[2].start,calendar:scenes[2].start+.35,reminder:Math.min(scenes[2].end-.3,within(2,/recordatorio/i,scenes[2].start+(scenes[2].end-scenes[2].start)*.65)),closing:scenes[3].start,cta:within(3,/conoce/i,scenes[3].end-1)}};
+ return {duration,fps:30,width:1080,height:1920,scenes,words,captions,events:{messageOne:.25,messageTwo:Math.min(1.15,focus-.55),messageThree:Math.min(2.05,focus-.28),phoneFocus:focus,customer:focus+.22,assistant:Math.max(focus+.8,within(1,/responde|contesta|disponibilidad/i,focus+span*.4)),reply:focus+span*.72,appointment:scenes[2].start,calendar:scenes[2].start+.35,reminder:Math.min(scenes[2].end-.3,within(2,/recordatorio/i,scenes[2].start+(scenes[2].end-scenes[2].start)*.65)),closing:scenes[3].start,cta:within(3,/conoc[eé]/i,scenes[3].end-1)}};
  }
  return {duration,fps:30,width:1080,height:1920,scenes,words,captions,events:{messageOne:.5,messageTwo:1.6,phoneFocus:scenes[1].start,customer:scenes[1].start+.4,assistant:scenes[1].start+1.6,reply:scenes[1].start+3.1,appointment:scenes[2].start,calendar:scenes[2].start+.6,reminder:Math.min(scenes[2].end-.5,scenes[2].start+3),closing:scenes[3].start}};
 }
