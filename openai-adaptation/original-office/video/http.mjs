@@ -1,3 +1,4 @@
+import {productionReport} from './production-report.mjs';
 import {createPosterRenderer} from './poster.mjs';
 import {audiovisualCriteria} from './audiovisual-standard.mjs';
 import {publicProductionPlan} from '../production/glowfy/cinematic-plan.mjs';
@@ -20,11 +21,12 @@ export function createVideoHttpHandler({flow,dataDir,origin}){
   if(!req.url.startsWith('/api/video-workflows'))return false;
   try{
    if(req.url==='/api/video-workflows/capabilities'&&req.method==='GET'){await flow.refreshConnection?.();send(res,200,{...flow.capabilities(),brandProfiles:brands});return true;}
-   const match=/^\/api\/video-workflows\/([a-z]+)(?:\/([a-z0-9-]{1,80})(?:\/(run|produce|rerender|approve|changes|discard|artifact|preview|poster|audiovisual-review))?)?(?:\?v=(\d+))?$/.exec(req.url);
+   const match=/^\/api\/video-workflows\/([a-z]+)(?:\/([a-z0-9-]{1,80})(?:\/(run|produce|rerender|approve|changes|discard|artifact|preview|poster|production-report|audiovisual-review))?)?(?:\?v=(\d+))?$/.exec(req.url);
    if(!match){send(res,404,{error:'NOT_FOUND'});return true;}
    const [,brand,id,action,version]=match;
    if(!flow.capabilities().brands.includes(brand)){send(res,404,{error:'UNKNOWN_BRAND'});return true;}
    if(req.method==='GET'||(req.method==='HEAD'&&['artifact','preview','poster'].includes(action))){
+    if(action==='production-report'){send(res,200,await productionReport(dataDir,await flow.get(brand,id)));return true;}
     if(['artifact','preview','poster'].includes(action)){
      const job=await flow.get(brand,id),media=action==='preview'?job.preview:job.artifact;if(!media||Number(version)!==job.version||media.version!==job.version)throw Error('artifact');
      const root=await fs.realpath(path.join(dataDir,brand,id,`v${job.version}`));const file=await fs.realpath(media.file);

@@ -22,7 +22,7 @@ export function organicSchema(stage,brand,cta,evidenceIds=null,productionMode=nu
   creative_review:obj({verdict:{type:'string',enum:['pass','changes','reject']},criteria:array(obj({id:{type:'string',enum:criteria.map(c=>c.id)},score:{type:'integer',minimum:0,maximum:10},reason:str(1000)}),6,6),corrections:array(str(1000),0,8)}),
   art_direction:obj({keyframes:array(obj({moment:{type:'string',enum:['opening','solution','closing']},composition:str(2000),motion:str(2000)}),3,3),assets:array(obj({description:str(1000),sourceId:str(80),availability:{type:'string',enum:['provided','needed']}}),0,20),audioNotes:str(2000)})
  };
- if(stage==='script'&&[MOTION_PROTOCOL,AUTHORED_PROTOCOL].includes(productionMode)){detail.script.properties.narration.maxLength=440;detail.script.properties.scenes.minItems=4;detail.script.properties.scenes.maxItems=4;if(productionMode===MOTION_PROTOCOL)detail.script.properties.scenes.items.properties.text.maxLength=28;}
+ if(stage==='script'&&[MOTION_PROTOCOL,AUTHORED_PROTOCOL].includes(productionMode)){detail.script.properties.narration.maxLength=440;detail.script.properties.scenes.minItems=4;detail.script.properties.scenes.maxItems=4;detail.script.properties.scenes.items.properties.text.maxLength=productionMode===MOTION_PROTOCOL?28:2000;}
  if(!detail[stage])throw Error('INVALID_ORGANIC_STAGE');
  const schema=obj({brand:{type:'string',enum:[brand]},stage:{type:'string',enum:[stage]},summary:str(3000),evidence:array(evidence,0,30),detail:detail[stage]});
  if(evidenceIds!==null){const ids=[...new Set(evidenceIds)];if(ids.length)schema.properties.evidence.items.properties.sourceId={type:'string',enum:ids};else schema.properties.evidence.maxItems=0;}

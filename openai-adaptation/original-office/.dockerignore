@@ -113,3 +113,5 @@ scripts/probe-tool-inventory.mjs
 !video/motion-contract.mjs
 
 !video/authored-motion.mjs
+
+!video/production-report.mjs

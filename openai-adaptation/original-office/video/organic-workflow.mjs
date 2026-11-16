@@ -29,8 +29,8 @@ export function createOrganicWorkflow({flow,runner,enabled=false,allowedJobIds=[
     const previous=Object.fromEntries(dependencies.filter(k=>job.outputs[k]).map(k=>{const {provenance,inheritedFrom,...content}=job.outputs[k];return [k,content];}));
     const history=recentVisualHistory(await flow.list(brand),id,brand);
     const q={brand,jobId:id,stage,prompt:(stage==='edit_plan'&&job.brief.productionMode===AUTHORED_PROTOCOL?authoredPlanPrompt:organicPrompts[stage])+' '+directionRules+(job.brief.productionMode===AUTHORED_PROTOCOL?' '+authoredBrief:job.brief.productionMode===MOTION_PROTOCOL?' '+productionBrief:''),input:{brief:job.brief,previous,feedback:job.organicFeedback??null,visualHistory:history},context:{workflow:ORGANIC_PROTOCOL,brand,brandProfile:brands[brand],version:job.version,editorId,restrictions:{noPaid:true,noPublish:true,noCloning:true,research:'supplied-evidence-only'}}};
-    while(JSON.stringify(q).length>23000&&q.input.visualHistory.length)q.input.visualHistory.pop();
-    if(JSON.stringify(q).length>23000)throw Error('SPECIALIST_CONTEXT_TOO_LARGE');
+    while(JSON.stringify(q).length>58000&&q.input.visualHistory.length)q.input.visualHistory.pop();
+    if(JSON.stringify(q).length>58000)throw Error('SPECIALIST_CONTEXT_TOO_LARGE');
     const result=await call(q);
     if(result?.status!=='completed')throw Error(result?.reason||'ORGANIC_STAGE_FAILED');
     const output=validateOrganicOutput(result.output,{stage,brand,brief:job.brief});
@@ -42,7 +42,7 @@ export function createOrganicWorkflow({flow,runner,enabled=false,allowedJobIds=[
       await patch(j=>{j.state='changes_requested';j.blocker='CREATIVE_REJECTED';j.execution=null;},'creative_rejected');return job;
      }
      if(review.verdict==='changes'){
-      if((job.organicAttempts||0)>=(job.brief.productionMode===AUTHORED_PROTOCOL?4:job.brief.productionMode===MOTION_PROTOCOL?3:2)){await patch(j=>{j.state='changes_requested';j.blocker='CREATIVE_REVISION_LIMIT';j.execution=null;},'creative_limit');return job;}
+      if((job.organicAttempts||0)>=(job.brief.productionMode===AUTHORED_PROTOCOL?6:job.brief.productionMode===MOTION_PROTOCOL?3:2)){await patch(j=>{j.state='changes_requested';j.blocker='CREATIVE_REVISION_LIMIT';j.execution=null;},'creative_limit');return job;}
       await patch(j=>{
        j.revisions||=[];j.revisions.push({version:j.version,outputs:copy(j.outputs),artifact:j.artifact,approval:j.approval,reason:'organic_creative_changes'});
        j.version++;j.organicAttempts=(j.organicAttempts||0)+1;j.organicFeedback=review.corrections;j.outputs={research:j.outputs.research,strategy:j.outputs.strategy};j.artifact=null;j.approval=null;j.stage='script';
