@@ -41,7 +41,7 @@ function polish(c){
  rect(c,-41,6,82,54,8,'#F6E8F0');text(c,'NAIL',-25,29,19,C.dark,600);text(c,'COLOR',-25,47,13,C.dark,500);
  c.globalAlpha=.45;rect(c,-41,-12,8,97,4,'#FFFFFF');c.restore();
 }
-function phone(c,t,e){
+function phone(c,t,e,variant=null){
  // Local phone coordinates; all content remains clipped to the glass.
  shadow(c,.25,55,31);rect(c,-188,-338,376,676,53,gradient(c,-188,-338,376,0,['#66586F','#24202A','#C7BBCB','#362D40']));noShadow(c);
  rect(c,-182,-332,364,664,49,'#24202A');rect(c,-169,-319,338,638,39,'#FEFCFF');
@@ -51,9 +51,10 @@ function phone(c,t,e){
  text(c,active>.5?'Asistente de citas':'Mensajes',-142,-231,23,C.ink,700);
  text(c,active>.5?'Glowfy · ejemplo ilustrado':'Mientras estás atendiendo',-142,-204,13,'#785B89',500);
  if(active<1){c.save();c.globalAlpha=1-active;for(let i=0;i<3;i++){rect(c,-145,-156+i*115,290,91,17,'#F4EDF7');oval(c,-111,-121+i*115,18,18,'#DABFEA');rect(c,-79,-137+i*115,160,9,4,'#9C83AA');rect(c,-79,-115+i*115,111,7,3,'#CDBCD5');}c.restore();}
- const items=[{start:e.customer,x:-145,y:-147,w:258,h:87,a:['¿Tienes lugar','mañana?'],mine:false},{start:e.assistant,x:-116,y:-42,w:261,h:106,a:['Sí. ¿11:00','o 16:00?'],mine:true},{start:e.reply,x:-145,y:82,w:250,h:75,a:['16:00, por favor.'],mine:false}];
+ const copy=variant==='reminder'?[['Tu cita es mañana','a las 16:00.'],['Te esperamos.','Recordatorio'],['¡Gracias!']]:variant==='reschedule'?[['¿Puedo cambiar','mi horario?'],['Hay lugar a','las 16:00.'],['Sí, a las 16:00.']]:[['¿Tienes lugar','mañana?'],['Sí. ¿11:00','o 16:00?'],['16:00, por favor.']];
+ const items=[{start:e.customer,x:-145,y:-147,w:258,h:87,a:copy[0],mine:variant==='reminder'},{start:e.assistant,x:-116,y:-42,w:261,h:106,a:copy[1],mine:true},{start:e.reply,x:-145,y:82,w:250,h:75,a:copy[2],mine:false}];
  for(const item of items){const p=at(t,item.start,.4);if(!p)continue;c.save();c.globalAlpha=p;c.translate(0,(1-p)*18);rect(c,item.x,item.y,item.w,item.h,19,item.mine?'#EBD8F8':'#F0ECF2');item.a.forEach((s,i)=>text(c,s,item.x+18,item.y+33+i*29,26,C.ink,500));c.restore();}
- const confirm=at(t,e.appointment,.5);if(confirm){c.save();c.globalAlpha=confirm;rect(c,-145,184,290,85,18,'#E7F3EC');oval(c,-112,224,17,17,C.green);line(c,[[-120,224],[-114,230],[-103,217]],'#fff',3);text(c,'Cita agendada',-83,220,19,C.green,700);text(c,'Mañana · 16:00',-83,246,16,C.green,500);c.restore();}
+ const confirm=at(t,e.appointment,.5);if(confirm){c.save();c.globalAlpha=confirm;rect(c,-145,184,290,85,18,'#E7F3EC');oval(c,-112,224,17,17,C.green);line(c,[[-120,224],[-114,230],[-103,217]],'#fff',3);text(c,variant==='reminder'?'Recordatorio listo':variant==='reschedule'?'Cita actualizada':'Cita agendada',-83,220,19,C.green,700);text(c,'Mañana · 16:00',-83,246,16,C.green,500);c.restore();}
  rect(c,-57,293,114,5,3,'#382C41');c.restore();
  // Edge highlights belong to the device, not the background.
  c.strokeStyle='#FFFFFF70';c.lineWidth=2;c.beginPath();c.moveTo(-173,-269);c.lineTo(-173,205);c.stroke();

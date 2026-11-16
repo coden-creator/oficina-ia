@@ -1,0 +1,69 @@
+{
+  "brandId": "glowfy",
+  "authorization": "Jorge: esta mejor luego veremos mas adelante, hagamos 3 videos mas",
+  "assets": [
+    {
+      "id": "clic-boton-02",
+      "file": "glowfy-r2-clic-boton-02.wav",
+      "revision": 2,
+      "sha256": "aeb4ca56d2eda98b5089c98874183a88b1ee79557f4229aaa91a4b60fecc9fe3",
+      "source": "production/sfx-catalog/revision-2/generation-manifest.json",
+      "decision": "approved",
+      "originalPreserved": true
+    },
+    {
+      "id": "golpe-grave-02",
+      "file": "glowfy-r2-golpe-grave-02.wav",
+      "revision": 2,
+      "sha256": "8573fe2b6bbc869549fa83b5f527b24112b2930ba686df4d26e16aa01e454b26",
+      "source": "production/sfx-catalog/revision-2/generation-manifest.json",
+      "decision": "approved",
+      "originalPreserved": true
+    },
+    {
+      "id": "teclas-suaves-01",
+      "file": "glowfy-r2-teclas-suaves-01.wav",
+      "revision": 2,
+      "sha256": "4470e8bbc55628de449269be106c4fd19d1203d7238ddc32c05afd2098f75fb7",
+      "source": "production/sfx-catalog/revision-2/generation-manifest.json",
+      "decision": "approved",
+      "originalPreserved": true
+    },
+    {
+      "id": "destello-particulas-01",
+      "file": "glowfy-r3-destello-particulas-01.wav",
+      "revision": 3,
+      "sha256": "01ba7fc1379a56a4a8eb5e5fb9608b18af1e4310d6ba526fe24ce44129639914",
+      "source": "production/sfx-catalog/revision-3/generation-manifest.json",
+      "decision": "accepted_for_continuation",
+      "originalPreserved": true
+    },
+    {
+      "id": "destello-particulas-02",
+      "file": "glowfy-r3-destello-particulas-02.wav",
+      "revision": 3,
+      "sha256": "5d1b597049e913ee12db03c96a2dc89cd61e3e74d10020d1f5898ac4ecaccac6",
+      "source": "production/sfx-catalog/revision-3/generation-manifest.json",
+      "decision": "accepted_for_continuation",
+      "originalPreserved": true
+    },
+    {
+      "id": "tick-cursor-01",
+      "file": "glowfy-r3-tick-cursor-01.wav",
+      "revision": 3,
+      "sha256": "c563b2b22749ccb11b0d98e7a70577c3be776b3ec4f959d70080d4ec76d697d7",
+      "source": "production/sfx-catalog/revision-3/generation-manifest.json",
+      "decision": "accepted_for_continuation",
+      "originalPreserved": true
+    },
+    {
+      "id": "tick-cursor-02",
+      "file": "glowfy-r3-tick-cursor-02.wav",
+      "revision": 3,
+      "sha256": "29fad18a6e72d3996f23b1bb7d4c47e5a6d9c58e7cfe690f8b9d9e2736b6f181",
+      "source": "production/sfx-catalog/revision-3/generation-manifest.json",
+      "decision": "accepted_for_continuation",
+      "originalPreserved": true
+    }
+  ]
+}

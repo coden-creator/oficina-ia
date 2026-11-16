@@ -12,12 +12,13 @@ export function readMusicTrack(id){
  if(createHash('sha256').update(bytes).digest('hex')!==track.sha256)throw Error('MUSIC_ASSET_INTEGRITY_FAILED');
  return {track,bytes};
 }
-export function selectGlowfyMusic(job){
+export function selectGlowfyMusic(job,selectedId=null){
  if(job?.brandId!=='glowfy'||typeof job.id!=='string'||!job.id||!tracks.length)throw Error('MUSIC_BRAND_OR_JOB_REQUIRED');
  // Stable for the same piece across edits. Distributes new pieces across the approved pool;
  // consecutive pieces may match. This is not a claim of editorial mood matching.
  const slot=createHash('sha256').update('glowfy-music-v1:'+job.id).digest().readUInt32BE(0)%tracks.length;
- const {track}=readMusicTrack(tracks[slot].id);
+ const selected=selectedId?tracks.find(t=>t.id===selectedId):tracks[slot];if(!selected)throw Error('MUSIC_SELECTION_INVALID');
+ const {track}=readMusicTrack(selected.id);
  return {...track,gainDb:Math.round((-27-track.integratedLufs)*100)/100};
 }
 export function musicHttp(req,res){

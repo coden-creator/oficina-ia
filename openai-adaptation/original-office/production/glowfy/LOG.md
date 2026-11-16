@@ -17,3 +17,5 @@
 - Jorge solicita regenerar siete efectos: clic-boton-02, destello-particulas-01/02, golpe-grave-02, teclas-suaves-01 y tick-cursor-01/02. Siete generaciones completadas con ElevenLabs, 20,16465 créditos reportados; propuestas preparadas localmente y comparación numerada de 55,75 s. Pendientes de revisión humana antes de cambiar las fuentes de producción. No se regeneró música ni voz.
 
 - Revisión de siete efectos desplegada en el mismo App con 27ae667. Comprobados HTTPS, capítulos, descarga SHA, vuelta al catálogo original, teclado y móvil. Codex conectado; la pieza v3 y sus decisiones no cambiaron. CPU 13,57%, RAM 34,65%. Propuestas pendientes de revisión de Jorge.
+
+- 2026-11-16 · Jorge solicita tres videos adicionales. Creadas tres fichas, preproducción real activada solo para esos IDs. Cuota consultada 61980, sobreconsumo desactivado. Preparadas variantes de escenas y selección A/B/D; no se generan música/efectos. Previews locales con tiempos sintéticos, sin voz, para verificar composición; no son entregables finales.

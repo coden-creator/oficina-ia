@@ -97,3 +97,6 @@ scripts/probe-tool-inventory.mjs
 !production/audio/glowfy-sfx-revision-3.mp4
 !production/sfx-catalog/
 !production/sfx-catalog/review-decisions.json
+
+!production/glowfy/batch-3.json
+!production/audio/glowfy-sfx-production.json
