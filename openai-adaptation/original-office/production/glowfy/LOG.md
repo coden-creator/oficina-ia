@@ -33,3 +33,11 @@
 ### Ajuste de contexto del director de arte — 16/11/2026
 El primer intento del piloto se conservó bloqueado antes del render. Se reduce el contexto por dependencias de cada especialista, evitando repetir la evidencia y enviar investigación/revisión completas al director de arte. El guion y los hechos del brief se mantienen íntegros; el historial visual opcional cede espacio al alcanzar el presupuesto. La API autenticada expone un código de bloqueo acotado para diagnosticar, sin mensajes privados del proveedor. 12 pruebas de coordinación pasaron, incluidas conservación del guion y diagnóstico seguro. Pendiente validar la ejecución real del piloto tras este ajuste.
 El reintento devolvió ORGANIC_STAGE_FAILED en dirección de arte, antes de leer/generar audio. Se limita también la extensión de la respuesta de arte y se ajusta el presupuesto del envío a 23.000 caracteres para respetar el límite real de 24.000 del runtime más su envoltorio. Se corrige la metadata del piloto para declarar seis planos y su propia campaña. Las pruebas de coordinación y del piloto pasan (14).
+
+
+### Piloto completado y revisión registrada — 16/11/2026, America/Guatemala
+El siguiente intento completó dirección de arte mediante Codex y render con narración existente. Archivo v1 `5ddca37cb6d4f8effe16fb8291a6566d05122e1669e738e8355b03ad05cd4277`; 17,366667 s, H.264 1080×1920/30 + AAC; −16,41 LUFS, −2,56 dBTP. Fragmento de 7 s `6e5e04c0f097559cec80ca284109f1cc5cd9fb0bcbb2c3358b02578665a19805`. Ambos descargados y verificados por hash/decodificación.
+
+Se inspeccionaron 69 cuadros finales (4 fps), la comparación con Reserva v3 y las capturas de escritorio/móvil. Navegador: reproducción completa, búsqueda exacta, cambio fragmento/completo, seis planos, seis criterios, teclado, sin desborde ni errores JS. Observaciones registradas para esta versión: historia, materiales, movimiento y variedad; voz y balance subjetivo pendientes de escucha, explícitamente. No se aprobó ni publicó.
+
+Los cuatro videos anteriores conservan sus hashes. ElevenLabs mantiene 61.617 caracteres y usageBasedBilling=false. Un render simultáneo, App y trabajador limitados a una CPU cada uno. Muestras de CPU/RAM dentro de 70%. Campaña y límites en `production/evidence/glowfy-cinematic-pilot-campaign.json`.

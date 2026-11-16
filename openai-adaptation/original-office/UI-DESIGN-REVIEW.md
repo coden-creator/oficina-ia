@@ -142,3 +142,5 @@ El mismo bloque abre la revisión 3, con los cuatro números pendientes y la com
 ## Piloto audiovisual · 16 de noviembre de 2026
 
 Se agrega alternancia entre fragmento de siete segundos y pieza completa dentro del reproductor existente. La dirección por planos y la revisión del archivo son secciones desplegables secundarias; se mantiene una sola selección de marca y la decisión principal de Jorge. Las observaciones no equivalen a aprobación. Controles nativos de video, botones y details accesibles por teclado. Pendiente comprobación final escritorio/móvil tras desplegar el piloto.
+
+Comprobación real final: Chromium autenticado, 1440×1100 y 390×844, reproducción completa del archivo y fragmento de 7 s, alternancia, búsqueda exacta, seis planos y seis criterios, teclado, cero errores JS y ningún desborde horizontal. Capturas de escritorio, dirección y móvil inspeccionadas. Las observaciones se guardan por versión/hash y muestran cuatro criterios observados y dos pendientes de escucha; no alteran la aprobación de Jorge.
