@@ -20,7 +20,7 @@ export function createVideoHttpHandler({flow,dataDir,origin}){
   if(!req.url.startsWith('/api/video-workflows'))return false;
   try{
    if(req.url==='/api/video-workflows/capabilities'&&req.method==='GET'){await flow.refreshConnection?.();send(res,200,{...flow.capabilities(),brandProfiles:brands});return true;}
-   const match=/^\/api\/video-workflows\/([a-z]+)(?:\/([a-z0-9-]{1,80})(?:\/(run|produce|approve|changes|discard|artifact|preview|poster|audiovisual-review))?)?(?:\?v=(\d+))?$/.exec(req.url);
+   const match=/^\/api\/video-workflows\/([a-z]+)(?:\/([a-z0-9-]{1,80})(?:\/(run|produce|rerender|approve|changes|discard|artifact|preview|poster|audiovisual-review))?)?(?:\?v=(\d+))?$/.exec(req.url);
    if(!match){send(res,404,{error:'NOT_FOUND'});return true;}
    const [,brand,id,action,version]=match;
    if(!flow.capabilities().brands.includes(brand)){send(res,404,{error:'UNKNOWN_BRAND'});return true;}
@@ -48,6 +48,7 @@ export function createVideoHttpHandler({flow,dataDir,origin}){
    let job;
    if(!id){if(Object.keys(b).some(k=>!['objective','cta','audience','channel','evidence','style','qualityStandard','deliverable'].includes(k)))throw Error('body');if(b.style!==undefined&&b.style!=='technical-canvas-demo')throw Error('style');job=await flow.create({brandId:brand,brief:{objective:b.objective,cta:b.cta,...(b.deliverable!==undefined?{deliverable:b.deliverable}:{}),qualityStandard:validateQualityStandard(b.qualityStandard??REFERENCE_STANDARD),...(b.audience?{audience:b.audience}:{}),...(b.channel?{channel:b.channel}:{}),...(b.evidence?{evidence:b.evidence}:{}),...(b.style?{style:b.style}:{}),voice:'none',paid:false,publish:false}});}
    else if(action==='produce'){if(Object.keys(b).some(k=>k!=='version')||!Number.isInteger(b.version))throw Error('body');job=await flow.produce(brand,id,b);}
+   else if(action==='rerender'){if(Object.keys(b).some(k=>k!=='version')||!Number.isInteger(b.version))throw Error('body');job=await flow.rerender(brand,id,b);}
    else if(action==='run'){if(Object.keys(b).length)throw Error('body');job=await flow.run(brand,id);if(job?.waiting){send(res,409,{error:job.reason,detail:'La producción automática está preparada para la prueba. Jorge avisará cuándo iniciarla.'});return true;}}
    else if(action==='audiovisual-review'){job=await flow.recordAudiovisualReview(brand,id,b);}
    else if(action==='approve'){if(Object.keys(b).some(k=>!['version','artifactHash'].includes(k)))throw Error('body');job=await flow.approve(brand,id,{version:b.version,artifactHash:b.artifactHash,actor:'authenticated-office-user',source:'office-ui'});}

@@ -68,5 +68,5 @@ test('structured specialist response limits citations to the supplied evidence i
 
 test('creative revision limit remains visible to the owner without approving the idea',async()=>{
  const {publicJob}=await import('./http.mjs');const j={id:'test',brandId:'glowfy',version:3,state:'changes_requested',stage:'creative_review',outputs:{},brief:{...brief,deliverable:'idea'},blocker:'CREATIVE_REVISION_LIMIT'};
- const v=publicJob(j);assert.equal(v.blockerCode,'CREATIVE_REVISION_LIMIT');assert.match(v.blocker,/dos correcciones/);assert.equal(v.approval,null);assert.equal(v.artifact,null);
+ const v=publicJob(j);assert.equal(v.blockerCode,'CREATIVE_REVISION_LIMIT');assert.match(v.blocker,/correcciones automáticas/);assert.equal(v.approval,null);assert.equal(v.artifact,null);
 });
