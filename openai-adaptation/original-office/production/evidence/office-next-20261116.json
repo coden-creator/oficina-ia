@@ -1,0 +1,64 @@
+{
+  "date": "2026-11-16",
+  "displayTimezone": "America/Guatemala",
+  "tests": {
+    "passed": 22,
+    "failed": 0
+  },
+  "local": {
+    "local": true,
+    "simulatedAgentStates": true,
+    "realMp4AndPosters": true,
+    "noVideoDownloadBeforeClick": true,
+    "onePlayingVideo": true,
+    "stableAcrossPolling": true,
+    "pauseOnNavigation": true,
+    "brandChangeReleasesMedia": true,
+    "keyboardPlayback": true,
+    "agentMotionObserved": true,
+    "pauseObserved": true,
+    "reducedMotionObserved": true,
+    "agentInspector": true,
+    "mobileNoOverflow": true,
+    "brandDrafts": true,
+    "readOnlyMetricoolDiscovery": true,
+    "javascriptErrors": []
+  },
+  "live": {
+    "at": "2026-11-16T17:52:48.573Z",
+    "deploymentMarker": "cf23b66cb8cff7538cf2b04d2ba9eb12136d0cb3",
+    "live": true,
+    "tlsVerified": true,
+    "jobCount": 6,
+    "oldVideoHashesAndVersionsPreserved": true,
+    "actualPosters": true,
+    "noMp4BeforeClick": true,
+    "keyboardPlayback": true,
+    "onlyOneGridVideoPlaying": true,
+    "stableAcrossPolling": true,
+    "pauseOnNavigation": true,
+    "brandChangeReleasesMedia": true,
+    "agentInspector": true,
+    "pauseObserved": true,
+    "activeAgents": [],
+    "velforceDraftVisible": true,
+    "purifyAndQuibaDeferred": true,
+    "metricoolOfficeConnected": false,
+    "mobileNoOverflow": true,
+    "mutatingBrowserRequestsAllowed": false,
+    "javascriptErrors": []
+  },
+  "visualInspection": {
+    "desktop": true,
+    "mobile": true
+  },
+  "newInference": false,
+  "newAudioGeneration": false,
+  "contentApproved": false,
+  "contentScheduled": false,
+  "contentPublished": false,
+  "deferredByOwner": [
+    "purify",
+    "quiba"
+  ]
+}

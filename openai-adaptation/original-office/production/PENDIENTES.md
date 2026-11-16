@@ -4,7 +4,7 @@ Lista aportada por Jorge el 16 de noviembre de 2026. Estado actualizado durante 
 
 ## 1. Vistas previas en el Estudio
 
-**Implementado, pendiente de comprobar este despliegue:** miniaturas reales por versión y reproducción desde la grilla. Pruebas locales aprobadas con teclado, móvil, cambio de marca y consultas periódicas. La ficha conserva fragmento/completo y las decisiones de Jorge.
+**Desplegado y comprobado con seis videos reales:** miniaturas reales por versión y reproducción desde la grilla. Pruebas locales aprobadas con teclado, móvil, cambio de marca y consultas periódicas. La ficha conserva fragmento/completo y las decisiones de Jorge.
 
 **Entrega:** miniatura extraída del video de la versión actual, vista previa accesible desde la tarjeta y apertura de su ficha para aprobar, pedir cambios o descartar. Carga diferida; reproducción por acción del usuario, pausa al salir de la vista o cambiar de marca; estado claro cuando aún no hay archivo. Conservar un solo selector global de marca y evitar descargas simultáneas de todos los videos.
 
@@ -20,7 +20,7 @@ Lista aportada por Jorge el 16 de noviembre de 2026. Estado actualizado durante 
 
 ## 3. Animaciones de los agentes
 
-**Implementado, pendiente de comprobar este despliegue:** herramientas y actuación por rol, traspasos entre responsables observados, pausa y movimiento reducido. La etapa QA se atribuye a Control. La prueba local usa estados simulados expresamente identificados; no demuestra nueva producción autónoma.
+**Desplegado; comprobado en espera real y trabajo simulado local:** herramientas y actuación por rol, traspasos entre responsables observados, pausa y movimiento reducido. La etapa QA se atribuye a Control. La prueba local usa estados simulados expresamente identificados; no demuestra nueva producción autónoma.
 
 **Entrega:** animaciones y accesorios por función: investigación, guion, selección creativa, tres puestos de edición, calidad y coordinación. Distinguir trabajando, esperando, bloqueado y pendiente de Jorge; mostrar de forma comprensible el traspaso de tareas. Respetar pausa, movimiento reducido y presupuesto de rendimiento.
 
