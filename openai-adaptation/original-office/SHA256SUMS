@@ -9,7 +9,7 @@ f7d092ef1af061aa03e73b5160144f62a8103927251977cdb0cf4f71ab9d517e  ./README.md
 5f1b4da25594630eea47fef94082e110f804311f506c2cc5a9caa69a3e009012  ./SECURITY-GATE-RESULT.json
 756258cfa7ceed391c51fd30859dd0b6848c9ca7fde0641dfdebda6a46e56c7b  ./SHELL-REVIEW-HISTORICAL.md
 22beff9f2a129722754b9f883c44dbac589ab28ced3fc167edab584fb4ba2db0  ./TEST-RESULTS.txt
-1e3c9f60d17f08b1b3abdb83917c7f80a4673804a3906a5235e73530432dc469  ./UI-DESIGN-REVIEW.md
+bb37b5c42e2daeb65cd75361f4c17609778ce4dd2ef4a52557f3899705dc4172  ./UI-DESIGN-REVIEW.md
 20d078186cdb329a50becb93dfe078ecddd0ce658c98b3ae5f9d735b8c56cbe9  ./agents-display.json
 66bf8b074ddaacbcc9ef176def1110cd88d18930244ae403bb56eddb2377db57  ./codex/adapter.mjs
 1e0917b9e74e6f8b92755e934c959829b10f3a0ddec125af4da84ae15262f192  ./codex/broker.mjs
@@ -143,7 +143,7 @@ fbddf3672ae648933f33053ef4d3960be8a5ef2068c1b086a05a4cd48eb352f0  ./visual-contr
 6367435342023636c7dafb377baa7ad4c097e99549193f5c870f2d7a8d6bf02c  ./Dockerfile.easypanel
 00ed83a7dc4064e289557f779e5ed3d94cfb3467d00fa8bcbd7c1e4fb437e8b4  ./PACKAGING.md
 f7d092ef1af061aa03e73b5160144f62a8103927251977cdb0cf4f71ab9d517e  ./README.md
-1e3c9f60d17f08b1b3abdb83917c7f80a4673804a3906a5235e73530432dc469  ./UI-DESIGN-REVIEW.md
+bb37b5c42e2daeb65cd75361f4c17609778ce4dd2ef4a52557f3899705dc4172  ./UI-DESIGN-REVIEW.md
 6ea1b31b665df995d9ce784ac9ee140e2fcd5e4b7540a6bae04b449230dd0009  ./connections/elevenlabs-speech.mjs
 40182e8583aa4ac8c9a956ea38bc4311866061f951bae4b52144c5ea57ad1bbb  ./connections/http.mjs
 b69336c1fd85fc83be19b6f1f60555a31426f779eb458cc7b63ccb0945ae73c5  ./connections/store.mjs
@@ -159,8 +159,8 @@ ff4bec6143387ae9ca8575e4418046672086cf3a42b156d91c1556f91aae078b  ./production/a
 5e3c112ada12904d78cc444f3b4d08ec087b3f3dad23ba26bb75e8fa3d4c2ab8  ./production/evidence/glowfy-social-real.json
 e07ae5c20cde50254be4c9cc2f3a6e8f821dff1db82f79f51da98725651ad347  ./production/glowfy-production.mjs
 019258e014fd42d9f60045659b75d8c84cc3fa0674e81f2c53f1db71f5aa7735  ./production/glowfy/FONT-LICENSES.txt
-00ba92c3206fc22ef4cca8e0c7a8f17712d969eeed0584af58cecfe3a4a3fe1d  ./production/glowfy/LOG.md
-dd37ffab2144559d6e56fb7dc3b42090a5338a5cc07fe24c17c9c0edbc02d404  ./production/glowfy/PROGRESS.md
+c73f3c60bfb9906c9c3bfb06d15771639e2de438de82f25ab611bd207e15a9ce  ./production/glowfy/LOG.md
+6798fcbcbde2244257e0557832cf4d7ecca9607a85091cd0264025af63ff0325  ./production/glowfy/PROGRESS.md
 b5e9b64494d8fddead68c3804299503483ba6b8cd38eb315ce216d48940e985b  ./production/glowfy/TASTE.md
 47598aa5fcc9d2270fce6a2b8cc2a6aedc11c4cfcec748d7a7864422c073590c  ./production/glowfy/assets.json
 1097f01027d148c3b38b3ea764a7ad915b831680e0e05524051568427d3b1c8e  ./production/glowfy/mix-social.mjs
@@ -195,7 +195,7 @@ b36dcad2cd1e77f9346a528f499f79f99c1d088cbdd31b66b32912ca555a8d01  ./production/e
 a08e629f4981653bfef731353138ad0dc8bd21db2d3d99747a7755454080c1cf  ./public/music-panel.js
 38a51104eebbe2b9607352b8b1aee762302b86f361e6e10fb20325e4e8d4eb1c  ./production/audio/glowfy-sfx-catalog.json
 3d73fd595807e4e26c41562c6a46ce4c27a3eb88607bf929079f06d4dc2a8806  ./production/audio/glowfy-sfx-catalog.mp4
-c09e803614047a1047ff348e4f4f07442cb7b6b18f7ab44a783ab5d7a9c744e9  ./production/evidence/glowfy-sfx-catalog.json
+fa7cb055cf865c48b93ebfb43523f4ba819b9ff6818b4c6c4b49481289decf2e  ./production/evidence/glowfy-sfx-catalog.json
 36fe661447b3c4b214b2211e6ff5d0050bb742c2e09701ff943e277b7a9cdd52  ./production/sfx-catalog/INDICE.txt
 40e2b66f3b0e077aaf02cf8e8f31bfaef9fd302ff0e8c414b3228fc2da3e06f5  ./production/sfx-catalog/README.md
 20b9c5dd5a0cc66ca46c9b21928a42d1b385ffc1768037390292f7d8e89c1d05  ./production/sfx-catalog/catalog.json

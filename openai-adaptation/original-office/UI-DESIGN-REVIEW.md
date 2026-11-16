@@ -128,3 +128,5 @@ La apertura directa utiliza `musica=1`. La biblioteca detiene el audio al cerrar
 Bloque «Revisar los efectos de sonido» contiguo a la música. Conserva paleta, tipografía y selector global. Un video vertical y un índice desplazable de 36 botones ocupan dos columnas en escritorio y una en móvil; el efecto actual se destaca con color y `aria-current`. Controles nativos, foco visible, descarga y explicación A/B. No se reproduce automáticamente. La ruta `efectos=1` abre el bloque; cerrar, salir o cambiar de marca detiene el video, y las respuestas tardías se descartan.
 
 Chromium local: 1440×1100 y 390×844, reproducción real, saltos a 1/12/36, descarga comprobada por SHA, teclado, cero errores JavaScript y sin desborde horizontal. Capturas de escritorio/móvil y 72 cuadros del MP4 revisados. El catálogo no afirma que los sonidos estén aprobados ni reparados; sirve para recibir la selección de Jorge.
+
+Comprobación real posterior al despliegue: mismas pruebas y capturas de escritorio/móvil aprobadas técnicamente, 36 entradas, descarga íntegra y sin errores JavaScript. No hubo modificación de la pieza en revisión ni aprobación automática.

@@ -11,3 +11,5 @@
 - Jorge eligió las cuatro músicas tras escucharlas. Incorporadas como biblioteca Glowfy v1, con reutilización sin nueva generación, acceso privado y asignación estable entre correcciones. Las aprobaciones de música y de videos permanecen separadas.
 
 - Catálogo solicitado por Jorge: 36 efectos existentes, 144 reproducciones A/B identificadas, 4:16, sin nuevas generaciones ni reparaciones. Verificados audio contra fuentes, cuadros, descarga y navegación local. Integración en el Estudio preparada para revisión de Jorge.
+
+- Catálogo SFX desplegado por MCP en el mismo App, commit 2cabb30. Verificados HTTPS, reproducción, índice, rangos, descarga, escritorio/móvil y cero errores JavaScript. CPU 13,62%, RAM 34,49%; montajes y límites conservados. Sin producción ni consumo adicional; a la espera de la selección de Jorge.

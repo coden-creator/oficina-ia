@@ -22,3 +22,5 @@ Desplegado y verificado en el App existente, commit `a1317c05cfd5c1b0e6c5dc4be2b
 ## Catálogo de efectos para elegir correcciones
 
 Preparado un MP4 de 255,75 s con los 36 efectos, A original/B procesado y dos repeticiones por versión. Integrado en el Estudio con índice y descarga. Fuentes conservadas, sin reparaciones ni consumo de API. Ver [método e índice](../sfx-catalog/README.md) y [evidencia](../evidence/glowfy-sfx-catalog.json). Pendiente de que Jorge señale los sonidos que quiere cambiar; las mediciones no sustituyen esa elección.
+
+Catálogo desplegado y comprobado en el App existente: `2cabb30c9b1e3e0607dd3d0807ffabaa78a56891`. La web real reproduce y descarga el MP4 por SHA, permite saltar entre efectos y funciona por teclado y en móvil. La pieza v3 conserva su archivo y revisión pendiente; Codex conectado.
