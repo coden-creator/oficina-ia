@@ -10,16 +10,16 @@ export function createSpecialistBroker({specialist,refreshAccount=async()=>{}}){
   try{
    if(req.method==='GET'&&req.url==='/status'){
     await refreshAccount();const s=specialist.status();
-    return send(200,{...disconnected(),connected:s.connected===true&&s.paidApiEnabled===false&&s.publishingEnabled===false,inferenceVerified:s.inferenceVerified===true,workflows:Array.isArray(s.workflows)?s.workflows.filter(w=>w==='organic-v1'):[],busy});
+    return send(200,{...disconnected(),connected:s.connected===true&&s.paidApiEnabled===false&&s.publishingEnabled===false,inferenceVerified:s.inferenceVerified===true,workflows:Array.isArray(s.workflows)?s.workflows.filter(w=>w==='organic-v1'):[],busy,model:s.model||null,reasoning:s.reasoning||null});
    }
    if(req.method!=='POST'||req.url!=='/run')return send(404,{error:'NOT_FOUND'});
    if(req.headers['content-type']!=='application/json')return send(415,{error:'JSON_REQUIRED'});
    if(busy)return send(409,{error:'CODEX_BUSY'});
    busy=true;
    try{
-    let bytes=0,body='';for await(const b of req){bytes+=b.length;if(bytes>32000)return send(413,{error:'REQUEST_TOO_LARGE'});body+=b;}
+    let bytes=0,body='';for await(const b of req){bytes+=b.length;if(bytes>4300000)return send(413,{error:'REQUEST_TOO_LARGE'});body+=b;}
     const q=JSON.parse(body);
-    if(!q||typeof q!=='object'||Array.isArray(q)||Object.keys(q).some(k=>!['brand','stage','jobId','prompt','input','context'].includes(k)))return send(400,{error:'INVALID_REQUEST'});
+    if(!q||typeof q!=='object'||Array.isArray(q)||Object.keys(q).some(k=>!['brand','stage','jobId','prompt','input','context','images'].includes(k)))return send(400,{error:'INVALID_REQUEST'});
     await refreshAccount();const s=specialist.status();
     if(!s.connected||s.paidApiEnabled!==false||s.publishingEnabled!==false)return send(503,{error:'CODEX_NOT_CONNECTED'});
     const result=await specialist.run(q);

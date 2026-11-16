@@ -1,7 +1,8 @@
 import {motionSchema,validateMotionPlan,motionPrompt,MOTION_PROTOCOL} from './motion-contract.mjs';
+import {AUTHORED_PROTOCOL,authoredPlanSchema,designSchema,visualReviewSchema,validateGraph,validateAuthoredPlan} from './authored-motion.mjs';
 // Contracts for preproduction, not the diagnostic card renderer or permission to spend.
 export const ORGANIC_PROTOCOL='organic-v1';
-export const organicStages=Object.freeze(['research','strategy','script','creative_review','art_direction','edit_plan']);
+export const organicStages=Object.freeze(['research','strategy','script','creative_review','art_direction','edit_plan','motion_design','visual_review']);
 export const criteria=Object.freeze([
  {id:'hook',label:'Apertura comprensible'}, {id:'audience',label:'Público y problema'},
  {id:'evidence',label:'Promesa sustentada'}, {id:'originality',label:'Novedad frente al historial'},
@@ -13,14 +14,15 @@ const array=(items,min=0,max=10)=>({type:'array',items,minItems:min,maxItems:max
 export function organicSchema(stage,brand,cta,evidenceIds=null,productionMode=null){
  const evidence=obj({sourceId:str(80),claim:str(1000)});
  const detail={
-  edit_plan:motionSchema,
+  edit_plan:productionMode===AUTHORED_PROTOCOL?authoredPlanSchema:motionSchema,
+  motion_design:designSchema,visual_review:visualReviewSchema,
   research:obj({ideas:array(obj({angle:str(400),reason:str(1000)}),1,3),limitations:array(str(1000),0,8)}),
   strategy:obj({angle:str(1000),audience:str(1000),permittedClaims:array(str(1000),0,12)}),
   script:obj({hook:str(400),narration:str(8000),scenes:array(obj({text:str(300),narration:str(1500),action:str(2000),assets:array(str(300),0,8)}),3,8),closing: {type:'string',enum:[cta]}}),
   creative_review:obj({verdict:{type:'string',enum:['pass','changes','reject']},criteria:array(obj({id:{type:'string',enum:criteria.map(c=>c.id)},score:{type:'integer',minimum:0,maximum:10},reason:str(1000)}),6,6),corrections:array(str(1000),0,8)}),
   art_direction:obj({keyframes:array(obj({moment:{type:'string',enum:['opening','solution','closing']},composition:str(2000),motion:str(2000)}),3,3),assets:array(obj({description:str(1000),sourceId:str(80),availability:{type:'string',enum:['provided','needed']}}),0,20),audioNotes:str(2000)})
  };
- if(stage==='script'&&productionMode===MOTION_PROTOCOL){detail.script.properties.narration.maxLength=440;detail.script.properties.scenes.minItems=4;detail.script.properties.scenes.maxItems=4;detail.script.properties.scenes.items.properties.text.maxLength=28;}
+ if(stage==='script'&&[MOTION_PROTOCOL,AUTHORED_PROTOCOL].includes(productionMode)){detail.script.properties.narration.maxLength=440;detail.script.properties.scenes.minItems=4;detail.script.properties.scenes.maxItems=4;detail.script.properties.scenes.items.properties.text.maxLength=28;}
  if(!detail[stage])throw Error('INVALID_ORGANIC_STAGE');
  const schema=obj({brand:{type:'string',enum:[brand]},stage:{type:'string',enum:[stage]},summary:str(3000),evidence:array(evidence,0,30),detail:detail[stage]});
  if(evidenceIds!==null){const ids=[...new Set(evidenceIds)];if(ids.length)schema.properties.evidence.items.properties.sourceId={type:'string',enum:ids};else schema.properties.evidence.maxItems=0;}
@@ -37,8 +39,10 @@ export function validateOrganicOutput(output,{stage,brand,brief}){
  check(output,organicSchema(stage,brand,brief.cta,null,brief.productionMode));
  const ids=new Set((brief.evidence||[]).map(e=>e.id));
  if(output.evidence.some(e=>!ids.has(e.sourceId)))throw Error('UNSUPPORTED_EVIDENCE');
- if(stage==='edit_plan')validateMotionPlan(output.detail);
- if(stage==='script'&&brief.productionMode===MOTION_PROTOCOL){const d=output.detail;if(d.scenes.map(s=>s.narration.trim()).join(' ')!==d.narration.trim()||d.scenes.some(s=>s.text.trim().split(/\s+/).length>5))throw Error('MOTION_NARRATION_CONTRACT');}
+ if(stage==='edit_plan')(brief.productionMode===AUTHORED_PROTOCOL?validateAuthoredPlan:validateMotionPlan)(output.detail);
+ if(stage==='motion_design')validateGraph(JSON.parse(output.detail.graph));
+ if(stage==='visual_review'&&output.detail.verdict==='changes'&&!output.detail.corrections.length)throw Error('MISSING_CORRECTIONS');
+ if(stage==='script'&&[MOTION_PROTOCOL,AUTHORED_PROTOCOL].includes(brief.productionMode)){const d=output.detail;if(d.scenes.map(s=>s.narration.trim()).join(' ')!==d.narration.trim()||d.scenes.some(s=>s.text.trim().split(/\s+/).length>5))throw Error('MOTION_NARRATION_CONTRACT');}
  if(stage==='creative_review'){
   if(new Set(output.detail.criteria.map(c=>c.id)).size!==6)throw Error('DUPLICATE_CRITERIA');
   const total=output.detail.criteria.reduce((n,c)=>n+c.score,0);

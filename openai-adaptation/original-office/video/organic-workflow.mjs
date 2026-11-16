@@ -1,3 +1,4 @@
+import {AUTHORED_PROTOCOL,authoredBrief,authoredPlanPrompt} from './authored-motion.mjs';
 import {MOTION_PROTOCOL,productionBrief} from './motion-contract.mjs';
 import {directionRules,recentVisualHistory} from './audiovisual-standard.mjs';
 import {ORGANIC_PROTOCOL,organicPrompts,validateOrganicOutput} from './organic-contract.mjs';
@@ -17,7 +18,7 @@ export function createOrganicWorkflow({flow,runner,enabled=false,allowedJobIds=[
   const patch=async(fn,event)=>{job=await flow.updateOffice(brand,id,job.version,fn,event);return job;};
   await patch(j=>{j.state='running';j.blocker=null;j.execution={workflow:ORGANIC_PROTOCOL,phase,editorId,startedAt:new Date().toISOString()};},'organic_started');
   try{
-   const stages=phase==='prepare'?['research','strategy','script','creative_review']:job.brief.productionMode===MOTION_PROTOCOL?['art_direction','edit_plan']:['art_direction'];
+   const stages=phase==='prepare'?['research','strategy','script','creative_review']:[MOTION_PROTOCOL,AUTHORED_PROTOCOL].includes(job.brief.productionMode)?['art_direction','edit_plan']:['art_direction'];
    let index=0;
    while(index<stages.length){
     const stage=stages[index];if(job.outputs[stage]){index++;continue;}
@@ -27,7 +28,7 @@ export function createOrganicWorkflow({flow,runner,enabled=false,allowedJobIds=[
     const dependencies={research:[],strategy:['research'],script:['research','strategy'],creative_review:['strategy','script'],art_direction:['strategy','script'],edit_plan:['script','art_direction']}[stage];
     const previous=Object.fromEntries(dependencies.filter(k=>job.outputs[k]).map(k=>{const {provenance,inheritedFrom,...content}=job.outputs[k];return [k,content];}));
     const history=recentVisualHistory(await flow.list(brand),id,brand);
-    const q={brand,jobId:id,stage,prompt:organicPrompts[stage]+' '+directionRules+(job.brief.productionMode===MOTION_PROTOCOL?' '+productionBrief:''),input:{brief:job.brief,previous,feedback:job.organicFeedback??null,visualHistory:history},context:{workflow:ORGANIC_PROTOCOL,brand,brandProfile:brands[brand],version:job.version,editorId,restrictions:{noPaid:true,noPublish:true,noCloning:true,research:'supplied-evidence-only'}}};
+    const q={brand,jobId:id,stage,prompt:(stage==='edit_plan'&&job.brief.productionMode===AUTHORED_PROTOCOL?authoredPlanPrompt:organicPrompts[stage])+' '+directionRules+(job.brief.productionMode===AUTHORED_PROTOCOL?' '+authoredBrief:job.brief.productionMode===MOTION_PROTOCOL?' '+productionBrief:''),input:{brief:job.brief,previous,feedback:job.organicFeedback??null,visualHistory:history},context:{workflow:ORGANIC_PROTOCOL,brand,brandProfile:brands[brand],version:job.version,editorId,restrictions:{noPaid:true,noPublish:true,noCloning:true,research:'supplied-evidence-only'}}};
     while(JSON.stringify(q).length>23000&&q.input.visualHistory.length)q.input.visualHistory.pop();
     if(JSON.stringify(q).length>23000)throw Error('SPECIALIST_CONTEXT_TOO_LARGE');
     const result=await call(q);

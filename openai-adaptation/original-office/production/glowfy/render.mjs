@@ -1,10 +1,11 @@
+import {draw as drawAuthored} from './scene-authored.mjs';
 import {draw as drawDirected} from './scene-directed.mjs';
 import {draw as drawCinematic} from './scene-cinematic.mjs';
 import {draw as drawReserva} from './scene-reserva.mjs';import {draw as drawRecordatorio} from './scene-recordatorio.mjs';import {draw as drawHorario} from './scene-horario.mjs';
 import fs from 'node:fs/promises';import path from 'node:path';import {fileURLToPath} from 'node:url';import {createRequire} from 'node:module';import {spawn} from 'node:child_process';import {once} from 'node:events';import {draw as drawStandard} from './scene.mjs';import {draw as drawSocial} from './scene-social.mjs';
 const [configPath]=process.argv.slice(2),config=JSON.parse(await fs.readFile(configPath,'utf8'));
 const unique={booking:drawReserva,reminder:drawRecordatorio,reschedule:drawHorario};
-const draw=config.beats.directed?drawDirected:config.beats.cinematic?drawCinematic:config.beats.uniqueProduction?unique[config.beats.variant]:(config.social?drawSocial:drawStandard);if(!draw)throw Error('UNIQUE_SCENE_NOT_FOUND');
+const draw=config.beats.authored?drawAuthored:config.beats.directed?drawDirected:config.beats.cinematic?drawCinematic:config.beats.uniqueProduction?unique[config.beats.variant]:(config.social?drawSocial:drawStandard);if(!draw)throw Error('UNIQUE_SCENE_NOT_FOUND');
 const root=path.dirname(fileURLToPath(import.meta.url));
 const {createCanvas,GlobalFonts,loadImage}=createRequire(import.meta.url)('@napi-rs/canvas');
 const assets=JSON.parse(await fs.readFile(path.join(root,'assets.json')));

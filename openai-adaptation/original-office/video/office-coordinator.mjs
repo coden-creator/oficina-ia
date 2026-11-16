@@ -1,3 +1,4 @@
+import {AUTHORED_PROTOCOL} from './authored-motion.mjs';
 import os from 'node:os';
 import fs from 'node:fs/promises';
 import {brands} from './video-flow.mjs';
@@ -33,7 +34,7 @@ export function createOfficeCoordinator({flow,runner,enabled=false,allowedJobIds
  }
  async function recover(){
   // A half-finished inference is not silently repeated; completed outputs remain available.
-  for(const j of await all()){if(j.brief.deliverable==='idea'&&j.ideaAuthorization?.source==='owner-idea-trigger')worker.authorizeIdea?.(j.id);}
+  for(const j of await all()){if((j.brief.deliverable==='idea'&&j.ideaAuthorization?.source==='owner-idea-trigger')||(j.productionAuthorization?.protocol===AUTHORED_PROTOCOL&&production?.permits?.(j)))worker.authorizeIdea?.(j.id);}
   for(const j of await all())if(j.execution?.workflow===ORGANIC_PROTOCOL&&j.state==='running')await flow.updateOffice(j.brandId,j.id,j.version,x=>{x.state='blocked';x.blocker='INTERRUPTED_STAGE';x.execution=null;},'interrupted_stage');
  }
  async function snapshot(brand){

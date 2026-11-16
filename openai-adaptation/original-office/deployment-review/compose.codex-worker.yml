@@ -19,7 +19,7 @@ services:
       traefik.enable: 'false'
       office.purpose: jorge-codex-worker
     environment:
-      OFFICE_WORKER_RELEASE: organic-contract-v8
+      OFFICE_WORKER_RELEASE: authored-motion-v2
       OFFICE_CODEX_ENABLE: '1'
       OFFICE_CODEX_ISOLATION_VERIFIED: '1'
       OFFICE_CODEX_MODEL: ${OFFICE_CODEX_MODEL:-gpt-6.1-sol}
@@ -44,6 +44,10 @@ services:
         target: /app/video/organic-contract.mjs
       - source: motion_contract
         target: /app/video/motion-contract.mjs
+      - source: authored_contract
+        target: /app/video/authored-motion.mjs
+      - source: event_stream
+        target: /app/codex/event-stream.mjs
       - source: specialist
         target: /app/codex/video-specialist.mjs
     healthcheck:
@@ -66,6 +70,8 @@ configs:
   organic_contract: {file: ../video/organic-contract.mjs}
   motion_contract: {file: ../video/motion-contract.mjs}
   specialist: {file: ../codex/video-specialist.mjs}
+  authored_contract: {file: ../video/authored-motion.mjs}
+  event_stream: {file: ../codex/event-stream.mjs}
 volumes:
   auth:
     external: true

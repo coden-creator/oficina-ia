@@ -1,3 +1,4 @@
+import {AUTHORED_PROTOCOL,authoredBrief} from './authored-motion.mjs';
 import {MOTION_PROTOCOL,productionBrief} from './motion-contract.mjs';
 import {validateAudiovisualReview} from './audiovisual-standard.mjs';
 import {validateScriptForRenderer,validateVisualPlan} from './visual-contract.mjs';
@@ -24,11 +25,11 @@ function validateBrief(b){
  const allowed=new Set(['objective','cta','voice','evidence','feedback','audience','channel','format','style','reference','qualityStandard','deliverable','productionMode','paid','publish']);
  for(const k of Object.keys(b))if(!allowed.has(k))throw new Error(`Campo de brief no admitido: ${k}`);
  if(b.qualityStandard!==undefined)validateQualityStandard(b.qualityStandard);
- if(b.productionMode!==undefined&&b.productionMode!==MOTION_PROTOCOL)throw Error('INVALID_PRODUCTION_MODE');
+ if(b.productionMode!==undefined&&![MOTION_PROTOCOL,AUTHORED_PROTOCOL].includes(b.productionMode))throw Error('INVALID_PRODUCTION_MODE');
  if(b.deliverable!==undefined&&!['video','idea'].includes(b.deliverable))throw Error('INVALID_DELIVERABLE');
  for(const k of ['objective','cta'])if(typeof b[k]!=='string'||!b[k].trim()||b[k].length>2000)throw new Error(`Brief inválido: ${k}`);
  for(const k of ['feedback','audience','channel','format','style','reference'])if(b[k]!==undefined&&(typeof b[k]!=='string'||b[k].length>4000))throw new Error(`Brief inválido: ${k}`);
- if(b.voice&&b.voice!=='none'&&!(b.productionMode===MOTION_PROTOCOL&&b.voice==='existing-authorized'))throw new Error('Esta versión solo admite animática sin voz; no clona ni genera voz');
+ if(b.voice&&b.voice!=='none'&&!([MOTION_PROTOCOL,AUTHORED_PROTOCOL].includes(b.productionMode)&&b.voice==='existing-authorized'))throw new Error('Esta versión solo admite animática sin voz; no clona ni genera voz');
  for(const k of ['paid','publish'])if(b[k]!==undefined&&b[k]!==false)throw new Error('Publicación/gasto no habilitados');
  if(b.evidence!==undefined){if(!Array.isArray(b.evidence)||b.evidence.length>30)throw new Error('Evidencia inválida');const ids=new Set();for(const e of b.evidence){if(!e||typeof e!=='object'||Array.isArray(e)||Object.keys(e).some(k=>!['id','text','source','date'].includes(k))||typeof e.id!=='string'||!/^[a-zA-Z0-9_-]{1,80}$/.test(e.id)||ids.has(e.id)||typeof e.text!=='string'||!e.text.trim()||e.text.length>8000)throw new Error('Evidencia inválida');ids.add(e.id);for(const k of ['source','date'])if(e[k]!==undefined&&(typeof e[k]!=='string'||e[k].length>2000))throw new Error('Fuente inválida');}}
  if(JSON.stringify(b).length>120000)throw new Error('Brief demasiado grande');
@@ -133,13 +134,14 @@ export function createVideoFlow({dataDir,adapters={},creativeRevision={}}){
   event(j,'discarded',{...j.discard,previousApproval});await save(j);return publicJob(j);
  });}
  async function recordAudiovisualReview(b,id,review){return serial(async()=>{const j=await get(b,id);if(j.state!=='awaiting_review'||!j.artifact)throw Error('REVIEW_ARTIFACT_REQUIRED');const checked=validateAudiovisualReview(review,j);if(digest(await safeRead(j.artifact.file,256*1024*1024))!==review.artifactHash)throw Error('REVIEW_ARTIFACT_CHANGED');j.audiovisualReviews||=[];j.audiovisualReviews.push({...checked,at:new Date().toISOString(),source:'authenticated-production-review',scope:'observations_only_not_owner_approval'});event(j,'audiovisual_review_recorded',{version:j.version,artifactHash:review.artifactHash});await save(j);return publicJob(j);});}
- async function prepareVideo(b,id,{version}){return serial(async()=>{const j=await get(b,id);
-  if(j.productionAuthorization?.protocol===MOTION_PROTOCOL)return clone(j);
-  if(j.version!==version||j.brief.deliverable!=='idea'||j.artifact||!['awaiting_review','changes_requested','blocked'].includes(j.state))throw Error('VIDEO_CONVERSION_CONFLICT');
+ async function prepareVideo(b,id,{version,productionMode=MOTION_PROTOCOL}){return serial(async()=>{const j=await get(b,id);
+  if(![MOTION_PROTOCOL,AUTHORED_PROTOCOL].includes(productionMode))throw Error('INVALID_PRODUCTION_MODE');
+  if(j.productionAuthorization?.protocol===productionMode)return clone(j);
+  if(j.version!==version||j.brief.deliverable!=='idea'||j.artifact||!['awaiting_review','changes_requested','blocked',...(productionMode===AUTHORED_PROTOCOL?['queued']:[])].includes(j.state))throw Error('VIDEO_CONVERSION_CONFLICT');
   j.revisions||=[];j.revisions.push({version:j.version,brief:clone(j.brief),outputs:clone(j.outputs),artifact:j.artifact,approval:j.approval,reason:'owner_requested_finished_video'});j.version++;
-  j.brief.deliverable='video';j.brief.productionMode=MOTION_PROTOCOL;j.brief.voice='existing-authorized';j.brief.evidence=j.brief.evidence.filter(e=>e.id!=='owner_request');j.brief.evidence.push({id:'owner_request',source:'Jorge: quiero ver el video finalizado, hacelos directo',text:productionBrief});
+  j.brief.deliverable='video';j.brief.productionMode=productionMode;j.brief.voice='existing-authorized';j.brief.evidence=j.brief.evidence.filter(e=>e.id!=='owner_request');j.brief.evidence.push({id:'owner_request',source:'Jorge: quiero ver el video finalizado, hacelos directo',text:productionMode===AUTHORED_PROTOCOL?authoredBrief:productionBrief});
   j.outputs=Object.fromEntries(['research','strategy'].filter(k=>j.outputs[k]).map(k=>[k,j.outputs[k]]));j.artifact=null;j.preview=null;j.approval=null;j.draftHash=null;j.organicAttempts=0;j.organicFeedback=null;j.execution=null;j.blocker=null;j.state='queued';j.stage='script';
-  j.productionAuthorization={protocol:MOTION_PROTOCOL,source:'authenticated-owner-video-trigger',at:new Date().toISOString(),includedVoiceOnly:true,publishing:false};event(j,'finished_video_requested',{version:j.version});await save(j);return clone(j);
+  j.productionAuthorization={protocol:productionMode,source:'authenticated-owner-video-trigger',at:new Date().toISOString(),includedVoiceOnly:true,publishing:false};event(j,'finished_video_requested',{version:j.version});await save(j);return clone(j);
  });}
  async function prepareRerender(b,id,{version}){return serial(async()=>{const j=await get(b,id);
   if(j.state==='queued'&&j.renderRepair?.sourceVersion===version)return clone(j);

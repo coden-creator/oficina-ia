@@ -111,3 +111,5 @@ scripts/probe-tool-inventory.mjs
 !public/brand-direction.js
 
 !video/motion-contract.mjs
+
+!video/authored-motion.mjs
