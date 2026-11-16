@@ -8,8 +8,8 @@ import argparse
 parser=argparse.ArgumentParser();parser.add_argument('--output',type=Path,required=True);parser.add_argument('--catalog',type=Path);parser.add_argument('--comparison',action='store_true');args=parser.parse_args()
 ROOT=Path(__file__).resolve().parent;OUT=args.output.resolve();CACHE=OUT/'cache';CACHE.mkdir(parents=True,exist_ok=True)
 REPO=ROOT.parents[3];SOURCE=REPO/'estudio-video/assets/sfx';APP=REPO/'openai-adaptation/original-office'
-catalog=json.loads((args.catalog or ROOT/'catalog.json').read_text());assets=json.loads((APP/'production/glowfy/assets.json').read_text());count=len(catalog['items']);comparison=args.comparison
-labels=('A · Anterior','B · Nueva propuesta') if comparison else ('A · Original de ElevenLabs','B · Procesado por el estudio')
+catalog=json.loads((args.catalog or ROOT/'catalog.json').read_text());assets=json.loads((APP/'production/glowfy/assets.json').read_text());count=len(catalog['items']);comparison=args.comparison;revision=catalog.get('revision',2)
+labels=tuple(catalog.get('labels',['A · Anterior','B · Nueva propuesta'])) if comparison else ('A · Original de ElevenLabs','B · Procesado por el estudio')
 for f in assets['fonts']:
  if f['family']=='Montserrat':(CACHE/('Montserrat-'+str(f['weight'])+'.ttf')).write_bytes(base64.b64decode(f['base64']))
 font=lambda n,w=500:ImageFont.truetype(str(CACHE/('Montserrat-'+str(w)+'.ttf')),n)
@@ -26,14 +26,14 @@ def wrap(draw,text,x,y,size=30,width=620,color=INK,weight=500):
  for line in lines:draw.text((x,y),line,font=f,fill=color);y+=size*1.35
  return y
 def base():
- im=Image.new('RGB',(W,H),BG);im.paste(logo,(50,52),logo);d=ImageDraw.Draw(im);d.text((50,148),'Efectos regenerados · revisión 2' if comparison else 'Catálogo de efectos',font=font(24,600),fill=MUTED);return im
+ im=Image.new('RGB',(W,H),BG);im.paste(logo,(50,52),logo);d=ImageDraw.Draw(im);d.text((50,148),f'Efectos regenerados · revisión {revision}' if comparison else 'Catálogo de efectos',font=font(24,600),fill=MUTED);return im
 def intro(outro=False):
  im=base();d=ImageDraw.Draw(im)
- wrap(d,'Decime cuáles mejoraron.' if comparison and outro else '7 nuevas propuestas.' if comparison else 'Decime cuáles cambiamos.' if outro else '36 sonidos. Escuchalos y elegí.',50,300,56,weight=700)
+ wrap(d,'Decime cuáles mejoraron.' if comparison and outro else f'{count} nuevas propuestas.' if comparison else 'Decime cuáles cambiamos.' if outro else '36 sonidos. Escuchalos y elegí.',50,300,56,weight=700)
  wrap(d,'Usá el número o el nombre que aparece en pantalla.',50,535,30)
- wrap(d,'A: sonido anterior · B: nueva propuesta' if comparison else 'A: original de ElevenLabs · B: versión procesada',50,695,28,color=ACCENT,weight=600)
+ wrap(d,catalog.get('comparisonDescription','A: sonido anterior · B: nueva propuesta') if comparison else 'A: original de ElevenLabs · B: versión procesada',50,695,28,color=ACCENT,weight=600)
  wrap(d,'Cada versión se escucha dos veces. El volumen está igualado para comparar.',50,840,27,color=MUTED)
- wrap(d,'Mismos números: 13, 16, 17, 22, 31, 33 y 34.' if comparison else 'Ejemplo: «12, original: el final suena roto».',50,1035,25,weight=600)
+ wrap(d,'Mismos números: '+', '.join(str(i['number']) for i in catalog['items'])+'.' if comparison else 'Ejemplo: «12, original: el final suena roto».',50,1035,25,weight=600)
  d.text((50,1190),'Pendientes de tu revisión' if comparison else 'Diagnóstico · audios sin reparar',font=font(20),fill=MUTED);return im
 
 events=[];chapters=[];sections=[];tick=5*TPS;sections.append({'start':0,'end':tick,'type':'intro'})
@@ -85,13 +85,13 @@ for s in sections:
    p=CACHE/f"frame-{current:05d}.png";draw_item(s,current).save(p,compress_level=1);concat+=['file '+str(p),'duration '+str(1/TPS)];frames.append(p)
   print(json.dumps({'renderedEffect':s['chapter']['number'],'total':count}),flush=True)
 concat.append('file '+str(frames[-1]));(CACHE/'frames.txt').write_text('\n'.join(concat)+'\n')
-metadata=[';FFMETADATA1','title=Glowfy - Efectos para revision','comment=7 efectos regenerados; A anterior y B nueva propuesta; dos repeticiones.' if comparison else 'comment=36 efectos; A original y B procesado; dos repeticiones; solo ganancia de escucha, sin reparaciones.']
+metadata=[';FFMETADATA1','title=Glowfy - Efectos para revision',f'comment={count} efectos regenerados; A anterior y B nueva propuesta; dos repeticiones.' if comparison else 'comment=36 efectos; A original y B procesado; dos repeticiones; solo ganancia de escucha, sin reparaciones.']
 for c in chapters:metadata+=['[CHAPTER]','TIMEBASE=1/1000','START='+str(round(c['start']*1000)),'END='+str(round(c['end']*1000)),'title='+str(c['number']).zfill(2)+' - '+c['title']]
 (CACHE/'chapters.ffmeta').write_text('\n'.join(metadata)+'\n')
-manifest={'schemaVersion':1,'brandId':'glowfy','title':'7 efectos regenerados' if comparison else 'Catálogo de efectos para revisión','purpose':'Comparación para revisión de Jorge: no es un video de publicación','duration':duration,'width':W,'height':H,'fps':FPS,'sampleRate':SR,'tracks':count,'playbacks':len(events),'newPaidGenerations':7 if comparison else 0,'listeningProcessing':'Constant scalar gain per source to approximately -10 dBTP. Comparison B uses prepared new files: DC removal, silent margins trimmed, edge fades; ticks additionally band-limited and shortened to 160 ms. Details in generation-manifest.json; original generation files preserved. Final AAC encoding is lossy.' if comparison else 'Constant scalar gain per source to approximately -10 dBTP. No trimming, denoising, EQ, compression or repairs; final AAC encoding is lossy.','chapters':chapters}
+manifest={'schemaVersion':1,'brandId':'glowfy','title':catalog.get('title',f'{count} efectos regenerados') if comparison else 'Catálogo de efectos para revisión','purpose':'Comparación para revisión de Jorge: no es un video de publicación','duration':duration,'width':W,'height':H,'fps':FPS,'sampleRate':SR,'tracks':count,'playbacks':len(events),'newPaidGenerations':count if comparison else 0,'listeningProcessing':catalog.get('listeningProcessing','Constant scalar gain per source to approximately -10 dBTP. Comparison B uses prepared new files: DC removal, silent margins trimmed, edge fades; ticks additionally band-limited and shortened to 160 ms. Details in generation-manifest.json; original generation files preserved. Final AAC encoding is lossy.') if comparison else 'Constant scalar gain per source to approximately -10 dBTP. No trimming, denoising, EQ, compression or repairs; final AAC encoding is lossy.','chapters':chapters}
 (OUT/'catalog-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
 (OUT/'Indice de efectos.txt').write_text('\n'.join(f"{int(c['start'])//60:02d}:{int(c['start'])%60:02d}  {c['number']:02d}. {c['title']}  ({c['id']})" for c in chapters)+'\n')
-output=OUT/('Glowfy - Efectos regenerados v2.mp4' if comparison else 'Glowfy - Catalogo de efectos v1.mp4')
+output=OUT/(f'Glowfy - Efectos regenerados v{revision}.mp4' if comparison else 'Glowfy - Catalogo de efectos v1.mp4')
 args=['ffmpeg','-hide_banner','-y','-threads','2','-f','concat','-safe','0','-i',str(CACHE/'frames.txt'),'-i',str(CACHE/'catalog-audio.wav'),'-i',str(CACHE/'chapters.ffmeta'),'-map','0:v','-map','1:a','-map_metadata','2','-map_chapters','2','-vf','fps=24,format=yuv420p','-c:v','libx264','-threads','2','-preset','fast','-crf','23','-c:a','aac','-b:a','256k','-ar','48000','-t',str(duration),'-movflags','+faststart',str(output)]
 with (OUT/'render.log').open('w') as log:subprocess.run(args,stderr=log,stdout=log,check=True)
-manifest.update(file='glowfy-sfx-revision-2.mp4' if comparison else 'glowfy-sfx-catalog.mp4',bytes=output.stat().st_size,sha256=hashlib.sha256(output.read_bytes()).hexdigest());(OUT/'catalog-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n');print(json.dumps({'complete':True,'duration':duration,'bytes':manifest['bytes'],'sha256':manifest['sha256']}),flush=True)
+manifest.update(file=f'glowfy-sfx-revision-{revision}.mp4' if comparison else 'glowfy-sfx-catalog.mp4',bytes=output.stat().st_size,sha256=hashlib.sha256(output.read_bytes()).hexdigest());(OUT/'catalog-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n');print(json.dumps({'complete':True,'duration':duration,'bytes':manifest['bytes'],'sha256':manifest['sha256']}),flush=True)

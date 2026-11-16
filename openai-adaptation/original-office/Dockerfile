@@ -11,6 +11,7 @@ COPY --chown=node:node production/reference-standard.mjs ./production/reference-
 COPY --chown=node:node production/music-library.mjs ./production/music-library.mjs
 COPY --chown=node:node production/sound-catalog.mjs ./production/sound-catalog.mjs
 COPY --chown=node:node production/sfx-review-plan.mjs production/sfx-review-batch.mjs ./production/
+COPY --chown=node:node production/sfx-catalog/review-decisions.json ./production/sfx-catalog/review-decisions.json
 COPY --chown=node:node production/audio/glowfy-* ./production/audio/
 USER node
 EXPOSE 3000

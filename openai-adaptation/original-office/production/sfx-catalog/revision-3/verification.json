@@ -1,0 +1,115 @@
+{
+  "sha256": "146f443869423e6cab17584072802f0596a429b0b635782ab167c423c14bc5f0",
+  "bytes": 777064,
+  "duration": 33.5,
+  "effects": 4,
+  "playbacksVerified": 16,
+  "minimumWaveformCorrelation": 0.99952,
+  "aacDecoded": true,
+  "fullVideoDecoded": true,
+  "chapters": 4,
+  "integratedLufs": -20.38,
+  "truePeakDbtp": -9.98,
+  "contactSheetFrames": 8,
+  "subjectiveListeningClaimed": false,
+  "newFilesPreparedLocally": true,
+  "completedPaidGenerations": 4,
+  "events": [
+    {
+      "id": "destello-particulas-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99996
+    },
+    {
+      "id": "destello-particulas-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99999
+    },
+    {
+      "id": "destello-particulas-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99966
+    },
+    {
+      "id": "destello-particulas-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.9997
+    },
+    {
+      "id": "destello-particulas-02",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99993
+    },
+    {
+      "id": "destello-particulas-02",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99996
+    },
+    {
+      "id": "destello-particulas-02",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99999
+    },
+    {
+      "id": "destello-particulas-02",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99999
+    },
+    {
+      "id": "tick-cursor-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99997
+    },
+    {
+      "id": "tick-cursor-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99997
+    },
+    {
+      "id": "tick-cursor-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99986
+    },
+    {
+      "id": "tick-cursor-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99952
+    },
+    {
+      "id": "tick-cursor-02",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99997
+    },
+    {
+      "id": "tick-cursor-02",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99998
+    },
+    {
+      "id": "tick-cursor-02",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99994
+    },
+    {
+      "id": "tick-cursor-02",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99996
+    }
+  ]
+}

@@ -93,3 +93,7 @@ scripts/probe-tool-inventory.mjs
 !production/sfx-review-plan.mjs
 !production/sfx-review-batch.mjs
 !connections/elevenlabs-sfx.mjs
+!production/audio/glowfy-sfx-revision-3.json
+!production/audio/glowfy-sfx-revision-3.mp4
+!production/sfx-catalog/
+!production/sfx-catalog/review-decisions.json
