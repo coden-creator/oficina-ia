@@ -9,7 +9,7 @@ import fs from 'node:fs';
 import {createHash,timingSafeEqual} from 'node:crypto';
 const digest=s=>createHash('sha256').update(s).digest();
 export const capabilities=Object.freeze({ui:'original-visual-shell',functionalOffice:false,provider:'not-connected',autonomous:false,externalActionsEnabled:false,paidApiEnabled:false,features:{chat:'unavailable',tasks:'unavailable',crm:'not-connected',ads:'not-connected',render:'not-connected',voice:'not-connected',publication:'unavailable'}});
-const files=new Map([['/','index.html'],...['style.css','negocio.css','officehq.js','sprites.js','compat-app.js','navigation.js','brand-context.js','ui.js','workspace-pages.js','compat.css','video-panel.js','music-panel.js','sound-catalog.js','material-import.js','connections-panel.js','office-panel.js'].map(f=>['/'+f,f])]);
+const files=new Map([['/','index.html'],...['style.css','negocio.css','officehq.js','agent-motion.js','sprites.js','compat-app.js','navigation.js','brand-context.js','ui.js','workspace-pages.js','brand-direction.js','compat.css','video-panel.js','clip-preview.js','music-panel.js','sound-catalog.js','material-import.js','connections-panel.js','office-panel.js'].map(f=>['/'+f,f])]);
 const types={html:'text/html; charset=utf-8',js:'text/javascript; charset=utf-8',css:'text/css; charset=utf-8'};
 export function createOriginalShell({password,origin,videoFlow=null,videoDataDir=null,deploymentMarker=null,connectionStore=null,officeCoordinator=null,sfxReview=null}){
  if(typeof password!=='string'||password.length<16)throw new Error('PASSWORD_REQUIRED');

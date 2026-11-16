@@ -11,7 +11,7 @@ export function mountOfficePanel({office,view,data,config}){
  office.cb.onOpenChat=details;
  office.cb.onOpenRoom=id=>{if(['contenido','edicion','calidad'].includes(id))location.hash='#/estudio';else if(id==='direccion')location.hash='#/inicio';else{const d=config.departments.find(d=>d.id===id);selected=null;title.textContent=d?.name||'Departamento';body.replaceChildren(el('p',d?.description||''),el('p','Este departamento se incorporará en una etapa posterior.'));drawer.showModal();}};
  data.subscribe(state=>{
-  current=state;const snapshot=state.office;status.textContent=state.status==='loading'?'Consultando la oficina…':!snapshot?'No se pudo verificar la actividad. Volvé a cargar los trabajos.':snapshot.coordination.message||'El equipo avanza con las solicitudes autorizadas.';
+  current=state;office.setBrand(state.brand);const snapshot=state.office;status.textContent=state.status==='loading'?'Consultando la oficina…':!snapshot?'No se pudo verificar la actividad. Volvé a cargar los trabajos.':snapshot.coordination.message||'El equipo avanza con las solicitudes autorizadas.';
   roster.replaceChildren();for(const base of config.agents){const a=snapshot?.agents.find(a=>a.id===base.id)||{...base,status:'unavailable',text:'Sin verificar'};office.setAgent(a.id,a);const row=button('',()=>details(a.id),{className:'agent-row'});row.replaceChildren(el('span','',`agent-dot agent-${a.status}`),el('strong',a.nombre),el('span',a.rol,'agent-role'),el('span',labels[a.status]||'Sin verificar','agent-state'));roster.append(row);}
   office.setPending(snapshot?.decisions.length||0);office.draw();
   if(drawer.open&&selected)details(selected);

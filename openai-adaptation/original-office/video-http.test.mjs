@@ -42,12 +42,14 @@ test('HTTP real MP4 render/download, hash approval, revision invalidation (speci
  assert.equal((await request(s,r.json.artifact.url,undefined,{Range:'bytes=0-127','If-Range':'unverified'})).status,200);
  assert.equal((await request(s,r.json.artifact.url,undefined,{Range:'bytes=0-127',Authorization:''})).status,401);
  assert.equal((await request(s,r.json.artifact.url,undefined,{Authorization:''})).status,401);
+ const poster=await request(s,r.json.artifact.posterUrl);assert.equal(poster.status,200);assert.equal(poster.headers['content-type'],'image/jpeg');assert.equal(poster.bytes[0],255);assert.equal(poster.bytes[1],216);assert.ok(poster.bytes.length<512000);
+ const posters=await Promise.all([request(s,r.json.artifact.posterUrl),request(s,r.json.artifact.posterUrl)]);assert.ok(posters.every(x=>x.bytes.equals(poster.bytes)));assert.equal((await request(s,r.json.artifact.posterUrl,undefined,{Authorization:''})).status,401);assert.equal((await request(s,r.json.artifact.posterUrl.replace('glowfy','purify'))).status,409);assert.equal((await request(s,r.json.artifact.posterUrl.replace('v=1','v=9'))).status,409);const jpegHead=await request(s,r.json.artifact.posterUrl,undefined,{},'HEAD');assert.equal(jpegHead.status,200);assert.equal(jpegHead.bytes.length,0);
  const review={version:r.json.version,artifactHash:r.json.artifact.sha256,criteria:['story','craft','motion','voice','sound','originality'].map(id=>({id,status:'not_checked',note:'Fixture: no actual subjective review'}))};
  assert.equal((await request(s,`/api/video-workflows/glowfy/${j.id}/audiovisual-review`,{...review,version:99})).status,409);
  assert.equal((await request(s,`/api/video-workflows/glowfy/${j.id}/audiovisual-review`,{...review,approved:true})).status,409);
  const reviewed=(await request(s,`/api/video-workflows/glowfy/${j.id}/audiovisual-review`,review)).json;assert.equal(reviewed.state,'awaiting_review');assert.equal(reviewed.approval,null);assert.equal(reviewed.audiovisualReview.artifactHash,r.json.artifact.sha256);assert.equal(reviewed.audiovisualReview.criteria.length,6);
  const approved=await request(s,`/api/video-workflows/glowfy/${j.id}/approve`,{version:r.json.version,artifactHash:r.json.artifact.sha256});assert.equal(approved.json.approval.scope,'accept_artifact_only');assert.equal(approved.json.capabilities.publish,false);
- const changed=await request(s,`/api/video-workflows/glowfy/${j.id}/changes`,{feedback:'Cambiar apertura'});assert.equal(changed.json.version,2);assert.equal(changed.json.approval,null);assert.equal((await request(s,r.json.artifact.url)).status,409);
+ const changed=await request(s,`/api/video-workflows/glowfy/${j.id}/changes`,{feedback:'Cambiar apertura'});assert.equal(changed.json.version,2);assert.equal(changed.json.approval,null);assert.equal((await request(s,r.json.artifact.url)).status,409);assert.equal((await request(s,r.json.artifact.posterUrl)).status,409);
  }finally{await s.close();}
 });
 test('HTTP rejects symlink cross-brand storage and does not expose internal paths',async()=>{

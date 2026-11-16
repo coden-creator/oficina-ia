@@ -8,7 +8,7 @@ import { randomUUID, createHash } from 'node:crypto';
 export const brands = Object.freeze({
  glowfy:{name:'Glowfy',audience:'Manicuristas y profesionales de belleza',focus:'Agenda, reservas y respuesta a mensajes',channels:['instagram','facebook','tiktok']},
  velforce:{name:'Velforce',audience:'Negocios que reciben muchos mensajes y necesitan seguimiento',focus:'Organización de prospectos y seguimiento comercial',channels:['instagram','facebook','tiktok']},
- quiba:{name:'QUIBA',audience:'Clientes de vidrio y aluminio',focus:'Ventanas y barandales con portafolio real',channels:['instagram','facebook','tiktok']},
+ quiba:{name:'Grupo Quiba',audience:'Clientes de vidrio y aluminio',focus:'Ventanas y barandales con portafolio real',channels:['instagram','facebook','tiktok']},
  purify:{name:'Purify',audience:'Hogares interesados en filtración de agua',focus:'Filtración doméstica sin promesas médicas',channels:['instagram','facebook','tiktok']},
  coden:{name:'CODEn',audience:'Negocios, emprendimientos y pymes',focus:'Glowfy y Velforce; asesoría secundaria',channels:['instagram','facebook']}
 });

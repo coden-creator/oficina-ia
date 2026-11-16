@@ -1,4 +1,4 @@
-export const BRANDS=Object.freeze([{id:'glowfy',name:'Glowfy'},{id:'velforce',name:'Velforce'},{id:'quiba',name:'QUIBA'},{id:'purify',name:'Purify'},{id:'coden',name:'CODEn'}]);
+export const BRANDS=Object.freeze([{id:'glowfy',name:'Glowfy'},{id:'velforce',name:'Velforce'},{id:'quiba',name:'Grupo Quiba'},{id:'purify',name:'Purify'},{id:'coden',name:'CODEn'}]);
 export const brandId=value=>BRANDS.some(b=>b.id===value)?value:'glowfy';
 
 // One source of brand selection. There are no credentials or network effects here.

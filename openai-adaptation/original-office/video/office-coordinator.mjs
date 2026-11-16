@@ -40,7 +40,7 @@ export function createOfficeCoordinator({flow,runner,enabled=false,allowedJobIds
   const jobs=await flow.list(brand),connections=runner?.status?.()||{},now=new Date().toISOString();
   const agents=team.map(a=>({...a,status:connections.connected===true||a.id==='coordinador'?'idle':'unavailable',text:connections.connected===true||a.id==='coordinador'?'Sin tarea asignada':'Conexión de Codex sin verificar',jobId:null,version:null}));
   for(const job of jobs){
-   const id=job.execution?.editorId||job.editorId||stageOwners[job.stage],a=agents.find(x=>x.id===id);if(!a)continue;
+   const id=job.stage==='qa'?'calidad':job.execution?.editorId||job.editorId||stageOwners[job.stage],a=agents.find(x=>x.id===id);if(!a)continue;
    if(job.state==='running'){Object.assign(a,{status:'working',text:job.brief.objective,jobId:job.id,version:job.version,stage:job.stage});}
    else if(job.state==='blocked'&&a.status!=='working')Object.assign(a,{status:'blocked',text:waitingReasons[job.blocker]||'Revisar el bloqueo de la pieza.',jobId:job.id,version:job.version,stage:job.stage});
   }

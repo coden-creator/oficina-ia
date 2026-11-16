@@ -1,3 +1,4 @@
+import {brandDirection,socialDiscovery} from './brand-direction.js';
 import {el,icon,link,pageHeader,emptyState,badge,groupOf,isTechnical,dateLabel,jobHref,button} from './ui.js';
 const section=(title,className='')=>{const node=el('section','',className);node.append(el('h2',title));return node;};
 const row=job=>{const a=link(' ',jobHref(job),'work-row'),copy=el('div');copy.append(el('strong',job.brief.objective),el('span','Versión '+job.version+' · '+dateLabel(job.createdAt),'muted'));a.replaceChildren(icon(job.artifact?'play':'file'),copy,badge(job.state),icon('arrow'));return a;};
@@ -11,9 +12,10 @@ export function mountWorkspacePages({pages,config,data,brandContext}){
  const connections=pages.conexiones;connections.append(pageHeader('Conexiones y ajustes','Configurá los servicios de tu oficina en un solo lugar.'));
  const grid=el('div','','connections-layout'),voice=el('div','','voice-settings'),services=el('div','','service-list');grid.append(voice,services);connections.append(grid);
  const codex=section('Codex','service-card'),codexState=el('span','','service-state');codex.prepend(icon('studio'));codex.append(codexState,el('p','Cuenta de ChatGPT para las solicitudes internas.','muted'));
- const networks=section('Redes sociales','service-card');networks.prepend(icon('calendar'));networks.append(el('span','Sin publicación habilitada','service-state'),el('p','La conexión de cuentas y la programación están pendientes.','muted'));const junie=section('Junie','service-card');junie.prepend(icon('link'));junie.append(el('span','Conexión futura','service-state'),el('p','Se integrará más adelante para colaborar con otras labores de Jorge.','muted'));services.append(codex,networks,junie);
+ const networks=section('Redes sociales','service-card');networks.prepend(icon('calendar'));const networkStatus=el('span','Integración pendiente','service-state'),networkInfo=el('p','','muted');networks.append(networkStatus,networkInfo);const junie=section('Junie','service-card');junie.prepend(icon('link'));junie.append(el('span','Conexión futura','service-state'),el('p','Se integrará más adelante para colaborar con otras labores de Jorge.','muted'));services.append(codex,networks,junie);
  const keysNote=el('div','','quiet-note');keysNote.append(icon('link'),el('p','Estas conexiones pertenecen a la oficina. Elegir otra marca no cambia las claves guardadas.'));connections.append(keysNote);
  function render(state){
+  const socialProfile=socialDiscovery.profiles[brandContext.get().id];networkInfo.textContent=(socialProfile?'Perfil localizado en Metricool: '+socialProfile+'. Facebook, Instagram'+(brandContext.get().id==='coden'?'.':' y TikTok.'):'Velforce no apareció en las cuentas de Metricool consultadas.')+' Verificado el '+socialDiscovery.date+'. Falta conectar la oficina y confirmar el acceso API del plan; publicar sigue deshabilitado.';
   codexState.textContent=state.status==='loading'?'Comprobando conexión…':state.status!=='ready'?'Sin verificar':state.caps?.runnerConnected===true?'Cuenta conectada':'Sin conexión';codexState.classList.toggle('is-connected',state.status==='ready'&&state.caps?.runnerConnected===true);
   homeBody.replaceChildren();profileBody.replaceChildren();
   if(state.status!=='ready'){
@@ -31,7 +33,7 @@ export function mountWorkspacePages({pages,config,data,brandContext}){
   const left=el('div'),note=el('div','','director-note');note.append(icon('clock'),el('p',state.office?.coordination.message||'La oficina coordina las solicitudes de esta marca.'));left.append(note,decision,columns,link('Ver todos los trabajos','#/estudio?estado=all','text-link'));homeBody.append(left,pipeline);
   const brand=state.caps?.brandProfiles?.[brandContext.get().id];if(!brand){profileBody.append(emptyState('Perfil no disponible','No se pudo cargar el contexto de esta marca.'));return;}
   const identity=el('section','','brand-profile');identity.append(el('div',brand.name,'brand-wordmark'),el('p','Perfil de contenido actual','muted'));const facts=el('dl','','profile-facts');for(const [key,value] of [['Público',brand.audience],['Enfoque',brand.focus],['Canales previstos',brand.channels.map(x=>({instagram:'Instagram',facebook:'Facebook',tiktok:'TikTok'}[x]||x)).join(', ')]]){const pair=el('div');pair.append(el('dt',key),el('dd',value));facts.append(pair);}identity.append(facts);profileBody.append(identity);
-  const resources=section('Recursos visuales','resource-section');resources.append(el('p','La gestión de logos, tipografías y referencias desde esta pantalla todavía está pendiente. El perfil se muestra en modo lectura.','muted'));profileBody.append(resources);
+  profileBody.append(brandDirection(brandContext.get().id));
  }
  data.subscribe(render);return {voiceContainer:voice};
 }

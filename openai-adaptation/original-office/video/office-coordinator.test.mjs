@@ -29,3 +29,7 @@ test('blocker diagnostics expose only bounded codes, never raw provider messages
  const {publicJob}=await import('./http.mjs');const j={id:'test',brandId:'glowfy',version:1,state:'blocked',outputs:{},brief,blocker:'SPECIALIST_CONTEXT_TOO_LARGE'};
  assert.equal(publicJob(j).blockerCode,'SPECIALIST_CONTEXT_TOO_LARGE');j.blocker='provider error with secret=private';assert.equal(publicJob(j).blockerCode,null);
 });
+test('technical QA is attributed to Control while an editor reservation is retained',async t=>{
+ const flow=createVideoFlow({dataDir:await tmp(t)}),j=await flow.create({brandId:'glowfy',brief});await flow.updateOffice('glowfy',j.id,1,x=>{x.state='running';x.stage='qa';x.execution={editorId:'video2'};x.editorId='video2';},'fixture');
+ const office=createOfficeCoordinator({flow,runner:{status}}),snapshot=await office.snapshot('glowfy');assert.equal(snapshot.agents.find(a=>a.id==='calidad').jobId,j.id);assert.equal(snapshot.agents.find(a=>a.id==='calidad').status,'working');assert.equal(snapshot.agents.find(a=>a.id==='video2').status,'idle');
+});

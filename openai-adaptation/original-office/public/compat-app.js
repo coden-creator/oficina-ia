@@ -22,7 +22,7 @@ $('#stats').hidden=true;
 $('#clock').textContent=new Intl.DateTimeFormat('es-GT',{dateStyle:'medium',timeZone:config.timezone}).format(new Date());
 const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');let paused=reducedMotion.matches,painted=false;
 const originalUpdate=office.update.bind(office),originalDraw=office.draw.bind(office),originalFit=office.fit.bind(office);
-office.update=delta=>{if(!paused&&$('[data-view="oficina"]').classList.contains('active'))originalUpdate(delta);};
+office.update=delta=>{if(!paused&&!document.hidden&&$('[data-view="oficina"]').classList.contains('active'))originalUpdate(delta);};
 office.draw=()=>{if(!paused||!painted){originalDraw();painted=true;}};
 office.fit=(...args)=>{painted=false;return originalFit(...args);};
 const originalSetAgent=office.setAgent.bind(office);office.setAgent=(...args)=>{painted=false;return originalSetAgent(...args);};

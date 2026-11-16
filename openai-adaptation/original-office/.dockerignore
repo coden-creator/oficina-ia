@@ -104,3 +104,8 @@ scripts/probe-tool-inventory.mjs
 !video/http-range.mjs
 
 !video/audiovisual-standard.mjs
+
+!video/poster.mjs
+!public/clip-preview.js
+!public/agent-motion.js
+!public/brand-direction.js

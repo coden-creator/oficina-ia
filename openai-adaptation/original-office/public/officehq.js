@@ -1,3 +1,4 @@
+import {drawWorkstation} from './agent-motion.js';
 // The scene is a view of observed work, never an autonomous source of activity.
 import {makeSprites} from './sprites.js';
 const W=1040,H=540;
@@ -14,7 +15,7 @@ const positions={coordinador:[126,212],estratega:[336,117],guionista:[504,117],v
 const stateLabel={idle:'Sin tarea',working:'Trabajando',waiting:'Espera tu decisión',blocked:'Necesita atención',unavailable:'Sin verificar'};
 export class OfficeHQ{
  constructor(canvas,overlay,agents,{onOpenChat,onOpenRoom}={}){
-  this.canvas=canvas;this.ctx=canvas.getContext('2d');this.overlay=overlay;this.t=0;this.pending=0;this.cb={onOpenChat,onOpenRoom};
+  this.canvas=canvas;this.ctx=canvas.getContext('2d');this.overlay=overlay;this.t=0;this.pending=0;this.transfers=[];this.owners=new Map();this.cb={onOpenChat,onOpenRoom};
   canvas.width=W;canvas.height=H;canvas.classList.add('hq');canvas.setAttribute('aria-hidden','true');overlay.replaceChildren();overlay.className='studio-overlay';
   this.people=agents.filter(a=>positions[a.id]).map((a,i)=>{
    const tag=document.createElement('button');tag.type='button';tag.className='studio-agent';tag.style.setProperty('--agent-color',a.color);tag.dataset.agent=a.id;tag.onclick=()=>this.cb.onOpenChat?.(a.id);overlay.append(tag);
@@ -32,25 +33,20 @@ export class OfficeHQ{
   for(const p of this.people){p.tag.style.left=left+p.x*this.scale+'px';p.tag.style.top=top+(p.y+10)*this.scale+'px';p.tag.style.transform='translateX(-50%)';}
   for(const {r,b} of this.labels){b.style.left=left+(r.x+14)*this.scale+'px';b.style.top=top+(r.y+12)*this.scale+'px';b.style.maxWidth=(r.w-28)*this.scale+'px';}
  }
- setAgent(id,agent){const p=this.people.find(a=>a.id===id);if(!p)return;Object.assign(p,agent);p.tag.replaceChildren();const name=document.createElement('strong'),state=document.createElement('span');name.textContent=p.nombre;state.textContent=stateLabel[p.status]||'Sin verificar';p.tag.append(name,state);p.tag.dataset.status=p.status;p.tag.setAttribute('aria-label',p.nombre+', '+p.rol+'. '+state.textContent);}
+ setAgent(id,agent){const p=this.people.find(a=>a.id===id);if(!p)return;if(agent.status==='working'&&agent.jobId){const key=agent.jobId+':'+agent.version,old=this.owners.get(key);if(old&&old!==id)this.transfers.push({from:old,to:id,start:this.t});this.owners.set(key,id);if(this.owners.size>100)this.owners.delete(this.owners.keys().next().value);}Object.assign(p,agent);p.tag.replaceChildren();const name=document.createElement('strong'),state=document.createElement('span');name.textContent=p.nombre;state.textContent=stateLabel[p.status]||'Sin verificar';p.tag.append(name,state);p.tag.dataset.status=p.status;p.tag.setAttribute('aria-label',p.nombre+', '+p.rol+'. '+state.textContent);}
  setPending(n){this.pending=n;}
  setTasks(tasks){this.tasks=tasks;}
- update(dt){this.t+=dt;}
+ setBrand(brand){if(this.brand===brand)return;this.brand=brand;this.owners.clear();this.transfers=[];}
+ update(dt){this.t+=dt;this.transfers=this.transfers.filter(x=>this.t-x.start<1.6);}
  draw(){
   const c=this.ctx;c.imageSmoothingEnabled=false;c.fillStyle='#0d0e12';c.fillRect(0,0,W,H);
   for(const r of rooms){c.fillStyle=r.planned?'#141720':'#1b202b';c.fillRect(r.x,r.y,r.w,r.h);c.fillStyle=r.color;c.fillRect(r.x,r.y,4,r.h);c.strokeStyle='#303847';c.strokeRect(r.x+.5,r.y+.5,r.w-1,r.h-1);
-   c.fillStyle='#8f9db3';c.font='12px system-ui';c.fillText(r.note,r.x+16,r.y+51);
+   c.fillStyle='#8f9db3';c.font='12px system-ui';c.fillText(r.note,r.x+16,r.y+45);
    if(r.planned){c.strokeStyle='#313b4c';for(let i=0;i<3;i++)c.strokeRect(r.x+20+i*44,r.y+94,30,18);}
   }
   c.strokeStyle='#485164';c.lineWidth=2;for(const [x1,y1,x2,y2] of [[236,96,252,96],[504,170,504,186],[756,264,772,264]]){c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.stroke();}
-  for(const p of this.people){
-   const active=p.status==='working',color=p.status==='blocked'?'#e7a884':p.status==='waiting'?'#b7a3ff':active?'#61c6ae':'#536174';
-   c.fillStyle='#11151e';c.fillRect(p.x-43,p.y-17,86,20);c.fillStyle='#394154';c.fillRect(p.x-43,p.y-20,86,4);
-   c.fillStyle='#10141e';c.fillRect(p.x-34,p.y-48,30,26);c.fillStyle=color;c.fillRect(p.x-31,p.y-45,24,19);c.fillStyle='#a7b3c8';c.fillRect(p.x-22,p.y-22,8,3);
-   if(active){c.fillStyle='#e8fff5';for(let i=0;i<3;i++)c.fillRect(p.x-28,p.y-41+i*4,7+(Math.floor(this.t*4)+i)%10,2);}
-   const sprite=p.sprites.get('down',0,active&&Math.sin(this.t*2)>0.97);const bob=active?Math.sin(this.t*4)*.6:0;c.drawImage(sprite,p.x+5,p.y-52+bob,sprite.width*2,sprite.height*2);
-   c.fillStyle=color;c.beginPath();c.arc(p.x+35,p.y-46,3,0,Math.PI*2);c.fill();
-  }
+  for(const move of this.transfers){const a=positions[move.from],b=positions[move.to];if(!a||!b)continue;const q=Math.min(1,(this.t-move.start)/1.6),e=q*q*(3-2*q);c.fillStyle='#c3afff';c.fillRect(a[0]+(b[0]-a[0])*e-5,a[1]+(b[1]-a[1])*e-66,10,7);}
+  for(const p of this.people)drawWorkstation(c,p,this.t);
   c.fillStyle='#a8b5c8';c.font='13px system-ui';c.fillText(this.pending?`${this.pending} pieza${this.pending===1?'':'s'} para Jorge`:'Bandeja al día',36,300);
  }
 }
