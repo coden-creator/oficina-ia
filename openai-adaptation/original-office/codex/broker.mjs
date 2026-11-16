@@ -10,7 +10,7 @@ export function createSpecialistBroker({specialist,refreshAccount=async()=>{}}){
   try{
    if(req.method==='GET'&&req.url==='/status'){
     await refreshAccount();const s=specialist.status();
-    return send(200,{...disconnected(),connected:s.connected===true&&s.paidApiEnabled===false&&s.publishingEnabled===false,inferenceVerified:s.inferenceVerified===true,busy});
+    return send(200,{...disconnected(),connected:s.connected===true&&s.paidApiEnabled===false&&s.publishingEnabled===false,inferenceVerified:s.inferenceVerified===true,workflows:Array.isArray(s.workflows)?s.workflows.filter(w=>w==='organic-v1'):[],busy});
    }
    if(req.method!=='POST'||req.url!=='/run')return send(404,{error:'NOT_FOUND'});
    if(req.headers['content-type']!=='application/json')return send(415,{error:'JSON_REQUIRED'});

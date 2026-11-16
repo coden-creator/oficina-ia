@@ -19,7 +19,7 @@ services:
       traefik.enable: 'false'
       office.purpose: jorge-codex-worker
     environment:
-      OFFICE_WORKER_RELEASE: canonical-review-v4
+      OFFICE_WORKER_RELEASE: organic-contract-v5
       OFFICE_CODEX_ENABLE: '1'
       OFFICE_CODEX_ISOLATION_VERIFIED: '1'
       OFFICE_CODEX_MODEL: ${OFFICE_CODEX_MODEL:-gpt-6.1-sol}
@@ -36,6 +36,12 @@ services:
         target: /app/codex/start-broker.mjs
       - source: isolation
         target: /app/codex/worker-isolation.mjs
+      - source: protocol
+        target: /app/codex/broker.mjs
+      - source: organic
+        target: /app/codex/organic-specialist.mjs
+      - source: organic_contract
+        target: /app/video/organic-contract.mjs
       - source: specialist
         target: /app/codex/video-specialist.mjs
     healthcheck:
@@ -53,6 +59,9 @@ configs:
   runtime: {file: ../codex/chatgpt-runtime.mjs}
   broker: {file: ../codex/start-broker.mjs}
   isolation: {file: ../codex/worker-isolation.mjs}
+  protocol: {file: ../codex/broker.mjs}
+  organic: {file: ../codex/organic-specialist.mjs}
+  organic_contract: {file: ../video/organic-contract.mjs}
   specialist: {file: ../codex/video-specialist.mjs}
 volumes:
   auth:

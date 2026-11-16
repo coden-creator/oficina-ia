@@ -95,3 +95,21 @@ Instaladas para Codex dentro de `.agents/skills/`, con procedencia en `skills-lo
 
 - Resuelto en la segunda intervención: disponibilidad compacta, etiquetas de estado en español y proceso técnico desplegable en `public/video-panel.js`.
 - `public/navigation.js:11` y `public/compat.css:75` — selector unificado, nombre accesible, foco visible, estado deshabilitado y presentación móvil revisados.
+
+## Tercera intervención: escritorio de Jorge y equipo operativo
+
+Plan previo (16 noviembre): conservar la cabecera y el selector único. Inicio se organiza en decisiones, trabajo en marcha y asuntos que requieren atención. La oficina pasa a ser un estudio de contenido con Dirección, investigación/guion/comité, tres puestos de edición y QA; Comercial, Sistemas y Administración aparecen como departamentos previstos. El inspector de un agente explica responsabilidad y tarea, sin ofrecer chats inexistentes.
+
+Paleta: tinta #0d0e12, superficie #171a22, borde #303644, texto #eef0f5, acento #b7a3ff y actividad #61c6ae. Tipografía del sistema: 30/24/16/13 px. La escena conserva personajes pixel art, con puestos y estados derivados de fichas reales. Solo el trabajo confirmado activa la animación de actividad; espera, pausa y bloqueo tienen señales distintas. El listado HTML equivalente funciona por teclado y en móvil.
+
+```
+Inicio        Necesita tu decisión | En marcha | Requiere atención
+Oficina       Dirección / recorrido de contenido / tres editores / QA
+              Departamentos previstos / inspector de rol y tarea
+```
+
+Revisión del plan: cinco oficinas iguales no comunican prioridades. El estudio de contenido recibe el espacio principal; los departamentos futuros se muestran con su alcance y sin actividad ficticia. No se habilita la prueba de producción ni se llama a ElevenLabs hasta el aviso de Jorge.
+
+Resultado de la tercera intervención: escena nueva con ocho responsables y tres editores; se retiraron las salas antiguas de Ads, Prospección y chats ficticios. Las personas en espera permanecen en su puesto; monitores activos indican trabajo registrado. Un inspector accesible muestra rol, estado y enlace a la pieza. En móvil se usa el listado de roles en lugar de reducir el plano hasta hacerlo ilegible. Los departamentos futuros muestran su alcance, sin personajes simulando actividad.
+
+Validación: Chromium autenticado local a 1440/390/320 px, seis rutas, decisiones de prueba, selector único, aislamiento de marca, borradores, reproducción de MP4 sintético, inspector de agente, trabajo simulado registrado, teclado, movimiento reducido y cero errores JavaScript. Se inspeccionaron capturas de Inicio, Oficina y móvil. Se evitó reconstruir las vistas en cada consulta cuando los datos no cambiaron, y el estado visual sigue actualizándose con la animación pausada. Los proveedores son simulados; no se usó ElevenLabs ni inferencia real. Ver `production/OFICINA-Y-AUTONOMIA.md` para límites de la coordinación y producción.

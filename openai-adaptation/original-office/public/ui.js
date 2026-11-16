@@ -13,13 +13,13 @@ export const isTechnical=job=>job.brief.qualityStandard==='technical-test'||['si
 export function dateLabel(value){const date=new Date(value);return Number.isNaN(date.getTime())?'Fecha no disponible':new Intl.DateTimeFormat('es-GT',{day:'numeric',month:'short',timeZone:'America/Guatemala'}).format(date);}
 export function jobHref(job){return '#/estudio?estado='+groupOf(job)+'&pieza='+encodeURIComponent(job.id);}
 export async function requestJSON(url,data){const response=await fetch(url,{method:data===undefined?'GET':'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:data===undefined?undefined:JSON.stringify(data)});let value;try{value=await response.json();}catch{throw Error('La oficina no respondió. Recarga la página e inténtalo de nuevo.');}if(!response.ok)throw Error(response.status===401?'Vuelve a iniciar sesión en la oficina.':value.detail||'No se pudo completar la operación. Inténtalo de nuevo.');return value;}
-export function createWorkspaceData({brandContext,enabled}){
+export function createWorkspaceData({brandContext,enabled,includeOffice=false}){
  let sequence=0,currentRevision=-1,state={status:enabled?'loading':'unavailable',jobs:[],caps:null,brand:brandContext.get().id,error:null};const listeners=new Set();
  const emit=()=>{for(const listener of listeners)listener(state);};
- async function refresh(){if(!enabled){state={...state,brand:brandContext.get().id};emit();return;}const ticket=++sequence,brand=brandContext.get();state={status:'loading',jobs:[],caps:null,brand:brand.id,error:null};emit();
-  try{const [caps,jobs]=await Promise.all([requestJSON('/api/video-workflows/capabilities'),requestJSON('/api/video-workflows/'+brand.id)]);if(ticket!==sequence||brandContext.get().revision!==brand.revision)return;
-   if(!Array.isArray(jobs)||jobs.some(j=>j.brandId!==brand.id))throw Error('No se pudo verificar la marca de los trabajos. Recarga la página.');state={status:'ready',brand:brand.id,jobs,caps,error:null};
-  }catch(error){if(ticket!==sequence||brandContext.get().revision!==brand.revision)return;state={status:'error',brand:brand.id,jobs:[],caps:null,error:error.message};}emit();
+ async function refresh({quiet=false}={}){if(!enabled){state={...state,brand:brandContext.get().id};emit();return;}const ticket=++sequence,brand=brandContext.get(),previousState=state;if(!quiet){state={status:'loading',jobs:[],caps:null,office:null,brand:brand.id,error:null};emit();}
+  try{const [caps,jobs,office]=await Promise.all([requestJSON('/api/video-workflows/capabilities'),requestJSON('/api/video-workflows/'+brand.id),includeOffice?requestJSON('/api/office/'+brand.id):null]);if(ticket!==sequence||brandContext.get().revision!==brand.revision)return;
+   if(!Array.isArray(jobs)||jobs.some(j=>j.brandId!==brand.id))throw Error('No se pudo verificar la marca de los trabajos. Recarga la página.');if(office&&office.brand!==brand.id)throw Error('No se pudo verificar la marca de la oficina.');state={status:'ready',brand:brand.id,jobs,caps,office,error:null};
+  }catch(error){if(ticket!==sequence||brandContext.get().revision!==brand.revision)return;state={status:'error',brand:brand.id,jobs:[],caps:null,error:error.message};}if(quiet&&state.status==='ready'&&previousState.status==='ready'){const comparable=s=>JSON.stringify({...s,office:s.office?{...s.office,observedAt:null}:null});if(comparable(state)===comparable(previousState))return;}emit();
  }
  brandContext.subscribe(brand=>{if(brand.revision===currentRevision)return;currentRevision=brand.revision;void refresh();});
  return {get:()=>state,refresh,subscribe(listener){listeners.add(listener);listener(state);return()=>listeners.delete(listener);}};

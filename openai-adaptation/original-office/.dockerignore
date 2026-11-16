@@ -55,3 +55,10 @@
 !connections/http.mjs
 !connections/elevenlabs.mjs
 scripts/probe-tool-inventory.mjs
+
+!video/office-team.mjs
+!video/organic-contract.mjs
+!video/organic-workflow.mjs
+!video/office-coordinator.mjs
+
+!public/office-panel.js

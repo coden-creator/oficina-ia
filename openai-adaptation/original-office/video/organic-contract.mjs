@@ -1,0 +1,51 @@
+// Contracts for preproduction, not the diagnostic card renderer or permission to spend.
+export const ORGANIC_PROTOCOL='organic-v1';
+export const organicStages=Object.freeze(['research','strategy','script','creative_review','art_direction']);
+export const criteria=Object.freeze([
+ {id:'hook',label:'Apertura comprensible'}, {id:'audience',label:'Público y problema'},
+ {id:'evidence',label:'Promesa sustentada'}, {id:'originality',label:'Novedad frente al historial'},
+ {id:'visual',label:'Viabilidad y lectura visual'}, {id:'cta',label:'Claridad de la acción'}
+]);
+const str=(max=2000)=>({type:'string',minLength:1,maxLength:max});
+const obj=properties=>({type:'object',additionalProperties:false,required:Object.keys(properties),properties});
+const array=(items,min=0,max=10)=>({type:'array',items,minItems:min,maxItems:max});
+export function organicSchema(stage,brand,cta){
+ const evidence=obj({sourceId:str(80),claim:str(1000)});
+ const detail={
+  research:obj({ideas:array(obj({angle:str(400),reason:str(1000)}),1,3),limitations:array(str(1000),0,8)}),
+  strategy:obj({angle:str(1000),audience:str(1000),permittedClaims:array(str(1000),0,12)}),
+  script:obj({hook:str(400),narration:str(8000),scenes:array(obj({text:str(300),narration:str(1500),action:str(2000),assets:array(str(300),0,8)}),3,8),closing: {type:'string',enum:[cta]}}),
+  creative_review:obj({verdict:{type:'string',enum:['pass','changes','reject']},criteria:array(obj({id:{type:'string',enum:criteria.map(c=>c.id)},score:{type:'integer',minimum:0,maximum:10},reason:str(1000)}),6,6),corrections:array(str(1000),0,8)}),
+  art_direction:obj({keyframes:array(obj({moment:{type:'string',enum:['opening','solution','closing']},composition:str(2000),motion:str(2000)}),3,3),assets:array(obj({description:str(1000),sourceId:str(80),availability:{type:'string',enum:['provided','needed']}}),0,20),audioNotes:str(2000)})
+ };
+ if(!detail[stage])throw Error('INVALID_ORGANIC_STAGE');
+ return obj({brand:{type:'string',enum:[brand]},stage:{type:'string',enum:[stage]},summary:str(3000),evidence:array(evidence,0,30),detail:detail[stage]});
+}
+function check(value,schema){
+ if(schema.enum&&!schema.enum.includes(value))throw Error('ORGANIC_ENUM');
+ if(schema.type==='object'){if(!value||typeof value!=='object'||Array.isArray(value)||Object.keys(value).length!==schema.required.length||schema.required.some(k=>!Object.hasOwn(value,k)))throw Error('ORGANIC_FIELDS');for(const k of schema.required)check(value[k],schema.properties[k]);}
+ else if(schema.type==='array'){if(!Array.isArray(value)||value.length<schema.minItems||value.length>schema.maxItems)throw Error('ORGANIC_ARRAY');for(const item of value)check(item,schema.items);}
+ else if(schema.type==='string'){if(typeof value!=='string'||(schema.minLength&&!value.trim())||value.length>(schema.maxLength??Infinity))throw Error('ORGANIC_TEXT');}
+ else if(schema.type==='integer'&&(!Number.isInteger(value)||value<schema.minimum||value>schema.maximum))throw Error('ORGANIC_SCORE');
+}
+export function validateOrganicOutput(output,{stage,brand,brief}){
+ check(output,organicSchema(stage,brand,brief.cta));
+ const ids=new Set((brief.evidence||[]).map(e=>e.id));
+ if(output.evidence.some(e=>!ids.has(e.sourceId)))throw Error('UNSUPPORTED_EVIDENCE');
+ if(stage==='creative_review'){
+  if(new Set(output.detail.criteria.map(c=>c.id)).size!==6)throw Error('DUPLICATE_CRITERIA');
+  const total=output.detail.criteria.reduce((n,c)=>n+c.score,0);
+  // Internal editorial threshold, not a forecast of virality or owner approval.
+  if(output.detail.verdict==='pass'&&(total<42||output.detail.criteria.some(c=>c.score<6)))throw Error('INVALID_CREATIVE_PASS');
+  if(output.detail.verdict==='changes'&&!output.detail.corrections.length)throw Error('MISSING_CORRECTIONS');
+ }
+ if(stage==='art_direction'&&(new Set(output.detail.keyframes.map(k=>k.moment)).size!==3||output.detail.assets.some(a=>a.availability==='provided'&&!ids.has(a.sourceId))))throw Error('UNVERIFIED_ART_ASSETS');
+ return output;
+}
+export const organicPrompts=Object.freeze({
+ research:'Valeria: analiza evidencia aportada y hasta tres ángulos originales. No hay navegación: declara ese límite y no inventes tendencias ni métricas.',
+ strategy:'Valeria: elige un ángulo coherente con objetivo, público y hechos comprobados. Explica la elección y las afirmaciones permitidas.',
+ script:'Mateo: escribe narración y storyboard de 3 a 8 escenas con acciones visuales concretas, recursos necesarios y cierre con la CTA exacta. La duración final dependerá de la voz real. No produzcas tarjetas de texto como sustituto del video.',
+ creative_review:'Nico: revisa el guion con los seis criterios. Cada nota exige una razón. Pass solo si total >=42/60 y cada nota >=6. Changes debe indicar correcciones concretas; reject descarta el concepto. No afirmes haber visto un video ni pronostiques viralidad.',
+ art_direction:'Editor: define apertura, solución y cierre, composición y movimiento. Identifica recursos aportados o pendientes y notas de audio. No inventes logos ni generes voz; no ejecutes código ni prometas una exportación.'
+});

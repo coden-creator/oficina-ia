@@ -1,4 +1,5 @@
 // The original office scene is preserved. Operational views use the adapted backend.
+import {mountOfficePanel} from './office-panel.js';
 import {OfficeHQ} from './officehq.js';
 import {mountVideoPanel} from './video-panel.js';
 import {mountNavigation} from './navigation.js';
@@ -13,11 +14,9 @@ for(const form of $$('form'))form.addEventListener('submit',event=>event.prevent
 for(const node of $$('.brand-text b'))node.textContent='Oficina';
 for(const node of $$('.brand-text small'))node.textContent='Contenido';
 $('#run-all').hidden=true;$('#demo-day').hidden=true;
-const openChat=id=>{$('#side-chat').hidden=false;$('#side-chat-head').textContent=(config.agents.find(agent=>agent.id===id)?.nombre||id)+' · Chat pendiente';$('#side-chat-msgs').textContent='El chat de este personaje todavía no está conectado. Las solicitudes se gestionan desde el Estudio.';};
-const office=new OfficeHQ($('#office'),$('#overlay'),config.agents,{onApprovalClick:()=>{},onOpenChat:openChat,onOpenGroup:openChat,onOpenRoom:()=>{location.hash='#/oficina';}});
-for(const a of office.people)office.setAgent(a.id,{status:'unavailable',text:'Chat sin conectar',lastRun:null});
+const office=new OfficeHQ($('#office'),$('#overlay'),config.agents);
 for(const close of $$('[data-side-close]')){close.disabled=false;close.addEventListener('click',()=>{$('#side-chat').hidden=true;});}
-$('#ticker').textContent='Escenario visual; chats de los personajes sin conectar. Los movimientos no indican trabajo de los agentes.';
+$('#ticker').textContent='Cada puesto muestra su tarea. La animación de trabajo solo se activa con una ejecución registrada.';
 for(const view of $$('.view'))if(view.dataset.view!=='oficina')for(const child of [...view.children]){child.hidden=true;child.classList.add('compat-preserved-unavailable');}
 $('#stats').hidden=true;
 $('#clock').textContent=new Intl.DateTimeFormat('es-GT',{dateStyle:'medium',timeZone:config.timezone}).format(new Date());
@@ -26,14 +25,18 @@ const originalUpdate=office.update.bind(office),originalDraw=office.draw.bind(of
 office.update=delta=>{if(!paused&&$('[data-view="oficina"]').classList.contains('active'))originalUpdate(delta);};
 office.draw=()=>{if(!paused||!painted){originalDraw();painted=true;}};
 office.fit=(...args)=>{painted=false;return originalFit(...args);};
+const originalSetAgent=office.setAgent.bind(office);office.setAgent=(...args)=>{painted=false;return originalSetAgent(...args);};
 const animation=button(paused?'Reanudar animación':'Pausar animación',()=>{paused=!paused;painted=false;animation.querySelector('span').textContent=paused?'Reanudar animación':'Pausar animación';});
+animation.classList.add('office-animation-toggle');
 reducedMotion.addEventListener('change',event=>{paused=event.matches;painted=false;animation.querySelector('span').textContent=paused?'Reanudar animación':'Pausar animación';});
-$('[data-view="oficina"]').prepend(pageHeader('Oficina y equipo','El escenario original y los roles del departamento de contenido.',animation));
+$('[data-view="oficina"]').prepend(pageHeader('Oficina y equipo','Un equipo compartido para tus marcas, con tareas y responsabilidades visibles.',animation));
 const brandContext=createBrandContext(new URL(location.href).searchParams.get('brand'));
 const {pages,route}=mountNavigation({office,brandContext});
-const data=createWorkspaceData({brandContext,enabled:config.features.videoWorkflow==='internal-workflow-only'});
+const data=createWorkspaceData({brandContext,enabled:config.features.videoWorkflow==='internal-workflow-only',includeOffice:true});
 const {voiceContainer}=mountWorkspacePages({pages,config,data,brandContext});
 mountConnectionsPanel(voiceContainer);
 mountVideoPanel(pages.estudio,{brandContext,data});
+mountOfficePanel({office,view:$('[data-view="oficina"]'),data,config});
+setInterval(()=>{if(!document.hidden&&!brandContext.get().busy&&!document.querySelector('dialog[open]'))void data.refresh({quiet:true});},10000);
 for(const heading of $$('h1'))heading.tabIndex=-1;
 document.body.classList.add('office-ui');notice.hidden=true;route();

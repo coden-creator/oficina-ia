@@ -1,6 +1,6 @@
 import http from 'node:http';
 import path from 'node:path';
-const offline=()=>({connected:false,inferenceVerified:false,paidApiEnabled:false,publishingEnabled:false});
+const offline=()=>({connected:false,inferenceVerified:false,paidApiEnabled:false,publishingEnabled:false,workflows:[]});
 export function createRemoteRunner({socketPath,timeoutMs=90000}){
  if(!path.isAbsolute(socketPath||''))throw Error('ABSOLUTE_SOCKET_REQUIRED');
  let state=offline(),observedAt=0;
@@ -13,7 +13,7 @@ export function createRemoteRunner({socketPath,timeoutMs=90000}){
   const timer=setTimeout(()=>req.destroy(Error('CODEX_TIMEOUT')),route==='/status'?Math.min(timeoutMs,3000):timeoutMs);req.on('close',()=>clearTimeout(timer));req.on('error',reject);
   req.end(body===undefined?undefined:JSON.stringify(body));
  });
- const refresh=async()=>{try{const s=await request('/status');state={...offline(),connected:s.connected===true&&s.paidApiEnabled===false&&s.publishingEnabled===false,inferenceVerified:s.inferenceVerified===true};observedAt=Date.now();}catch{state=offline();observedAt=0;}return state;};
+ const refresh=async()=>{try{const s=await request('/status');state={...offline(),connected:s.connected===true&&s.paidApiEnabled===false&&s.publishingEnabled===false,inferenceVerified:s.inferenceVerified===true,workflows:Array.isArray(s.workflows)?s.workflows.filter(w=>w==='organic-v1'):[]};observedAt=Date.now();}catch{state=offline();observedAt=0;}return state;};
  return {status:()=>Date.now()-observedAt<10000?{...state}:offline(),refresh,async run(q){
   if(!(await refresh()).connected)return {status:'blocked',reason:'CHATGPT_OWNER_CONNECTION_REQUIRED'};
   try{return await request('/run',q);}catch{state=offline();return {status:'blocked',reason:'CODEX_CONNECTION_UNAVAILABLE'};}
