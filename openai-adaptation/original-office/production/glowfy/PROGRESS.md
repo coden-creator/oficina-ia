@@ -16,3 +16,5 @@ Código desplegado: `3c7d72b5196ea3903de861125d2d5e46f4120d4d`. [Evidencia de la
 ## Cuatro variantes musicales elegidas
 
 Jorge escuchó las muestras A/B/C/D y seleccionó las cuatro para variar la música de Glowfy. Quedan registradas en la biblioteca y conectadas al perfil social, con nivel ajustado por pista y selección estable por pieza. La UI ofrece escucha y descarga privada. No se vuelve a producir el video existente; sus decisiones y la revisión pendiente se conservan. Ver [MUSICA.md](MUSICA.md).
+
+Desplegado y verificado en el App existente, commit `a1317c05cfd5c1b0e6c5dc4be2b0078a505c4340`. Reproducción, descarga por SHA, aislamiento de marca, teclado y móvil pasaron en la web real, sin errores JavaScript. La pieza v3 mantiene su archivo, estado pendiente de revisión y aprobación nula; Codex sigue conectado. No se consumieron nuevos créditos durante esta integración.

@@ -160,7 +160,7 @@ ff4bec6143387ae9ca8575e4418046672086cf3a42b156d91c1556f91aae078b  ./production/a
 e07ae5c20cde50254be4c9cc2f3a6e8f821dff1db82f79f51da98725651ad347  ./production/glowfy-production.mjs
 019258e014fd42d9f60045659b75d8c84cc3fa0674e81f2c53f1db71f5aa7735  ./production/glowfy/FONT-LICENSES.txt
 da2bf4b54774f23af375f214b5cac7e109e38737b25481cbe50f95e2b019ace5  ./production/glowfy/LOG.md
-2776f6421a04b1a14eaf27b338c5e0e382e8fbfdd8da621e91d322be3d27894e  ./production/glowfy/PROGRESS.md
+7a4534ce63003a3b000e1ceb40eeda7b68cc1f84e8d69758e78fc0751fe0f485  ./production/glowfy/PROGRESS.md
 b5e9b64494d8fddead68c3804299503483ba6b8cd38eb315ce216d48940e985b  ./production/glowfy/TASTE.md
 47598aa5fcc9d2270fce6a2b8cc2a6aedc11c4cfcec748d7a7864422c073590c  ./production/glowfy/assets.json
 1097f01027d148c3b38b3ea764a7ad915b831680e0e05524051568427d3b1c8e  ./production/glowfy/mix-social.mjs
@@ -188,7 +188,7 @@ bb66ff5b02a769e1b3fda480dd8fe394fbe2d6a5e96f82774454831f47fbe8b7  ./production/a
 945f87528cfd3caa37fce94137891a913dfb31c0a1d0a24bdcba85c4283f7311  ./production/audio/glowfy-c.mp3
 cb5e8ff582cb3de078a98c5f1ec9057f35ce90178a17475eb3aea70c1183060d  ./production/audio/glowfy-d.mp3
 624e3132897cc28f83e2c21feccab6a0763563b0142390f9a5380e743cb54363  ./production/audio/glowfy-music.json
-a5a5f3d01ad81ed060a98d88b48169942dcd31aad748bf7933195268e508d039  ./production/evidence/glowfy-music-library.json
+b36dcad2cd1e77f9346a528f499f79f99c1d088cbdd31b66b32912ca555a8d01  ./production/evidence/glowfy-music-library.json
 68aff5412694c5672cfcf53d2edff0f34057c67fdeb7be4c6914a8adaee00c37  ./production/glowfy/MUSICA.md
 11bf4f04e69cf2a0d3bf36c43126d8657227113fd9ea47f7f7952c0e3a44df03  ./production/music-library.mjs
 849cac47f093bccc9d564ce4d8bd6d70a71a330ef7917ea654b3deafe0ca5911  ./production/music-library.test.mjs
