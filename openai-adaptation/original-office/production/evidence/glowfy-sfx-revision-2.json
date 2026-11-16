@@ -200,6 +200,31 @@
   },
   "visualFramesInspected": 14,
   "deployment": {
-    "verified": false
+    "verified": true,
+    "commit": "27ae667f6ba24b78062e0a744c79ce9ec0d82778",
+    "url": "https://service-oficina-jorge.flb2mp.easypanel.host/?brand=glowfy#/estudio?efectos=1",
+    "existingApp": true,
+    "configurationPreserved": true,
+    "codexConnected": true,
+    "previousVideoUnchanged": true,
+    "resourcesAfter": {
+      "cpuPercent": 13.57,
+      "memoryPercent": 34.65
+    },
+    "productionAssetsReplaced": false
+  },
+  "browserLive": {
+    "live": true,
+    "effects": 7,
+    "duration": 55.75,
+    "videoPlayback": true,
+    "chapterSeeking": true,
+    "httpRanges": true,
+    "downloadHashVerified": true,
+    "brandIsolation": true,
+    "originalCatalogAccessible": true,
+    "keyboard": true,
+    "mobileNoOverflow": true,
+    "javascriptErrors": 0
   }
 }

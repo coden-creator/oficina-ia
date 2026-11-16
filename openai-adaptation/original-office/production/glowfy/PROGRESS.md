@@ -26,3 +26,5 @@ Preparado un MP4 de 255,75 s con los 36 efectos, A original/B procesado y dos re
 Catálogo desplegado y comprobado en el App existente: `2cabb30c9b1e3e0607dd3d0807ffabaa78a56891`. La web real reproduce y descarga el MP4 por SHA, permite saltar entre efectos y funciona por teclado y en móvil. La pieza v3 conserva su archivo y revisión pendiente; Codex conectado.
 
 Jorge rechazó los efectos 13, 16, 17, 22, 31, 33 y 34 y pidió regenerarlos. Se completó una propuesta nueva por efecto con ElevenLabs y una comparación A anterior/B nueva de 55,75 s. Los originales y la pieza v3 se conservan; las propuestas aún no se conectan a producción. [Detalle y procedencia](../sfx-catalog/revision-2/README.md).
+
+Revisión 2 desplegada y comprobada en `27ae667f6ba24b78062e0a744c79ce9ec0d82778`: reproducción, saltos y descarga íntegra en la web real; catálogo original conservado. La pieza v3, aprobación pendiente, configuración y Codex permanecen sin cambios.
