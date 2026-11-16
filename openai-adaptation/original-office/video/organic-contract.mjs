@@ -9,7 +9,7 @@ export const criteria=Object.freeze([
 const str=(max=2000)=>({type:'string',minLength:1,maxLength:max});
 const obj=properties=>({type:'object',additionalProperties:false,required:Object.keys(properties),properties});
 const array=(items,min=0,max=10)=>({type:'array',items,minItems:min,maxItems:max});
-export function organicSchema(stage,brand,cta){
+export function organicSchema(stage,brand,cta,evidenceIds=null){
  const evidence=obj({sourceId:str(80),claim:str(1000)});
  const detail={
   research:obj({ideas:array(obj({angle:str(400),reason:str(1000)}),1,3),limitations:array(str(1000),0,8)}),
@@ -19,7 +19,9 @@ export function organicSchema(stage,brand,cta){
   art_direction:obj({keyframes:array(obj({moment:{type:'string',enum:['opening','solution','closing']},composition:str(2000),motion:str(2000)}),3,3),assets:array(obj({description:str(1000),sourceId:str(80),availability:{type:'string',enum:['provided','needed']}}),0,20),audioNotes:str(2000)})
  };
  if(!detail[stage])throw Error('INVALID_ORGANIC_STAGE');
- return obj({brand:{type:'string',enum:[brand]},stage:{type:'string',enum:[stage]},summary:str(3000),evidence:array(evidence,0,30),detail:detail[stage]});
+ const schema=obj({brand:{type:'string',enum:[brand]},stage:{type:'string',enum:[stage]},summary:str(3000),evidence:array(evidence,0,30),detail:detail[stage]});
+ if(evidenceIds!==null){const ids=[...new Set(evidenceIds)];if(ids.length)schema.properties.evidence.items.properties.sourceId={type:'string',enum:ids};else schema.properties.evidence.maxItems=0;}
+ return schema;
 }
 function check(value,schema){
  if(schema.enum&&!schema.enum.includes(value))throw Error('ORGANIC_ENUM');

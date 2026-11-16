@@ -59,3 +59,9 @@ test('organic worker reports safe timeout codes without exposing arbitrary provi
  const runtime={status:()=>({transportConnected:true,chatgptAccountObserved:true,accountKind:'chatgpt',paidApiEnabled:false}),draft:async()=>{throw Error('TURN_TIMEOUT');}},specialist=new CodexOrganicSpecialist({runtime}),q={brand:'glowfy',stage:'research',jobId:'fixture',prompt:'Test',input:{brief},context:{brand:'glowfy',workflow:'organic-v1'}};
  assert.equal((await specialist.run(q)).reason,'SPECIALIST_TURN_TIMEOUT');runtime.draft=async()=>{throw Error('credential=private');};assert.equal((await specialist.run(q)).reason,'ORGANIC_STAGE_FAILED');
 });
+
+test('structured specialist response limits citations to the supplied evidence identifiers',async()=>{
+ let schema;const q={brand:'glowfy',stage:'research',jobId:'fixture',prompt:'Test',input:{brief:{...brief,evidence:[{id:'actual_source',text:'Supplied fact'}]}},context:{brand:'glowfy',workflow:'organic-v1'}};
+ const runtime={status:()=>({transportConnected:true,chatgptAccountObserved:true,accountKind:'chatgpt',paidApiEnabled:false}),draft:async(_,options)=>{schema=options.outputSchema;return{source:'chatgpt-app-server',text:JSON.stringify(output(q))};}},specialist=new CodexOrganicSpecialist({runtime});
+ assert.equal((await specialist.run(q)).status,'completed');assert.deepEqual(schema.properties.evidence.items.properties.sourceId.enum,['actual_source']);q.input.brief.evidence=[];await specialist.run(q);assert.equal(schema.properties.evidence.maxItems,0);
+});

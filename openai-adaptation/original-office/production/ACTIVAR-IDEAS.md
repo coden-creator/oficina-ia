@@ -14,3 +14,6 @@ Validación: 26 pruebas Node aprobadas; incluyen autorización puntual, recupera
 Primera ejecución real: las tres fichas se activaron. La primera completó investigación, estrategia y guion; después las solicitudes recibieron `ORGANIC_STAGE_FAILED`. El trabajador tenía un corte de 60 s y ocultaba el tipo de error. Se amplía a 180 s, con espera del socket de 210 s, y se exponen únicamente códigos locales permitidos. No se atribuye una causa definitiva a los primeros errores genéricos. El trabajador sigue limitado a 1 CPU/768 MiB, cuenta ChatGPT existente y sin herramientas externas.
 
 Ajuste de presentación: los enfoques extensos se leen en «Enfoque elegido por la oficina»; el título conserva la identificación de la solicitud. No se reescriben resultados de los especialistas.
+
+
+El diagnóstico nuevo identificó `SPECIALIST_UNSUPPORTED_EVIDENCE` en el comité de la segunda idea. El esquema de salida del trabajador enumera ahora los identificadores exactos de las fuentes aportadas; si no hay fuentes, exige evidencia vacía. La validación posterior se conserva. No se sustituyen ni se corrigen manualmente citas, guiones o evaluaciones.
