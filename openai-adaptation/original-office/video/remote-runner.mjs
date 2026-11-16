@@ -1,7 +1,7 @@
 import http from 'node:http';
 import path from 'node:path';
 const offline=()=>({connected:false,inferenceVerified:false,paidApiEnabled:false,publishingEnabled:false,workflows:[]});
-export function createRemoteRunner({socketPath,timeoutMs=450000}){
+export function createRemoteRunner({socketPath,timeoutMs=900000}){
  if(!path.isAbsolute(socketPath||''))throw Error('ABSOLUTE_SOCKET_REQUIRED');
  let state=offline(),observedAt=0,tail=Promise.resolve();
  const request=(route,body)=>new Promise((resolve,reject)=>{

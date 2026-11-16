@@ -42,7 +42,8 @@ export function validateOrganicOutput(output,{stage,brand,brief}){
  if(stage==='edit_plan')(brief.productionMode===AUTHORED_PROTOCOL?validateAuthoredPlan:validateMotionPlan)(output.detail);
  if(stage==='motion_design')validateGraph(JSON.parse(output.detail.graph));
  if(stage==='visual_review'&&output.detail.verdict==='changes'&&!output.detail.corrections.length)throw Error('MISSING_CORRECTIONS');
- if(stage==='script'&&[MOTION_PROTOCOL,AUTHORED_PROTOCOL].includes(brief.productionMode)){const d=output.detail;if(d.scenes.map(s=>s.narration.trim()).join(' ')!==d.narration.trim()||d.scenes.some(s=>s.text.trim().split(/\s+/).length>5))throw Error('MOTION_NARRATION_CONTRACT');}
+ if(stage==='script'&&brief.productionMode===MOTION_PROTOCOL){const d=output.detail;if(d.scenes.map(s=>s.narration.trim()).join(' ')!==d.narration.trim()||d.scenes.some(s=>s.text.trim().split(/\s+/).length>5))throw Error('MOTION_NARRATION_CONTRACT');}
+ if(stage==='script'&&brief.productionMode===AUTHORED_PROTOCOL){const d=output.detail;d.narration=d.scenes.map(s=>s.narration.replace(/\s+/g,' ').trim()).join(' ');if(d.narration.length>440)throw Error('MOTION_NARRATION_CONTRACT');}
  if(stage==='creative_review'){
   if(new Set(output.detail.criteria.map(c=>c.id)).size!==6)throw Error('DUPLICATE_CRITERIA');
   const total=output.detail.criteria.reduce((n,c)=>n+c.score,0);
