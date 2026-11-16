@@ -1,0 +1,27 @@
+{
+  "live": true,
+  "effects": 4,
+  "duration": 33.5,
+  "videoPlayback": true,
+  "chapterSeeking": true,
+  "httpRanges": true,
+  "downloadHashVerified": true,
+  "brandIsolation": true,
+  "originalCatalogAccessible": true,
+  "previousRevisionAccessible": true,
+  "threeApprovalsVisible": true,
+  "keyboard": true,
+  "mobileNoOverflow": true,
+  "javascriptErrors": 0,
+  "deployedCommit": "2fba8907eef54dea0179256b2513e6aa016d036f",
+  "generationEnabled": false,
+  "reportedCredits": 37,
+  "completedGenerations": 4,
+  "screenshotsInspected": [
+    "desktop",
+    "mobile",
+    "mobile-index"
+  ],
+  "cpuPercent": 5.35,
+  "memoryPercent": 34.61
+}
