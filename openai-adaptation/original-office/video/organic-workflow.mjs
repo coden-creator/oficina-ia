@@ -42,7 +42,7 @@ export function createOrganicWorkflow({flow,runner,enabled=false,allowedJobIds=[
       await patch(j=>{j.state='changes_requested';j.blocker='CREATIVE_REJECTED';j.execution=null;},'creative_rejected');return job;
      }
      if(review.verdict==='changes'){
-      if((job.organicAttempts||0)>=(job.brief.productionMode===MOTION_PROTOCOL?3:2)){await patch(j=>{j.state='changes_requested';j.blocker='CREATIVE_REVISION_LIMIT';j.execution=null;},'creative_limit');return job;}
+      if((job.organicAttempts||0)>=(job.brief.productionMode===AUTHORED_PROTOCOL?4:job.brief.productionMode===MOTION_PROTOCOL?3:2)){await patch(j=>{j.state='changes_requested';j.blocker='CREATIVE_REVISION_LIMIT';j.execution=null;},'creative_limit');return job;}
       await patch(j=>{
        j.revisions||=[];j.revisions.push({version:j.version,outputs:copy(j.outputs),artifact:j.artifact,approval:j.approval,reason:'organic_creative_changes'});
        j.version++;j.organicAttempts=(j.organicAttempts||0)+1;j.organicFeedback=review.corrections;j.outputs={research:j.outputs.research,strategy:j.outputs.strategy};j.artifact=null;j.approval=null;j.stage='script';

@@ -25,14 +25,14 @@ export async function authorScenes({job,plan,beats,outDir,runner,onStage}){
    const start=beats.scenes[i].start,end=i===3?beats.duration:beats.scenes[i+1].start;
    if(saved&&saved.sourceHash!==sourceHash)throw Error('AUTHORED_CACHE_CONFLICT');
    if(!saved){
-    const input={plan,scene:plan.scenes[i],spokenText:beats.scenes[i].narration,durationSeconds:end-start,wordTiming:beats.words.filter(w=>w.start>=start&&w.start<end).map(w=>({word:w.text,at:Number(((w.start-start)/(end-start)).toFixed(3))})),...(correction?{previousGraph:scenes[i].graph,correction:correction.instruction}:{}),artDirection:job.outputs.art_direction.detail};
+    const input={plan,scene:plan.scenes[i],...(i>0?{previousSceneGraph:scenes[i-1].graph,continuity:'Previous scene ends at u=1. Preserve recognisable object geometry, labels and materials. Reframe purposefully; carry forward the completed state.'}:{}),spokenText:beats.scenes[i].narration,durationSeconds:end-start,wordTiming:beats.words.filter(w=>w.start>=start&&w.start<end).map(w=>({word:w.text,at:Number(((w.start-start)/(end-start)).toFixed(3))})),...(correction?{previousGraph:scenes[i].graph,correction:correction.instruction}:{}),artDirection:job.outputs.art_direction.detail};
     const images=correction?['data:image/jpeg;base64,'+(await fs.readFile(path.join(folder,`review-scene-${i+1}.jpg`))).toString('base64')]:[];
     const result=await call('motion_design',designPrompt,input,images);if(result.output.detail.scene!==i+1)throw Error('AUTHORED_SCENE_ORDER');
     saved={sourceHash,attempt,...result};await write(file,saved);
    }
    scenes[i]={scene:i+1,start,end,graph:validateGraph(JSON.parse(saved.output.detail.graph)),provenance:saved.provenance,rationale:saved.output.detail.rationale,attempt};
   }
-  const imageConfig=path.join(folder,'preview-config.json');await fs.writeFile(imageConfig,JSON.stringify({outDir:folder,scenes}));
+  const imageConfig=path.join(folder,'preview-config.json');await fs.writeFile(imageConfig,JSON.stringify({outDir:folder,scenes,beats:{...beats,authored:true,authoredScenes:scenes}}));
   await runProcess(process.execPath,[new URL('./authored-previews.mjs',import.meta.url).pathname,imageConfig]);
   await onStage('production','El director revisa cuatro secuencias de imágenes reales del render');
   const graphHash=hash(scenes.map(s=>s.graph)),file=`review-${attempt}.json`;review=await read(file);

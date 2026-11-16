@@ -19,10 +19,11 @@ services:
       traefik.enable: 'false'
       office.purpose: jorge-codex-worker
     environment:
-      OFFICE_WORKER_RELEASE: authored-motion-v2
+      OFFICE_WORKER_RELEASE: authored-motion-astra-v2
       OFFICE_CODEX_ENABLE: '1'
       OFFICE_CODEX_ISOLATION_VERIFIED: '1'
-      OFFICE_CODEX_MODEL: ${OFFICE_CODEX_MODEL:-gpt-6.1-sol}
+      # Pinned for this authorized production release; Compose .env resolution varies by rootPath.
+      OFFICE_CODEX_MODEL: gpt-6-astra
       OFFICE_CODEX_SOCKET: /run/office/codex.sock
     volumes:
       - auth:/home/node/codex-isolated

@@ -7,5 +7,5 @@ export function batchPlan(job,authorizedJobIds=[]){
 }
 export function validateBatchScript(script,plan){
  if(!plan)return;
- if(script.narration.length>plan.maxNarrationCharacters||script.scenes.some(s=>s.text.length>28||s.text.trim().split(/\s+/).length>5)||script.closing!=='Conocé Glowfy')throw Error('BATCH_SCRIPT_LIMIT');
+ if(script.narration.length>plan.maxNarrationCharacters||(!plan.authored&&script.scenes.some(s=>s.text.length>28||s.text.trim().split(/\s+/).length>5))||script.closing!=='Conocé Glowfy')throw Error('BATCH_SCRIPT_LIMIT');
 }
