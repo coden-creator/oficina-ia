@@ -1,16 +1,12 @@
-# Original shell + protected internal video workflow
+# Oficina de Jorge · estado vigente
 
-> Despliegue: la oficina debe volver al App existente `service/oficina-jorge`. Está preparada la [corrección inicial para Deploy/Rebuild por MCP](deployment-review/EASYPANEL-MANAGED.md); aún no se ejecutó en el VPS.
+La aplicación funciona en el App existente `service/oficina-jorge`, rama `codex/revision-visual`, build `Dockerfile.easypanel`. La web, el trabajador Codex y la conexión cifrada de ElevenLabs están conectados. La actualización por MCP conserva los cuatro montajes persistentes y el login.
 
-> Interfaz de revisión: selector global, Estudio por estados, formulario independiente y ficha de decisiones. Ver [estructura visual y validación](UI-DESIGN-REVIEW.md). Estos cambios todavía no están desplegados en el VPS.
+La primera prueba completa de Glowfy ejecutó cinco etapas reales de Codex, voz Jorge Q y MP4 1080×1920. Jorge rechazó su acabado: faltaban música, efectos audibles, ritmo e interpretación de voz. La revisión social incorpora recursos del estudio original y dirección de voz conforme a la guía de ElevenLabs. Su nuevo audio y render siguen pendientes de activar la segunda toma; la revisión automática bloqueó reenviar el entorno completo de EasyPanel porque contiene la contraseña existente. No hay aprobación ni publicación.
 
-> Revisión actual (código, pendiente de despliegue): [recuperación del departamento orgánico](production/RECUPERACION-CONTENIDO-ORGANICO.md) identifica el motor original y lo que falta portar. Se añade [configuración de ElevenLabs en Conexiones](connections/README.md) y descarte de ideas con historial; no se habilita síntesis ni publicación.
+Estado detallado: [Glowfy](production/glowfy/PROGRESS.md), [directrices de montaje](production/glowfy/TASTE.md), [estructura visual](UI-DESIGN-REVIEW.md), [límites de empaquetado](PACKAGING.md). Para activar esta corrección se requieren `OFFICE_VOICE_TEST_TAKE=2` y `OFFICE_VOICE_PROFILE=social-v2`, manteniendo el alcance de la pieza ya autorizada.
 
-> Corrección creativa: Jorge rechazó el acabado de tarjetas y fijó dos referencias como mínimo audiovisual. Ver [directrices vigentes](production/ESTANDAR-AUDIOVISUAL.md). La prueba de conexión sigue siendo evidencia técnica, no aceptación del video.
-
-> Estado verificado (15 noviembre 2026): Jorge completó el login oficial; el trabajador privado de Codex ya está desplegado y Docker lo reportó saludable. La web de revisión y el trabajador están saludables. La ficha Glowfy, versión 2, completó las cinco etapas con Codex real y generó un MP4 silencioso de 9 segundos; descarga, SHA256 y decodificación comprobados. Permanece pendiente de aprobación de Jorge. Ver [evidencia del video real](production/evidence/first-real-video.json). La entrega vigente usa un trabajador Compose y una web Swarm porque CodeNet no es attachable. Consultar [IMPLEMENTACION.md](deployment-review/IMPLEMENTACION.md) para el procedimiento y los límites actuales. Los apartados posteriores conservan evidencia histórica; no describen por sí solos el despliegue vigente.
-
-Historical review-build notes follow; current deployment status is recorded above.
+Los apartados siguientes documentan etapas históricas. Las afirmaciones antiguas de ausencia de voz, música, conexión o despliegue no describen por sí solas la prueba actual; la síntesis sigue limitada a las tomas autorizadas de una sola pieza.
 
 ## Real functionality
 - Preserves original office canvas, rooms, navigation and visual styles with audited unavailable states.

@@ -4,3 +4,4 @@
 
 2026-11-16 · Primera exportación real completada y rechazada por Jorge. SHA256 c834e6eb30a174be597a2756d3f086859a048e09b0a7881156e3b5d5c583ba03, 32.87 s, voz Jorge Q, 448 caracteres enviados. Sin aprobación ni publicación.
 2026-11-16 · Revisadas las directrices originales de música, efectos y voz de Claude. Corrección registrada en la oficina; preproducción real revisada. Implementación social con recursos existentes y una segunda toma acotada. Pendiente de resultado real.
+2026-11-16 · Edición social desplegada en 8e69055. Catálogo oficial responde; la compatibilidad concreta se verifica también mediante los modelos declarados por Jorge Q. Guía oficial de ElevenLabs indica etiquetas de interpretación para v4/v3 sin los controles de velocidad/estilo del modelo anterior. Activación de la nueva toma pendiente de autorización: auto-review rechazó reenviar el entorno completo (incluye contraseña) al conector de EasyPanel. Ninguna segunda síntesis ejecutada.

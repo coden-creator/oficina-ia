@@ -5,6 +5,12 @@ export function validateNarration(script){
  return script.narration;
 }
 export function buildTiming(script,alignment,{social=false}={}){
+ if(social&&Array.isArray(alignment?.characters)){
+  // Provider timestamps may contain the three delivery tags, or already omit them.
+  // Remove only our known tags, retaining each spoken character's original time.
+  const source=alignment.characters.join(''),keep=alignment.characters.map(()=>true);for(const match of source.matchAll(/\[(curious|excited|warmly)\]\s*/g)){const start=Array.from(source.slice(0,match.index)).length,length=Array.from(match[0]).length;for(let i=start;i<start+length;i++)keep[i]=false;}
+  alignment={...alignment,characters:alignment.characters.filter((_,i)=>keep[i]),character_start_times_seconds:alignment.character_start_times_seconds?.filter((_,i)=>keep[i]),character_end_times_seconds:alignment.character_end_times_seconds?.filter((_,i)=>keep[i])};
+ }
  const text=validateNarration(script),chars=alignment?.characters,starts=alignment?.character_start_times_seconds,ends=alignment?.character_end_times_seconds;
  if(!Array.isArray(chars)||!Array.isArray(starts)||!Array.isArray(ends)||chars.length!==starts.length||chars.length!==ends.length||normalize(chars.join(''))!==normalize(text))throw Error('VOICE_ALIGNMENT_INVALID');
  for(let i=0;i<chars.length;i++)if(!Number.isFinite(starts[i])||!Number.isFinite(ends[i])||starts[i]<0||ends[i]<starts[i]||(i&&starts[i]<starts[i-1])||ends[i]>55)throw Error('VOICE_ALIGNMENT_INVALID');

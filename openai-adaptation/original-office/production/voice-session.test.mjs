@@ -16,7 +16,7 @@ test('social revision selects a supported expressive model and charges once in i
  await obtainNarration({store,jobDir,text,voiceId});const first=await fs.readFile(path.join(jobDir,'speech-attempt.json'));
  const revision=path.join(jobDir,'voice-take-2');await fs.mkdir(revision);
  await obtainNarration({store,jobDir:revision,text:'¿Justo ahora?',voiceId,profile:'social-v2'});
- assert.equal(last.plan.model,'eleven_v4');assert.equal(last.plan.settings.stability,.3);assert.equal(last.plan.settings.style,.55);assert.equal(last.plan.settings.speed,1.12);
+ assert.equal(last.plan.model,'eleven_v4');assert.equal(last.plan.settings,undefined);assert.equal(last.text,'[curious] ¿Justo ahora?');
  assert.equal((await obtainNarration({store,jobDir:revision,text:'¿Justo ahora?',voiceId,profile:'social-v2'})).cached,true);assert.equal(calls,2);assert.deepEqual(await fs.readFile(path.join(jobDir,'speech-attempt.json')),first);
 }));
 test('social model cost must fit remaining included quota before any request',()=>dir(async jobDir=>{
@@ -24,6 +24,11 @@ test('social model cost must fit remaining included quota before any request',()
  store.synthesize=async()=>assert.fail('must not submit synthesis');await assert.rejects(obtainNarration({store,jobDir,text,voiceId,profile:'social-v2'}),/VOICE_INCLUDED_QUOTA_REQUIRED/);assert.deepEqual(await fs.readdir(jobDir),[]);
 }));
 test('social model selection skips models which do not serve professional voices',()=>dir(async jobDir=>{
- const store=fixture(),base=await store.speechCatalog();store.speechCatalog=async()=>({...base,models:[...base.models,{id:'eleven_v4',professionalVoices:false,characterCostFactor:1}]});
+ const store=fixture(),base=await store.speechCatalog();store.speechCatalog=async()=>({...base,voices:[{id:voiceId,category:'professional',ownerAuthorized:true,supportedModels:['eleven_multilingual_v2']}],models:base.models.map(m=>({...m,professionalVoices:false})).concat({id:'eleven_v4',professionalVoices:false,characterCostFactor:1})});
  store.synthesize=async input=>{assert.equal(input.plan.model,'eleven_multilingual_v2');return {audio:Buffer.alloc(1500,42),alignment:{}}};await obtainNarration({store,jobDir,text,voiceId,profile:'social-v2'});
 }));
+
+test('new-model delivery tags do not become captions or fabricated timestamps',()=>{
+ const script={narration:'Uno dos tres cuatro',scenes:['Uno','dos','tres','cuatro'].map(narration=>({narration}))};const characters=Array.from('[curious] Uno [excited] dos tres [warmly] cuatro'),starts=characters.map((_,i)=>i*.25),ends=characters.map((_,i)=>(i+1)*.25);
+ const timing=buildTiming(script,{characters,character_start_times_seconds:starts,character_end_times_seconds:ends},{social:true});assert.equal(timing.words.map(w=>w.text).join(' '),script.narration);assert.equal(timing.words[0].start,2.5);assert.equal(timing.words[1].start,starts[characters.join('').indexOf('dos')]);
+});
