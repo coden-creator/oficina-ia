@@ -1,9 +1,10 @@
 import fs from 'node:fs/promises';import path from 'node:path';import {createHash} from 'node:crypto';
 const hash=b=>createHash('sha256').update(b).digest('hex');
 async function write(file,bytes){const temp=file+'.new';const h=await fs.open(temp,'wx',0o600);try{await h.writeFile(bytes);await h.sync()}finally{await h.close()}await fs.rename(temp,file);}
-export async function obtainNarration({store,jobDir,text,voiceId,profile='standard',authorization='Jorge: prueba Glowfy y corrección de interpretación, 2026-11-16'}){
+export async function obtainNarration({store,jobDir,text,voiceId,profile='standard',cachedOnly=false,authorization='Jorge: prueba Glowfy y corrección de interpretación, 2026-11-16'}){
  const stamp=hash(JSON.stringify(profile==='standard'?{text,voiceId,model:'eleven_multilingual_v2'}:{text,voiceId,profile})),ledger=path.join(jobDir,'speech-attempt.json'),audioPath=path.join(jobDir,'speech.mp3'),metaPath=path.join(jobDir,'speech.json');
  try{const old=JSON.parse(await fs.readFile(ledger));if(old.stamp!==stamp)throw Error('VOICE_TEST_ALREADY_USED');if(old.state!=='completed')throw Error('VOICE_RESULT_UNCERTAIN');const meta=JSON.parse(await fs.readFile(metaPath));const audio=await fs.readFile(audioPath);if(hash(audio)!==old.sha256)throw Error('VOICE_CACHE_INVALID');return {...meta,audioPath,cached:true};}catch(e){if(e.code!=='ENOENT')throw e;}
+ if(cachedOnly)throw Error('VOICE_CACHE_REQUIRED');
  const catalog=await store.speechCatalog();const selected=catalog.voices.find(v=>v.id===voiceId&&(v.category==='premade'||v.ownerAuthorized===true));if(!selected)throw Error('VOICE_CATALOG_SELECTION_REQUIRED');
  const candidates=profile==='social-v2'?['eleven_v4','eleven_v3','eleven_multilingual_v2']:['eleven_multilingual_v2'];
  const model=candidates.map(id=>(catalog.models||[]).find(m=>m.id===id&&(selected.category==='premade'||m.professionalVoices||selected.supportedModels?.includes(id)))).find(Boolean);

@@ -1,3 +1,4 @@
+import {seedCinematicPilot,PILOT_REVISION} from './production/glowfy/cinematic-plan.mjs';
 import {createOriginalShell} from './server.mjs';
 import {createVideoFlow} from './video/video-flow.mjs';
 import {selectRenderer} from './video/renderer-selection.mjs';
@@ -25,7 +26,7 @@ try{
  const production=connectionStore&&videoFlow?createGlowfyProduction({dataDir:videoDataDir,connectionStore,authorizedJobId:process.env.OFFICE_VOICE_TEST_JOB_ID,authorizedJobIds:(process.env.OFFICE_VOICE_JOB_IDS||'').split(',').filter(Boolean),voiceId:process.env.OFFICE_VOICE_ID,voiceTake:Number(process.env.OFFICE_VOICE_TEST_TAKE||1),voiceProfile:process.env.OFFICE_VOICE_PROFILE||'standard'}):null;
  const officeCoordinator=videoFlow?createOfficeCoordinator({flow:videoFlow,runner,production,enabled:process.env.OFFICE_AUTONOMY_ENABLED==='1',allowedJobIds:(process.env.OFFICE_AUTONOMY_JOB_IDS||'').split(',').filter(Boolean)}):null;
  if(production)videoFlow.setProductionCapability(()=>({scopedTest:{brand:'glowfy',jobId:process.env.OFFICE_VOICE_TEST_JOB_ID||null,voiceConfigured:production.voiceConfigured}}));
- if(officeCoordinator){await officeCoordinator.recover();await applyUniqueDirection(videoFlow,process.env.OFFICE_BATCH_VISUAL_REVISION===VISUAL_REVISION);videoFlow.setReferenceRunner(officeCoordinator.manualRun);officeCoordinator.start();}
+ if(officeCoordinator){await officeCoordinator.recover();await applyUniqueDirection(videoFlow,process.env.OFFICE_BATCH_VISUAL_REVISION===VISUAL_REVISION);await seedCinematicPilot(videoFlow,process.env.OFFICE_CINEMATIC_PILOT===PILOT_REVISION);videoFlow.setReferenceRunner(officeCoordinator.manualRun);officeCoordinator.start();}
  const password=process.env.OFFICE_PASSWORD_FILE?fs.readFileSync(process.env.OFFICE_PASSWORD_FILE,'utf8').trim():process.env.OFFICE_PASSWORD;
 
  const sfxReview=videoFlow&&connectionStore?createSfxReviewBatch({dataDir:videoDataDir,store:connectionStore,enabled:process.env.OFFICE_SFX_REVIEW_BATCH===SFX_BATCH}):null;

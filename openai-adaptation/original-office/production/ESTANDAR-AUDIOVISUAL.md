@@ -52,3 +52,11 @@ La pregunta de revisión es: «¿Esta pieza sostiene el nivel de elaboración, c
 ## Variedad exigida por Jorge · 16 de noviembre de 2026
 
 Cada pieza necesita una dirección de arte y coreografía propias. Reutilizar exactamente una secuencia de objetos y sustituir sus textos no satisface el pedido. Antes de exportar, comparar entre las piezas del lote: concepto, objeto protagonista, composición, acciones, transiciones, cámara y sonido. La consistencia de marca no exige repetir la producción. El lote Glowfy de tres piezas dispone de tres módulos locales independientes; futuros conceptos requieren su diseño e implementación, no se promete generación ilimitada de escenas arbitrarias por Codex.
+
+## Dirección y revisión del archivo · 16 de noviembre de 2026
+
+Jorge autorizó incorporar seis exigencias: acciones narrativas, planos/cámara/materiales, variedad entre piezas, voz con intención, diseño sonoro y revisión después del render. El contexto de los especialistas incorpora el historial visual reciente de su marca. Cada piloto dirigido registra concepto, diferencias, planos, acciones, cámara, transiciones e intención sonora; los tiempos finales proceden de la voz real.
+
+El piloto «El hilo de una cita» conserva la narración de Reserva y las tres piezas anteriores. Exporta un fragmento audiovisual de siete segundos antes del archivo completo. La oficina muestra el plan y permite revisar ambos. Los recursos existentes se reutilizan y la ruta del piloto rechaza generar otra voz si falta el máster.
+
+La revisión del archivo registra observaciones por historia, composición/materiales, cámara/ritmo, voz, sonido e identidad/variedad, ligadas a versión y hash. Un criterio sin escucha u observación se registra como pendiente. Las métricas de audio no acreditan interpretación o gusto. Registrar observaciones no aprueba ni publica. Nuevos conceptos todavía necesitan una escena compatible implementada; el trabajador de preproducción no ejecuta código libre ni analiza el video mediante visión/audio por sí solo.

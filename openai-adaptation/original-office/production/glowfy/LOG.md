@@ -27,3 +27,5 @@
 - Detectado durante revisión: la reproducción completa funciona pero el seek regresaba a cero. Implementados rangos HTTP autenticados con validación de versión/hash; verificaciones de bytes, límites, HEAD y acceso sin credenciales. Pendiente comprobación real después del deploy.
 
 - Corrección de reproducción desplegada en a29589b: comprobados saltos reales a 10,42 / 10,38 / 10,18 s y navegación escritorio/móvil de las tres piezas, cero errores JS. Diez pruebas de HTTP/rangos/catálogo pasaron. Sin cambio en archivos, versiones o aprobaciones; Codex conectado, cola vacía y publicación deshabilitada.
+
+- 2026-11-16 · Jorge autoriza incorporar seis mejoras de producción. Creada una ficha piloto separada para conservar los tres videos anteriores. Se prepara narración reutilizada, seis planos, sonido específico, historial de marca para especialistas y revisión audiovisual vinculada al archivo.
