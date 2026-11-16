@@ -2,9 +2,9 @@
 
 La aplicación funciona en el App existente `service/oficina-jorge`, rama `codex/revision-visual`, build `Dockerfile.easypanel`. La web, el trabajador Codex y la conexión cifrada de ElevenLabs están conectados. La actualización por MCP conserva los cuatro montajes persistentes y el login.
 
-La primera prueba completa de Glowfy ejecutó cinco etapas reales de Codex, voz Jorge Q y MP4 1080×1920. Jorge rechazó su acabado: faltaban música, efectos audibles, ritmo e interpretación de voz. La revisión social incorpora recursos del estudio original y dirección de voz conforme a la guía de ElevenLabs. Su nuevo audio y render siguen pendientes de activar la segunda toma; la revisión automática bloqueó reenviar el entorno completo de EasyPanel porque contiene la contraseña existente. No hay aprobación ni publicación.
+La primera prueba completa de Glowfy ejecutó cinco etapas reales de Codex, voz Jorge Q y MP4 1080×1920. Jorge rechazó su acabado: faltaban música, efectos audibles, ritmo e interpretación de voz. La revisión social incorpora recursos del estudio original y dirección de voz conforme a la guía de ElevenLabs. Tras la autorización expresa de Jorge, la segunda toma y el montaje real terminaron: 18,1 s, Eleven v4, música y efectos; la versión 3 está disponible en la oficina para revisión. No hay aprobación ni publicación.
 
-Estado detallado: [Glowfy](production/glowfy/PROGRESS.md), [directrices de montaje](production/glowfy/TASTE.md), [estructura visual](UI-DESIGN-REVIEW.md), [límites de empaquetado](PACKAGING.md). Para activar esta corrección se requieren `OFFICE_VOICE_TEST_TAKE=2` y `OFFICE_VOICE_PROFILE=social-v2`, manteniendo el alcance de la pieza ya autorizada.
+Estado detallado: [Glowfy](production/glowfy/PROGRESS.md), [directrices de montaje](production/glowfy/TASTE.md), [estructura visual](UI-DESIGN-REVIEW.md), [límites de empaquetado](PACKAGING.md). Esta corrección usa `OFFICE_VOICE_TEST_TAKE=2` y `OFFICE_VOICE_PROFILE=social-v2`, activados únicamente para la pieza autorizada. Ver [evidencia del resultado real](production/evidence/glowfy-social-real.json).
 
 Los apartados siguientes documentan etapas históricas. Las afirmaciones antiguas de ausencia de voz, música, conexión o despliegue no describen por sí solas la prueba actual; la síntesis sigue limitada a las tomas autorizadas de una sola pieza.
 
