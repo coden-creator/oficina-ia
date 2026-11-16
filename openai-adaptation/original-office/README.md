@@ -1,5 +1,7 @@
 # Oficina de Jorge · estado vigente
 
+Biblioteca musical: Jorge eligió las cuatro variantes de Glowfy. Se incorporan reproducción/descarga privada en el Estudio y selección estable por pieza en el mezclador social. [Alcance y evidencia](production/glowfy/MUSICA.md).
+
 La aplicación funciona en el App existente `service/oficina-jorge`, rama `codex/revision-visual`, build `Dockerfile.easypanel`. La web, el trabajador Codex y la conexión cifrada de ElevenLabs están conectados. La actualización por MCP conserva los cuatro montajes persistentes y el login.
 
 La primera prueba completa de Glowfy ejecutó cinco etapas reales de Codex, voz Jorge Q y MP4 1080×1920. Jorge rechazó su acabado: faltaban música, efectos audibles, ritmo e interpretación de voz. La revisión social incorpora recursos del estudio original y dirección de voz conforme a la guía de ElevenLabs. Tras la autorización expresa de Jorge, la segunda toma y el montaje real terminaron: 18,1 s, Eleven v4, música y efectos; la versión 3 está disponible en la oficina para revisión. No hay aprobación ni publicación.

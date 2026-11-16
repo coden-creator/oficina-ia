@@ -79,3 +79,7 @@ scripts/probe-tool-inventory.mjs
 !production/audio/*.wav
 !production/audio/*.mp3
 !production/audio/manifest.json
+
+!production/music-library.mjs
+!production/audio/glowfy-music.json
+!public/music-panel.js

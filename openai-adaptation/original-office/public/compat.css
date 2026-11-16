@@ -78,3 +78,10 @@
 
 @media(max-width:780px){.office-ui .office-animation-toggle{display:none}}
 .office-ui [data-view="oficina"] #office{box-shadow:none;border:0;border-radius:0}
+
+/* Compact approved music library; inherits the office palette and global brand. */
+.music-library{margin:0 0 24px;border-block:1px solid var(--workspace-border)}
+.music-library>summary{padding:16px 4px;cursor:pointer;color:var(--workspace-accent);font-weight:600;min-height:48px}
+.music-library>summary:hover{color:#fff}.music-library-body{padding:0 4px 16px}.music-library-row{display:grid;grid-template-columns:140px minmax(220px,1fr) 140px;gap:20px;align-items:center;padding:16px 0;border-bottom:1px solid var(--workspace-border)}
+.music-library-row h3{font-size:16px}.music-library-row p{margin:3px 0;font-size:13px}.music-library-row audio{width:100%;min-width:0;height:42px}.music-library-row a{min-height:44px;display:flex;align-items:center;justify-content:end}
+@media(max-width:650px){.music-library-row{grid-template-columns:1fr;gap:10px}.music-library-row a{justify-content:start}.music-library-body{padding-inline:0}}

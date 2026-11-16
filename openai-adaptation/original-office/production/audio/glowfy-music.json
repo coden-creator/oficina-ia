@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "brandId": "glowfy",
+  "direction": "Moderna, cálida y elegante",
+  "provider": "ElevenLabs",
+  "model": "eleven_music_v2",
+  "flowId": "GYqzlGaTXIWRbdFR3jQf",
+  "ownerSelection": "Las 4! Para asi tener variaciones musicales. Ya logre escucharlas",
+  "selectionScope": "Música para Glowfy; no aprueba piezas ni publicaciones",
+  "tracks": [
+    {
+      "id": "glowfy-a",
+      "title": "Variante A",
+      "file": "glowfy-a.mp3",
+      "brandId": "glowfy",
+      "duration": 20.0,
+      "sha256": "5cd1578d827ce996fde6941f8ba55bea32aaee09d30e6761bb48408897c176b5",
+      "integratedLufs": -12.15,
+      "truePeakDbtp": -0.95,
+      "generationId": "2I77YRXn8vuSUSNQLmGY",
+      "approvedForBrand": true
+    },
+    {
+      "id": "glowfy-b",
+      "title": "Variante B",
+      "file": "glowfy-b.mp3",
+      "brandId": "glowfy",
+      "duration": 20.0,
+      "sha256": "bb66ff5b02a769e1b3fda480dd8fe394fbe2d6a5e96f82774454831f47fbe8b7",
+      "integratedLufs": -12.86,
+      "truePeakDbtp": -0.8,
+      "generationId": "niKtvCnhgSsAFeUmVDao",
+      "approvedForBrand": true
+    },
+    {
+      "id": "glowfy-c",
+      "title": "Variante C",
+      "file": "glowfy-c.mp3",
+      "brandId": "glowfy",
+      "duration": 20.0,
+      "sha256": "945f87528cfd3caa37fce94137891a913dfb31c0a1d0a24bdcba85c4283f7311",
+      "integratedLufs": -18.24,
+      "truePeakDbtp": -0.19,
+      "generationId": "Ylgcs5gvzkC10fOlrPhE",
+      "approvedForBrand": true
+    },
+    {
+      "id": "glowfy-d",
+      "title": "Variante D",
+      "file": "glowfy-d.mp3",
+      "brandId": "glowfy",
+      "duration": 20.0,
+      "sha256": "cb5e8ff582cb3de078a98c5f1ec9057f35ce90178a17475eb3aea70c1183060d",
+      "integratedLufs": -13.54,
+      "truePeakDbtp": -0.76,
+      "generationId": "gv2qQj3Sy6aZBpwZDXhx",
+      "approvedForBrand": true
+    }
+  ]
+}

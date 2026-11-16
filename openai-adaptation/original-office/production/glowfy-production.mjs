@@ -21,11 +21,12 @@ export function createGlowfyProduction({dataDir,connectionStore,authorizedJobId,
   await onStage('production','Animando las cuatro escenas y sus subtítulos');
   const config=path.join(outDir,'render.json');await fs.writeFile(config,JSON.stringify({outDir,beats,social:voiceProfile==='social-v2'}),{mode:0o600});
   await runProcess(process.execPath,[path.join(root,'glowfy/render.mjs'),config]);
+  let selectedMusic=null;
   const voiceMix=path.join(outDir,'voice-normalized.wav'),mix=path.join(outDir,'mix.wav');
   const ff=async args=>runProcess('/usr/bin/ffmpeg',['-hide_banner','-nostdin','-y','-filter_complex_threads','1',...args]);
   await ff(['-i',voice.audioPath,'-af','loudnorm=I=-18:TP=-3:LRA=7','-ar','48000','-ac','2',voiceMix]);
   if(voiceProfile==='social-v2'){
-   const soundtrack=socialSoundtrack(beats);await fs.writeFile(path.join(outDir,'sound-cues.json'),JSON.stringify(soundtrack,null,2));
+   const soundtrack=socialSoundtrack(beats,job);selectedMusic=soundtrack.music;await fs.writeFile(path.join(outDir,'sound-cues.json'),JSON.stringify(soundtrack,null,2));
    await ff(['-i',voiceMix,...soundtrack.input,'-filter_complex',soundtrack.filters,'-map','[m]','-ar','48000','-ac','2',mix]);
   }else await ff(['-i',voiceMix,'-i',path.join(outDir,'ui-sounds.wav'),'-filter_complex',`[0:a]apad,atrim=duration=${beats.duration}[v];[v][1:a]amix=inputs=2:normalize=0:duration=first[m]`,'-map','[m]','-ar','48000','-ac','2',mix]);
   const measured=loudness((await ff(['-i',mix,'-af','loudnorm=I=-16:TP=-1.5:LRA=7:print_format=json','-f','null','-'])).stderr);
@@ -40,7 +41,7 @@ export function createGlowfyProduction({dataDir,connectionStore,authorizedJobId,
   const bytes=await fs.readFile(file),artifact={file,sha256:digest(bytes),bytes:bytes.length,version:job.version,kind:'narrated_brand_video',metadata:{width:1080,height:1920,fps:30,duration:beats.duration}};
   const qa={technical:{passed:true,width:1080,height:1920,fps:30,duration:beats.duration,audioCodec:'aac',sampleRate:48000,channels:2,integratedLufs:Number(levels.input_i),truePeakDbtp:Number(levels.input_tp),decoded:true},visual:'pending_owner_review',audio:'elevenlabs-with-character-alignment',commercialQuality:'pending_owner_review',subjectiveListeningVerified:false};
   await fs.writeFile(path.join(outDir,'qa.json'),JSON.stringify(qa,null,2));
-  return {artifact,qa,production:{summary:voiceProfile==='social-v2'?'Reedición con tu voz dirigida, música del estudio, efectos sincronizados, cámara y subtítulos editoriales. Pendiente de tu revisión.':'Cuatro escenas ilustradas, narración ElevenLabs, subtítulos alineados y efectos de interfaz. Pendiente de revisión audiovisual de Jorge.',evidence:[],voice:{provider:'elevenlabs',voiceId,model:voice.model,settings:voice.settings,delivery:voice.delivery,profile:voiceProfile,take:voiceTake,characters:voice.characters,submittedCharacters:voice.submittedCharacters,cached:voice.cached},sceneCount:4,provenance:{provider:'office-trusted-renderer',version:voiceProfile==='social-v2'?'glowfy-social-v2':'glowfy-v1'}}};
+  return {artifact,qa,production:{summary:voiceProfile==='social-v2'?'Reedición con tu voz dirigida, una variante musical de Glowfy, efectos sincronizados, cámara y subtítulos editoriales. Pendiente de tu revisión.':'Cuatro escenas ilustradas, narración ElevenLabs, subtítulos alineados y efectos de interfaz. Pendiente de revisión audiovisual de Jorge.',evidence:[],voice:{provider:'elevenlabs',voiceId,model:voice.model,settings:voice.settings,delivery:voice.delivery,profile:voiceProfile,take:voiceTake,characters:voice.characters,submittedCharacters:voice.submittedCharacters,cached:voice.cached},music:selectedMusic,sceneCount:4,provenance:{provider:'office-trusted-renderer',version:voiceProfile==='social-v2'?'glowfy-social-v2':'glowfy-v1'}}};
  }
  return {permits,voiceConfigured:!!voiceId,render(job,stage){const next=tail.then(()=>produce(job,stage));tail=next.catch(()=>{});return next;}};
 }

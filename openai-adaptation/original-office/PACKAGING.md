@@ -51,3 +51,8 @@ The parallel CLI investigation verified the staged managed requirements in a bwr
 ### Glowfy social revision
 
 The app image includes the existing studio music and seven SFX named in `production/audio/manifest.json`. Docker context explicitly permits these files. It adds a separate `voice-take-2` ledger for the owner-requested correction; existing audio, Codex authentication and persistent mounts remain intact. Model metadata and included quota are checked before the single synthesis request. This profile is scoped to the same test job; it does not enable general paid production or publication.
+
+
+### Biblioteca musical Glowfy v1
+
+La imagen incorpora cuatro MP3 de 20 segundos seleccionados por Jorge y su manifiesto, sin URLs temporales, credenciales ni audios de voz. Los tres Dockerfiles contemplan las dependencias de la nueva ruta privada de música. No se cambian el trabajador, la sesión de Codex, los montajes ni los límites de recursos. Las pistas se comprueban por SHA-256 al servirlas o seleccionarlas para mezclar.

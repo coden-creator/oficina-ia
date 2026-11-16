@@ -1,4 +1,5 @@
 import {prepareMaterial,materialEvidence} from './material-import.js';
+import {mountMusicLibrary} from './music-panel.js';
 import {el,icon,button,link,pageHeader,emptyState,badge,groupOf,isTechnical,dateLabel,jobHref,requestJSON,STAGE_LABELS} from './ui.js';
 
 export function mountVideoPanel(page,{brandContext,data}){
@@ -6,6 +7,7 @@ export function mountVideoPanel(page,{brandContext,data}){
  const newButton=button('Nueva solicitud',()=>openRequest(),{primary:true,iconName:'plus'});
  page.append(pageHeader('Estudio de contenido','Revisá las piezas, pedí cambios y seguí su producción.',newButton));
  const availability=el('div','','studio-availability');page.append(availability);
+ mountMusicLibrary(page,brandContext);
  const tabs=el('nav','','studio-tabs');tabs.setAttribute('aria-label','Estado de los trabajos');page.append(tabs);
  const message=el('p','','inline-message');message.setAttribute('role','status');const content=el('div','','studio-content');page.append(message,content);
  const requestDialog=el('dialog','','office-dialog request-dialog');requestDialog.setAttribute('aria-labelledby','request-title');
@@ -49,6 +51,7 @@ export function mountVideoPanel(page,{brandContext,data}){
   const same=selectedJob?.id===job.id&&selectedJob?.version===job.version,comment=same?feedback?.value||'':'';selectedJob=job;reviewTitle.textContent=job.brief.objective;reviewBody.replaceChildren();reviewError.textContent='';feedback=null;
   const previewBox=el('section','','piece-preview');if(job.artifact){const video=el('video');video.controls=true;video.preload='metadata';video.playsInline=true;video.src=job.artifact.url;video.setAttribute('aria-label','Vista previa de '+job.brief.objective);previewBox.append(video,el('p',isTechnical(job)?'Prueba técnica sin voz. No es una pieza final.':'Vista previa de la versión '+job.version,'preview-caption'));}
   else previewBox.append(icon('studio'),el('strong','Todavía no hay un video'),el('p','La solicitud conserva su contexto y el avance disponible.'));
+  if(job.music)previewBox.append(el('p','Música: '+job.music.title,'preview-caption'));
   const decisions=el('section','','piece-decisions');const meta=el('div','','piece-meta');meta.append(badge(job.state),el('span','Versión '+job.version,'muted'));decisions.append(meta,el('h3','Tu revisión'),el('p',job.brief.cta,'piece-cta'));
   if(job.blocker)decisions.append(el('p',job.blocker,'attention-note'));
   if(job.state==='discarded')decisions.append(el('p','Motivo: '+job.discard.reason,'attention-note'));

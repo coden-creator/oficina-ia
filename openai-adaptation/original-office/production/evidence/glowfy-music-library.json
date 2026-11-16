@@ -1,0 +1,23 @@
+{
+  "scope": "Four music variants selected by Jorge for Glowfy; videos still require separate review",
+  "musicGeneratedCount": 4,
+  "estimatedCreditsAuthorized": 2200,
+  "reportedFinalCredits": 1199.73,
+  "newProviderCallsForIntegration": 0,
+  "nodeTests": {
+    "passed": 50,
+    "note": "28 core tests including corrected HTTP transport test; 22 navigation/data/voice-ledger regression tests. Synthetic production inputs are not new AI outputs."
+  },
+  "localBrowser": {
+    "tracks": 4,
+    "audioPlayback": true,
+    "downloadHashVerified": true,
+    "brandIsolation": true,
+    "keyboard": true,
+    "mobileNoOverflow": true,
+    "javascriptErrors": 0
+  },
+  "liveDeployment": "pending",
+  "existingVideoRerendered": false,
+  "published": false
+}

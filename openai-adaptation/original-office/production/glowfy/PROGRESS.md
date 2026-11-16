@@ -11,3 +11,8 @@ Jorge autorizó expresamente reenviar la configuración al mismo conector de Eas
 Verificado: descarga y SHA256, decodificación completa, -16,32 LUFS y pico -1,52 dBTP. La música y los cuatro primeros efectos se detectaron en el audio exportado comparándolos con sus fuentes. Revisados 36 cuadros distribuidos por todo el clip y reproducción en escritorio/móvil sin errores JavaScript. Estas comprobaciones no acreditan una escucha subjetiva ni equivalencia artística con las referencias.
 
 Código desplegado: `3c7d72b5196ea3903de861125d2d5e46f4120d4d`. [Evidencia de la prueba](../evidence/glowfy-social-real.json). La aceptación audiovisual depende de Jorge. No está aprobado, publicado ni programado.
+
+
+## Cuatro variantes musicales elegidas
+
+Jorge escuchó las muestras A/B/C/D y seleccionó las cuatro para variar la música de Glowfy. Quedan registradas en la biblioteca y conectadas al perfil social, con nivel ajustado por pista y selección estable por pieza. La UI ofrece escucha y descarga privada. No se vuelve a producir el video existente; sus decisiones y la revisión pendiente se conservan. Ver [MUSICA.md](MUSICA.md).

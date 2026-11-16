@@ -115,3 +115,10 @@ Resultado de la tercera intervención: escena nueva con ocho responsables y tres
 Validación: Chromium autenticado local a 1440/390/320 px, seis rutas, decisiones de prueba, selector único, aislamiento de marca, borradores, reproducción de MP4 sintético, inspector de agente, trabajo simulado registrado, teclado, movimiento reducido y cero errores JavaScript. Se inspeccionaron capturas de Inicio, Oficina y móvil. Se evitó reconstruir las vistas en cada consulta cuando los datos no cambiaron, y el estado visual sigue actualizándose con la animación pausada. Los proveedores son simulados; no se usó ElevenLabs ni inferencia real. Ver `production/OFICINA-Y-AUTONOMIA.md` para límites de la coordinación y producción.
 
 2026-11-16: la ficha muestra el paso observado de narración, animación o QA mientras se produce la primera prueba. El encabezado reconoce la prueba de Glowfy sin declarar disponibles las otras marcas. Sin nuevos selectores ni cambio de estructura. Pendiente comprobación del despliegue y reproducción de la primera pieza narrada.
+
+
+## Biblioteca musical aprobada de Glowfy
+
+Se incorpora un bloque desplegable en el Estudio, antes de los filtros de trabajos. Usa la paleta existente (#0d0e12, #171a22, #303644, #eef0f5, #aeb7c7, #c3afff), tipografía de la oficina y cuatro filas con nombre, reproductor y descarga; en móvil cada fila se apila. Se conserva la selección global de marca. No agrega tarjetas promocionales, animaciones ni nuevas conexiones.
+
+La apertura directa utiliza `musica=1`. La biblioteca detiene el audio al cerrar, salir del Estudio o cambiar de marca; ignora respuestas tardías y conserva la vista durante el sondeo de trabajos. Los controles nativos tienen etiquetas y navegación por teclado. La selección de Jorge ya está registrada: no se vuelve a pedir elegir una sola favorita.

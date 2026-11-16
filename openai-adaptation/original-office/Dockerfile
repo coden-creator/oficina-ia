@@ -8,6 +8,8 @@ COPY --chown=node:node public/ ./public/
 COPY --chown=node:node video/ ./video/
 COPY --chown=node:node connections/ ./connections/
 COPY --chown=node:node production/reference-standard.mjs ./production/reference-standard.mjs
+COPY --chown=node:node production/music-library.mjs ./production/music-library.mjs
+COPY --chown=node:node production/audio/glowfy-* ./production/audio/
 USER node
 EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 CMD node -e "require('http').get('http://127.0.0.1:3000/health',r=>{r.resume();process.exit(r.statusCode===200?0:1)}).on('error',()=>process.exit(1))"
