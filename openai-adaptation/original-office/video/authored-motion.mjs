@@ -35,7 +35,7 @@ export function validateGraph(g){
   for(const k of ['sw','maxWidth','pathLength','tracking'])if(n[k]!==undefined&&(!Number.isFinite(n[k])||Math.abs(n[k])>10000))throw Error('AUTHORED_NUMBER_INVALID');
   for(const [p,points] of Object.entries(n.tracks||{})){if(!props.has(p)||!Array.isArray(points)||points.length<1||points.length>16||points.some((v,i)=>!Array.isArray(v)||v.length<2||v.length>3||!Number.isFinite(v[0])||v[0]<0||v[0]>1||!Number.isFinite(v[1])||Math.abs(v[1])>10000||(v[2]&&!easing.has(v[2]))||(i&&v[0]<=points[i-1][0])))throw Error('AUTHORED_TRACK_INVALID');}
  }
- if(g.sounds.some(c=>!sounds.has(c.name)||!Number.isFinite(c.at)||c.at<0||c.at>.95||!Number.isFinite(c.gainDb)||c.gainDb< -24||c.gainDb> -8||typeof c.intention!=='string'||c.intention.length>150))throw Error('AUTHORED_SOUND_INVALID');
+ if(g.sounds.some(c=>!c||Object.keys(c).some(k=>!['name','at','gainDb','intention'].includes(k))||!sounds.has(c.name)||!Number.isFinite(c.at)||c.at<0||c.at>.95||!Number.isFinite(c.gainDb)||c.gainDb< -24||c.gainDb> -8||typeof c.intention!=='string'||c.intention.length>150))throw Error('AUTHORED_SOUND_INVALID');
  return g;
 }
 export function validateAuthoredPlan(p){if(p.scenes.length!==4||p.scenes.some((s,i)=>s.scene!==i+1))throw Error('AUTHORED_SCENE_ORDER');return p;}

@@ -1,6 +1,18 @@
 # Original shell + protected internal video workflow
 
-> Revisión actual (código, pendiente de despliegue): [recuperación del departamento orgánico](production/RECUPERACION-CONTENIDO-ORGANICO.md) identifica el motor original y lo que falta portar. Se añade [configuración de ElevenLabs en Conexiones](connections/README.md) y descarte de ideas con historial; no se habilita síntesis ni publicación.
+## Producción por proyecto · 16 de noviembre de 2026
+
+La oficina está conectada al trabajador `gpt-6-astra` con razonamiento `high`, mediante el uso incluido de ChatGPT. El plan de edición, la autoría de escenas y la revisión de imágenes del lote nuevo usan ese modelo. Las etapas iniciales de las dos primeras fichas comenzaron con Sol; se conserva la procedencia por etapa. [Estado y entregables](production/glowfy/PROGRESS.md).
+
+El protocolo `glowfy-authored-motion-v2` permite construir geometría vectorial, jerarquías, materiales, animación y contactos sonoros por proyecto. El especialista entrega datos validados, sin ejecutar JavaScript generado ni cargar URLs/recursos arbitrarios. El director recibe cuatro secuencias de imágenes renderizadas y solicita correcciones concretas; su revisión no equivale a la aprobación audiovisual de Jorge.
+
+La ruta se activa únicamente para los IDs autorizados en `OFFICE_AUTHORED_VIDEO_JOB_IDS`, con autorización registrada en cada ficha. Usa la voz existente autorizada de ElevenLabs, música y efectos de la biblioteca elegida, guarda los resultados en el volumen privado y reutiliza la voz al corregir imágenes. No hay publicación ni programación automática. La investigación sigue limitada a evidencia suministrada; no se afirma investigación web autónoma.
+
+Las observaciones de cada render se vinculan a su versión y hash. Los cuadros de revisión se renderizan individualmente a 1080×1920 antes de componer el contacto visual. El cierre conserva fondos claros/oscuros y evita repetir logo, CTA o aclaraciones ya presentes. Las correcciones del compositor invalidan la revisión de imágenes y conservan los diseños previos; no autorizan nueva síntesis de voz.
+
+> Los apartados siguientes conservan el historial de integración. Sus restricciones por defecto y resultados simulados no sustituyen la evidencia de producción vigente enlazada arriba.
+
+> Registro histórico (código entonces pendiente de despliegue): [recuperación del departamento orgánico](production/RECUPERACION-CONTENIDO-ORGANICO.md) identifica el motor original y lo que falta portar. Se añade [configuración de ElevenLabs en Conexiones](connections/README.md) y descarte de ideas con historial; no se habilita síntesis ni publicación.
 
 > Corrección creativa: Jorge rechazó el acabado de tarjetas y fijó dos referencias como mínimo audiovisual. Ver [directrices vigentes](production/ESTANDAR-AUDIOVISUAL.md). La prueba de conexión sigue siendo evidencia técnica, no aceptación del video.
 

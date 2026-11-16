@@ -1,5 +1,15 @@
 # Oficina de Jorge · estado vigente
 
+## Producción por proyecto · 16 de noviembre de 2026
+
+La oficina está conectada al trabajador `gpt-6-astra` con razonamiento `high`, mediante el uso incluido de ChatGPT. El plan de edición, la autoría de escenas y la revisión de imágenes del lote nuevo usan ese modelo. Las etapas iniciales de las dos primeras fichas comenzaron con Sol; se conserva la procedencia por etapa. [Estado y entregables](production/glowfy/PROGRESS.md).
+
+El protocolo `glowfy-authored-motion-v2` permite construir geometría vectorial, jerarquías, materiales, animación y contactos sonoros por proyecto. El especialista entrega datos validados, sin ejecutar JavaScript generado ni cargar URLs/recursos arbitrarios. El director recibe cuatro secuencias de imágenes renderizadas y solicita correcciones concretas; su revisión no equivale a la aprobación audiovisual de Jorge.
+
+La ruta se activa únicamente para los IDs autorizados en `OFFICE_AUTHORED_VIDEO_JOB_IDS`, con autorización registrada en cada ficha. Usa la voz existente autorizada de ElevenLabs, música y efectos de la biblioteca elegida, guarda los resultados en el volumen privado y reutiliza la voz al corregir imágenes. No hay publicación ni programación automática. La investigación sigue limitada a evidencia suministrada; no se afirma investigación web autónoma.
+
+Las observaciones de cada render se vinculan a su versión y hash. Los cuadros de revisión se renderizan individualmente a 1080×1920 antes de componer el contacto visual. El cierre conserva fondos claros/oscuros y evita repetir logo, CTA o aclaraciones ya presentes. Las correcciones del compositor invalidan la revisión de imágenes y conservan los diseños previos; no autorizan nueva síntesis de voz.
+
 Pendientes vigentes de Jorge: [Estudio, identidades de marca, animaciones e integración social](production/PENDIENTES.md).
 
 Biblioteca musical: Jorge eligió las cuatro variantes de Glowfy. Se incorporan reproducción/descarga privada en el Estudio y selección estable por pieza en el mezclador social. [Alcance y evidencia](production/glowfy/MUSICA.md).
@@ -10,7 +20,7 @@ La primera prueba completa de Glowfy ejecutó cinco etapas reales de Codex, voz 
 
 Estado detallado: [Glowfy](production/glowfy/PROGRESS.md), [directrices de montaje](production/glowfy/TASTE.md), [estructura visual](UI-DESIGN-REVIEW.md), [límites de empaquetado](PACKAGING.md). Esta corrección usa `OFFICE_VOICE_TEST_TAKE=2` y `OFFICE_VOICE_PROFILE=social-v2`, activados únicamente para la pieza autorizada. Ver [evidencia del resultado real](production/evidence/glowfy-social-real.json).
 
-Los apartados siguientes documentan etapas históricas. Las afirmaciones antiguas de ausencia de voz, música, conexión o despliegue no describen por sí solas la prueba actual; la síntesis sigue limitada a las tomas autorizadas de una sola pieza.
+Los apartados siguientes documentan etapas históricas. Las afirmaciones antiguas de ausencia de voz, música, conexión o despliegue no describen por sí solas la prueba actual; la síntesis sigue limitada a los IDs y tomas expresamente autorizados.
 
 ## Real functionality
 - Preserves original office canvas, rooms, navigation and visual styles with audited unavailable states.

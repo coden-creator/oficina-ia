@@ -1,4 +1,12 @@
-# Runtime packaging: prepared, not deployed or authenticated
+# Empaquetado y despliegue · historial técnico
+
+## Ruta de producción vigente · 16 de noviembre de 2026
+
+`Dockerfile.easypanel` empaqueta el compositor de escenas por proyecto y su inspector de imágenes. El App existente y el trabajador privado conservan 1 CPU/768 MiB cada uno. Un render simultáneo; consultas de uso incluido antes de inferencia. El trabajador utiliza `gpt-6-astra`/`high`, con sesión del propietario en el volumen privado, y acepta imágenes generadas de revisión a través del socket privado. No recibe credenciales de ElevenLabs ni el socket Docker.
+
+Los grafos generados, narraciones, imágenes de revisión y MP4 viven en el volumen de videos; el ZIP privado de Motion Video Director y los videos de referencia no se redistribuyen en la imagen ni el repositorio. Las pruebas sintéticas del contrato y los renders/consultas reales se registran separadamente. Ver [estado de las tres nuevas piezas](production/glowfy/PROGRESS.md).
+
+Los bloques siguientes son registros históricos. No interpretarlos como ausencia actual de login, inferencia, Canvas o voz.
 
 > Corrección creativa: Jorge rechazó el acabado de tarjetas y fijó dos referencias como mínimo audiovisual. Ver [directrices vigentes](production/ESTANDAR-AUDIOVISUAL.md). La prueba de conexión sigue siendo evidencia técnica, no aceptación del video.
 
