@@ -25,3 +25,5 @@
 - 2026-11-16 · Tres producciones únicas completadas en el App existente, código f63a8d1. Reserva v3 17,37 s; Recordatorio v2 17,30 s; Horario v2 16,97 s. Narraciones reales Eleven v4, música A/B/D y efectos revisados. Hashes, decodificación, secuencias completas y navegador escritorio/móvil comprobados; 28 pruebas pertinentes pasaron. Los tres permanecen awaiting_review y los videos previos están intactos. Sin publicación ni nuevas generaciones de música/SFX. Evaluación estética y escucha subjetiva pendientes de Jorge.
 
 - Detectado durante revisión: la reproducción completa funciona pero el seek regresaba a cero. Implementados rangos HTTP autenticados con validación de versión/hash; verificaciones de bytes, límites, HEAD y acceso sin credenciales. Pendiente comprobación real después del deploy.
+
+- Corrección de reproducción desplegada en a29589b: comprobados saltos reales a 10,42 / 10,38 / 10,18 s y navegación escritorio/móvil de las tres piezas, cero errores JS. Diez pruebas de HTTP/rangos/catálogo pasaron. Sin cambio en archivos, versiones o aprobaciones; Codex conectado, cola vacía y publicación deshabilitada.

@@ -1,6 +1,6 @@
 # Glowfy · tres producciones listas para revisión
 
-Fase: tres archivos reales terminados y visibles en la oficina. Código desplegado: `f63a8d143ced62d04b2f894bbb200fb66fe4626c`. Jorge pidió tres videos y corrigió que cada uno debe tener animaciones y producción propias.
+Fase: tres archivos reales terminados y visibles en la oficina. Código desplegado: `a29589b47ee076e19bab4c69a78c194096250909`. Jorge pidió tres videos y corrigió que cada uno debe tener animaciones y producción propias.
 
 - Reserva: `62ff9b0a-8653-4f23-b16f-08b8d00f62cb`, v3, 17,37 s. Conversaciones flotantes → opciones → reserva troquelada. Música A.
 - Recordatorio: `60dce0a0-6d3c-4254-87d1-d7782c8de951`, v2, 17,30 s. Escritorio, papeles, reloj, sobre y agenda. Música B.
@@ -14,4 +14,4 @@ Codex sigue conectado, sin trabajos activos; publicación deshabilitada. El vide
 
 Pendiente: evaluación audiovisual y decisiones de Jorge para cada versión. No aprobados, programados ni publicados. Evidencia y continuidad en `../evidence/glowfy-batch-3-*.json`.
 
-Corrección final en curso: la entrega de MP4 no soportaba rangos y algunos saltos volvían a cero. Agregado soporte HTTP de rango único y HEAD conservando autenticación, versión y hash. Reutilizado por el catálogo SFX. Pendiente desplegar y verificar el segundo solicitado, además de la reproducción completa ya comprobada.
+Corrección final completada: la entrega de MP4 no soportaba rangos y algunos saltos volvían a cero. Agregado soporte HTTP de rango único y HEAD conservando autenticación, versión y hash. Reutilizado por el catálogo SFX. Desplegada y verificada: los tres videos alcanzaron 10,42 / 10,38 / 10,18 s al solicitar el 60% de su duración. Diez pruebas del cambio pasaron. Artefactos conservados, ninguna nueva generación.

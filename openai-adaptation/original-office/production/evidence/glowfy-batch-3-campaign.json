@@ -2,7 +2,7 @@
   "schema_version": 1,
   "campaign_id": "glowfy-tres-piezas-20261116",
   "brand": "Glowfy",
-  "updated_at": "2026-11-16T04:25:22.017Z",
+  "updated_at": "2026-11-16T04:30:49.347Z",
   "objective": "Tres videos orgánicos con producciones y animaciones distintas para revisión de Jorge",
   "audience": "Profesionales y negocios de belleza que coordinan citas por WhatsApp",
   "status": "awaiting_owner_review",
@@ -248,8 +248,8 @@
     {
       "type": "browser",
       "evidence": "glowfy-batch-3-browser.json",
-      "passed": false,
-      "note": "Reproducción completa funciona. Detectado salto que vuelve a cero: corregidos rangos HTTP; verificación de búsqueda exacta pendiente de deploy."
+      "passed": true,
+      "note": "Los tres videos reproducen y alcanzan exactamente el segundo solicitado después de corregir rangos HTTP; escritorio/móvil sin desbordamiento de página ni errores JS."
     },
     {
       "type": "visual_review",
@@ -260,6 +260,12 @@
       "type": "subjective_audio",
       "passed": null,
       "result": "Sin escucha subjetiva verificada; niveles, flujo y decodificación comprobados. Evaluación de voz/mezcla a cargo de Jorge."
+    },
+    {
+      "type": "http_ranges",
+      "tests": 10,
+      "passed": true,
+      "scope": "Rangos parciales, sufijos, errores 416, HEAD, rechazo sin credenciales, versión anterior y catálogo de sonidos"
     }
   ],
   "publication": null,
@@ -270,9 +276,7 @@
     "evidence": "Tres narraciones con Eleven v4 y una toma máxima por ficha; la voz de Reserva ya guardada se reutiliza al cambiar visuales. Sin nueva música, SFX ni clonación. Sobreconsumo desactivado. La cuota global bajó 363 unidades entre las consultas anterior y posterior; no se obtuvo costo por solicitud ni moneda y no se atribuye ese delta como facturación individual."
   },
   "next_action": "Jorge revisa las tres piezas, solicita cambios o aprueba cada versión; publicación separada.",
-  "blockers": [
-    "Comprobar búsqueda exacta tras despliegue de rangos HTTP"
-  ],
+  "blockers": [],
   "storage": {
     "location": "production/evidence/glowfy-batch-3-campaign.json",
     "retrieved_at": "2026-11-16T04:25:22.017Z",
@@ -284,5 +288,6 @@
     "Los guiones iniciales de Reserva y Recordatorio se conservaron para reutilizar la narración; la dirección de arte posterior y los módulos de producción reemplazan sus antiguas indicaciones visuales.",
     "Guion y revisión creativa no acreditan calidad estética ni viralidad.",
     "No se pudo cargar el validador empaquetado de la skill; se validó JSON, campos requeridos y referencias de estas entregas localmente."
-  ]
+  ],
+  "deployment": "a29589b47ee076e19bab4c69a78c194096250909"
 }

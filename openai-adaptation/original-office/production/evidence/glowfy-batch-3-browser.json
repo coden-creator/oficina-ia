@@ -1,5 +1,5 @@
 {
-  "deployment": "f63a8d143ced62d04b2f894bbb200fb66fe4626c",
+  "deployment": "a29589b47ee076e19bab4c69a78c194096250909",
   "results": [
     {
       "key": "reserva",
@@ -8,7 +8,8 @@
       "width": 1080,
       "height": 1920,
       "playback": true,
-      "seeking": false,
+      "seeking": true,
+      "seekTime": 10.42,
       "mobileNoPageOverflow": true,
       "reviewButtonVisible": true,
       "approved": false
@@ -20,7 +21,8 @@
       "width": 1080,
       "height": 1920,
       "playback": true,
-      "seeking": false,
+      "seeking": true,
+      "seekTime": 10.38,
       "mobileNoPageOverflow": true,
       "reviewButtonVisible": true,
       "approved": false
@@ -32,7 +34,8 @@
       "width": 1080,
       "height": 1920,
       "playback": true,
-      "seeking": false,
+      "seeking": true,
+      "seekTime": 10.18,
       "mobileNoPageOverflow": true,
       "reviewButtonVisible": true,
       "approved": false
@@ -40,6 +43,5 @@
   ],
   "javascriptErrors": 0,
   "mutedPlaybackOnly": true,
-  "subjectiveAudioJudgment": "pending Jorge",
-  "seekingVerification": "Initial seeked event check was insufficient; continuous playback passed. HTTP range fix prepared, exact seek verification pending deployment."
+  "subjectiveAudioJudgment": "pending Jorge"
 }
