@@ -22,13 +22,13 @@ export function createOrganicWorkflow({flow,runner,enabled=false,allowedJobIds=[
     const stage=stages[index];if(job.outputs[stage]){index++;continue;}
     await patch(j=>{j.stage=stage;},'specialist_started');
     // Each specialist gets the facts and drafts it uses, once. Keep the exact
-    // script and evidence; optional visual history must not exhaust the worker budget.
+    // script and evidence; leave room for the runtime envelope (24,000 characters).
     const dependencies={research:[],strategy:['research'],script:['research','strategy'],creative_review:['strategy','script'],art_direction:['strategy','script']}[stage];
     const previous=Object.fromEntries(dependencies.filter(k=>job.outputs[k]).map(k=>{const {provenance,inheritedFrom,...content}=job.outputs[k];return [k,content];}));
     const history=recentVisualHistory(await flow.list(brand),id);
     const q={brand,jobId:id,stage,prompt:organicPrompts[stage]+' '+directionRules,input:{brief:job.brief,previous,feedback:job.organicFeedback??null,visualHistory:history},context:{workflow:ORGANIC_PROTOCOL,brand,brandProfile:brands[brand],version:job.version,editorId,restrictions:{noPaid:true,noPublish:true,noCloning:true,research:'supplied-evidence-only'}}};
-    while(JSON.stringify(q).length>28000&&q.input.visualHistory.length)q.input.visualHistory.pop();
-    if(JSON.stringify(q).length>28000)throw Error('SPECIALIST_CONTEXT_TOO_LARGE');
+    while(JSON.stringify(q).length>23000&&q.input.visualHistory.length)q.input.visualHistory.pop();
+    if(JSON.stringify(q).length>23000)throw Error('SPECIALIST_CONTEXT_TOO_LARGE');
     const result=await call(q);
     if(result?.status!=='completed')throw Error(result?.reason||'ORGANIC_STAGE_FAILED');
     const output=validateOrganicOutput(result.output,{stage,brand,brief:job.brief});
