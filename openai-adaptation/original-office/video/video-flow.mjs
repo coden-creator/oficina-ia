@@ -20,9 +20,10 @@ const validId=x=>typeof x==='string'&&/^[a-z0-9-]{1,80}$/.test(x);
 function ensureBrand(b){if(!Object.hasOwn(brands,b))throw new Error('Marca no admitida');}
 function validateBrief(b){
  if(!b||typeof b!=='object'||Array.isArray(b))throw new Error('Brief requerido');
- const allowed=new Set(['objective','cta','voice','evidence','feedback','audience','channel','format','style','reference','qualityStandard','paid','publish']);
+ const allowed=new Set(['objective','cta','voice','evidence','feedback','audience','channel','format','style','reference','qualityStandard','deliverable','paid','publish']);
  for(const k of Object.keys(b))if(!allowed.has(k))throw new Error(`Campo de brief no admitido: ${k}`);
  if(b.qualityStandard!==undefined)validateQualityStandard(b.qualityStandard);
+ if(b.deliverable!==undefined&&!['video','idea'].includes(b.deliverable))throw Error('INVALID_DELIVERABLE');
  for(const k of ['objective','cta'])if(typeof b[k]!=='string'||!b[k].trim()||b[k].length>2000)throw new Error(`Brief inválido: ${k}`);
  for(const k of ['feedback','audience','channel','format','style','reference'])if(b[k]!==undefined&&(typeof b[k]!=='string'||b[k].length>4000))throw new Error(`Brief inválido: ${k}`);
  if(b.voice&&b.voice!=='none')throw new Error('Esta versión solo admite animática sin voz; no clona ni genera voz');

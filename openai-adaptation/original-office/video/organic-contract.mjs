@@ -43,7 +43,7 @@ export function validateOrganicOutput(output,{stage,brand,brief}){
  return output;
 }
 export const organicPrompts=Object.freeze({
- research:'Valeria: analiza evidencia aportada y hasta tres ángulos originales. No hay navegación: declara ese límite y no inventes tendencias ni métricas.',
+ research:'Valeria: analiza evidencia aportada y hasta tres ángulos originales. No hay navegación: declara ese límite y no inventes tendencias ni métricas. Consulta visualHistory, que incluye propuestas del mismo lote: elige un concepto distinto de los anteriores; no repitas la misma idea con otro título.',
  strategy:'Valeria: elige un ángulo coherente con objetivo, público y hechos comprobados. Explica la elección y las afirmaciones permitidas.',
  script:'Mateo: escribe narración y storyboard de 3 a 8 escenas con acciones visuales concretas, recursos necesarios y cierre con la CTA exacta. La duración final dependerá de la voz real. Cada pieza necesita un concepto visual propio, un objeto protagonista y transformaciones que cuenten esa idea. Cambiar palabras, colores o música de una misma plantilla no crea otra producción. Usa la dirección específica del brief; no repitas por defecto teléfono, mano y agenda. No produzcas tarjetas de texto como sustituto del video.',
  creative_review:'Nico: revisa el guion con los seis criterios. Cada nota exige una razón. Pass solo si total >=42/60 y cada nota >=6. Changes debe indicar correcciones concretas; reject descarta el concepto. No afirmes haber visto un video ni pronostiques viralidad.',

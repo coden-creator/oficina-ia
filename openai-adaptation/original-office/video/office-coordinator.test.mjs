@@ -33,3 +33,24 @@ test('technical QA is attributed to Control while an editor reservation is retai
  const flow=createVideoFlow({dataDir:await tmp(t)}),j=await flow.create({brandId:'glowfy',brief});await flow.updateOffice('glowfy',j.id,1,x=>{x.state='running';x.stage='qa';x.execution={editorId:'video2'};x.editorId='video2';},'fixture');
  const office=createOfficeCoordinator({flow,runner:{status}}),snapshot=await office.snapshot('glowfy');assert.equal(snapshot.agents.find(a=>a.id==='calidad').jobId,j.id);assert.equal(snapshot.agents.find(a=>a.id==='calidad').status,'working');assert.equal(snapshot.agents.find(a=>a.id==='video2').status,'idle');
 });
+test('idea delivery follows every specialist, stops before paid production, and remains reviewable after restart',async t=>{
+ const dir=await tmp(t),flow=createVideoFlow({dataDir:dir}),calls=[],runner=mockRunner(calls),j=await flow.create({brandId:'glowfy',brief:{...brief,deliverable:'idea'}});let rendered=0;
+ const work=createOrganicWorkflow({flow,runner,enabled:true,allowedJobIds:[j.id],production:{permits:()=>true,render:async()=>{rendered++;throw Error('UNEXPECTED_RENDER');}}});
+ await work.execute('glowfy',j.id);const done=await work.execute('glowfy',j.id,{phase:'edit',editorId:'video3'});
+ assert.equal(done.state,'awaiting_review');assert.equal(done.stage,'owner_review');assert.equal(done.artifact,null);assert.equal(done.approval,null);assert.equal(rendered,0);assert.deepEqual(calls.map(c=>c.stage),['research','strategy','script','creative_review','art_direction']);
+ const {publicJob}=await import('./http.mjs'),view=publicJob(await createVideoFlow({dataDir:dir}).get('glowfy',j.id));assert.equal(view.brief.deliverable,'idea');assert.equal(view.concept.angle,'Agenda organizada');assert.ok(view.stages.filter(s=>['production','qa'].includes(s.id)).every(s=>s.status==='not_requested'));
+ await assert.rejects(flow.approve('glowfy',j.id,{version:1,artifactHash:'a'.repeat(64)}));
+ const revised=await flow.requestChanges('glowfy',j.id,{feedback:'Otra perspectiva'});assert.equal(revised.brief.deliverable,'idea');assert.equal(revised.version,2);assert.equal(revised.artifact,null);
+});
+test('subsequent ideas receive same-brand conceptual history without needing an exported video',async t=>{
+ const flow=createVideoFlow({dataDir:await tmp(t)}),calls=[],runner=mockRunner(calls);
+ const prior=await flow.create({brandId:'glowfy',brief:{...brief,deliverable:'idea'}}),other=await flow.create({brandId:'purify',brief:{...brief,deliverable:'idea'}}),next=await flow.create({brandId:'glowfy',brief:{...brief,deliverable:'idea'}});
+ const work=createOrganicWorkflow({flow,runner,enabled:true,allowedJobIds:[prior.id,other.id,next.id]});await work.execute('glowfy',prior.id);await work.execute('purify',other.id);await work.execute('glowfy',next.id);
+ const q=calls.find(c=>c.jobId===next.id&&c.stage==='research');assert.ok(q.input.visualHistory.some(x=>x.id===prior.id&&x.concept==='Agenda organizada'));assert.equal(q.input.visualHistory.some(x=>x.id===other.id||x.id===next.id),false);
+});
+
+test('explicit idea trigger grants only that idea and persists authorization without enabling video production',async t=>{
+ const dir=await tmp(t),flow=createVideoFlow({dataDir:dir}),calls=[],runner=mockRunner(calls),idea=await flow.create({brandId:'glowfy',brief:{...brief,deliverable:'idea'}}),video=await flow.create({brandId:'glowfy',brief});
+ const office=createOfficeCoordinator({flow,runner,enabled:true,resourceMonitor:async()=>({ready:false})});assert.equal((await office.manualRun('glowfy',video.id)).waiting,true);await office.manualRun('glowfy',idea.id);assert.equal((await flow.get('glowfy',idea.id)).ideaAuthorization.source,'owner-idea-trigger');assert.equal(calls.length,0);await office.stop();
+ const restored=createOfficeCoordinator({flow,runner,enabled:true,resourceMonitor:async()=>({ready:true})});await restored.recover();await restored.tick();await restored.stop();assert.ok(calls.length>0);assert.ok(calls.every(c=>c.jobId===idea.id));assert.equal((await flow.get('glowfy',video.id)).state,'queued');
+});

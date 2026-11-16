@@ -50,7 +50,9 @@ export function createOrganicWorkflow({flow,runner,enabled=false,allowedJobIds=[
     index++;
    }
    if(phase==='prepare')await patch(j=>{j.stage='art_direction';j.state='queued';j.execution=null;},'ready_for_editor');
-   else if(production?.permits(job)){
+   else if(job.brief.deliverable==='idea'){
+    await patch(j=>{j.stage='owner_review';j.state='awaiting_review';j.execution=null;j.editorId=editorId;j.blocker=null;},'idea_ready_for_review');
+   }else if(production?.permits(job)){
     await patch(j=>{j.stage='production';j.editorId=editorId;},'production_started');
     const result=await production.render(job,async(stage,summary,media)=>patch(j=>{j.stage=stage;j.productionProgress=summary;if(media?.preview)j.preview=copy(media.preview);},'production_progress'));
     await patch(j=>{j.artifact=result.artifact;if(result.preview)j.preview=result.preview;if(result.production.plan)j.productionPlan=result.production.plan;j.outputs.production=result.production;j.outputs.qa=result.qa;j.stage='owner_review';j.state='awaiting_review';j.execution=null;j.productionProgress=null;},'narrated_video_ready');
@@ -61,5 +63,5 @@ export function createOrganicWorkflow({flow,runner,enabled=false,allowedJobIds=[
   return job;
  }
  async function execute(brand,id,options){const key=brand+'/'+id;if(processing.has(key))return {waiting:true,reason:'PIECE_RUNNING'};processing.add(key);try{return await executeInternal(brand,id,options);}finally{processing.delete(key);}}
- return {execute,permits:permit};
+ return {execute,permits:permit,authorizeIdea:id=>allowed.add(id)};
 }
