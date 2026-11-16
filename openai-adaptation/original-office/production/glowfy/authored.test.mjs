@@ -25,7 +25,7 @@ test('contact-sheet cells remain isolated even with off-canvas paths and cached 
 });
 test('authored CTA and logo suppress the duplicate automatic closing layer',()=>{
  const c=createCanvas(1080,1920),ctx=c.getContext('2d'),g={background:'#FAF7FD',gradients:{},nodes:[{id:'cta',kind:'text',text:'Conocé Glowfy',size:60,x:200,y:200},{id:'logo',kind:'logo',x:10,y:10,w:20,h:20}]},beats={duration:10,captions:[],authoredScenes:[{start:0,end:10,graph:g}]};
- draw(ctx,9.9,{beats});assert.deepEqual([...ctx.getImageData(540,1800,1,1).data],[250,247,253,255]);g.nodes=[];draw(ctx,9.9,{beats});assert.ok(ctx.getImageData(540,1800,1,1).data[0]<100);
+ draw(ctx,9.9,{beats});assert.deepEqual([...ctx.getImageData(540,1800,1,1).data],[250,247,253,255]);g.nodes=[];draw(ctx,9.9,{beats});assert.deepEqual([...ctx.getImageData(540,1800,1,1).data],[250,247,253,255]);
 });
 test('renderer correction re-reviews cached designs without repeating design inference',async()=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'authored-reinspect-'));try{
@@ -35,4 +35,8 @@ test('renderer correction re-reviews cached designs without repeating design inf
   let calls=0;const runner={run:async q=>{calls++;assert.equal(q.stage,'visual_review');assert.equal(q.images.length,4);return {status:'completed',provenance:{provider:'codex-chatgpt-plan',model:'SYNTHETIC'},output:{detail:{verdict:'pass',observations:['Synthetic only'],corrections:[]}}};}};
   await authorScenes({job,plan,beats,outDir:dir,runner,onStage:async()=>{}});assert.equal(calls,1);await authorScenes({job,plan,beats,outDir:dir,runner,onStage:async()=>{}});assert.equal(calls,1);
  }finally{await fs.rm(dir,{recursive:true,force:true});}
+});
+
+test('shared illustration note disappears when the scene already has its own note',()=>{
+ const c=createCanvas(1080,1920),ctx=c.getContext('2d'),g={background:'#FAF7FD',gradients:{},nodes:[{id:'note',kind:'text',text:'Ejemplo ilustrado',size:28,x:100,y:100}]},beats={duration:10,captions:[],authoredScenes:[{start:0,end:10,graph:g}]};draw(ctx,2,{beats});const before=ctx.getImageData(0,1800,1080,70).data;assert.equal([...before].filter((v,i)=>i%4===0&&v<150).length,0);g.nodes=[];draw(ctx,2,{beats});const after=ctx.getImageData(0,1800,1080,70).data;assert.ok([...after].filter((v,i)=>i%4===0&&v<150).length>100);
 });

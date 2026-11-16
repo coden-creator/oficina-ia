@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';import path from 'node:path';import {createHash} from 'node:crypto';
 import {AUTHORED_PROTOCOL,validateAuthoredPlan,validateGraph,designPrompt} from '../../video/authored-motion.mjs';
 import {runProcess} from '../process.mjs';
-export const AUTHORED_RENDER_REVIEW='isolated-tiles-v2';
+export const AUTHORED_RENDER_REVIEW='clean-brand-v3';
 const hash=x=>createHash('sha256').update(JSON.stringify(x)).digest('hex');
 export function authoredPlan(job,ids){
  if(job?.brandId!=='glowfy'||!ids.includes(job.id)||job.brief?.productionMode!==AUTHORED_PROTOCOL||job.productionAuthorization?.protocol!==AUTHORED_PROTOCOL)return null;
@@ -24,7 +24,9 @@ export async function authorScenes({job,plan,beats,outDir,runner,onStage}){
    await onStage('production',`${attempt?'Corrigiendo':'Diseñando'} la escena ${i+1}/4 con ${job.outputs.edit_plan.provenance.model||'Codex'}${attempt?' · revisión '+attempt:''}`);
    const file=`scene-${i+1}-${AUTHORED_RENDER_REVIEW}-attempt-${attempt}.json`;let saved=await read(file);
    // Re-inspect the latest authored designs after a renderer fix; preserve prior inference/audio.
-   if(!saved&&attempt===0){for(let old=2;old>=0;old--){const prior=await read(`scene-${i+1}-attempt-${old}.json`);if(prior){if(prior.sourceHash!==sourceHash)throw Error('AUTHORED_CACHE_CONFLICT');saved={...prior,seededFrom:`scene-${i+1}-attempt-${old}.json`,renderReview:AUTHORED_RENDER_REVIEW};await write(file,saved);break;}}}
+   if(!saved&&attempt===0){
+    for(const prefix of ['isolated-tiles-v2-','']){for(let old=2;old>=0;old--){const previousFile=`scene-${i+1}-${prefix}attempt-${old}.json`,prior=await read(previousFile);if(prior){if(prior.sourceHash!==sourceHash)throw Error('AUTHORED_CACHE_CONFLICT');saved={...prior,seededFrom:previousFile,renderReview:AUTHORED_RENDER_REVIEW};await write(file,saved);break;}}if(saved)break;}
+   }
    const start=beats.scenes[i].start,end=i===3?beats.duration:beats.scenes[i+1].start;
    if(saved&&saved.sourceHash!==sourceHash)throw Error('AUTHORED_CACHE_CONFLICT');
    if(!saved){
@@ -42,7 +44,7 @@ export async function authorScenes({job,plan,beats,outDir,runner,onStage}){
   if(review&&review.graphHash!==graphHash)throw Error('AUTHORED_REVIEW_CONFLICT');
   if(!review){
    const images=await Promise.all(scenes.map(async s=>'data:image/jpeg;base64,'+(await fs.readFile(path.join(folder,`review-scene-${s.scene}.jpg`))).toString('base64')));
-   const r=await call('visual_review','Director de calidad: inspecciona las CUATRO imágenes adjuntas, cada una es una secuencia real de cuatro momentos (0/28/58/88%) de una escena. No son descripciones. Evalúa legibilidad, jerarquía, reconocibilidad, recortes, sombras, espacio negativo, acciones y coherencia con el guion. Critica defectos VISIBLES concretos: identifica texto/objeto y ubicación. Rechaza collage estático, diapositivas genéricas, objetos ilegibles o solapados. No inventes un problema porque la imagen no tiene sonido: estos cuadros no permiten juzgar voz, sincronía exacta ni movimiento entre muestras. No pidas cambiar el guion ni audio; corrige la construcción vectorial. Emite pass sólo cuando las cuatro escenas son visualmente presentables. Si changes, incluye una sola instrucción concreta por escena afectada, nunca detalles vagos ni nuevas exigencias incompatibles. Tu veredicto es revisión interna de imágenes, NO aprobación de Jorge ni certificación audiovisual completa.',{plan,narration:job.outputs.script.detail.narration,designNotes:scenes.map(s=>({scene:s.scene,rationale:s.rationale})),previousReview:review?.output?.detail??null},images);
+   const r=await call('visual_review','Director de calidad: inspecciona las CUATRO imágenes adjuntas, cada una es una secuencia real de cuatro momentos (0/28/58/88%) de una escena. No son descripciones. Evalúa legibilidad, jerarquía, reconocibilidad, recortes, sombras, espacio negativo, acciones y coherencia con el guion. Critica defectos VISIBLES concretos: identifica texto/objeto y ubicación. Rechaza collage estático, diapositivas genéricas, objetos ilegibles o solapados. No inventes un problema porque la imagen no tiene sonido: estos cuadros no permiten juzgar voz, sincronía exacta ni movimiento entre muestras. No pidas cambiar el guion ni audio; corrige la construcción vectorial. Emite pass sólo cuando las cuatro escenas son visualmente presentables. Si changes, incluye una sola instrucción concreta por escena afectada, nunca detalles vagos ni nuevas exigencias incompatibles. Tu veredicto es revisión interna de imágenes, NO aprobación de Jorge ni certificación audiovisual completa.',{plan,rendererLayers:'Subtítulos automáticos. Leyenda inferior sólo si no hay aclaración propia en el grafo. CTA y logo de cierre sólo si faltan en el grafo, sin banda de fondo. La revisión corresponde al resultado compuesto.',narration:job.outputs.script.detail.narration,designNotes:scenes.map(s=>({scene:s.scene,rationale:s.rationale})),previousReview:review?.output?.detail??null},images);
    review={sourceHash,graphHash,attempt,renderer:AUTHORED_RENDER_REVIEW,...r};await write(file,review);
   }
   reviews.push(review);if(review.output.detail.verdict==='pass')break;

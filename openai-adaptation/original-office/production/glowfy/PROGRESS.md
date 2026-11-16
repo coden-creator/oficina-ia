@@ -1,14 +1,14 @@
-# Glowfy · corrección de producción
+# Glowfy · tres nuevas producciones con escenas propias
 
 Fecha: 16 de noviembre de 2026 (America/Guatemala).
-Fase: auditoría y corrección del flujo tras rechazo de Jorge.
+Fase: producción real y revisión interna en curso; todavía no hay tres entregables nuevos terminados.
 
-Las tres piezas más recientes están exportadas y conservadas, pero Jorge rechazó su repetición visual y sonora: «Una mesa, tres funciones» v4, «Del otro lado del salón» v5 y «Después del último detalle» v4. No son referencias aprobadas. El piloto «El hilo de una cita» y las otras cinco piezas previas no fueron modificados.
+La oficina crea las escenas por proyecto mediante grafos vectoriales animados, con geometría, jerarquía, materiales, movimientos y contactos sonoros definidos por el especialista. El compositor ejecuta datos validados; no ejecuta código generado. Las tres fichas autorizadas están aisladas de los nueve videos anteriores.
 
-Se estudió Motion Video Director 3.5.2 aportado por Jorge, incluyendo guías, scripts y plantillas. Paquete privado fuera del repositorio; no confundir lectura local con instalación en el trabajador de producción. Se compararon el contrato dirigido, el compositor, el montaje sonoro, el runtime Codex y las referencias audiovisuales del usuario. Hallazgos y fuentes: `../AUDITORIA-PRODUCCION-20261116.md`.
+Modelo del trabajador verificado: `gpt-6-astra`, razonamiento `high`, mediante la cuenta ChatGPT y su uso incluido. Las primeras etapas de las dos primeras fichas comenzaron con Sol; su plan de edición y autoría visual usan Astra. La tercera ficha usa Astra desde investigación. No se ha habilitado una API de modelo de pago.
 
-Corrección de infraestructura de contexto: las observaciones audiovisuales de la versión/hash exactos pasan al historial de los especialistas como referencias negativas; se distinguen de archivos no revisados y aprobaciones del propietario. No se ejecutó una nueva producción con este cambio.
+El director recibe cuatro secuencias de imágenes reales, con subtítulos y cierre, y puede solicitar correcciones concretas antes del render. Se corrigieron contaminación entre cuadros del contacto visual y duplicación del cierre automático. La nueva revisión conserva diseños, registros previos y narración; no vuelve a generar voz por una corrección visual.
 
-Próximo trabajo de producción: conectar un editor capaz de construir escenas por proyecto, obtener previews y revisarlas con imágenes del resultado. El trabajador actual es de texto/JSON y el compositor dirigido es de repertorio fijo. Cambiar el prompt o cargar un ZIP no sustituye esa implementación. Conservar narraciones, música y efectos existentes; generar audio adicional solo dentro de la autorización aplicable.
+Fichas activas: `a3c879dc-ba2d-46f8-8115-3174dd486cda`, `0515e9c0-4c58-4420-a19f-61e94b6cf8f1`, `d860512f-d525-44f7-a6fe-a6252753db13`.
 
-La revisión de Jorge sigue siendo sobre videos terminados. No hubo nuevas generaciones, aprobaciones ni publicaciones durante la auditoría. Los límites de recursos y conexiones existentes se conservan.
+Jorge revisa únicamente los MP4 terminados. La revisión interna de imágenes no equivale a escucha subjetiva ni a su aprobación. Música y efectos proceden de la biblioteca aprobada; voz existente autorizada, sin clonación. Un render simultáneo, App y trabajador con una CPU cada uno. Ninguna programación ni publicación.

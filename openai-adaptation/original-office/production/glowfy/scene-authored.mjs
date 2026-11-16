@@ -30,12 +30,15 @@ export function drawGraph(c,g,u,{logo,whiteLogo}={}){
  };
  for(const n of children.get('')||[])node(n);
 }
+export function lightBackground(color){const m=/^#([0-9a-f]{6}|[0-9a-f]{3})$/i.exec(color);if(!m)return false;const hex=m[1].length===3?[...m[1]].map(x=>x+x).join(''):m[1];const rgb=[0,2,4].map(i=>parseInt(hex.slice(i,i+2),16));return rgb[0]*.2126+rgb[1]*.7152+rgb[2]*.0722>150;}
 export function hasAuthoredClosing(graph){return graph.nodes.some(n=>n.kind==='logo')&&graph.nodes.some(n=>n.kind==='text'&&/conoc[eé]\s+glowfy/i.test(n.text));}
 export function draw(c,t,{width=1080,height=1920,beats:b,logo,whiteLogo}){
  c.save();c.scale(width/1080,height/1920);const s=b.authoredScenes.find(s=>t>=s.start&&t<s.end)||b.authoredScenes.at(-1),u=clamp((t-s.start)/(s.end-s.start));drawGraph(c,s.graph,u,{logo,whiteLogo});
  // Shared accessibility/brand layer; the entire scene above is authored per project.
  const cap=b.captions.find(g=>t>=g.start&&t<g.end),closing=t>b.duration-2.3;
  if(cap&&!closing){const text=cap.words.map(w=>w.text).join(' ');c.font='600 44px Montserrat';const w=Math.min(940,c.measureText(text).width+56);rounded(c,(1080-w)/2,1654,w,88,22);c.fillStyle='rgba(33,16,46,0.91)';c.fill();c.textAlign='center';c.fillStyle='#FAF7FD';c.fillText(text,540,1713,900);}
- if(closing&&!hasAuthoredClosing(s.graph)){const p=ease((t-(b.duration-2.3))/.45,'out');c.globalAlpha=p;const bg=c.createLinearGradient(0,1470,0,1920);bg.addColorStop(0,'rgba(33,16,46,0)');bg.addColorStop(.35,'rgba(33,16,46,0.94)');bg.addColorStop(1,'#21102E');c.fillStyle=bg;c.fillRect(0,1470,1080,450);c.textAlign='center';c.fillStyle='#FAF7FD';c.font='400 70px "Instrument Serif"';c.fillText('Conocé Glowfy',540,1650);if(whiteLogo)c.drawImage(whiteLogo,420,1700,240,240*whiteLogo.height/whiteLogo.width);c.globalAlpha=1;}
- c.textAlign='center';c.font='400 20px Montserrat';c.fillStyle=closing?'#D8C4E5':'#8B7894';c.fillText('Ejemplo ilustrado · Funciones según tu plan',540,1845);c.restore();
+ const light=lightBackground(s.graph.background),ownCTA=s.graph.nodes.some(n=>n.kind==='text'&&/conoc[eé]\s+glowfy/i.test(n.text)),ownLogo=s.graph.nodes.some(n=>n.kind==='logo');
+ if(closing&&(!ownCTA||!ownLogo)){const p=ease((t-(b.duration-2.3))/.45,'out');c.globalAlpha=p;c.textAlign='center';c.fillStyle=light?'#21102E':'#FAF7FD';c.font='400 70px "Instrument Serif"';if(!ownCTA)c.fillText('Conocé Glowfy',540,1650);const mark=light?logo:whiteLogo;if(!ownLogo&&mark)c.drawImage(mark,420,1700,240,240*mark.height/mark.width);c.globalAlpha=1;}
+ const ownNote=s.graph.nodes.some(n=>n.kind==='text'&&/ejemplo\s+ilustrado|seg[uú]n tu plan/i.test(n.text));
+ if(!ownNote){c.textAlign='center';c.font='400 28px Montserrat';c.fillStyle=light?'#61466F':'#D8C4E5';c.fillText('Ejemplo ilustrado · Según tu plan',540,1845);}c.restore();
 }
