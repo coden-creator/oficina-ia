@@ -11,7 +11,7 @@ const digest=s=>createHash('sha256').update(s).digest();
 export const capabilities=Object.freeze({ui:'original-visual-shell',functionalOffice:false,provider:'not-connected',autonomous:false,externalActionsEnabled:false,paidApiEnabled:false,features:{chat:'unavailable',tasks:'unavailable',crm:'not-connected',ads:'not-connected',render:'not-connected',voice:'not-connected',publication:'unavailable'}});
 const files=new Map([['/','index.html'],...['style.css','negocio.css','officehq.js','sprites.js','compat-app.js','navigation.js','brand-context.js','ui.js','workspace-pages.js','compat.css','video-panel.js','music-panel.js','sound-catalog.js','material-import.js','connections-panel.js','office-panel.js'].map(f=>['/'+f,f])]);
 const types={html:'text/html; charset=utf-8',js:'text/javascript; charset=utf-8',css:'text/css; charset=utf-8'};
-export function createOriginalShell({password,origin,videoFlow=null,videoDataDir=null,deploymentMarker=null,connectionStore=null,officeCoordinator=null}){
+export function createOriginalShell({password,origin,videoFlow=null,videoDataDir=null,deploymentMarker=null,connectionStore=null,officeCoordinator=null,sfxReview=null}){
  if(typeof password!=='string'||password.length<16)throw new Error('PASSWORD_REQUIRED');
  const publicURL=new URL(origin);if(publicURL.protocol!=='https:'||publicURL.username||publicURL.password||publicURL.pathname!=='/'||publicURL.search||publicURL.hash)throw new Error('HTTPS_ORIGIN_REQUIRED');
  const currentCapabilities=()=>{const flow=videoFlow?.capabilities();return {...capabilities,provider:flow?.runnerConnected?'codex-chatgpt-plan':'not-connected',features:{...capabilities.features,render:flow?.rendererConfigured?'configured-unverified':'not-connected',videoWorkflow:videoFlow?'internal-workflow-only':'unavailable'},video:flow||null};};
@@ -26,6 +26,7 @@ export function createOriginalShell({password,origin,videoFlow=null,videoDataDir
   const raw=req.headers.authorization||'';
   if(!raw.startsWith('Basic ')||!timingSafeEqual(digest(Buffer.from(raw.slice(6),'base64').toString()),digest('jorge:'+password))){res.setHeader('WWW-Authenticate','Basic realm="Oficina", charset="UTF-8"');return send(401,{error:'AUTHENTICATION_REQUIRED'});}
   if(req.headers.host!==publicURL.host)return send(403,{error:'HOST_NOT_ALLOWED'});
+  if(sfxReview&&await sfxReview.http(req,res))return;
   if(musicHttp(req,res))return;
   if(soundCatalogHttp(req,res))return;
   if(req.method==='GET'&&req.url.startsWith('/api/office/')){const brand=req.url.slice('/api/office/'.length);try{if(!officeCoordinator)return send(503,{error:'COORDINATION_UNAVAILABLE'});await videoFlow?.refreshConnection?.();return send(200,await officeCoordinator.snapshot(brand));}catch{return send(404,{error:'OFFICE_NOT_AVAILABLE'});}}

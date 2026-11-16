@@ -7,6 +7,9 @@ import {createConnectionStore} from './connections/store.mjs';
 import {createElevenLabsVerifier} from './connections/elevenlabs.mjs';
 import fs from 'node:fs';
 import {createElevenLabsSpeech} from './connections/elevenlabs-speech.mjs';
+import {createElevenLabsSfx} from './connections/elevenlabs-sfx.mjs';
+import {createSfxReviewBatch} from './production/sfx-review-batch.mjs';
+import {SFX_BATCH} from './production/sfx-review-plan.mjs';
 import {createGlowfyProduction} from './production/glowfy-production.mjs';
 import {createOfficeCoordinator} from './video/office-coordinator.mjs';
 try{
@@ -17,15 +20,17 @@ try{
  const renderer=selectRenderer({local:process.env.OFFICE_ENABLE_LOCAL_RENDER==='1',canvasDemo:process.env.OFFICE_ENABLE_CANVAS_DEMO==='1',dependenciesVerified:process.env.OFFICE_CANVAS_DEPENDENCIES_VERIFIED==='1'});
  const runner=process.env.OFFICE_CODEX_SOCKET?createRemoteRunner({socketPath:process.env.OFFICE_CODEX_SOCKET}):null;
  const videoFlow=process.env.OFFICE_ENABLE_VIDEO_WORKFLOW==='1'?createVideoFlow({dataDir:videoDataDir,adapters:{...(renderer?{renderer}:{}),...(runner?{runner}:{})}}):null;
- const connectionStore=process.env.OFFICE_ENABLE_CONNECTION_SETTINGS==='1'?await createConnectionStore({directory:process.env.OFFICE_CONNECTIONS_DIR,keyFile:process.env.OFFICE_CONNECTIONS_KEY_FILE,verify:createElevenLabsVerifier(),speech:createElevenLabsSpeech({profile:process.env.OFFICE_VOICE_PROFILE||'standard',authorizedExistingVoiceId:process.env.OFFICE_VOICE_OWNER_AUTHORIZED==='1'?process.env.OFFICE_VOICE_ID:null})}):null;
+ const connectionStore=process.env.OFFICE_ENABLE_CONNECTION_SETTINGS==='1'?await createConnectionStore({directory:process.env.OFFICE_CONNECTIONS_DIR,keyFile:process.env.OFFICE_CONNECTIONS_KEY_FILE,verify:createElevenLabsVerifier(),sfx:createElevenLabsSfx(),speech:createElevenLabsSpeech({profile:process.env.OFFICE_VOICE_PROFILE||'standard',authorizedExistingVoiceId:process.env.OFFICE_VOICE_OWNER_AUTHORIZED==='1'?process.env.OFFICE_VOICE_ID:null})}):null;
  const production=connectionStore&&videoFlow?createGlowfyProduction({dataDir:videoDataDir,connectionStore,authorizedJobId:process.env.OFFICE_VOICE_TEST_JOB_ID,voiceId:process.env.OFFICE_VOICE_ID,voiceTake:Number(process.env.OFFICE_VOICE_TEST_TAKE||1),voiceProfile:process.env.OFFICE_VOICE_PROFILE||'standard'}):null;
  const officeCoordinator=videoFlow?createOfficeCoordinator({flow:videoFlow,runner,production,enabled:process.env.OFFICE_AUTONOMY_ENABLED==='1',allowedJobIds:(process.env.OFFICE_AUTONOMY_JOB_IDS||'').split(',').filter(Boolean)}):null;
  if(production)videoFlow.setProductionCapability(()=>({scopedTest:{brand:'glowfy',jobId:process.env.OFFICE_VOICE_TEST_JOB_ID||null,voiceConfigured:production.voiceConfigured}}));
  if(officeCoordinator){await officeCoordinator.recover();videoFlow.setReferenceRunner(officeCoordinator.manualRun);officeCoordinator.start();}
  const password=process.env.OFFICE_PASSWORD_FILE?fs.readFileSync(process.env.OFFICE_PASSWORD_FILE,'utf8').trim():process.env.OFFICE_PASSWORD;
 
- const server=createOriginalShell({password,origin:process.env.OFFICE_ORIGIN,videoFlow,videoDataDir,connectionStore,officeCoordinator,deploymentMarker:process.env.OFFICE_DEPLOYMENT_MARKER||null});
+ const sfxReview=videoFlow&&connectionStore?createSfxReviewBatch({dataDir:videoDataDir,store:connectionStore,enabled:process.env.OFFICE_SFX_REVIEW_BATCH===SFX_BATCH}):null;
+ const server=createOriginalShell({password,origin:process.env.OFFICE_ORIGIN,videoFlow,videoDataDir,connectionStore,officeCoordinator,sfxReview,deploymentMarker:process.env.OFFICE_DEPLOYMENT_MARKER||null});
  server.on('error',()=>{console.error('Office shell refused to start. Check private configuration.');process.exit(1);});
  server.listen(port,process.env.HOST||'0.0.0.0',()=>console.log('Office web ready. Check /api/config for the current private worker connection.'));
+ void sfxReview?.run();
  for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>{const timer=setTimeout(()=>process.exit(1),10000);timer.unref();void officeCoordinator?.stop();server.close(()=>process.exit(0));server.closeIdleConnections();});
 }catch{console.error('Office startup failed. Check private configuration and the dedicated writable video storage; model credentials are forbidden.');process.exit(1);}

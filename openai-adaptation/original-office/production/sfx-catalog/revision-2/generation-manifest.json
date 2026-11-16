@@ -324,8 +324,8 @@
         "gainDb": -3.0174,
         "targetTruePeakDbtp": -6
       },
-      "status": "awaiting_owner_review",
-      "approved": false
+      "status": "approved_by_jorge",
+      "approved": true
     },
     {
       "id": "destello-particulas-01",
@@ -647,7 +647,7 @@
         "gainDb": 0.6963,
         "targetTruePeakDbtp": -6
       },
-      "status": "awaiting_owner_review",
+      "status": "changes_requested_by_jorge",
       "approved": false
     },
     {
@@ -970,7 +970,7 @@
         "gainDb": -1.0326,
         "targetTruePeakDbtp": -6
       },
-      "status": "awaiting_owner_review",
+      "status": "changes_requested_by_jorge",
       "approved": false
     },
     {
@@ -1293,8 +1293,8 @@
         "gainDb": 8.5167,
         "targetTruePeakDbtp": -6
       },
-      "status": "awaiting_owner_review",
-      "approved": false
+      "status": "approved_by_jorge",
+      "approved": true
     },
     {
       "id": "teclas-suaves-01",
@@ -1616,8 +1616,8 @@
         "gainDb": -0.8901,
         "targetTruePeakDbtp": -6
       },
-      "status": "awaiting_owner_review",
-      "approved": false
+      "status": "approved_by_jorge",
+      "approved": true
     },
     {
       "id": "tick-cursor-01",
@@ -1944,7 +1944,7 @@
         "gainDb": 25.7567,
         "targetTruePeakDbtp": -6
       },
-      "status": "awaiting_owner_review",
+      "status": "changes_requested_by_jorge",
       "approved": false
     },
     {
@@ -2272,7 +2272,7 @@
         "gainDb": 30.9638,
         "targetTruePeakDbtp": -6
       },
-      "status": "awaiting_owner_review",
+      "status": "changes_requested_by_jorge",
       "approved": false
     }
   ],
@@ -2294,5 +2294,18 @@
     "sessionCreated": false,
     "generationsOnInspection": 0,
     "resolution": "Ran only the unstarted node; one completed result."
+  },
+  "ownerReview": {
+    "approved": [
+      "clic-boton-02",
+      "golpe-grave-02",
+      "teclas-suaves-01"
+    ],
+    "changesRequested": [
+      "destello-particulas-01",
+      "destello-particulas-02",
+      "tick-cursor-01",
+      "tick-cursor-02"
+    ]
   }
 }

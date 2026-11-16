@@ -90,3 +90,6 @@ scripts/probe-tool-inventory.mjs
 !public/sound-catalog.js
 !production/audio/glowfy-sfx-revision-2.json
 !production/audio/glowfy-sfx-revision-2.mp4
+!production/sfx-review-plan.mjs
+!production/sfx-review-batch.mjs
+!connections/elevenlabs-sfx.mjs

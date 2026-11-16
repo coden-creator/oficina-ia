@@ -17,7 +17,7 @@ async function readPrivate(file,max){
  await checkedPath(file);const h=await fs.open(file,constants.O_RDONLY|constants.O_NOFOLLOW);
  try{const s=await h.stat();if(!s.isFile()||s.size>max||(s.mode&0o077)!==0||(process.getuid&&s.uid!==process.getuid()))fail('CONNECTION_STORAGE_UNSAFE');return await h.readFile();}finally{await h.close()}
 }
-export async function createConnectionStore({directory,keyFile,verify,speech=null,now=()=>new Date().toISOString()}){
+export async function createConnectionStore({directory,keyFile,verify,speech=null,sfx=null,now=()=>new Date().toISOString()}){
  if(!path.isAbsolute(directory||'')||!path.isAbsolute(keyFile||'')||typeof verify!=='function')fail('CONNECTION_CONFIG_REQUIRED');
  await checkedPath(directory,true);const st=await fs.stat(directory);
  if((st.mode&0o077)!==0||(process.getuid&&st.uid!==process.getuid()))fail('CONNECTION_STORAGE_UNSAFE');
@@ -57,6 +57,8 @@ export async function createConnectionStore({directory,keyFile,verify,speech=nul
   status:async()=>expose(await read()),
   speechCatalog:async()=>{const record=await read();if(!record||record.verification.status!=='verified'||!speech)fail('VOICE_CONNECTION_REQUIRED');return speech.catalog(record.apiKey);},
   synthesize:async input=>{const record=await read();if(!record||record.verification.status!=='verified'||!speech)fail('VOICE_CONNECTION_REQUIRED');return speech.synthesize(record.apiKey,input);},
+  sfxQuota:async()=>{const record=await read();if(!record||record.verification.status!=='verified'||!sfx)fail('SFX_CONNECTION_REQUIRED');return sfx.quota(record.apiKey);},
+  generateSfx:async id=>{const record=await read();if(!record||record.verification.status!=='verified'||!sfx)fail('SFX_CONNECTION_REQUIRED');return sfx.generate(record.apiKey,id);},
   save:apiKey=>locked(async()=>{
    if(!validApiKey(apiKey))fail('INVALID_API_KEY_FORMAT');const previous=await read();
    if(previous?.apiKey===apiKey)return expose(previous);

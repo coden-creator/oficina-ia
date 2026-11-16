@@ -1,7 +1,7 @@
-38687a29a8d8df86dd2e806ca4422059bb2a1db83f5283b48dd00f1970b9c3bf  ./.dockerignore
-8807dbf6590009e7649061ad1b44d8f8f1312b679e82d6eb98f5d8c5370cc87b  ./Dockerfile
+42343da8b9533bab8627c6dd31d6bd01e03a00bb49dab59f351ea5b40ec71b3c  ./.dockerignore
+2fbe0d46d64c17d7cc238fae7072d31146732f08af984591f9858ad5c4cf3957  ./Dockerfile
 6367435342023636c7dafb377baa7ad4c097e99549193f5c870f2d7a8d6bf02c  ./Dockerfile.easypanel
-58dac529e29923211ca189a0abfcf0903e0f34d1f7784094c38f20ee6f2c18b0  ./Dockerfile.runtime
+90123f701f041c5b23e062ad6caceef40398910ce1a8dec3dd9fbecd5064e610  ./Dockerfile.runtime
 77502fab5672d45daaec8fe9ff5d5b311b4aa095a0001c0c52ee6e16f881ec80  ./INTEGRATION.md
 6973de6b46223d1dce737f1d6314b30bc00b1b6dd4f08331bc30f0c762fa6c1f  ./NAVIGATION-REVIEW.md
 00ed83a7dc4064e289557f779e5ed3d94cfb3467d00fa8bcbd7c1e4fb437e8b4  ./PACKAGING.md
@@ -26,7 +26,7 @@ a00717f7d56af17c6d672422ac8ef039c3a94678304a0bdb07ff3dbaf82815a9  ./connections/
 e2f6b01eb2e277346f02d108ee5f9964bf28066fae231079c2238b675696c9c4  ./connections/connections.test.mjs
 3e99827edf4be735593a60c962a6fd171b4ab99f9ce82c95f30c0419819419d7  ./connections/elevenlabs.mjs
 40182e8583aa4ac8c9a956ea38bc4311866061f951bae4b52144c5ea57ad1bbb  ./connections/http.mjs
-b69336c1fd85fc83be19b6f1f60555a31426f779eb458cc7b63ccb0945ae73c5  ./connections/store.mjs
+2758df386cbc0f275044aa8a0a2eef72184e11e86d65d28ea91af13bca150465  ./connections/store.mjs
 54651a5647cebcd16f955c6a11e2b91b339c2948ce2fae3c836b7e9dd73385d6  ./connectors/README.md
 8393a7bb6fff2a968fd260fec7b04353ac0206ae3833a55e23fbeb6e4b58047b  ./connectors/VOICE-ADAPTER.md
 4ec0de2cf1b61f6b36113c00ee61bef77ae4b8b45f9a0a23c8a8efce450768b7  ./connectors/contracts.mjs
@@ -103,8 +103,8 @@ ceceae734ed9bcf991b3454eeef2c890c9377d0fa601da473cfd6f0cf2587474  ./scripts/prep
 d7be3384dacf1f4b4c94e0a9adffccb14775f4733b148d11c7a3dd2412ff4774  ./scripts/update-review-connections.py
 be975a660b27d6ad015fc2be01ee5a635ddbcf251f52ff3bdd195ea931e8b173  ./scripts/verify-runtime-container.sh
 28b7f089b740a687a8ef61b2412ff1c0aabe3201e638d89c8bc0f1c7f8b1a238  ./scripts/verify-tool-restrictions.mjs
-7470deb9f56fdbd60680b4b4f9469edd61bba4459d0636b916a5acc217e3b51c  ./server.mjs
-f71620574c8f307c350624026a1b410881d69b9ce908d2aa23b4ea52e4c3f087  ./start.mjs
+eaa3f8ba533e03ad83ed4a3ab666f585ba4fe52ab542eabeb4e7e8195bfc1c61  ./server.mjs
+b135d1a4b48bbbb3df4d04d2f48666e54d9aa3523c5823917a6f5692febecdbb  ./start.mjs
 cc14f4fd7b1c46d5e4104c3dd4038daef2138e06df468d847e5b85efdb275396  ./test.mjs
 a019f657c8cd2f4cc2ceba2a17bc3fc017bc552a2a7d71bb8438b60f01e3178e  ./test/deploy-review.test.py
 137bf2f0bfcffb695de7ee8707962794215375e2c80c4557c42066a69672e299  ./test/fixtures/synthetic-broker.mjs
@@ -139,14 +139,14 @@ ea36954a33eb9d29bf9b8036c5fde7839195ed5cc1c364f07bd3f1f7dec55aee  ./video/video-
 dca55722d69731501420220238c977b589f19e5299980f3f864f93e0f8b2c93c  ./video/visual-contract.mjs
 fbddf3672ae648933f33053ef4d3960be8a5ef2068c1b086a05a4cd48eb352f0  ./visual-contract.test.mjs
 199b1a88f5a4ee2c803c43244b7ac67864208a94ca2ece4dea711fb6cfc6e4b5  ./workspace-data.test.mjs
-38687a29a8d8df86dd2e806ca4422059bb2a1db83f5283b48dd00f1970b9c3bf  ./.dockerignore
+42343da8b9533bab8627c6dd31d6bd01e03a00bb49dab59f351ea5b40ec71b3c  ./.dockerignore
 6367435342023636c7dafb377baa7ad4c097e99549193f5c870f2d7a8d6bf02c  ./Dockerfile.easypanel
 00ed83a7dc4064e289557f779e5ed3d94cfb3467d00fa8bcbd7c1e4fb437e8b4  ./PACKAGING.md
 f7d092ef1af061aa03e73b5160144f62a8103927251977cdb0cf4f71ab9d517e  ./README.md
 e634ba09ac74f6488941ed3e87b91226c5c44c2a2ef0a5b6552fccde7f43abfb  ./UI-DESIGN-REVIEW.md
 6ea1b31b665df995d9ce784ac9ee140e2fcd5e4b7540a6bae04b449230dd0009  ./connections/elevenlabs-speech.mjs
 40182e8583aa4ac8c9a956ea38bc4311866061f951bae4b52144c5ea57ad1bbb  ./connections/http.mjs
-b69336c1fd85fc83be19b6f1f60555a31426f779eb458cc7b63ccb0945ae73c5  ./connections/store.mjs
+2758df386cbc0f275044aa8a0a2eef72184e11e86d65d28ea91af13bca150465  ./connections/store.mjs
 ba67b2629bb86597996d418c0d78b396c05046006a8cec95b2fb9d25b8e76ed0  ./production/audio/burbuja-mensaje-01.wav
 4774a45c3ac909b7638b3d0d8df81c373e11f218bdb98f951d3b2318bfd881b1  ./production/audio/clic-boton-01.wav
 6eb5cac7ba66cc2b002ea81a6ae4360e362b5807290febba3773fc2ce1e5fffa  ./production/audio/ding-confirmacion-01.wav
@@ -176,7 +176,7 @@ fe35ec8253915f597f527f1c0370a8c916468e211482100dff7ee3c038c057a0  ./production/r
 76a595695d6e04ad3217684499796d09eadb7c181854e9f65daabf1292213386  ./production/voice-session.mjs
 4141aa66eeac92a51f9b5cefadfec00f5da8912f6ab9b5531ec589911994f80b  ./production/voice-session.test.mjs
 c6b62777703a58035f789ec5f77d9b3ddd91e25668e47d510d58d30bdde6a3d5  ./public/video-panel.js
-f71620574c8f307c350624026a1b410881d69b9ce908d2aa23b4ea52e4c3f087  ./start.mjs
+b135d1a4b48bbbb3df4d04d2f48666e54d9aa3523c5823917a6f5692febecdbb  ./start.mjs
 2d889eb7dda654e3c6e0722c3d4ea928a5e103b5f6bd26d8535d1ed63d54b20b  ./video/http.mjs
 2d394f62daa1130280d9001342a9454e627cc17f7fcb8d4bd26cf19b0503f810  ./video/office-coordinator.mjs
 09cfb78220f591cefa767cf81a631c41f42b1c1b830ef8eee9105bb1260c53ca  ./video/office-coordinator.test.mjs
@@ -209,7 +209,7 @@ b84f9108e39c7d2d8e03fa6be01221091e69ae8ba4a1799902a3d017c669368a  ./public/sound
 86d7d5d995f2faba978df60411cea530d5ebd02ad9af7c33f88392559805d857  ./production/sfx-catalog/revision-2/INDICE.txt
 caa83e0f3dad1356d4cdd1870b99256e4e05828ca9fd783387b2e4aab1ad5b41  ./production/sfx-catalog/revision-2/README.md
 c953105a7beb77f595ace35689f8062cc09ba2a7a19f6bd246618d337db9ce05  ./production/sfx-catalog/revision-2/catalog.json
-4492d8698770d9ea555bbe7df786d18ad484674010aa811a492a52636621bf4d  ./production/sfx-catalog/revision-2/generation-manifest.json
+e9e41561b86754477f26a38d00dc6c88864a03aee4a08f70e6f562cb5defc784  ./production/sfx-catalog/revision-2/generation-manifest.json
 edaadb98afe20510083314ce71adc1b3af240bf092e790b5c61bb1cd27c8ecc6  ./production/sfx-catalog/revision-2/originals/clic-boton-02.json
 05584c48f46b33c0f692fe445edd011bf8d04f2393a2f300b6d371942c64db7e  ./production/sfx-catalog/revision-2/originals/clic-boton-02.mp3
 c0384f4d636d7f7dd64da456ccba171e47bb8e406a4fbe9c3d0fb63745d4a85c  ./production/sfx-catalog/revision-2/originals/destello-particulas-01.json
@@ -231,3 +231,9 @@ fe275a697a16000a8267e02a77eaf9a0553ba6fc3784f2a268de3df53fe41ca3  ./production/s
 4470e8bbc55628de449269be106c4fd19d1203d7238ddc32c05afd2098f75fb7  ./production/sfx-catalog/revision-2/prepared/teclas-suaves-01.wav
 f93e7d873ed0c4649b609f7bb0c1903817738b1cdf815946cf20d9c38e03c057  ./production/sfx-catalog/revision-2/prepared/tick-cursor-01.wav
 2f458cf9beafd434f6b7abf62ff359bb9bbafbb1c6f57c5ae465d2ab2c806dd8  ./production/sfx-catalog/revision-2/prepared/tick-cursor-02.wav
+7a9354965800b1b67a28266a40ffc119b908a72012e3ae7e364f6ef4774db646  ./connections/elevenlabs-sfx.mjs
+c0db8b9eb58f02d2f0a681d6c1d3e5503edd52e3ac93938551c7a3cd232eb0c6  ./production/sfx-catalog/review-decisions.json
+5b705e3e586c7a0a8201ba4a543c81888a6c153bb6e7cf92e495ec2f1128d741  ./production/sfx-catalog/revision-3/README.md
+354b214344a1be26dbc6463875b3d6255c73acb29a0ab7b591e8f6c5d480ff22  ./production/sfx-review-batch.mjs
+ec1393d066b1b79eb1324db53f0c58fdd217cb0b3e5c67dcabcdf1f4e598393f  ./production/sfx-review-batch.test.mjs
+871bda2eede487b023522a7523f6332d87331a94f34377b26b78c0d4552fc095  ./production/sfx-review-plan.mjs
