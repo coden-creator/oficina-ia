@@ -13,3 +13,7 @@ Para el nuevo alcance se conservan las versiones de ideas y se inicia un ciclo e
 Preparación comprobada localmente: pruebas de promoción idempotente, exclusión de otras piezas, etapa editorial hasta producción, validación del plan, alineación y render determinista; regresiones de oficina, voz, HTTP y empaquetado. Los datos de prueba son sintéticos. La ejecución de las tres fichas reales se registra separadamente después de activarlas.
 
 Revisión del primer archivo: se detectaron rótulos por defecto cuando el editor pedía mensajes abstractos y una CTA duplicada. El motor respeta ahora text vacío y muestra un único cierre; la ruta autenticada /rerender guarda la versión anterior y exige reutilizar la narración exacta en caché, sin síntesis ni consulta del proveedor. El contrato del editor explicita tres cámaras y dos ambientes para evitar respuestas que luego incumplan su validación.
+
+## Ejecución real
+
+Las tres fichas completaron guion, comité, dirección, montaje, ElevenLabs y render en la oficina. Entregas actuales: primera v4 (24,10 s), segunda v5 (21,13 s), tercera v4 (22,73 s). Las dos primeras conservan la narración generada antes de la corrección del render; la tercera completó el montaje tras explicitar el criterio de diversidad. Tres MP4 1080×1920/30 fps, AAC, control técnico aprobado y SHA-256 de descarga comprobado. Se revisaron hojas de cuadros de los tres archivos; la escucha subjetiva y la aprobación comercial siguen siendo del propietario. [Evidencia](evidence/glowfy-office-videos-20261116.json).

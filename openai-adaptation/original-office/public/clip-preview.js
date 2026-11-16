@@ -4,8 +4,8 @@ export function createClipPreview(job,{onPlay}){
  const media=job.artifact||job.preview,box=el('div','','clip-preview');
  if(job.brief.deliverable==='idea'){const idea=link('',jobHref(job),'idea-cover');idea.append(el('span','Propuesta de contenido','muted'),el('strong',job.storyboard?.hook||'El equipo prepara la idea'),el('span','Ver propuesta','text-link'));return {element:idea,stop(){},dispose(){}};}
  if(!media){const empty=link('',jobHref(job),'job-preview');empty.append(icon('file'),el('span','Solicitud guardada'));return {element:empty,stop(){},dispose(){}};}
- const video=el('video');video.controls=true;video.preload='none';video.playsInline=true;video.setAttribute('aria-label','Vista previa de '+job.brief.objective);video.hidden=true;
- const cover=button('',start,{className:'clip-cover'});cover.setAttribute('aria-label','Reproducir vista previa: '+job.brief.objective);
+ const video=el('video');video.controls=true;video.preload='none';video.playsInline=true;video.setAttribute('aria-label','Vista previa de '+(job.productionPlan?.title||job.brief.objective));video.hidden=true;
+ const cover=button('',start,{className:'clip-cover'});cover.setAttribute('aria-label','Reproducir vista previa: '+(job.productionPlan?.title||job.brief.objective));
  if(media.posterUrl){const img=el('img');img.alt='';img.width=360;img.height=640;img.loading='lazy';img.decoding='async';img.src=media.posterUrl;img.addEventListener('error',()=>img.remove(),{once:true});cover.append(img);}
  const label=el('span','','clip-play');label.append(icon('play'),el('span',job.artifact?'Ver video':'Ver fragmento'));cover.append(label);
  const error=el('p','','clip-error');error.setAttribute('role','status');error.hidden=true;box.append(cover,video,error);

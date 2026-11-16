@@ -167,3 +167,8 @@ Plan: conservar fondo #0d0e12, panel #171a22, texto #eef0f5, secundario #aeb7c7 
 Comprobación local: tres propuestas sintéticas, apertura por teclado, gancho/guion/dirección visibles, sin aprobación de video inexistente, escritorio y móvil sin desborde ni errores JS. Capturas inspeccionadas. Pendiente la ejecución real de los especialistas.
 
 Las correcciones del comité y el límite de dos intentos se muestran también para propuestas en «Cambios solicitados». No se convierten en aprobación ni se ocultan las propuestas que no alcanzan el umbral editorial.
+
+
+## Entrega directa de videos · 16 noviembre 2026
+
+Jorge revisa el archivo final. Las tarjetas y la ficha muestran el título de producción del editor cuando existe; el objetivo inicial queda en el registro. El estado del Estudio deriva del trabajo real y los MP4 disponibles, evitando el aviso obsoleto de integración pendiente cuando ya hay videos para revisar. Se conservan tipografía, paleta, estructura, selector global y controles nativos. Cambios de texto, sin nuevas superficies ni decoraciones. Se aplicaron frontend-design y web-design-guidelines del proyecto. Validación final de reproducción y escritorio/móvil se registra en la evidencia de esta entrega.
