@@ -9,3 +9,8 @@ El historial compartido por marca incluye propuestas con estrategia aunque aún 
 La ficha muestra gancho, narración, storyboard, dirección de arte y evaluación. Permite pedir cambios o descartar. No se ofrece aprobar un archivo inexistente. Los conceptos nuevos todavía requieren resolver su producción audiovisual antes de generar un video.
 
 Validación: 26 pruebas Node aprobadas; incluyen autorización puntual, recuperación, aislamiento por marca, no invocación de producción en modo idea y protección de videos normales. Chromium local: tres propuestas sintéticas, teclado, revisión en escritorio/móvil, cero errores JS. Las pruebas no acreditan ejecución real; el lote solicitado se registra por separado después de activarlo.
+
+
+Primera ejecución real: las tres fichas se activaron. La primera completó investigación, estrategia y guion; después las solicitudes recibieron `ORGANIC_STAGE_FAILED`. El trabajador tenía un corte de 60 s y ocultaba el tipo de error. Se amplía a 180 s, con espera del socket de 210 s, y se exponen únicamente códigos locales permitidos. No se atribuye una causa definitiva a los primeros errores genéricos. El trabajador sigue limitado a 1 CPU/768 MiB, cuenta ChatGPT existente y sin herramientas externas.
+
+Ajuste de presentación: los enfoques extensos se leen en «Enfoque elegido por la oficina»; el título conserva la identificación de la solicitud. No se reescriben resultados de los especialistas.

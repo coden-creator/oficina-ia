@@ -54,3 +54,8 @@ test('explicit idea trigger grants only that idea and persists authorization wit
  const office=createOfficeCoordinator({flow,runner,enabled:true,resourceMonitor:async()=>({ready:false})});assert.equal((await office.manualRun('glowfy',video.id)).waiting,true);await office.manualRun('glowfy',idea.id);assert.equal((await flow.get('glowfy',idea.id)).ideaAuthorization.source,'owner-idea-trigger');assert.equal(calls.length,0);await office.stop();
  const restored=createOfficeCoordinator({flow,runner,enabled:true,resourceMonitor:async()=>({ready:true})});await restored.recover();await restored.tick();await restored.stop();assert.ok(calls.length>0);assert.ok(calls.every(c=>c.jobId===idea.id));assert.equal((await flow.get('glowfy',video.id)).state,'queued');
 });
+
+test('organic worker reports safe timeout codes without exposing arbitrary provider errors',async()=>{
+ const runtime={status:()=>({transportConnected:true,chatgptAccountObserved:true,accountKind:'chatgpt',paidApiEnabled:false}),draft:async()=>{throw Error('TURN_TIMEOUT');}},specialist=new CodexOrganicSpecialist({runtime}),q={brand:'glowfy',stage:'research',jobId:'fixture',prompt:'Test',input:{brief},context:{brand:'glowfy',workflow:'organic-v1'}};
+ assert.equal((await specialist.run(q)).reason,'SPECIALIST_TURN_TIMEOUT');runtime.draft=async()=>{throw Error('credential=private');};assert.equal((await specialist.run(q)).reason,'ORGANIC_STAGE_FAILED');
+});

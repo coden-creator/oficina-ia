@@ -18,6 +18,7 @@ export const team=Object.freeze([
 export const editorIds=Object.freeze(['video','video2','video3']);
 export const stageOwners=Object.freeze({research:'estratega',strategy:'estratega',script:'guionista',creative_review:'viralidad',art_direction:'video',production:'video',qa:'calidad',owner_review:'coordinador'});
 export const waitingReasons=Object.freeze({
+ SPECIALIST_TURN_TIMEOUT:'El especialista agotó el tiempo de respuesta; se conserva lo completado.',SPECIALIST_DRAFT_FAILED:'Codex no completó esta respuesta. Se conserva lo completado para revisar el intento.',
  VOICE_CATALOG_SELECTION_REQUIRED:'La pieza espera la selección de una voz de catálogo.',
  VOICE_INCLUDED_QUOTA_REQUIRED:'El saldo incluido de ElevenLabs no alcanza para esta narración.',
  VOICE_RESULT_UNCERTAIN:'La solicitud de voz quedó sin confirmación; no se repite el consumo automáticamente.',

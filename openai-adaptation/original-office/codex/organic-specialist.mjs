@@ -11,6 +11,10 @@ export class CodexOrganicSpecialist{
    if(r.source!=='chatgpt-app-server')return blocked('UNVERIFIED_RUNTIME_SOURCE');
    const output=validateOrganicOutput(JSON.parse(r.text),{stage:q.stage,brand:q.brand,brief:q.input.brief});
    return {status:'completed',output,provenance:{provider:'codex-chatgpt-plan',workflow:ORGANIC_PROTOCOL,stage:q.stage,brand:q.brand,jobId:q.jobId,evidenceCoverage:'supplied-only'}};
-  }catch{return blocked('ORGANIC_STAGE_FAILED');}
+  }catch(error){
+   // Only bounded local codes cross the private socket; never raw provider text.
+   const known=new Set(['TURN_TIMEOUT','DRAFT_FAILED','RPC_REMOTE_ERROR','TRANSPORT_CLOSED','INVALID_PROMPT','DRAFT_ALREADY_RUNNING','ORGANIC_FIELDS','ORGANIC_ARRAY','ORGANIC_TEXT','ORGANIC_ENUM','ORGANIC_SCORE','INVALID_CREATIVE_PASS','UNSUPPORTED_EVIDENCE','UNVERIFIED_ART_ASSETS']);
+   return blocked(error instanceof SyntaxError?'ORGANIC_JSON_INVALID':known.has(error?.message)?'SPECIALIST_'+error.message:'ORGANIC_STAGE_FAILED');
+  }
  }
 }
