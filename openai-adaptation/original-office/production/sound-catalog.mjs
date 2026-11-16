@@ -1,3 +1,5 @@
+import {byteRange as catalogRange} from '../video/http-range.mjs';
+export {catalogRange};
 import fs from 'node:fs';import {createHash} from 'node:crypto';
 const catalogs=new Map([
  ['/api/sound-catalog/glowfy',{file:'glowfy-sfx-catalog',download:'Glowfy-catalogo-efectos-v1.mp4',description:'A: original de ElevenLabs. B: versión procesada. Cada una se escucha dos veces, con nivel igualado.'}],
@@ -7,13 +9,6 @@ const catalogs=new Map([
 const decisions=JSON.parse(fs.readFileSync(new URL('./sfx-catalog/review-decisions.json',import.meta.url),'utf8'));
 const metadata=c=>c.metadata??=JSON.parse(fs.readFileSync(new URL('./audio/'+c.file+'.json',import.meta.url),'utf8'));
 function asset(c){if(c.verified)return c.verified;const data=fs.readFileSync(new URL('./audio/'+c.file+'.mp4',import.meta.url)),m=metadata(c);if(data.length!==m.bytes||data.length>50*1024*1024||createHash('sha256').update(data).digest('hex')!==m.sha256)throw Error('CATALOG_INTEGRITY');return c.verified=data;}
-export function catalogRange(header,size){
- if(header===undefined)return {start:0,end:size-1,partial:false};
- const m=/^bytes=(\d*)-(\d*)$/.exec(header);if(!m||(!m[1]&&!m[2]))return null;
- let start=m[1]?Number(m[1]):Math.max(0,size-Number(m[2])),end=m[1]?(m[2]?Math.min(Number(m[2]),size-1):size-1):size-1;
- if(!Number.isSafeInteger(start)||!Number.isSafeInteger(end)||start<0||start>=size||end<start||(!m[1]&&Number(m[2])<=0))return null;
- return {start,end,partial:true};
-}
 export function soundCatalogHttp(req,res){
  if(!req.url.startsWith('/api/sound-catalog/'))return false;
  const headers={'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Cross-Origin-Resource-Policy':'same-origin'};

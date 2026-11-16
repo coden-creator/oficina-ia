@@ -1,0 +1,45 @@
+{
+  "deployment": "f63a8d143ced62d04b2f894bbb200fb66fe4626c",
+  "results": [
+    {
+      "key": "reserva",
+      "id": "62ff9b0a-8653-4f23-b16f-08b8d00f62cb",
+      "duration": 17.366667,
+      "width": 1080,
+      "height": 1920,
+      "playback": true,
+      "seeking": false,
+      "mobileNoPageOverflow": true,
+      "reviewButtonVisible": true,
+      "approved": false
+    },
+    {
+      "key": "recordatorio",
+      "id": "60dce0a0-6d3c-4254-87d1-d7782c8de951",
+      "duration": 17.3,
+      "width": 1080,
+      "height": 1920,
+      "playback": true,
+      "seeking": false,
+      "mobileNoPageOverflow": true,
+      "reviewButtonVisible": true,
+      "approved": false
+    },
+    {
+      "key": "horario",
+      "id": "35b0d07e-4983-4d80-b638-b39c2cfd556c",
+      "duration": 16.966667,
+      "width": 1080,
+      "height": 1920,
+      "playback": true,
+      "seeking": false,
+      "mobileNoPageOverflow": true,
+      "reviewButtonVisible": true,
+      "approved": false
+    }
+  ],
+  "javascriptErrors": 0,
+  "mutedPlaybackOnly": true,
+  "subjectiveAudioJudgment": "pending Jorge",
+  "seekingVerification": "Initial seeked event check was insufficient; continuous playback passed. HTTP range fix prepared, exact seek verification pending deployment."
+}

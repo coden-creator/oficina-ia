@@ -100,3 +100,5 @@ scripts/probe-tool-inventory.mjs
 
 !production/glowfy/batch-3.json
 !production/audio/glowfy-sfx-production.json
+
+!video/http-range.mjs

@@ -21,3 +21,7 @@
 - 2026-11-16 · Jorge solicita tres videos adicionales. Creadas tres fichas, preproducción real activada solo para esos IDs. Cuota consultada 61980, sobreconsumo desactivado. Preparadas variantes de escenas y selección A/B/D; no se generan música/efectos. Previews locales con tiempos sintéticos, sin voz, para verificar composición; no son entregables finales.
 
 - 2026-11-16 · Jorge exige producción y animaciones únicas por video. Cola pausada; la primera voz quedó guardada y se reutiliza. Sustituidas las variantes paramétricas por tres módulos de escena y tres mapas sonoros. Corrección persistida en instrucciones de guion y arte. Migración limitada a los tres IDs, con versiones preservadas y guiones intactos. 31 pruebas pasaron; previews aún sin voz real.
+
+- 2026-11-16 · Tres producciones únicas completadas en el App existente, código f63a8d1. Reserva v3 17,37 s; Recordatorio v2 17,30 s; Horario v2 16,97 s. Narraciones reales Eleven v4, música A/B/D y efectos revisados. Hashes, decodificación, secuencias completas y navegador escritorio/móvil comprobados; 28 pruebas pertinentes pasaron. Los tres permanecen awaiting_review y los videos previos están intactos. Sin publicación ni nuevas generaciones de música/SFX. Evaluación estética y escucha subjetiva pendientes de Jorge.
+
+- Detectado durante revisión: la reproducción completa funciona pero el seek regresaba a cero. Implementados rangos HTTP autenticados con validación de versión/hash; verificaciones de bytes, límites, HEAD y acceso sin credenciales. Pendiente comprobación real después del deploy.

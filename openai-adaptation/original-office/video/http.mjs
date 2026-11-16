@@ -1,3 +1,4 @@
+import {byteRange} from './http-range.mjs';
 import {criteria} from './organic-contract.mjs';
 import {waitingReasons} from './office-team.mjs';
 import fs from 'node:fs/promises';
@@ -19,14 +20,18 @@ export function createVideoHttpHandler({flow,dataDir,origin}){
    if(!match){send(res,404,{error:'NOT_FOUND'});return true;}
    const [,brand,id,action,version]=match;
    if(!flow.capabilities().brands.includes(brand)){send(res,404,{error:'UNKNOWN_BRAND'});return true;}
-   if(req.method==='GET'){
+   if(req.method==='GET'||(req.method==='HEAD'&&action==='artifact')){
     if(action==='artifact'){
      const job=await flow.get(brand,id);if(!job.artifact||Number(version)!==job.version||job.artifact.version!==job.version)throw Error('artifact');
      const root=await fs.realpath(path.join(dataDir,brand,id,`v${job.version}`));const file=await fs.realpath(job.artifact.file);
      if(!file.startsWith(root+path.sep)||path.extname(file)!=='.mp4'||!['silent_animatic','technical_canvas_demo','narrated_brand_video'].includes(job.artifact.kind))throw Error('artifact');
      const stat=await fs.stat(file);if(stat.size>50*1024*1024||stat.size<1)throw Error('artifact');
      const bytes=await fs.readFile(file);if(createHash('sha256').update(bytes).digest('hex')!==job.artifact.sha256)throw Error('artifact');
-     res.writeHead(200,{'Content-Type':'video/mp4','Content-Length':bytes.length,'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Cross-Origin-Resource-Policy':'same-origin','Content-Disposition':`inline; filename="${brand}-${id}-v${job.version}.mp4"`});res.end(bytes);return true;
+     const headers={'Content-Type':'video/mp4','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Cross-Origin-Resource-Policy':'same-origin','Accept-Ranges':'bytes','Content-Disposition':`inline; filename="${brand}-${id}-v${job.version}.mp4"`};
+     // No validator is advertised: an If-Range request must receive the full representation.
+     const range=byteRange(req.headers['if-range']?undefined:req.headers.range,bytes.length);
+     if(!range){res.writeHead(416,{...headers,'Content-Range':`bytes */${bytes.length}`,'Content-Length':0});res.end();return true;}
+     const {start,end,partial}=range;res.writeHead(partial?206:200,{...headers,'Content-Length':end-start+1,...(partial?{'Content-Range':`bytes ${start}-${end}/${bytes.length}`}:{})});res.end(req.method==='HEAD'?undefined:bytes.subarray(start,end+1));return true;
     }
     if(action)throw Error('route');send(res,200,id?publicJob(await flow.get(brand,id)):(await flow.list(brand)).map(publicJob));return true;
    }
