@@ -2,7 +2,7 @@
 """One bounded owner-run host correction; later App deployments use EasyPanel.
 
 No remote command listener, Docker socket mounts, Codex credential access,
-shared proxy/network edits, paid calls, content generation, or data deletion.
+shared proxy/network edits, backups, paid calls, content generation, or data deletion.
 """
 import base64
 import hashlib
@@ -15,9 +15,7 @@ from pathlib import Path
 import secrets
 import ssl
 import socket
-import subprocess
 import sys
-import tempfile
 import time
 
 spec = importlib.util.spec_from_file_location('review', Path(__file__).with_name('deploy-review-office.py'))
@@ -31,7 +29,6 @@ CONNECTIONS = 'oficina-jorge-connections-r1'
 OLD_KEY = 'oficina-jorge-connections-key-r1'
 KEY_VOLUME = 'oficina-jorge-connections-key-r2'
 STATE = Path.home()/'oficina-easypanel-handoff-r1.json'
-BRANDS = ['glowfy', 'velforce', 'quiba', 'purify', 'coden']
 
 
 def private_json(file, value):
@@ -163,15 +160,6 @@ def volume_mountpoint(name):
     return point
 
 
-def backup_volume(name, directory):
-    file = directory/(name+'.tar')
-    fd = os.open(file, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
-    with os.fdopen(fd, 'wb') as output:
-        result = subprocess.run(['docker', *bounded_run(['type=volume,source='+name+',target=/data,readonly'],
-                                 ['tar', '-C', '/data', '-cf', '-', '.'])], stdout=output, stderr=subprocess.PIPE, timeout=180)
-    d.require(result.returncode == 0 and file.stat().st_size > 0, 'No se pudo completar el respaldo de '+name)
-
-
 def initialize_private_volume(name, purpose):
     if name not in d.ids('volume'):
         d.docker('volume', 'create', '--label', 'office.purpose='+purpose, name)
@@ -226,8 +214,8 @@ def prepare_connections(node):
     d.docker(*bounded_run([mount+',readonly'], ['node', '-e', check]))
 
 
-def output_handoff(backup):
-    d.emit(ok=True, readyForEasyPanel=True, originTlsVerified=True, url='https://'+APP_HOST, backup=str(backup),
+def output_handoff():
+    d.emit(ok=True, readyForEasyPanel=True, originTlsVerified=True, url='https://'+APP_HOST,
            projectName='service', serviceName='oficina-jorge', buildFile='Dockerfile.easypanel',
            bindMounts=[{'hostPath':volume_mountpoint(name)+('/encryption.key' if name == KEY_VOLUME else ''), 'mountPath':target, 'type':'bind'}
                        for name, target in [(d.VIDEO, '/data/video'), (d.IPC, '/run/office'),
@@ -262,7 +250,7 @@ def resume_handoff(digest):
               and worker['State'].get('Health', {}).get('Status') == 'healthy' and d.limits_ok(worker),
               'La entrega existente cambió; no se reemplaza.')
     wait_route()
-    output_handoff(state['backup'])
+    output_handoff()
 
 
 def main():
@@ -278,10 +266,6 @@ def main():
     d.require(not any(v.startswith('OFFICE_ENABLE_VIDEO_WORKFLOW=1') for v in app['Spec']['TaskTemplate']['ContainerSpec'].get('Env', [])),
               'El App ya procesa fichas; no se inicia otra migración.')
     no_running_jobs()
-    backup = Path(tempfile.mkdtemp(prefix='oficina-easypanel-backup-', dir=Path.home()))
-    private_json(backup/'app-service.json', app)
-    private_json(backup/'review-service.json', review)
-    d.emit(step='backup', directory=str(backup))
     config_name = 'office-managed-route-'+digest[:24]
     if config_name not in d.ids('config'):
         d.docker('config', 'create', '--label', 'office.purpose='+PURPOSE, config_name, str(source))
@@ -306,16 +290,14 @@ def main():
         else:
             raise d.DeploymentError('No se confirmó la pausa del servidor anterior.')
         d.require(d.inspect('service', d.ORIGINAL)['Version']['Index'] == app['Version']['Index'], 'El App cambió durante el traslado; revisar antes de continuar.')
-        backup_volume(d.VIDEO, backup)
         if CONNECTIONS in d.ids('volume'):
             d.require(d.owned(d.inspect('volume', CONNECTIONS)), 'Volumen de conexiones ajeno.')
-            backup_volume(CONNECTIONS, backup)
         prepare_connections(node)
         d.resource_check()
-        state = {'backup':str(backup), 'routeDigest':digest, 'phase':'ready-for-easypanel', 'reviewService':d.SERVICE, 'appService':d.ORIGINAL}
+        state = {'routeDigest':digest, 'phase':'ready-for-easypanel', 'reviewService':d.SERVICE, 'appService':d.ORIGINAL}
         private_json(STATE, state)
         marker_created = True
-        output_handoff(backup)
+        output_handoff()
     except BaseException:
         # Do not revive the old writer over an App concurrently changed by its owner.
         app_unchanged = d.inspect('service', d.ORIGINAL)['Version']['Index'] == app['Version']['Index']
@@ -324,7 +306,7 @@ def main():
         if route_created and app_unchanged and owned_route(d.inspect('service', GATEWAY)):
             d.docker('service', 'rm', GATEWAY)  # Only the new route created by this transaction.
         if not app_unchanged:
-            d.emit(step='recovery', automaticRestore=False, message='El App fue modificado durante la preparación. Se conservan los servicios y respaldos para evitar dos escritores.')
+            d.emit(step='recovery', automaticRestore=False, message='El App fue modificado durante la preparación. Se conservan los servicios para evitar dos escritores.')
         if marker_created and json.loads(STATE.read_text()) == state:
             STATE.unlink()
         raise
@@ -337,8 +319,8 @@ if __name__ == '__main__':
         d.emit(ok=False, error=str(error), resourcesPreserved=True)
         sys.exit(1)
     except KeyboardInterrupt:
-        d.emit(ok=False, error='Interrumpido; revisar salida y respaldos antes de reintentar.', resourcesPreserved=True)
+        d.emit(ok=False, error='Interrumpido; revisar la salida antes de reintentar.', resourcesPreserved=True)
         sys.exit(130)
     except Exception:
-        d.emit(ok=False, error='Preparación interrumpida; conservar salida y respaldos. No se muestran credenciales.', resourcesPreserved=True)
+        d.emit(ok=False, error='Preparación interrumpida; conservar la salida. No se muestran credenciales.', resourcesPreserved=True)
         sys.exit(1)

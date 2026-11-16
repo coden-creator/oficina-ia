@@ -90,7 +90,7 @@ class HandoffTests(unittest.TestCase):
 
     def test_resume_checks_state_without_enabling_old_writer(self):
         with tempfile.TemporaryDirectory() as folder:
-            state=Path(folder)/'state.json';app.private_json(state,{'backup':folder,'routeDigest':'fixture'})
+            state=Path(folder)/'state.json';app.private_json(state,{'routeDigest':'fixture'})
             gateway={'Spec':{'Labels':{'office.purpose':app.PURPOSE},'Mode':{'Replicated':{'Replicas':1}}}}
             review={'Spec':{'Labels':{'office.purpose':app.d.PURPOSE},'Mode':{'Replicated':{'Replicas':0}}}}
             worker={'State':{'Health':{'Status':'healthy'}}}
@@ -98,13 +98,13 @@ class HandoffTests(unittest.TestCase):
             with patch.object(app,'STATE',state),patch.object(app.d,'inspect',side_effect=inspect), \
                  patch.object(app.d,'limits_ok',return_value=True),patch.object(app,'wait_route'), \
                  patch.object(app,'output_handoff') as output,patch.object(app.d,'docker') as docker:
-                app.resume_handoff('fixture');output.assert_called_once_with(folder);docker.assert_not_called()
+                app.resume_handoff('fixture');output.assert_called_once_with();docker.assert_not_called()
                 review['Spec']['Mode']['Replicated']['Replicas']=1
                 with self.assertRaises(app.d.DeploymentError):app.resume_handoff('fixture')
 
     def transaction(self, failure=None):
         with tempfile.TemporaryDirectory() as folder, ExitStack() as stack:
-            root = Path(folder); backup = root/'backup'; backup.mkdir()
+            root = Path(folder)
             original, review = services(); payload=b'fixed-route-fixture'; digest=hashlib.sha256(payload).hexdigest()
             config={'Spec': {'Labels': {'office.purpose': app.PURPOSE}, 'Data': base64.b64encode(payload).decode()}}
             def inspect(kind, name):
@@ -118,7 +118,6 @@ class HandoffTests(unittest.TestCase):
             stack.enter_context(patch.object(app.d, 'preflight', return_value=('node', original, review)))
             stack.enter_context(patch.object(app, 'validate_targets'))
             stack.enter_context(patch.object(app, 'cpu_margin'))
-            stack.enter_context(patch.object(app.tempfile, 'mkdtemp', return_value=str(backup)))
             stack.enter_context(patch.object(app.d, 'ids', side_effect=lambda kind: ['office-managed-route-'+digest[:24]] if kind == 'config' else []))
             stack.enter_context(patch.object(app.d, 'inspect', side_effect=inspect))
             stack.enter_context(patch.object(app.d, 'emit'))
@@ -126,8 +125,7 @@ class HandoffTests(unittest.TestCase):
             docker=stack.enter_context(patch.object(app.d, 'docker', side_effect=lambda *args, **kwargs: events.append(args) or ''))
             stack.enter_context(patch.object(app, 'wait_route', side_effect=app.d.DeploymentError('TLS') if failure=='tls' else None))
             stack.enter_context(patch.object(app, 'no_running_jobs'))
-            stack.enter_context(patch.object(app, 'backup_volume', side_effect=lambda *args: events.append(('backup', args[0]))))
-            stack.enter_context(patch.object(app, 'prepare_connections', side_effect=app.d.DeploymentError('key') if failure=='key' else None))
+            stack.enter_context(patch.object(app, 'prepare_connections', side_effect=app.d.DeploymentError('key') if failure=='key' else lambda *_: events.append(('connections',))))
             stack.enter_context(patch.object(app.d, 'resource_check'))
             stack.enter_context(patch.object(app, 'output_handoff'))
             if failure:
@@ -136,23 +134,25 @@ class HandoffTests(unittest.TestCase):
             else:
                 app.main()
                 self.assertEqual(json.loads(app.STATE.read_text())['phase'], 'ready-for-easypanel')
-                self.assertEqual((backup/'app-service.json').stat().st_mode & 0o777, 0o600)
-                self.assertEqual((backup/'review-service.json').stat().st_mode & 0o777, 0o600)
+                self.assertEqual(app.STATE.stat().st_mode & 0o777, 0o600)
+                self.assertEqual(list(root.iterdir()), [app.STATE])
+                self.assertNotIn('backup', json.loads(app.STATE.read_text()))
             return events
 
-    def test_success_stops_old_writer_before_consistent_video_backup(self):
+    def test_success_reuses_data_without_creating_backups(self):
         events=self.transaction()
         stop=('service','scale','--detach=true',app.d.SERVICE+'=0')
-        self.assertLess(events.index(stop), events.index(('backup', app.d.VIDEO)))
+        self.assertLess(events.index(stop), events.index(('connections',)))
         self.assertFalse(any(e[:2]==('service','rm') for e in events))
         self.assertFalse(any(app.d.WORKER in str(e) for e in events))
+        self.assertFalse(any('tar' in e or 'cp' in e for e in events))
 
     def test_tls_failure_removes_only_new_route_without_stopping_old_web(self):
         events=self.transaction('tls')
         self.assertIn(('service','rm',app.GATEWAY), events)
         self.assertFalse(any(e[:2]==('service','scale') for e in events))
 
-    def test_late_failure_restores_old_writer_and_keeps_backups(self):
+    def test_late_failure_restores_old_writer_without_copying_data(self):
         events=self.transaction('key')
         self.assertIn(('service','scale','--detach=true',app.d.SERVICE+'=1'), events)
         self.assertIn(('service','rm',app.GATEWAY), events)
