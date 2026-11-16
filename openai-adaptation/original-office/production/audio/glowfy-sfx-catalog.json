@@ -1,0 +1,2108 @@
+{
+  "schemaVersion": 1,
+  "brandId": "glowfy",
+  "title": "Catálogo de efectos para revisión",
+  "purpose": "Diagnóstico: no es un video de publicación",
+  "duration": 255.75,
+  "width": 720,
+  "height": 1280,
+  "fps": 24,
+  "sampleRate": 48000,
+  "tracks": 36,
+  "playbacks": 144,
+  "newPaidGenerations": 0,
+  "listeningProcessing": "Constant scalar gain per source to approximately -10 dBTP. No trimming, denoising, EQ, compression or repairs; final AAC encoding is lossy.",
+  "chapters": [
+    {
+      "number": 1,
+      "id": "apagado-01",
+      "title": "Apagado 01",
+      "start": 5.0,
+      "events": [
+        {
+          "number": 1,
+          "id": "apagado-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 46,
+          "ticks": 5,
+          "start": 5.75,
+          "duration": 0.6,
+          "gainDb": -9.1,
+          "sourceSha256": "86faa1577a0e87cc58ac1365555c420aec379d27d87c7b35ef71dc8ccf42272d"
+        },
+        {
+          "number": 1,
+          "id": "apagado-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 55,
+          "ticks": 5,
+          "start": 6.875,
+          "duration": 0.6,
+          "gainDb": -9.1,
+          "sourceSha256": "86faa1577a0e87cc58ac1365555c420aec379d27d87c7b35ef71dc8ccf42272d"
+        },
+        {
+          "number": 1,
+          "id": "apagado-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 66,
+          "ticks": 5,
+          "start": 8.25,
+          "duration": 0.6,
+          "gainDb": -9.0,
+          "sourceSha256": "68f11fd729593c59a109c77d550e0fc5615609c51a45bfc46469126acfc604e1"
+        },
+        {
+          "number": 1,
+          "id": "apagado-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 75,
+          "ticks": 5,
+          "start": 9.375,
+          "duration": 0.6,
+          "gainDb": -9.0,
+          "sourceSha256": "68f11fd729593c59a109c77d550e0fc5615609c51a45bfc46469126acfc604e1"
+        }
+      ],
+      "technicalReview": false,
+      "end": 10.75
+    },
+    {
+      "number": 2,
+      "id": "apagado-02",
+      "title": "Apagado 02",
+      "start": 10.75,
+      "events": [
+        {
+          "number": 2,
+          "id": "apagado-02",
+          "version": "original",
+          "repeat": 1,
+          "tick": 92,
+          "ticks": 5,
+          "start": 11.5,
+          "duration": 0.6,
+          "gainDb": -10.2,
+          "sourceSha256": "7b131ada46d76259f6953a18e7c2c357f3d54fad27fd133d323797c269266c7e"
+        },
+        {
+          "number": 2,
+          "id": "apagado-02",
+          "version": "original",
+          "repeat": 2,
+          "tick": 101,
+          "ticks": 5,
+          "start": 12.625,
+          "duration": 0.6,
+          "gainDb": -10.2,
+          "sourceSha256": "7b131ada46d76259f6953a18e7c2c357f3d54fad27fd133d323797c269266c7e"
+        },
+        {
+          "number": 2,
+          "id": "apagado-02",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 112,
+          "ticks": 5,
+          "start": 14.0,
+          "duration": 0.6,
+          "gainDb": -8.98,
+          "sourceSha256": "fbdaf20400da4a40f2db7882456764c9b85f08b8fbadc275aa8cf0b7915a2c0a"
+        },
+        {
+          "number": 2,
+          "id": "apagado-02",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 121,
+          "ticks": 5,
+          "start": 15.125,
+          "duration": 0.6,
+          "gainDb": -8.98,
+          "sourceSha256": "fbdaf20400da4a40f2db7882456764c9b85f08b8fbadc275aa8cf0b7915a2c0a"
+        }
+      ],
+      "technicalReview": false,
+      "end": 16.5
+    },
+    {
+      "number": 3,
+      "id": "bloques-madera-01",
+      "title": "Bloques de madera 01",
+      "start": 16.5,
+      "events": [
+        {
+          "number": 3,
+          "id": "bloques-madera-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 138,
+          "ticks": 7,
+          "start": 17.25,
+          "duration": 0.8,
+          "gainDb": -10.14,
+          "sourceSha256": "4574469074c17a3eaae9fbd49ad7f6245c35c1d46bc6cc4363055aeeec6fc9fd"
+        },
+        {
+          "number": 3,
+          "id": "bloques-madera-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 149,
+          "ticks": 7,
+          "start": 18.625,
+          "duration": 0.8,
+          "gainDb": -10.14,
+          "sourceSha256": "4574469074c17a3eaae9fbd49ad7f6245c35c1d46bc6cc4363055aeeec6fc9fd"
+        },
+        {
+          "number": 3,
+          "id": "bloques-madera-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 162,
+          "ticks": 7,
+          "start": 20.25,
+          "duration": 0.7997,
+          "gainDb": -9.02,
+          "sourceSha256": "443c58493ac3f6cd235c74ab69b310d9c8f127ef019ff9a5338bedf5245601f6"
+        },
+        {
+          "number": 3,
+          "id": "bloques-madera-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 173,
+          "ticks": 7,
+          "start": 21.625,
+          "duration": 0.7997,
+          "gainDb": -9.02,
+          "sourceSha256": "443c58493ac3f6cd235c74ab69b310d9c8f127ef019ff9a5338bedf5245601f6"
+        }
+      ],
+      "technicalReview": true,
+      "end": 23.25
+    },
+    {
+      "number": 4,
+      "id": "bombillo-01",
+      "title": "Bombillo 01",
+      "start": 23.25,
+      "events": [
+        {
+          "number": 4,
+          "id": "bombillo-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 192,
+          "ticks": 8,
+          "start": 24.0,
+          "duration": 1.0,
+          "gainDb": -7.76,
+          "sourceSha256": "cdc2f03fa9fb515a55d8f1664809f40f038c0ba97bb6c7bfd7316abe73081e4b"
+        },
+        {
+          "number": 4,
+          "id": "bombillo-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 204,
+          "ticks": 8,
+          "start": 25.5,
+          "duration": 1.0,
+          "gainDb": -7.76,
+          "sourceSha256": "cdc2f03fa9fb515a55d8f1664809f40f038c0ba97bb6c7bfd7316abe73081e4b"
+        },
+        {
+          "number": 4,
+          "id": "bombillo-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 218,
+          "ticks": 7,
+          "start": 27.25,
+          "duration": 0.8409,
+          "gainDb": -8.97,
+          "sourceSha256": "e1b83daf42fc847934a98efda7e6938731f3867d94235a13e82ac2fa91be363b"
+        },
+        {
+          "number": 4,
+          "id": "bombillo-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 229,
+          "ticks": 7,
+          "start": 28.625,
+          "duration": 0.8409,
+          "gainDb": -8.97,
+          "sourceSha256": "e1b83daf42fc847934a98efda7e6938731f3867d94235a13e82ac2fa91be363b"
+        }
+      ],
+      "technicalReview": true,
+      "end": 30.25
+    },
+    {
+      "number": 5,
+      "id": "burbuja-mensaje-01",
+      "title": "Mensaje recibido 01",
+      "start": 30.25,
+      "events": [
+        {
+          "number": 5,
+          "id": "burbuja-mensaje-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 248,
+          "ticks": 4,
+          "start": 31.0,
+          "duration": 0.48,
+          "gainDb": 0.83,
+          "sourceSha256": "ecc49616ce2dd64151743ac964ca69fb9ee59445cf8413aa202c4d04f8c9557b"
+        },
+        {
+          "number": 5,
+          "id": "burbuja-mensaje-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 256,
+          "ticks": 4,
+          "start": 32.0,
+          "duration": 0.48,
+          "gainDb": 0.83,
+          "sourceSha256": "ecc49616ce2dd64151743ac964ca69fb9ee59445cf8413aa202c4d04f8c9557b"
+        },
+        {
+          "number": 5,
+          "id": "burbuja-mensaje-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 266,
+          "ticks": 4,
+          "start": 33.25,
+          "duration": 0.48,
+          "gainDb": -9.08,
+          "sourceSha256": "ba67b2629bb86597996d418c0d78b396c05046006a8cec95b2fb9d25b8e76ed0"
+        },
+        {
+          "number": 5,
+          "id": "burbuja-mensaje-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 274,
+          "ticks": 4,
+          "start": 34.25,
+          "duration": 0.48,
+          "gainDb": -9.08,
+          "sourceSha256": "ba67b2629bb86597996d418c0d78b396c05046006a8cec95b2fb9d25b8e76ed0"
+        }
+      ],
+      "technicalReview": false,
+      "end": 35.5
+    },
+    {
+      "number": 6,
+      "id": "burbuja-mensaje-02",
+      "title": "Mensaje recibido 02",
+      "start": 35.5,
+      "events": [
+        {
+          "number": 6,
+          "id": "burbuja-mensaje-02",
+          "version": "original",
+          "repeat": 1,
+          "tick": 290,
+          "ticks": 4,
+          "start": 36.25,
+          "duration": 0.48,
+          "gainDb": -9.76,
+          "sourceSha256": "f9dc67b94175c417fa3a04c9f22a62f9342683e2809146ed7637be680911a85e"
+        },
+        {
+          "number": 6,
+          "id": "burbuja-mensaje-02",
+          "version": "original",
+          "repeat": 2,
+          "tick": 298,
+          "ticks": 4,
+          "start": 37.25,
+          "duration": 0.48,
+          "gainDb": -9.76,
+          "sourceSha256": "f9dc67b94175c417fa3a04c9f22a62f9342683e2809146ed7637be680911a85e"
+        },
+        {
+          "number": 6,
+          "id": "burbuja-mensaje-02",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 308,
+          "ticks": 4,
+          "start": 38.5,
+          "duration": 0.48,
+          "gainDb": -8.96,
+          "sourceSha256": "127c142d37f1aaa284f2f4f8da68ebcf53ca5c5a401f8a9ca6844176f627b1bd"
+        },
+        {
+          "number": 6,
+          "id": "burbuja-mensaje-02",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 316,
+          "ticks": 4,
+          "start": 39.5,
+          "duration": 0.48,
+          "gainDb": -8.96,
+          "sourceSha256": "127c142d37f1aaa284f2f4f8da68ebcf53ca5c5a401f8a9ca6844176f627b1bd"
+        }
+      ],
+      "technicalReview": false,
+      "end": 40.75
+    },
+    {
+      "number": 7,
+      "id": "cajas-carton-01",
+      "title": "Cajas de cartón 01",
+      "start": 40.75,
+      "events": [
+        {
+          "number": 7,
+          "id": "cajas-carton-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 332,
+          "ticks": 8,
+          "start": 41.5,
+          "duration": 1.0,
+          "gainDb": -9.26,
+          "sourceSha256": "5deab2e7279ae34d59ecff89e7ceab21652808dff18c966d14d535310c47113f"
+        },
+        {
+          "number": 7,
+          "id": "cajas-carton-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 344,
+          "ticks": 8,
+          "start": 43.0,
+          "duration": 1.0,
+          "gainDb": -9.26,
+          "sourceSha256": "5deab2e7279ae34d59ecff89e7ceab21652808dff18c966d14d535310c47113f"
+        },
+        {
+          "number": 7,
+          "id": "cajas-carton-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 358,
+          "ticks": 8,
+          "start": 44.75,
+          "duration": 1.0,
+          "gainDb": -8.96,
+          "sourceSha256": "975c5f4e81de7c8daf9cd21240fdd120ac74014dcbd4e6cbf70104637da69109"
+        },
+        {
+          "number": 7,
+          "id": "cajas-carton-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 370,
+          "ticks": 8,
+          "start": 46.25,
+          "duration": 1.0,
+          "gainDb": -8.96,
+          "sourceSha256": "975c5f4e81de7c8daf9cd21240fdd120ac74014dcbd4e6cbf70104637da69109"
+        }
+      ],
+      "technicalReview": false,
+      "end": 48.0
+    },
+    {
+      "number": 8,
+      "id": "calendario-arrancar-01",
+      "title": "Arrancar calendario 01",
+      "start": 48.0,
+      "events": [
+        {
+          "number": 8,
+          "id": "calendario-arrancar-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 390,
+          "ticks": 7,
+          "start": 48.75,
+          "duration": 0.8,
+          "gainDb": -9.19,
+          "sourceSha256": "fb895c77019212c2da03cb0722af44b5f50859e1f545880b47a9abdead4b0635"
+        },
+        {
+          "number": 8,
+          "id": "calendario-arrancar-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 401,
+          "ticks": 7,
+          "start": 50.125,
+          "duration": 0.8,
+          "gainDb": -9.19,
+          "sourceSha256": "fb895c77019212c2da03cb0722af44b5f50859e1f545880b47a9abdead4b0635"
+        },
+        {
+          "number": 8,
+          "id": "calendario-arrancar-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 414,
+          "ticks": 7,
+          "start": 51.75,
+          "duration": 0.8,
+          "gainDb": -9.39,
+          "sourceSha256": "a687f9cd5d9e6becd2e5b733f38230b71e4576ead3e5a0c2570585dab660c3d9"
+        },
+        {
+          "number": 8,
+          "id": "calendario-arrancar-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 425,
+          "ticks": 7,
+          "start": 53.125,
+          "duration": 0.8,
+          "gainDb": -9.39,
+          "sourceSha256": "a687f9cd5d9e6becd2e5b733f38230b71e4576ead3e5a0c2570585dab660c3d9"
+        }
+      ],
+      "technicalReview": true,
+      "end": 54.75
+    },
+    {
+      "number": 9,
+      "id": "campana-recepcion-01",
+      "title": "Campana de recepción 01",
+      "start": 54.75,
+      "events": [
+        {
+          "number": 9,
+          "id": "campana-recepcion-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 444,
+          "ticks": 12,
+          "start": 55.5,
+          "duration": 1.48,
+          "gainDb": 19.2,
+          "sourceSha256": "5d051c1da814259cb26160110926bbc9c122b9632c314c93672daeff96098c2e"
+        },
+        {
+          "number": 9,
+          "id": "campana-recepcion-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 460,
+          "ticks": 12,
+          "start": 57.5,
+          "duration": 1.48,
+          "gainDb": 19.2,
+          "sourceSha256": "5d051c1da814259cb26160110926bbc9c122b9632c314c93672daeff96098c2e"
+        },
+        {
+          "number": 9,
+          "id": "campana-recepcion-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 478,
+          "ticks": 12,
+          "start": 59.75,
+          "duration": 1.48,
+          "gainDb": -9.1,
+          "sourceSha256": "f85c64488678ac25c8e28015f5aa5443eedc9ebf8e0c8e8b2d847ad308399f28"
+        },
+        {
+          "number": 9,
+          "id": "campana-recepcion-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 494,
+          "ticks": 12,
+          "start": 61.75,
+          "duration": 1.48,
+          "gainDb": -9.1,
+          "sourceSha256": "f85c64488678ac25c8e28015f5aa5443eedc9ebf8e0c8e8b2d847ad308399f28"
+        }
+      ],
+      "technicalReview": true,
+      "end": 64.0
+    },
+    {
+      "number": 10,
+      "id": "campana-recepcion-02",
+      "title": "Campana de recepción 02",
+      "start": 64.0,
+      "events": [
+        {
+          "number": 10,
+          "id": "campana-recepcion-02",
+          "version": "original",
+          "repeat": 1,
+          "tick": 518,
+          "ticks": 12,
+          "start": 64.75,
+          "duration": 1.48,
+          "gainDb": -0.24,
+          "sourceSha256": "dfe2dc0bc922f5212e2b25c57d5a4087809fec9dd6b6e949c1c1e747313ba7c8"
+        },
+        {
+          "number": 10,
+          "id": "campana-recepcion-02",
+          "version": "original",
+          "repeat": 2,
+          "tick": 534,
+          "ticks": 12,
+          "start": 66.75,
+          "duration": 1.48,
+          "gainDb": -0.24,
+          "sourceSha256": "dfe2dc0bc922f5212e2b25c57d5a4087809fec9dd6b6e949c1c1e747313ba7c8"
+        },
+        {
+          "number": 10,
+          "id": "campana-recepcion-02",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 552,
+          "ticks": 12,
+          "start": 69.0,
+          "duration": 1.48,
+          "gainDb": -9.44,
+          "sourceSha256": "b4bf0d2452f40c9b5d1bca63f27eb763be42c490b28fd199352dd869dc2a3e84"
+        },
+        {
+          "number": 10,
+          "id": "campana-recepcion-02",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 568,
+          "ticks": 12,
+          "start": 71.0,
+          "duration": 1.48,
+          "gainDb": -9.44,
+          "sourceSha256": "b4bf0d2452f40c9b5d1bca63f27eb763be42c490b28fd199352dd869dc2a3e84"
+        }
+      ],
+      "technicalReview": true,
+      "end": 73.25
+    },
+    {
+      "number": 11,
+      "id": "check-lapiz-01",
+      "title": "Marca de lápiz 01",
+      "start": 73.25,
+      "events": [
+        {
+          "number": 11,
+          "id": "check-lapiz-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 592,
+          "ticks": 5,
+          "start": 74.0,
+          "duration": 0.6,
+          "gainDb": -3.02,
+          "sourceSha256": "47892cf9b5adcab6d736c259c9ddc758a63cf22eb68487a1826606c34c98790d"
+        },
+        {
+          "number": 11,
+          "id": "check-lapiz-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 601,
+          "ticks": 5,
+          "start": 75.125,
+          "duration": 0.6,
+          "gainDb": -3.02,
+          "sourceSha256": "47892cf9b5adcab6d736c259c9ddc758a63cf22eb68487a1826606c34c98790d"
+        },
+        {
+          "number": 11,
+          "id": "check-lapiz-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 612,
+          "ticks": 5,
+          "start": 76.5,
+          "duration": 0.6,
+          "gainDb": -10.12,
+          "sourceSha256": "11d5547f329fe51874dc81eee05d05a84dfb63ae54e38fcf078bc664db9bcddd"
+        },
+        {
+          "number": 11,
+          "id": "check-lapiz-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 621,
+          "ticks": 5,
+          "start": 77.625,
+          "duration": 0.6,
+          "gainDb": -10.12,
+          "sourceSha256": "11d5547f329fe51874dc81eee05d05a84dfb63ae54e38fcf078bc664db9bcddd"
+        }
+      ],
+      "technicalReview": true,
+      "end": 79.0
+    },
+    {
+      "number": 12,
+      "id": "clic-boton-01",
+      "title": "Clic de botón 01",
+      "start": 79.0,
+      "events": [
+        {
+          "number": 12,
+          "id": "clic-boton-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 638,
+          "ticks": 4,
+          "start": 79.75,
+          "duration": 0.48,
+          "gainDb": 3.69,
+          "sourceSha256": "bd445ebc48a7f4aa6fbfbc659217f44ca472debece78d03c014fd902d4522512"
+        },
+        {
+          "number": 12,
+          "id": "clic-boton-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 646,
+          "ticks": 4,
+          "start": 80.75,
+          "duration": 0.48,
+          "gainDb": 3.69,
+          "sourceSha256": "bd445ebc48a7f4aa6fbfbc659217f44ca472debece78d03c014fd902d4522512"
+        },
+        {
+          "number": 12,
+          "id": "clic-boton-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 656,
+          "ticks": 4,
+          "start": 82.0,
+          "duration": 0.4222,
+          "gainDb": -9.03,
+          "sourceSha256": "4774a45c3ac909b7638b3d0d8df81c373e11f218bdb98f951d3b2318bfd881b1"
+        },
+        {
+          "number": 12,
+          "id": "clic-boton-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 664,
+          "ticks": 4,
+          "start": 83.0,
+          "duration": 0.4222,
+          "gainDb": -9.03,
+          "sourceSha256": "4774a45c3ac909b7638b3d0d8df81c373e11f218bdb98f951d3b2318bfd881b1"
+        }
+      ],
+      "technicalReview": false,
+      "end": 84.25
+    },
+    {
+      "number": 13,
+      "id": "clic-boton-02",
+      "title": "Clic de botón 02",
+      "start": 84.25,
+      "events": [
+        {
+          "number": 13,
+          "id": "clic-boton-02",
+          "version": "original",
+          "repeat": 1,
+          "tick": 680,
+          "ticks": 4,
+          "start": 85.0,
+          "duration": 0.48,
+          "gainDb": 8.95,
+          "sourceSha256": "c37cec398607dbfc9432c1a6525045c23a69b6131ace789c0a9c5d359135b660"
+        },
+        {
+          "number": 13,
+          "id": "clic-boton-02",
+          "version": "original",
+          "repeat": 2,
+          "tick": 688,
+          "ticks": 4,
+          "start": 86.0,
+          "duration": 0.48,
+          "gainDb": 8.95,
+          "sourceSha256": "c37cec398607dbfc9432c1a6525045c23a69b6131ace789c0a9c5d359135b660"
+        },
+        {
+          "number": 13,
+          "id": "clic-boton-02",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 698,
+          "ticks": 4,
+          "start": 87.25,
+          "duration": 0.48,
+          "gainDb": -9.05,
+          "sourceSha256": "e0c091a03dd5d56705f0e92d88826c871c69b54d77b41c842b9650ac845b64e7"
+        },
+        {
+          "number": 13,
+          "id": "clic-boton-02",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 706,
+          "ticks": 4,
+          "start": 88.25,
+          "duration": 0.48,
+          "gainDb": -9.05,
+          "sourceSha256": "e0c091a03dd5d56705f0e92d88826c871c69b54d77b41c842b9650ac845b64e7"
+        }
+      ],
+      "technicalReview": false,
+      "end": 89.5
+    },
+    {
+      "number": 14,
+      "id": "cuaderno-01",
+      "title": "Cuaderno 01",
+      "start": 89.5,
+      "events": [
+        {
+          "number": 14,
+          "id": "cuaderno-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 722,
+          "ticks": 8,
+          "start": 90.25,
+          "duration": 1.0,
+          "gainDb": 1.87,
+          "sourceSha256": "49257340eafc26c07b4443596739060035611b118dfd78ce1c1b84bbd7693b28"
+        },
+        {
+          "number": 14,
+          "id": "cuaderno-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 734,
+          "ticks": 8,
+          "start": 91.75,
+          "duration": 1.0,
+          "gainDb": 1.87,
+          "sourceSha256": "49257340eafc26c07b4443596739060035611b118dfd78ce1c1b84bbd7693b28"
+        },
+        {
+          "number": 14,
+          "id": "cuaderno-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 748,
+          "ticks": 8,
+          "start": 93.5,
+          "duration": 1.0,
+          "gainDb": -9.29,
+          "sourceSha256": "7b2705c5b39cbc23846ea7f3ce1cb013e97bc93f70f4acb4ac2a6e77f70fd411"
+        },
+        {
+          "number": 14,
+          "id": "cuaderno-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 760,
+          "ticks": 8,
+          "start": 95.0,
+          "duration": 1.0,
+          "gainDb": -9.29,
+          "sourceSha256": "7b2705c5b39cbc23846ea7f3ce1cb013e97bc93f70f4acb4ac2a6e77f70fd411"
+        }
+      ],
+      "technicalReview": false,
+      "end": 96.75
+    },
+    {
+      "number": 15,
+      "id": "cuchara-taza-01",
+      "title": "Cuchara y taza 01",
+      "start": 96.75,
+      "events": [
+        {
+          "number": 15,
+          "id": "cuchara-taza-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 780,
+          "ticks": 7,
+          "start": 97.5,
+          "duration": 0.8,
+          "gainDb": -9.01,
+          "sourceSha256": "05e5478ce7e7f5e0d7996b808e78341e50a05484df9e732869a183748406fc88"
+        },
+        {
+          "number": 15,
+          "id": "cuchara-taza-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 791,
+          "ticks": 7,
+          "start": 98.875,
+          "duration": 0.8,
+          "gainDb": -9.01,
+          "sourceSha256": "05e5478ce7e7f5e0d7996b808e78341e50a05484df9e732869a183748406fc88"
+        },
+        {
+          "number": 15,
+          "id": "cuchara-taza-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 804,
+          "ticks": 7,
+          "start": 100.5,
+          "duration": 0.8,
+          "gainDb": -9.01,
+          "sourceSha256": "0873d769c297ee03c17fc194098f9f01ed2879e5f66b9e9bc701288fd45d5d6e"
+        },
+        {
+          "number": 15,
+          "id": "cuchara-taza-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 815,
+          "ticks": 7,
+          "start": 101.875,
+          "duration": 0.8,
+          "gainDb": -9.01,
+          "sourceSha256": "0873d769c297ee03c17fc194098f9f01ed2879e5f66b9e9bc701288fd45d5d6e"
+        }
+      ],
+      "technicalReview": false,
+      "end": 103.5
+    },
+    {
+      "number": 16,
+      "id": "destello-particulas-01",
+      "title": "Destello de partículas 01",
+      "start": 103.5,
+      "events": [
+        {
+          "number": 16,
+          "id": "destello-particulas-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 834,
+          "ticks": 8,
+          "start": 104.25,
+          "duration": 1.0,
+          "gainDb": -8.94,
+          "sourceSha256": "335ea1299016419238c51efebbd8f3445fa6f59359f47574a953e6d9eeb8cfd4"
+        },
+        {
+          "number": 16,
+          "id": "destello-particulas-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 846,
+          "ticks": 8,
+          "start": 105.75,
+          "duration": 1.0,
+          "gainDb": -8.94,
+          "sourceSha256": "335ea1299016419238c51efebbd8f3445fa6f59359f47574a953e6d9eeb8cfd4"
+        },
+        {
+          "number": 16,
+          "id": "destello-particulas-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 860,
+          "ticks": 8,
+          "start": 107.5,
+          "duration": 1.0,
+          "gainDb": -9.03,
+          "sourceSha256": "34a335ef68dda115992d0b4d0bef18fc9950e44f9bcc4afb2a3e8fd0345d9db6"
+        },
+        {
+          "number": 16,
+          "id": "destello-particulas-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 872,
+          "ticks": 8,
+          "start": 109.0,
+          "duration": 1.0,
+          "gainDb": -9.03,
+          "sourceSha256": "34a335ef68dda115992d0b4d0bef18fc9950e44f9bcc4afb2a3e8fd0345d9db6"
+        }
+      ],
+      "technicalReview": false,
+      "end": 110.75
+    },
+    {
+      "number": 17,
+      "id": "destello-particulas-02",
+      "title": "Destello de partículas 02",
+      "start": 110.75,
+      "events": [
+        {
+          "number": 17,
+          "id": "destello-particulas-02",
+          "version": "original",
+          "repeat": 1,
+          "tick": 892,
+          "ticks": 8,
+          "start": 111.5,
+          "duration": 1.0,
+          "gainDb": -7.51,
+          "sourceSha256": "21b5214803dad8a5740f93f6da8bc8df2d17966e9c069d82f642dbaa2d46d647"
+        },
+        {
+          "number": 17,
+          "id": "destello-particulas-02",
+          "version": "original",
+          "repeat": 2,
+          "tick": 904,
+          "ticks": 8,
+          "start": 113.0,
+          "duration": 1.0,
+          "gainDb": -7.51,
+          "sourceSha256": "21b5214803dad8a5740f93f6da8bc8df2d17966e9c069d82f642dbaa2d46d647"
+        },
+        {
+          "number": 17,
+          "id": "destello-particulas-02",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 918,
+          "ticks": 8,
+          "start": 114.75,
+          "duration": 1.0,
+          "gainDb": -9.14,
+          "sourceSha256": "1a7cd3a8365f644c1265548e9f747825b74c419bc9d8d33b8ea290a0d6457352"
+        },
+        {
+          "number": 17,
+          "id": "destello-particulas-02",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 930,
+          "ticks": 8,
+          "start": 116.25,
+          "duration": 1.0,
+          "gainDb": -9.14,
+          "sourceSha256": "1a7cd3a8365f644c1265548e9f747825b74c419bc9d8d33b8ea290a0d6457352"
+        }
+      ],
+      "technicalReview": false,
+      "end": 118.0
+    },
+    {
+      "number": 18,
+      "id": "ding-confirmacion-01",
+      "title": "Confirmación 01",
+      "start": 118.0,
+      "events": [
+        {
+          "number": 18,
+          "id": "ding-confirmacion-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 950,
+          "ticks": 8,
+          "start": 118.75,
+          "duration": 1.0,
+          "gainDb": -1.24,
+          "sourceSha256": "ef8b5b5ad09dc98aa0fdd704b131c1c6cf8933ccb28d69e889eb720c0fb43e17"
+        },
+        {
+          "number": 18,
+          "id": "ding-confirmacion-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 962,
+          "ticks": 8,
+          "start": 120.25,
+          "duration": 1.0,
+          "gainDb": -1.24,
+          "sourceSha256": "ef8b5b5ad09dc98aa0fdd704b131c1c6cf8933ccb28d69e889eb720c0fb43e17"
+        },
+        {
+          "number": 18,
+          "id": "ding-confirmacion-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 976,
+          "ticks": 8,
+          "start": 122.0,
+          "duration": 1.0,
+          "gainDb": -9.03,
+          "sourceSha256": "6eb5cac7ba66cc2b002ea81a6ae4360e362b5807290febba3773fc2ce1e5fffa"
+        },
+        {
+          "number": 18,
+          "id": "ding-confirmacion-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 988,
+          "ticks": 8,
+          "start": 123.5,
+          "duration": 1.0,
+          "gainDb": -9.03,
+          "sourceSha256": "6eb5cac7ba66cc2b002ea81a6ae4360e362b5807290febba3773fc2ce1e5fffa"
+        }
+      ],
+      "technicalReview": false,
+      "end": 125.25
+    },
+    {
+      "number": 19,
+      "id": "ding-confirmacion-02",
+      "title": "Confirmación 02",
+      "start": 125.25,
+      "events": [
+        {
+          "number": 19,
+          "id": "ding-confirmacion-02",
+          "version": "original",
+          "repeat": 1,
+          "tick": 1008,
+          "ticks": 8,
+          "start": 126.0,
+          "duration": 1.0,
+          "gainDb": 3.63,
+          "sourceSha256": "ce8fd87aa985f35581fd16ce70d34acd515eb3409e9a3541c9d1955216f8ab9a"
+        },
+        {
+          "number": 19,
+          "id": "ding-confirmacion-02",
+          "version": "original",
+          "repeat": 2,
+          "tick": 1020,
+          "ticks": 8,
+          "start": 127.5,
+          "duration": 1.0,
+          "gainDb": 3.63,
+          "sourceSha256": "ce8fd87aa985f35581fd16ce70d34acd515eb3409e9a3541c9d1955216f8ab9a"
+        },
+        {
+          "number": 19,
+          "id": "ding-confirmacion-02",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 1034,
+          "ticks": 8,
+          "start": 129.25,
+          "duration": 1.0,
+          "gainDb": -8.97,
+          "sourceSha256": "bc989e8d13983634a4665f6fbc4fa5e9906075a5e7334e8c761eef02830ae7e9"
+        },
+        {
+          "number": 19,
+          "id": "ding-confirmacion-02",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 1046,
+          "ticks": 8,
+          "start": 130.75,
+          "duration": 1.0,
+          "gainDb": -8.97,
+          "sourceSha256": "bc989e8d13983634a4665f6fbc4fa5e9906075a5e7334e8c761eef02830ae7e9"
+        }
+      ],
+      "technicalReview": false,
+      "end": 132.5
+    },
+    {
+      "number": 20,
+      "id": "engranes-01",
+      "title": "Engranes 01",
+      "start": 132.5,
+      "events": [
+        {
+          "number": 20,
+          "id": "engranes-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 1066,
+          "ticks": 10,
+          "start": 133.25,
+          "duration": 1.2,
+          "gainDb": -8.43,
+          "sourceSha256": "fc1d694fdeb4ab4bcb1500568bf5ac82df2133b31c1750a61f912c2679cb730d"
+        },
+        {
+          "number": 20,
+          "id": "engranes-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 1080,
+          "ticks": 10,
+          "start": 135.0,
+          "duration": 1.2,
+          "gainDb": -8.43,
+          "sourceSha256": "fc1d694fdeb4ab4bcb1500568bf5ac82df2133b31c1750a61f912c2679cb730d"
+        },
+        {
+          "number": 20,
+          "id": "engranes-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 1096,
+          "ticks": 10,
+          "start": 137.0,
+          "duration": 1.1919,
+          "gainDb": -9.04,
+          "sourceSha256": "75fe667cb5f354a02095b140144365f3b93cf140dd9fff093d96f8af7e749f10"
+        },
+        {
+          "number": 20,
+          "id": "engranes-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 1110,
+          "ticks": 10,
+          "start": 138.75,
+          "duration": 1.1919,
+          "gainDb": -9.04,
+          "sourceSha256": "75fe667cb5f354a02095b140144365f3b93cf140dd9fff093d96f8af7e749f10"
+        }
+      ],
+      "technicalReview": false,
+      "end": 140.75
+    },
+    {
+      "number": 21,
+      "id": "golpe-grave-01",
+      "title": "Golpe grave 01",
+      "start": 140.75,
+      "events": [
+        {
+          "number": 21,
+          "id": "golpe-grave-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 1132,
+          "ticks": 8,
+          "start": 141.5,
+          "duration": 1.0,
+          "gainDb": 7.99,
+          "sourceSha256": "b52d8df2930cad6bd57d858725030956b18062572d69af1ec68487d8d3b5fa1b"
+        },
+        {
+          "number": 21,
+          "id": "golpe-grave-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 1144,
+          "ticks": 8,
+          "start": 143.0,
+          "duration": 1.0,
+          "gainDb": 7.99,
+          "sourceSha256": "b52d8df2930cad6bd57d858725030956b18062572d69af1ec68487d8d3b5fa1b"
+        },
+        {
+          "number": 21,
+          "id": "golpe-grave-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 1158,
+          "ticks": 8,
+          "start": 144.75,
+          "duration": 1.0,
+          "gainDb": -9.05,
+          "sourceSha256": "49455039c1030d0f3174b642e2db61b597611e971f0e3868f43396f026fd17e1"
+        },
+        {
+          "number": 21,
+          "id": "golpe-grave-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 1170,
+          "ticks": 8,
+          "start": 146.25,
+          "duration": 1.0,
+          "gainDb": -9.05,
+          "sourceSha256": "49455039c1030d0f3174b642e2db61b597611e971f0e3868f43396f026fd17e1"
+        }
+      ],
+      "technicalReview": false,
+      "end": 148.0
+    },
+    {
+      "number": 22,
+      "id": "golpe-grave-02",
+      "title": "Golpe grave 02",
+      "start": 148.0,
+      "events": [
+        {
+          "number": 22,
+          "id": "golpe-grave-02",
+          "version": "original",
+          "repeat": 1,
+          "tick": 1190,
+          "ticks": 8,
+          "start": 148.75,
+          "duration": 1.0,
+          "gainDb": 3.5,
+          "sourceSha256": "ae74fecc7a380f0690092d65092c25c91088db094b1034c1e5b13f40be1e848c"
+        },
+        {
+          "number": 22,
+          "id": "golpe-grave-02",
+          "version": "original",
+          "repeat": 2,
+          "tick": 1202,
+          "ticks": 8,
+          "start": 150.25,
+          "duration": 1.0,
+          "gainDb": 3.5,
+          "sourceSha256": "ae74fecc7a380f0690092d65092c25c91088db094b1034c1e5b13f40be1e848c"
+        },
+        {
+          "number": 22,
+          "id": "golpe-grave-02",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 1216,
+          "ticks": 8,
+          "start": 152.0,
+          "duration": 1.0,
+          "gainDb": -9.0,
+          "sourceSha256": "02269315e1ab41954b6fdf8f58ab9351b1e867130062b8d91e116de8e0818417"
+        },
+        {
+          "number": 22,
+          "id": "golpe-grave-02",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 1228,
+          "ticks": 8,
+          "start": 153.5,
+          "duration": 1.0,
+          "gainDb": -9.0,
+          "sourceSha256": "02269315e1ab41954b6fdf8f58ab9351b1e867130062b8d91e116de8e0818417"
+        }
+      ],
+      "technicalReview": false,
+      "end": 155.25
+    },
+    {
+      "number": 23,
+      "id": "hoja-arrugada-01",
+      "title": "Papel arrugado 01",
+      "start": 155.25,
+      "events": [
+        {
+          "number": 23,
+          "id": "hoja-arrugada-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 1248,
+          "ticks": 8,
+          "start": 156.0,
+          "duration": 1.0,
+          "gainDb": -5.48,
+          "sourceSha256": "e097b7fdfff5284caba715731c9db6e9dd8b343c6c5109f7a822d4f2c39eb913"
+        },
+        {
+          "number": 23,
+          "id": "hoja-arrugada-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 1260,
+          "ticks": 8,
+          "start": 157.5,
+          "duration": 1.0,
+          "gainDb": -5.48,
+          "sourceSha256": "e097b7fdfff5284caba715731c9db6e9dd8b343c6c5109f7a822d4f2c39eb913"
+        },
+        {
+          "number": 23,
+          "id": "hoja-arrugada-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 1274,
+          "ticks": 8,
+          "start": 159.25,
+          "duration": 1.0,
+          "gainDb": -8.98,
+          "sourceSha256": "2b488e9debb2bce4fe7f367b18e5a32dcc6fd9366cd35706773f591adf88054d"
+        },
+        {
+          "number": 23,
+          "id": "hoja-arrugada-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 1286,
+          "ticks": 8,
+          "start": 160.75,
+          "duration": 1.0,
+          "gainDb": -8.98,
+          "sourceSha256": "2b488e9debb2bce4fe7f367b18e5a32dcc6fd9366cd35706773f591adf88054d"
+        }
+      ],
+      "technicalReview": false,
+      "end": 162.5
+    },
+    {
+      "number": 24,
+      "id": "llave-candado-01",
+      "title": "Llave y candado 01",
+      "start": 162.5,
+      "events": [
+        {
+          "number": 24,
+          "id": "llave-candado-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 1306,
+          "ticks": 10,
+          "start": 163.25,
+          "duration": 1.2,
+          "gainDb": -10.44,
+          "sourceSha256": "f245421017818da322ff53fb5ca8b2316172f4db90059b80767fc7816cb28cd3"
+        },
+        {
+          "number": 24,
+          "id": "llave-candado-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 1320,
+          "ticks": 10,
+          "start": 165.0,
+          "duration": 1.2,
+          "gainDb": -10.44,
+          "sourceSha256": "f245421017818da322ff53fb5ca8b2316172f4db90059b80767fc7816cb28cd3"
+        },
+        {
+          "number": 24,
+          "id": "llave-candado-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 1336,
+          "ticks": 10,
+          "start": 167.0,
+          "duration": 1.1487,
+          "gainDb": -9.01,
+          "sourceSha256": "156fc244cb71471b4295c9590459b94d875bc720afeb54aecd192907d9c108ce"
+        },
+        {
+          "number": 24,
+          "id": "llave-candado-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 1350,
+          "ticks": 10,
+          "start": 168.75,
+          "duration": 1.1487,
+          "gainDb": -9.01,
+          "sourceSha256": "156fc244cb71471b4295c9590459b94d875bc720afeb54aecd192907d9c108ce"
+        }
+      ],
+      "technicalReview": true,
+      "end": 170.75
+    },
+    {
+      "number": 25,
+      "id": "papel-hojas-01",
+      "title": "Hojas de papel 01",
+      "start": 170.75,
+      "events": [
+        {
+          "number": 25,
+          "id": "papel-hojas-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 1372,
+          "ticks": 8,
+          "start": 171.5,
+          "duration": 1.0,
+          "gainDb": -3.5,
+          "sourceSha256": "67701fc3d4803a71f033627715102ccba553abe12deeaf4ab4519fa5010aa690"
+        },
+        {
+          "number": 25,
+          "id": "papel-hojas-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 1384,
+          "ticks": 8,
+          "start": 173.0,
+          "duration": 1.0,
+          "gainDb": -3.5,
+          "sourceSha256": "67701fc3d4803a71f033627715102ccba553abe12deeaf4ab4519fa5010aa690"
+        },
+        {
+          "number": 25,
+          "id": "papel-hojas-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 1398,
+          "ticks": 8,
+          "start": 174.75,
+          "duration": 1.0,
+          "gainDb": -9.0,
+          "sourceSha256": "29e777e3c14bd77725fa736993c54123312f47ea1f9e4ec054e891379bea9286"
+        },
+        {
+          "number": 25,
+          "id": "papel-hojas-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 1410,
+          "ticks": 8,
+          "start": 176.25,
+          "duration": 1.0,
+          "gainDb": -9.0,
+          "sourceSha256": "29e777e3c14bd77725fa736993c54123312f47ea1f9e4ec054e891379bea9286"
+        }
+      ],
+      "technicalReview": true,
+      "end": 178.0
+    },
+    {
+      "number": 26,
+      "id": "planta-crece-01",
+      "title": "Planta creciendo 01",
+      "start": 178.0,
+      "events": [
+        {
+          "number": 26,
+          "id": "planta-crece-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 1430,
+          "ticks": 12,
+          "start": 178.75,
+          "duration": 1.48,
+          "gainDb": 3.17,
+          "sourceSha256": "38ac17b53bcf427ed23c5eaae38d60e0717f71cd3edf1e3976a86b65521e750d"
+        },
+        {
+          "number": 26,
+          "id": "planta-crece-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 1446,
+          "ticks": 12,
+          "start": 180.75,
+          "duration": 1.48,
+          "gainDb": 3.17,
+          "sourceSha256": "38ac17b53bcf427ed23c5eaae38d60e0717f71cd3edf1e3976a86b65521e750d"
+        },
+        {
+          "number": 26,
+          "id": "planta-crece-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 1464,
+          "ticks": 12,
+          "start": 183.0,
+          "duration": 1.455,
+          "gainDb": -8.99,
+          "sourceSha256": "18d8574659f1c3ac5924d1b08b83e454c5e0e564c8e2c522d496f4f842614be1"
+        },
+        {
+          "number": 26,
+          "id": "planta-crece-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 1480,
+          "ticks": 12,
+          "start": 185.0,
+          "duration": 1.455,
+          "gainDb": -8.99,
+          "sourceSha256": "18d8574659f1c3ac5924d1b08b83e454c5e0e564c8e2c522d496f4f842614be1"
+        }
+      ],
+      "technicalReview": true,
+      "end": 187.25
+    },
+    {
+      "number": 27,
+      "id": "pop-ui-01",
+      "title": "Pop de interfaz 01",
+      "start": 187.25,
+      "events": [
+        {
+          "number": 27,
+          "id": "pop-ui-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 1504,
+          "ticks": 4,
+          "start": 188.0,
+          "duration": 0.48,
+          "gainDb": -8.26,
+          "sourceSha256": "43b796a32833c73203257c63949347ff6bdcccebff5c976140572ba217606e2c"
+        },
+        {
+          "number": 27,
+          "id": "pop-ui-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 1512,
+          "ticks": 4,
+          "start": 189.0,
+          "duration": 0.48,
+          "gainDb": -8.26,
+          "sourceSha256": "43b796a32833c73203257c63949347ff6bdcccebff5c976140572ba217606e2c"
+        },
+        {
+          "number": 27,
+          "id": "pop-ui-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 1522,
+          "ticks": 4,
+          "start": 190.25,
+          "duration": 0.4514,
+          "gainDb": -9.06,
+          "sourceSha256": "ff4bec6143387ae9ca8575e4418046672086cf3a42b156d91c1556f91aae078b"
+        },
+        {
+          "number": 27,
+          "id": "pop-ui-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 1530,
+          "ticks": 4,
+          "start": 191.25,
+          "duration": 0.4514,
+          "gainDb": -9.06,
+          "sourceSha256": "ff4bec6143387ae9ca8575e4418046672086cf3a42b156d91c1556f91aae078b"
+        }
+      ],
+      "technicalReview": false,
+      "end": 192.5
+    },
+    {
+      "number": 28,
+      "id": "pop-ui-02",
+      "title": "Pop de interfaz 02",
+      "start": 192.5,
+      "events": [
+        {
+          "number": 28,
+          "id": "pop-ui-02",
+          "version": "original",
+          "repeat": 1,
+          "tick": 1546,
+          "ticks": 4,
+          "start": 193.25,
+          "duration": 0.48,
+          "gainDb": 3.32,
+          "sourceSha256": "98abe7f9f0a6c1b4dfa6335ce3710e50e9f9908600640451bf59273466fa7251"
+        },
+        {
+          "number": 28,
+          "id": "pop-ui-02",
+          "version": "original",
+          "repeat": 2,
+          "tick": 1554,
+          "ticks": 4,
+          "start": 194.25,
+          "duration": 0.48,
+          "gainDb": 3.32,
+          "sourceSha256": "98abe7f9f0a6c1b4dfa6335ce3710e50e9f9908600640451bf59273466fa7251"
+        },
+        {
+          "number": 28,
+          "id": "pop-ui-02",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 1564,
+          "ticks": 4,
+          "start": 195.5,
+          "duration": 0.48,
+          "gainDb": -8.98,
+          "sourceSha256": "ea974be0e7cd55776b68ca0c288692381d4fcb494dadcbc96342378826c24e9f"
+        },
+        {
+          "number": 28,
+          "id": "pop-ui-02",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 1572,
+          "ticks": 4,
+          "start": 196.5,
+          "duration": 0.48,
+          "gainDb": -8.98,
+          "sourceSha256": "ea974be0e7cd55776b68ca0c288692381d4fcb494dadcbc96342378826c24e9f"
+        }
+      ],
+      "technicalReview": false,
+      "end": 197.75
+    },
+    {
+      "number": 29,
+      "id": "sello-tinta-01",
+      "title": "Sello de tinta 01",
+      "start": 197.75,
+      "events": [
+        {
+          "number": 29,
+          "id": "sello-tinta-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 1588,
+          "ticks": 5,
+          "start": 198.5,
+          "duration": 0.6,
+          "gainDb": -4.22,
+          "sourceSha256": "33b0f748fe9db9383f0b85bdefb170b7c3d64acc4f6b9bd249a33970f650866b"
+        },
+        {
+          "number": 29,
+          "id": "sello-tinta-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 1597,
+          "ticks": 5,
+          "start": 199.625,
+          "duration": 0.6,
+          "gainDb": -4.22,
+          "sourceSha256": "33b0f748fe9db9383f0b85bdefb170b7c3d64acc4f6b9bd249a33970f650866b"
+        },
+        {
+          "number": 29,
+          "id": "sello-tinta-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 1608,
+          "ticks": 3,
+          "start": 201.0,
+          "duration": 0.3347,
+          "gainDb": -9.13,
+          "sourceSha256": "c16083616e8b9b6ce2426b9ee5a1f876afb134a544cdeea1aff32954d3505d97"
+        },
+        {
+          "number": 29,
+          "id": "sello-tinta-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 1615,
+          "ticks": 3,
+          "start": 201.875,
+          "duration": 0.3347,
+          "gainDb": -9.13,
+          "sourceSha256": "c16083616e8b9b6ce2426b9ee5a1f876afb134a544cdeea1aff32954d3505d97"
+        }
+      ],
+      "technicalReview": false,
+      "end": 203.0
+    },
+    {
+      "number": 30,
+      "id": "sobre-abrir-01",
+      "title": "Abrir sobre 01",
+      "start": 203.0,
+      "events": [
+        {
+          "number": 30,
+          "id": "sobre-abrir-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 1630,
+          "ticks": 8,
+          "start": 203.75,
+          "duration": 1.0,
+          "gainDb": -9.58,
+          "sourceSha256": "e48009f8e8112a3fb81f89c51c0253b5f33abc30474617a9ea3ed135b9f71c02"
+        },
+        {
+          "number": 30,
+          "id": "sobre-abrir-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 1642,
+          "ticks": 8,
+          "start": 205.25,
+          "duration": 1.0,
+          "gainDb": -9.58,
+          "sourceSha256": "e48009f8e8112a3fb81f89c51c0253b5f33abc30474617a9ea3ed135b9f71c02"
+        },
+        {
+          "number": 30,
+          "id": "sobre-abrir-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 1656,
+          "ticks": 8,
+          "start": 207.0,
+          "duration": 0.9602,
+          "gainDb": -9.0,
+          "sourceSha256": "ee8df2b29440ad2f277449253621ab6073f2cf2f525d9e9271d65d3dd25c0820"
+        },
+        {
+          "number": 30,
+          "id": "sobre-abrir-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 1668,
+          "ticks": 8,
+          "start": 208.5,
+          "duration": 0.9602,
+          "gainDb": -9.0,
+          "sourceSha256": "ee8df2b29440ad2f277449253621ab6073f2cf2f525d9e9271d65d3dd25c0820"
+        }
+      ],
+      "technicalReview": false,
+      "end": 210.25
+    },
+    {
+      "number": 31,
+      "id": "teclas-suaves-01",
+      "title": "Teclas suaves 01",
+      "start": 210.25,
+      "events": [
+        {
+          "number": 31,
+          "id": "teclas-suaves-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 1688,
+          "ticks": 12,
+          "start": 211.0,
+          "duration": 1.48,
+          "gainDb": -10.24,
+          "sourceSha256": "4116a7c4ef4bb0a951ce3405c8c1f4e06d7868d359db76a6f498009824b5dd33"
+        },
+        {
+          "number": 31,
+          "id": "teclas-suaves-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 1704,
+          "ticks": 12,
+          "start": 213.0,
+          "duration": 1.48,
+          "gainDb": -10.24,
+          "sourceSha256": "4116a7c4ef4bb0a951ce3405c8c1f4e06d7868d359db76a6f498009824b5dd33"
+        },
+        {
+          "number": 31,
+          "id": "teclas-suaves-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 1722,
+          "ticks": 12,
+          "start": 215.25,
+          "duration": 1.4555,
+          "gainDb": -9.17,
+          "sourceSha256": "9a908ea29cb2310f01f20bd6b681f6170a5c2abeeeb2bc133d978c55f72fd81f"
+        },
+        {
+          "number": 31,
+          "id": "teclas-suaves-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 1738,
+          "ticks": 12,
+          "start": 217.25,
+          "duration": 1.4555,
+          "gainDb": -9.17,
+          "sourceSha256": "9a908ea29cb2310f01f20bd6b681f6170a5c2abeeeb2bc133d978c55f72fd81f"
+        }
+      ],
+      "technicalReview": true,
+      "end": 219.5
+    },
+    {
+      "number": 32,
+      "id": "teclas-suaves-02",
+      "title": "Teclas suaves 02",
+      "start": 219.5,
+      "events": [
+        {
+          "number": 32,
+          "id": "teclas-suaves-02",
+          "version": "original",
+          "repeat": 1,
+          "tick": 1762,
+          "ticks": 12,
+          "start": 220.25,
+          "duration": 1.48,
+          "gainDb": -11.63,
+          "sourceSha256": "bdece91c71ff09512c24d2d2b5c0f1f68439c3e35f269587f853466332b02cc1"
+        },
+        {
+          "number": 32,
+          "id": "teclas-suaves-02",
+          "version": "original",
+          "repeat": 2,
+          "tick": 1778,
+          "ticks": 12,
+          "start": 222.25,
+          "duration": 1.48,
+          "gainDb": -11.63,
+          "sourceSha256": "bdece91c71ff09512c24d2d2b5c0f1f68439c3e35f269587f853466332b02cc1"
+        },
+        {
+          "number": 32,
+          "id": "teclas-suaves-02",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 1796,
+          "ticks": 12,
+          "start": 224.5,
+          "duration": 1.4311,
+          "gainDb": -9.03,
+          "sourceSha256": "d8bea14dbc3c659142ac6a216348b645cb88cef7b3f6b8dab78db334cdefccec"
+        },
+        {
+          "number": 32,
+          "id": "teclas-suaves-02",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 1812,
+          "ticks": 12,
+          "start": 226.5,
+          "duration": 1.4311,
+          "gainDb": -9.03,
+          "sourceSha256": "d8bea14dbc3c659142ac6a216348b645cb88cef7b3f6b8dab78db334cdefccec"
+        }
+      ],
+      "technicalReview": true,
+      "end": 228.75
+    },
+    {
+      "number": 33,
+      "id": "tick-cursor-01",
+      "title": "Tick de cursor 01",
+      "start": 228.75,
+      "events": [
+        {
+          "number": 33,
+          "id": "tick-cursor-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 1836,
+          "ticks": 4,
+          "start": 229.5,
+          "duration": 0.48,
+          "gainDb": -2.53,
+          "sourceSha256": "d0084375ee9cda5026ca653690a587d8a56d8a0ed56bb16452369a2b52380dfe"
+        },
+        {
+          "number": 33,
+          "id": "tick-cursor-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 1844,
+          "ticks": 4,
+          "start": 230.5,
+          "duration": 0.48,
+          "gainDb": -2.53,
+          "sourceSha256": "d0084375ee9cda5026ca653690a587d8a56d8a0ed56bb16452369a2b52380dfe"
+        },
+        {
+          "number": 33,
+          "id": "tick-cursor-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 1854,
+          "ticks": 4,
+          "start": 231.75,
+          "duration": 0.48,
+          "gainDb": -9.62,
+          "sourceSha256": "0afac3bf29f8ff609ec950215a5bef262e603438f695c36695c6bf806eb2972c"
+        },
+        {
+          "number": 33,
+          "id": "tick-cursor-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 1862,
+          "ticks": 4,
+          "start": 232.75,
+          "duration": 0.48,
+          "gainDb": -9.62,
+          "sourceSha256": "0afac3bf29f8ff609ec950215a5bef262e603438f695c36695c6bf806eb2972c"
+        }
+      ],
+      "technicalReview": false,
+      "end": 234.0
+    },
+    {
+      "number": 34,
+      "id": "tick-cursor-02",
+      "title": "Tick de cursor 02",
+      "start": 234.0,
+      "events": [
+        {
+          "number": 34,
+          "id": "tick-cursor-02",
+          "version": "original",
+          "repeat": 1,
+          "tick": 1878,
+          "ticks": 4,
+          "start": 234.75,
+          "duration": 0.48,
+          "gainDb": -4.77,
+          "sourceSha256": "20ab841f4a3d495ba5ffe045792a9e7ae4abb9d57192ca299750f41b32e62152"
+        },
+        {
+          "number": 34,
+          "id": "tick-cursor-02",
+          "version": "original",
+          "repeat": 2,
+          "tick": 1886,
+          "ticks": 4,
+          "start": 235.75,
+          "duration": 0.48,
+          "gainDb": -4.77,
+          "sourceSha256": "20ab841f4a3d495ba5ffe045792a9e7ae4abb9d57192ca299750f41b32e62152"
+        },
+        {
+          "number": 34,
+          "id": "tick-cursor-02",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 1896,
+          "ticks": 4,
+          "start": 237.0,
+          "duration": 0.48,
+          "gainDb": -9.08,
+          "sourceSha256": "5ccaacbf1a79ba94afa07ef2755540c16146e8482f96839ebf3fa02b459974f7"
+        },
+        {
+          "number": 34,
+          "id": "tick-cursor-02",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 1904,
+          "ticks": 4,
+          "start": 238.0,
+          "duration": 0.48,
+          "gainDb": -9.08,
+          "sourceSha256": "5ccaacbf1a79ba94afa07ef2755540c16146e8482f96839ebf3fa02b459974f7"
+        }
+      ],
+      "technicalReview": false,
+      "end": 239.25
+    },
+    {
+      "number": 35,
+      "id": "whoosh-corto-01",
+      "title": "Transición corta 01",
+      "start": 239.25,
+      "events": [
+        {
+          "number": 35,
+          "id": "whoosh-corto-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 1920,
+          "ticks": 5,
+          "start": 240.0,
+          "duration": 0.6,
+          "gainDb": -9.92,
+          "sourceSha256": "f16c3ae4e3d443bfd0b2b5d5064736eab081c53fdd7df48f982a9afc8071cd74"
+        },
+        {
+          "number": 35,
+          "id": "whoosh-corto-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 1929,
+          "ticks": 5,
+          "start": 241.125,
+          "duration": 0.6,
+          "gainDb": -9.92,
+          "sourceSha256": "f16c3ae4e3d443bfd0b2b5d5064736eab081c53fdd7df48f982a9afc8071cd74"
+        },
+        {
+          "number": 35,
+          "id": "whoosh-corto-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 1940,
+          "ticks": 5,
+          "start": 242.5,
+          "duration": 0.5206,
+          "gainDb": -9.02,
+          "sourceSha256": "2a7520b68a425b905545a747e5380b74d92993a109ad85519154ec6709d34eb0"
+        },
+        {
+          "number": 35,
+          "id": "whoosh-corto-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 1949,
+          "ticks": 5,
+          "start": 243.625,
+          "duration": 0.5206,
+          "gainDb": -9.02,
+          "sourceSha256": "2a7520b68a425b905545a747e5380b74d92993a109ad85519154ec6709d34eb0"
+        }
+      ],
+      "technicalReview": false,
+      "end": 245.0
+    },
+    {
+      "number": 36,
+      "id": "whoosh-corto-02",
+      "title": "Transición corta 02",
+      "start": 245.0,
+      "events": [
+        {
+          "number": 36,
+          "id": "whoosh-corto-02",
+          "version": "original",
+          "repeat": 1,
+          "tick": 1966,
+          "ticks": 5,
+          "start": 245.75,
+          "duration": 0.6,
+          "gainDb": -6.6,
+          "sourceSha256": "3e81d5d63cdba19ed75815d0f2a05d5bbad01b55284ef95a57c2d1f9cd54488c"
+        },
+        {
+          "number": 36,
+          "id": "whoosh-corto-02",
+          "version": "original",
+          "repeat": 2,
+          "tick": 1975,
+          "ticks": 5,
+          "start": 246.875,
+          "duration": 0.6,
+          "gainDb": -6.6,
+          "sourceSha256": "3e81d5d63cdba19ed75815d0f2a05d5bbad01b55284ef95a57c2d1f9cd54488c"
+        },
+        {
+          "number": 36,
+          "id": "whoosh-corto-02",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 1986,
+          "ticks": 5,
+          "start": 248.25,
+          "duration": 0.6,
+          "gainDb": -9.0,
+          "sourceSha256": "fef1065999133fb6d9882e36fed4abddd49a171369cf4d68841497015f9e6b98"
+        },
+        {
+          "number": 36,
+          "id": "whoosh-corto-02",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 1995,
+          "ticks": 5,
+          "start": 249.375,
+          "duration": 0.6,
+          "gainDb": -9.0,
+          "sourceSha256": "fef1065999133fb6d9882e36fed4abddd49a171369cf4d68841497015f9e6b98"
+        }
+      ],
+      "technicalReview": false,
+      "end": 250.75
+    }
+  ],
+  "file": "glowfy-sfx-catalog.mp4",
+  "bytes": 7706372,
+  "sha256": "3d73fd595807e4e26c41562c6a46ce4c27a3eb88607bf929079f06d4dc2a8806"
+}

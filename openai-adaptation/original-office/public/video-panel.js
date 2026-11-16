@@ -1,5 +1,6 @@
 import {prepareMaterial,materialEvidence} from './material-import.js';
 import {mountMusicLibrary} from './music-panel.js';
+import {mountSoundCatalog} from './sound-catalog.js';
 import {el,icon,button,link,pageHeader,emptyState,badge,groupOf,isTechnical,dateLabel,jobHref,requestJSON,STAGE_LABELS} from './ui.js';
 
 export function mountVideoPanel(page,{brandContext,data}){
@@ -8,6 +9,7 @@ export function mountVideoPanel(page,{brandContext,data}){
  page.append(pageHeader('Estudio de contenido','Revisá las piezas, pedí cambios y seguí su producción.',newButton));
  const availability=el('div','','studio-availability');page.append(availability);
  mountMusicLibrary(page,brandContext);
+ mountSoundCatalog(page,brandContext);
  const tabs=el('nav','','studio-tabs');tabs.setAttribute('aria-label','Estado de los trabajos');page.append(tabs);
  const message=el('p','','inline-message');message.setAttribute('role','status');const content=el('div','','studio-content');page.append(message,content);
  const requestDialog=el('dialog','','office-dialog request-dialog');requestDialog.setAttribute('aria-labelledby','request-title');

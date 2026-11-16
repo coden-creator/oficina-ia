@@ -9,3 +9,5 @@
 2026-11-15 (America/Guatemala) · Jorge autoriza expresamente la actualización de entorno por el mismo conector. Activación aplicada y segunda toma completada con Eleven v4; producción retomada con el guion existente. Versión 3 exportada en 18,1 s, SHA256 020fd68ffd43f8f998aedbcffaf6df38592cc2b66f9bf7089a48f6f67846aab1. Música y efectos comprobados en el archivo; 36 cuadros y reproducción escritorio/móvil revisados. Pendiente de aprobación de Jorge, sin publicación. Ver ../evidence/glowfy-social-real.json.
 
 - Jorge eligió las cuatro músicas tras escucharlas. Incorporadas como biblioteca Glowfy v1, con reutilización sin nueva generación, acceso privado y asignación estable entre correcciones. Las aprobaciones de música y de videos permanecen separadas.
+
+- Catálogo solicitado por Jorge: 36 efectos existentes, 144 reproducciones A/B identificadas, 4:16, sin nuevas generaciones ni reparaciones. Verificados audio contra fuentes, cuadros, descarga y navegación local. Integración en el Estudio preparada para revisión de Jorge.

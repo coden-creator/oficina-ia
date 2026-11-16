@@ -4,11 +4,12 @@ import {team,departments} from './video/office-team.mjs';
 import {createVideoHttpHandler} from './video/http.mjs';
 import {createConnectionsHttpHandler} from './connections/http.mjs';
 import {musicHttp} from './production/music-library.mjs';
+import {soundCatalogHttp} from './production/sound-catalog.mjs';
 import fs from 'node:fs';
 import {createHash,timingSafeEqual} from 'node:crypto';
 const digest=s=>createHash('sha256').update(s).digest();
 export const capabilities=Object.freeze({ui:'original-visual-shell',functionalOffice:false,provider:'not-connected',autonomous:false,externalActionsEnabled:false,paidApiEnabled:false,features:{chat:'unavailable',tasks:'unavailable',crm:'not-connected',ads:'not-connected',render:'not-connected',voice:'not-connected',publication:'unavailable'}});
-const files=new Map([['/','index.html'],...['style.css','negocio.css','officehq.js','sprites.js','compat-app.js','navigation.js','brand-context.js','ui.js','workspace-pages.js','compat.css','video-panel.js','music-panel.js','material-import.js','connections-panel.js','office-panel.js'].map(f=>['/'+f,f])]);
+const files=new Map([['/','index.html'],...['style.css','negocio.css','officehq.js','sprites.js','compat-app.js','navigation.js','brand-context.js','ui.js','workspace-pages.js','compat.css','video-panel.js','music-panel.js','sound-catalog.js','material-import.js','connections-panel.js','office-panel.js'].map(f=>['/'+f,f])]);
 const types={html:'text/html; charset=utf-8',js:'text/javascript; charset=utf-8',css:'text/css; charset=utf-8'};
 export function createOriginalShell({password,origin,videoFlow=null,videoDataDir=null,deploymentMarker=null,connectionStore=null,officeCoordinator=null}){
  if(typeof password!=='string'||password.length<16)throw new Error('PASSWORD_REQUIRED');
@@ -26,6 +27,7 @@ export function createOriginalShell({password,origin,videoFlow=null,videoDataDir
   if(!raw.startsWith('Basic ')||!timingSafeEqual(digest(Buffer.from(raw.slice(6),'base64').toString()),digest('jorge:'+password))){res.setHeader('WWW-Authenticate','Basic realm="Oficina", charset="UTF-8"');return send(401,{error:'AUTHENTICATION_REQUIRED'});}
   if(req.headers.host!==publicURL.host)return send(403,{error:'HOST_NOT_ALLOWED'});
   if(musicHttp(req,res))return;
+  if(soundCatalogHttp(req,res))return;
   if(req.method==='GET'&&req.url.startsWith('/api/office/')){const brand=req.url.slice('/api/office/'.length);try{if(!officeCoordinator)return send(503,{error:'COORDINATION_UNAVAILABLE'});await videoFlow?.refreshConnection?.();return send(200,await officeCoordinator.snapshot(brand));}catch{return send(404,{error:'OFFICE_NOT_AVAILABLE'});}}
   if(await connectionsHandler(req,res))return;
   if(videoHandler&&await videoHandler(req,res))return;

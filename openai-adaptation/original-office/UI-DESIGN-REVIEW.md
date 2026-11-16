@@ -122,3 +122,9 @@ Validación: Chromium autenticado local a 1440/390/320 px, seis rutas, decisione
 Se incorpora un bloque desplegable en el Estudio, antes de los filtros de trabajos. Usa la paleta existente (#0d0e12, #171a22, #303644, #eef0f5, #aeb7c7, #c3afff), tipografía de la oficina y cuatro filas con nombre, reproductor y descarga; en móvil cada fila se apila. Se conserva la selección global de marca. No agrega tarjetas promocionales, animaciones ni nuevas conexiones.
 
 La apertura directa utiliza `musica=1`. La biblioteca detiene el audio al cerrar, salir del Estudio o cambiar de marca; ignora respuestas tardías y conserva la vista durante el sondeo de trabajos. Los controles nativos tienen etiquetas y navegación por teclado. La selección de Jorge ya está registrada: no se vuelve a pedir elegir una sola favorita.
+
+## Revisión de efectos por video
+
+Bloque «Revisar los efectos de sonido» contiguo a la música. Conserva paleta, tipografía y selector global. Un video vertical y un índice desplazable de 36 botones ocupan dos columnas en escritorio y una en móvil; el efecto actual se destaca con color y `aria-current`. Controles nativos, foco visible, descarga y explicación A/B. No se reproduce automáticamente. La ruta `efectos=1` abre el bloque; cerrar, salir o cambiar de marca detiene el video, y las respuestas tardías se descartan.
+
+Chromium local: 1440×1100 y 390×844, reproducción real, saltos a 1/12/36, descarga comprobada por SHA, teclado, cero errores JavaScript y sin desborde horizontal. Capturas de escritorio/móvil y 72 cuadros del MP4 revisados. El catálogo no afirma que los sonidos estén aprobados ni reparados; sirve para recibir la selección de Jorge.

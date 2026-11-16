@@ -83,3 +83,8 @@ scripts/probe-tool-inventory.mjs
 !production/music-library.mjs
 !production/audio/glowfy-music.json
 !public/music-panel.js
+
+!production/sound-catalog.mjs
+!production/audio/glowfy-sfx-catalog.json
+!production/audio/glowfy-sfx-catalog.mp4
+!public/sound-catalog.js

@@ -72,3 +72,7 @@ El ledger `speech-attempt.json` persiste antes de enviar la petición. Un result
 La primera prueba fue rechazada por falta de música, efectos débiles y voz plana. La reedición usa el perfil `OFFICE_VOICE_PROFILE=social-v2` y, únicamente para la pieza ya autorizada, `OFFICE_VOICE_TEST_TAKE=2`. Conserva los archivos de la primera toma y registra la nueva en `voice-take-2/`. No habilita nuevas tomas por cambios de texto, reinicios o intentos repetidos.
 
 El catálogo oficial de ElevenLabs determina modelos disponibles, compatibilidad de la voz profesional, controles y factor de consumo. La mezcla incorpora música y efectos existentes del estudio (procedencia en `production/audio/manifest.json`), sincronizados con las acciones, más ducking y medición final. La aprobación estética y la publicación siguen pendientes de Jorge. Las notas anteriores que describen ausencia de voz/música son registros históricos de etapas anteriores; no describen esta prueba acotada.
+
+### Catálogo de efectos para revisión
+
+El Estudio de Glowfy incluye un video de 4:16 con los 36 efectos existentes, comparando original y procesado, dos veces cada uno. Permite saltar a cada efecto y descargar el MP4 autenticado. Abrir `/?brand=glowfy#/estudio?efectos=1`; devolver número, A/B y problema. No regenera sonidos ni modifica piezas. Fuentes, método y comprobaciones: [catálogo SFX](production/sfx-catalog/README.md).
