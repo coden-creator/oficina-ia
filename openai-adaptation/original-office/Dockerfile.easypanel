@@ -1,0 +1,14 @@
+# Reuse the verified local runtime; rebuilds only replace application source.
+# No login, dependency installation, credentials, or host access in this image.
+FROM scratch AS office-source
+COPY server.mjs start.mjs agents-display.json /
+COPY public/ /public/
+COPY video/ /video/
+COPY connections/ /connections/
+COPY production/reference-standard.mjs /production/reference-standard.mjs
+FROM oficina-runtime:33a3edc
+WORKDIR /app
+COPY --from=office-source --chown=1000:1000 / /app/
+USER 1000:1000
+EXPOSE 3000
+CMD ["node","start.mjs"]

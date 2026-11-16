@@ -8,7 +8,7 @@ Inspección del MCP: el App existente sigue apuntando a `junie/review-office-wor
 
 La corrección debe conservar el App como único servidor web que procesa las fichas, el trabajador de Codex separado, y los datos de `oficina-jorge-videos-review-r1`. Rebuild debe reconstruir la fuente vigente sin reconfigurar manualmente la ruta después de cada cambio. Antes de cambiar fuente/montajes o desplegar: respaldar configuración, verificar el almacenamiento existente y resolver una ruta persistente que no dependa de etiquetas efímeras del App. No montar la sesión de Codex ni el socket Docker en la web. Evitar dos procesos escribiendo simultáneamente las mismas fichas durante la transición. Preservar el servicio anterior y su configuración para volver atrás; no eliminar volúmenes.
 
-Esta corrección todavía no está aplicada. No presentar el actualizador de configs de la web Swarm como automatización de EasyPanel. Tampoco activar el Compose de bootstrap deshabilitado: no puede adjuntarse a CodeNet, cuya configuración compartida se conserva.
+La entrega acotada ya está preparada en [EASYPANEL-MANAGED.md](EASYPANEL-MANAGED.md): `scripts/prepare-easypanel-app.py` fija la ruta, respalda los datos y pausa el escritor anterior; el App se configura y despliega después mediante MCP. Esta corrección todavía no está aplicada. No presentar el actualizador de configs de la web Swarm como automatización de EasyPanel. Tampoco activar el Compose de bootstrap deshabilitado: no puede adjuntarse a CodeNet, cuya configuración compartida se conserva.
 
 ## Estado verificado y siguiente despliegue — 15 noviembre 2026
 

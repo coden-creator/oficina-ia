@@ -1,5 +1,7 @@
 # Original shell + protected internal video workflow
 
+> Despliegue: la oficina debe volver al App existente `service/oficina-jorge`. Está preparada la [corrección inicial para Deploy/Rebuild por MCP](deployment-review/EASYPANEL-MANAGED.md); aún no se ejecutó en el VPS.
+
 > Interfaz de revisión: selector global, Estudio por estados, formulario independiente y ficha de decisiones. Ver [estructura visual y validación](UI-DESIGN-REVIEW.md). Estos cambios todavía no están desplegados en el VPS.
 
 > Revisión actual (código, pendiente de despliegue): [recuperación del departamento orgánico](production/RECUPERACION-CONTENIDO-ORGANICO.md) identifica el motor original y lo que falta portar. Se añade [configuración de ElevenLabs en Conexiones](connections/README.md) y descarte de ideas con historial; no se habilita síntesis ni publicación.
