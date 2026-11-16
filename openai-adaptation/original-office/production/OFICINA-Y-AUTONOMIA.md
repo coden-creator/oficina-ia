@@ -1,5 +1,7 @@
 # Oficina de Jorge: coordinación y contenido
 
+> Registro histórico de la entrega inicial. La producción Glowfy avanzó después de esta etapa: ver [avance actual](glowfy/PROGRESS.md) y [pendientes de Jorge](PENDIENTES.md). Las secciones sobre voz desconectada y prueba pendiente describen aquella entrega, no el piloto ya realizado.
+
 Entrega del 16 de noviembre de 2026. La autorización vigente es desarrollar la oficina; Jorge avisará cuándo ejecutar la prueba después de configurar ElevenLabs. Guardar una clave no activa producción.
 
 ## Disponible en esta entrega

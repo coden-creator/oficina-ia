@@ -1,5 +1,7 @@
 # Oficina de Jorge · estado vigente
 
+Pendientes vigentes de Jorge: [Estudio, identidades de marca, animaciones e integración social](production/PENDIENTES.md).
+
 Biblioteca musical: Jorge eligió las cuatro variantes de Glowfy. Se incorporan reproducción/descarga privada en el Estudio y selección estable por pieza en el mezclador social. [Alcance y evidencia](production/glowfy/MUSICA.md).
 
 La aplicación funciona en el App existente `service/oficina-jorge`, rama `codex/revision-visual`, build `Dockerfile.easypanel`. La web, el trabajador Codex y la conexión cifrada de ElevenLabs están conectados. La actualización por MCP conserva los cuatro montajes persistentes y el login.
