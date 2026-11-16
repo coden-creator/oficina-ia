@@ -60,3 +60,11 @@ Next-stage source adds a renderer-specific structured visual plan and bounded cr
 ElevenLabs/network contracts under connectors/ are review-only, excluded from images and unconnected. Their tests are mocks, not provider calls. Voice and publication remain unavailable; there is no active credit-approval UI, provider credential or synthesis HTTP endpoint. Provider-side spend enforcement and durable reconciliation must be implemented before enabling any paid transport.
 
 The optional production/template-bridge source reuses the supplied amano Canvas2D primitives in two finite, new technical layouts. It is not packaged or exposed to runtime/model/user input. Two real local MP4 tests verify encoding/decode, not commercial or Three.js parity; synthetic palette/source approval is test-only.
+
+### Primera prueba narrada de Glowfy
+
+La producción `production/glowfy-production.mjs` une el guion orgánico real con la clave cifrada de la oficina, narración ElevenLabs Multilingual v2 con timestamps, escenas ilustradas propias, subtítulos, efectos de interfaz y mezcla medida. Se agrega únicamente `@napi-rs/canvas@0.1.100` al App por `Dockerfile.easypanel`; el trabajador de autenticación no se modifica.
+
+Activación por administración: `OFFICE_AUTONOMY_ENABLED=1` y `OFFICE_AUTONOMY_JOB_IDS=<pieza>` autorizan el trabajo Codex; `OFFICE_VOICE_TEST_JOB_ID=<misma pieza Glowfy>` y `OFFICE_VOICE_ID=<voz premade consultada en el catálogo>` limitan la prueba de voz. Para una voz existente propia indicada explícitamente por Jorge, `OFFICE_VOICE_OWNER_AUTHORIZED=1` admite únicamente ese ID, sin crear ni clonar voz. El consumo máximo es una solicitud de hasta 1000 caracteres por pieza y debe caber en la cuota incluida. No se habilita sobreconsumo, clonación, publicación ni generación para otras piezas. Cambiar el guion tras una síntesis no concede automáticamente otro consumo.
+
+El ledger `speech-attempt.json` persiste antes de enviar la petición. Un resultado dudoso se bloquea sin reintentar; un resultado completo se reutiliza por hash para corregir el render. `beats.json`, audio, mapa de efectos, cuadros, MP4 y QA quedan en el volumen privado de videos. La prueba real se distingue de las pruebas unitarias con proveedores simulados. `awaiting_review` exige aprobación estética de Jorge; ni el score editorial ni la medición de LUFS la sustituyen.

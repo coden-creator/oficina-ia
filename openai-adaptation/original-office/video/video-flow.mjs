@@ -54,7 +54,7 @@ export function createVideoFlow({dataDir,adapters={},creativeRevision={}}){
  if(revisionPolicy.authorized&&(typeof revisionPolicy.source!=='string'||!revisionPolicy.source.trim()||revisionPolicy.source.length>1000))throw new Error('Fuente de autorización de producción requerida');
  if(!path.isAbsolute(dataDir))throw new Error('Directorio absoluto requerido');
  dataDir=path.resolve(dataDir);
- let referenceRunner=null;
+ let referenceRunner=null,referenceCapability=null;
  let tail=Promise.resolve();
  const serial=fn=>{const next=tail.then(async()=>{
   await safePath(dataDir,{directory:true,create:true});const lock=path.join(dataDir,'.flow.lock');let h;
@@ -129,5 +129,5 @@ export function createVideoFlow({dataDir,adapters={},creativeRevision={}}){
   event(j,'discarded',{...j.discard,previousApproval});await save(j);return publicJob(j);
  });}
  async function updateOffice(b,id,version,change,type){return serial(async()=>{const j=await get(b,id);if(j.version!==version||['approved','discarded','awaiting_review'].includes(j.state))throw Error('PIECE_VERSION_CHANGED');change(j);if(j.version>100)throw Error('REVISION_LIMIT');j.draftHash=j.outputs.script?digest(JSON.stringify({brandId:j.brandId,version:j.version,brief:j.brief,script:j.outputs.script})):null;event(j,type,{stage:j.stage,version:j.version,editorId:j.execution?.editorId??null});await save(j);return clone(j);});}
- return {updateOffice,setReferenceRunner(fn){referenceRunner=fn;},refreshConnection:()=>adapters.runner?.refresh?.(),create:args=>serial(()=>createInternal(args)),list,get,run:async(b,id)=>{const j=await get(b,id);if(j.brief.qualityStandard==='cresova-reference-v1'&&referenceRunner)return referenceRunner(b,id);return serial(()=>runInternal(b,id));},approve,requestChanges,discard,capabilities:()=>({brands:Object.keys(brands),stages,runnerConfigured:!!adapters.runner?.run,runnerConnected:adapters.runner?.status?.()?.connected===true,rendererConfigured:!!adapters.renderer?.render,rendererVerified:false,production:productionCapability(),automaticCreativeRevision:{configuredMax:revisionPolicy.maxAttempts,authorized:revisionPolicy.authorized,finalHumanApprovalRequired:true},publish:false,paid:false,voice:false})};
+ return {updateOffice,setProductionCapability(fn){referenceCapability=fn;},setReferenceRunner(fn){referenceRunner=fn;},refreshConnection:()=>adapters.runner?.refresh?.(),create:args=>serial(()=>createInternal(args)),list,get,run:async(b,id)=>{const j=await get(b,id);if(j.brief.qualityStandard==='cresova-reference-v1'&&referenceRunner)return referenceRunner(b,id);return serial(()=>runInternal(b,id));},approve,requestChanges,discard,capabilities:()=>({brands:Object.keys(brands),stages,runnerConfigured:!!adapters.runner?.run,runnerConnected:adapters.runner?.status?.()?.connected===true,rendererConfigured:!!adapters.renderer?.render,rendererVerified:false,production:{...productionCapability(),...(referenceCapability?.()||{})},automaticCreativeRevision:{configuredMax:revisionPolicy.maxAttempts,authorized:revisionPolicy.authorized,finalHumanApprovalRequired:true},publish:false,paid:false,voice:false})};
 }

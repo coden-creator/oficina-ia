@@ -7,9 +7,10 @@ export function createConnectionsHttpHandler({store=null,origin}){
  return async(req,res)=>{
   if(!req.url.startsWith('/api/connections'))return false;
   const send=(code,value)=>{res.writeHead(code,{'Content-Type':'application/json','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Cross-Origin-Resource-Policy':'same-origin'});res.end(JSON.stringify(value));return true};
-  if(!['/api/connections','/api/connections/elevenlabs','/api/connections/elevenlabs/verify'].includes(req.url))return send(404,{error:'NOT_FOUND'});
+  if(!['/api/connections','/api/connections/elevenlabs','/api/connections/elevenlabs/verify','/api/connections/elevenlabs/catalog'].includes(req.url))return send(404,{error:'NOT_FOUND'});
   try{
    if(req.method==='GET'&&req.url==='/api/connections')return send(200,{available:!!store,csrfToken:store?csrf:null,elevenlabs:store?await store.status():{provider:'elevenlabs',configured:false,status:'unavailable',generationEnabled:false}});
+   if(req.method==='GET'&&req.url==='/api/connections/elevenlabs/catalog')return send(200,await store.speechCatalog());
    if(req.method!=='POST'||req.url==='/api/connections')return send(405,{error:'METHOD_NOT_ALLOWED'});
    if(req.headers.origin!==origin||req.headers['sec-fetch-site']==='cross-site')return send(403,{error:'ORIGIN_NOT_ALLOWED'});
    if(req.headers['content-type']!=='application/json')return send(415,{error:'JSON_REQUIRED'});

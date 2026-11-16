@@ -62,3 +62,15 @@ scripts/probe-tool-inventory.mjs
 !video/office-coordinator.mjs
 
 !public/office-panel.js
+
+!connections/elevenlabs-speech.mjs
+!production/glowfy-production.mjs
+!production/voice-session.mjs
+!production/process.mjs
+!production/glowfy/
+!production/glowfy/*.mjs
+!production/glowfy/assets.json
+!production/glowfy/FONT-LICENSES.txt
+!production/runtime/
+!production/runtime/package.json
+!production/runtime/package-lock.json

@@ -1,7 +1,7 @@
 import {ORGANIC_PROTOCOL,organicPrompts,validateOrganicOutput} from './organic-contract.mjs';
 import {brands} from './video-flow.mjs';
 const copy=x=>structuredClone(x);
-export function createOrganicWorkflow({flow,runner,enabled=false,allowedJobIds=[]}){
+export function createOrganicWorkflow({flow,runner,enabled=false,allowedJobIds=[],production=null}){
  let turn=Promise.resolve();const processing=new Set();
  const allowed=new Set(allowedJobIds);
  const permit=id=>enabled&&allowed.has(id);
@@ -43,7 +43,11 @@ export function createOrganicWorkflow({flow,runner,enabled=false,allowedJobIds=[
     index++;
    }
    if(phase==='prepare')await patch(j=>{j.stage='art_direction';j.state='queued';j.execution=null;},'ready_for_editor');
-   else await patch(j=>{j.stage='production';j.state='blocked';j.blocker='REFERENCE_PRODUCTION_NOT_CONNECTED';j.execution=null;j.editorId=editorId;},'production_dependency');
+   else if(production?.permits(job)){
+    await patch(j=>{j.stage='production';j.editorId=editorId;},'production_started');
+    const result=await production.render(job,async(stage,summary)=>patch(j=>{j.stage=stage;j.productionProgress=summary;},'production_progress'));
+    await patch(j=>{j.artifact=result.artifact;j.outputs.production=result.production;j.outputs.qa=result.qa;j.stage='owner_review';j.state='awaiting_review';j.execution=null;j.productionProgress=null;},'narrated_video_ready');
+   }else await patch(j=>{j.stage='production';j.state='blocked';j.blocker='REFERENCE_PRODUCTION_NOT_CONNECTED';j.execution=null;j.editorId=editorId;},'production_dependency');
   }catch(error){
    await patch(j=>{j.state='blocked';j.execution=null;j.blocker=/^[A-Z0-9_]{1,100}$/.test(error.message)?error.message:'ORGANIC_STAGE_FAILED';},'organic_blocked');
   }
