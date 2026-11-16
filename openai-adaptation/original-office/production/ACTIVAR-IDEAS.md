@@ -17,3 +17,14 @@ Ajuste de presentación: los enfoques extensos se leen en «Enfoque elegido por 
 
 
 El diagnóstico nuevo identificó `SPECIALIST_UNSUPPORTED_EVIDENCE` en el comité de la segunda idea. El esquema de salida del trabajador enumera ahora los identificadores exactos de las fuentes aportadas; si no hay fuentes, exige evidencia vacía. La validación posterior se conserva. No se sustituyen ni se corrigen manualmente citas, guiones o evaluaciones.
+
+
+## Resultado del lote real
+
+Tres conceptos generados por la oficina, sin insertar respuestas de especialistas desde el activador. Primera idea: v2, cinco etapas Codex completadas, 46/60, esperando revisión. Segunda: v2, cinco etapas, 48/60, esperando revisión. Tercera: v3, investigación/estrategia/guion/comité completados, 41/60, cambios solicitados al agotar las dos correcciones; no pasó a dirección de arte. No se eludió el comité ni se aprobó contenido.
+
+Una observación de la tercera solicita reorganizar en dos escenas, mientras el contrato de guion exige 3–8. Esa contradicción debe resolverse antes de otro intento; no presentar todas sus instrucciones como ejecutables ni reiniciar automáticamente el límite. Se conservan sus resultados y observaciones para la revisión.
+
+Se observó un reinicio de la web durante el lote: la tercera se marcó `INTERRUPTED_STAGE` y después se retomó desde el guion de v3. No atribuir la causa únicamente al valor `autoDeploy:false`: la fuente mostró un commit más reciente y hubo un HTTP 503 transitorio. No actualizar la rama de origen mientras haya tareas activas sin verificar el mecanismo real de despliegue.
+
+El cliente muestra propuestas sin video, su dirección cuando existe, las correcciones del comité y la razón del límite de revisión. [Evidencia del lote](evidence/glowfy-office-ideas-20261116.json).

@@ -165,3 +165,5 @@ Despliegue real comprobado en `cf23b66`: seis videos con portada extraída de su
 Plan: conservar fondo #0d0e12, panel #171a22, texto #eef0f5, secundario #aeb7c7 y acento #c3afff; tipografía existente. Las propuestas sin MP4 muestran el gancho escrito por la oficina y «Ver propuesta», sin reproductor vacío. En la ficha, idea y guion son el contenido principal; dirección visual y evaluación editorial permanecen accesibles. Una sola marca global. Se distinguen concepto y video: no se ofrece aprobar un archivo inexistente ni se presenta el comité como QA audiovisual. Revisar escritorio, móvil y teclado después de implementar.
 
 Comprobación local: tres propuestas sintéticas, apertura por teclado, gancho/guion/dirección visibles, sin aprobación de video inexistente, escritorio y móvil sin desborde ni errores JS. Capturas inspeccionadas. Pendiente la ejecución real de los especialistas.
+
+Las correcciones del comité y el límite de dos intentos se muestran también para propuestas en «Cambios solicitados». No se convierten en aprobación ni se ocultan las propuestas que no alcanzan el umbral editorial.

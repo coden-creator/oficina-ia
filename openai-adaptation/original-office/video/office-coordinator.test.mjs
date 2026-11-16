@@ -65,3 +65,8 @@ test('structured specialist response limits citations to the supplied evidence i
  const runtime={status:()=>({transportConnected:true,chatgptAccountObserved:true,accountKind:'chatgpt',paidApiEnabled:false}),draft:async(_,options)=>{schema=options.outputSchema;return{source:'chatgpt-app-server',text:JSON.stringify(output(q))};}},specialist=new CodexOrganicSpecialist({runtime});
  assert.equal((await specialist.run(q)).status,'completed');assert.deepEqual(schema.properties.evidence.items.properties.sourceId.enum,['actual_source']);q.input.brief.evidence=[];await specialist.run(q);assert.equal(schema.properties.evidence.maxItems,0);
 });
+
+test('creative revision limit remains visible to the owner without approving the idea',async()=>{
+ const {publicJob}=await import('./http.mjs');const j={id:'test',brandId:'glowfy',version:3,state:'changes_requested',stage:'creative_review',outputs:{},brief:{...brief,deliverable:'idea'},blocker:'CREATIVE_REVISION_LIMIT'};
+ const v=publicJob(j);assert.equal(v.blockerCode,'CREATIVE_REVISION_LIMIT');assert.match(v.blocker,/dos correcciones/);assert.equal(v.approval,null);assert.equal(v.artifact,null);
+});
