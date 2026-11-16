@@ -1,0 +1,118 @@
+[
+  {
+    "file": "clic-boton-01.wav",
+    "source": "estudio-video/assets/sfx/listos/clic-boton-01.wav",
+    "sha256": "4774a45c3ac909b7638b3d0d8df81c373e11f218bdb98f951d3b2318bfd881b1",
+    "provenance": {
+      "source": "ElevenLabs Sound Effects API",
+      "model": "eleven_text_to_sound_v2",
+      "prompt": "Crisp soft button click, dry plastic contact, very short, interface",
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5,
+      "created": "2026-10-24T21:18:10.476Z",
+      "license": "ElevenLabs Starter (uso comercial)"
+    },
+    "used_in": "Glowfy test revision 2, per Jorge music/effects feedback"
+  },
+  {
+    "file": "golpe-grave-01.wav",
+    "source": "estudio-video/assets/sfx/listos/golpe-grave-01.wav",
+    "sha256": "49455039c1030d0f3174b642e2db61b597611e971f0e3868f43396f026fd17e1",
+    "provenance": {
+      "source": "ElevenLabs Sound Effects API",
+      "model": "eleven_text_to_sound_v2",
+      "prompt": "Soft deep sub thump, single dry hit, short decay, no reverb tail, no music, no voice",
+      "duration_seconds": 1,
+      "prompt_influence": 0.5,
+      "created": "2026-10-24T21:17:52.691Z",
+      "license": "ElevenLabs Starter (uso comercial)"
+    },
+    "used_in": "Glowfy test revision 2, per Jorge music/effects feedback"
+  },
+  {
+    "file": "tick-cursor-01.wav",
+    "source": "estudio-video/assets/sfx/listos/tick-cursor-01.wav",
+    "sha256": "0afac3bf29f8ff609ec950215a5bef262e603438f695c36695c6bf806eb2972c",
+    "provenance": {
+      "source": "ElevenLabs Sound Effects API",
+      "model": "eleven_text_to_sound_v2",
+      "prompt": "One tiny soft digital tick, very short, dry, minimal high frequencies, interface sound",
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5,
+      "created": "2026-10-24T21:17:56.041Z",
+      "license": "ElevenLabs Starter (uso comercial)"
+    },
+    "used_in": "Glowfy test revision 2, per Jorge music/effects feedback"
+  },
+  {
+    "file": "pop-ui-01.wav",
+    "source": "estudio-video/assets/sfx/listos/pop-ui-01.wav",
+    "sha256": "ff4bec6143387ae9ca8575e4418046672086cf3a42b156d91c1556f91aae078b",
+    "provenance": {
+      "source": "ElevenLabs Sound Effects API",
+      "model": "eleven_text_to_sound_v2",
+      "prompt": "Short dry rounded UI pop, soft and modern, no echo, no tail",
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5,
+      "created": "2026-10-24T21:17:38.976Z",
+      "license": "ElevenLabs Starter (uso comercial)"
+    },
+    "used_in": "Glowfy test revision 2, per Jorge music/effects feedback"
+  },
+  {
+    "file": "burbuja-mensaje-01.wav",
+    "source": "estudio-video/assets/sfx/listos/burbuja-mensaje-01.wav",
+    "sha256": "ba67b2629bb86597996d418c0d78b396c05046006a8cec95b2fb9d25b8e76ed0",
+    "provenance": {
+      "source": "ElevenLabs Sound Effects API",
+      "model": "eleven_text_to_sound_v2",
+      "prompt": "Modern chat message received sound, soft single bubble pop, short, not a ringtone",
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.5,
+      "created": "2026-10-24T21:18:07.548Z",
+      "license": "ElevenLabs Starter (uso comercial)"
+    },
+    "used_in": "Glowfy test revision 2, per Jorge music/effects feedback"
+  },
+  {
+    "file": "studio-theme.mp3",
+    "source": "estudio-video/assets/marca-sonora/candidatos/Tema AC1 epico latino.mp3",
+    "sha256": "9ea9323a1dc2f7eb6b371292ec9f1f31cbdc28309d1f1c6be56c9ba661fd31c5",
+    "provenance": {
+      "source": "ElevenLabs Music, according to estudio-video/TASTE.md section 5",
+      "license": "Customer-supplied studio theme; generation and commercial studio use documented in TASTE.md and example 09-cinco-cosas",
+      "note": "Existing supplied music, not reference soundtrack extraction or new paid generation"
+    },
+    "used_in": "Glowfy test revision 2, per Jorge music/effects feedback"
+  },
+  {
+    "file": "whoosh-corto-01.wav",
+    "source": "estudio-video/assets/sfx/listos/whoosh-corto-01.wav",
+    "sha256": "2a7520b68a425b905545a747e5380b74d92993a109ad85519154ec6709d34eb0",
+    "provenance": {
+      "source": "ElevenLabs Sound Effects API",
+      "model": "eleven_text_to_sound_v2",
+      "prompt": "Short filtered swish, soft air movement, under 0.4 seconds, no riser, no boom",
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.5,
+      "created": "2026-10-24T21:18:17.005Z",
+      "license": "ElevenLabs Starter (uso comercial)"
+    },
+    "used_in": "Glowfy test revision 2, per Jorge music/effects feedback"
+  },
+  {
+    "file": "ding-confirmacion-01.wav",
+    "source": "estudio-video/assets/sfx/listos/ding-confirmacion-01.wav",
+    "sha256": "6eb5cac7ba66cc2b002ea81a6ae4360e362b5807290febba3773fc2ce1e5fffa",
+    "provenance": {
+      "source": "ElevenLabs Sound Effects API",
+      "model": "eleven_text_to_sound_v2",
+      "prompt": "Gentle warm confirmation chime, single soft note, short decay, premium app",
+      "duration_seconds": 1,
+      "prompt_influence": 0.5,
+      "created": "2026-10-24T21:18:13.589Z",
+      "license": "ElevenLabs Starter (uso comercial)"
+    },
+    "used_in": "Glowfy test revision 2, per Jorge music/effects feedback"
+  }
+]

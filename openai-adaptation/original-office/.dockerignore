@@ -74,3 +74,8 @@ scripts/probe-tool-inventory.mjs
 !production/runtime/
 !production/runtime/package.json
 !production/runtime/package-lock.json
+
+!production/audio/
+!production/audio/*.wav
+!production/audio/*.mp3
+!production/audio/manifest.json
