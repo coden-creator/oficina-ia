@@ -30,11 +30,12 @@ export function drawGraph(c,g,u,{logo,whiteLogo}={}){
  };
  for(const n of children.get('')||[])node(n);
 }
+export function hasAuthoredClosing(graph){return graph.nodes.some(n=>n.kind==='logo')&&graph.nodes.some(n=>n.kind==='text'&&/conoc[eé]\s+glowfy/i.test(n.text));}
 export function draw(c,t,{width=1080,height=1920,beats:b,logo,whiteLogo}){
  c.save();c.scale(width/1080,height/1920);const s=b.authoredScenes.find(s=>t>=s.start&&t<s.end)||b.authoredScenes.at(-1),u=clamp((t-s.start)/(s.end-s.start));drawGraph(c,s.graph,u,{logo,whiteLogo});
  // Shared accessibility/brand layer; the entire scene above is authored per project.
  const cap=b.captions.find(g=>t>=g.start&&t<g.end),closing=t>b.duration-2.3;
  if(cap&&!closing){const text=cap.words.map(w=>w.text).join(' ');c.font='600 44px Montserrat';const w=Math.min(940,c.measureText(text).width+56);rounded(c,(1080-w)/2,1654,w,88,22);c.fillStyle='rgba(33,16,46,0.91)';c.fill();c.textAlign='center';c.fillStyle='#FAF7FD';c.fillText(text,540,1713,900);}
- if(closing){const p=ease((t-(b.duration-2.3))/.45,'out');c.globalAlpha=p;const bg=c.createLinearGradient(0,1470,0,1920);bg.addColorStop(0,'rgba(33,16,46,0)');bg.addColorStop(.35,'rgba(33,16,46,0.94)');bg.addColorStop(1,'#21102E');c.fillStyle=bg;c.fillRect(0,1470,1080,450);c.textAlign='center';c.fillStyle='#FAF7FD';c.font='400 70px "Instrument Serif"';c.fillText('Conocé Glowfy',540,1650);if(whiteLogo)c.drawImage(whiteLogo,420,1700,240,240*whiteLogo.height/whiteLogo.width);c.globalAlpha=1;}
+ if(closing&&!hasAuthoredClosing(s.graph)){const p=ease((t-(b.duration-2.3))/.45,'out');c.globalAlpha=p;const bg=c.createLinearGradient(0,1470,0,1920);bg.addColorStop(0,'rgba(33,16,46,0)');bg.addColorStop(.35,'rgba(33,16,46,0.94)');bg.addColorStop(1,'#21102E');c.fillStyle=bg;c.fillRect(0,1470,1080,450);c.textAlign='center';c.fillStyle='#FAF7FD';c.font='400 70px "Instrument Serif"';c.fillText('Conocé Glowfy',540,1650);if(whiteLogo)c.drawImage(whiteLogo,420,1700,240,240*whiteLogo.height/whiteLogo.width);c.globalAlpha=1;}
  c.textAlign='center';c.font='400 20px Montserrat';c.fillStyle=closing?'#D8C4E5':'#8B7894';c.fillText('Ejemplo ilustrado · Funciones según tu plan',540,1845);c.restore();
 }
