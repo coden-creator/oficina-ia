@@ -1,5 +1,15 @@
 # Glowfy · revisión audiovisual solicitada por Jorge
 
+## Corrección vigente · 16 de noviembre de 2026 · lote rechazado
+
+Jorge rechazó «Una mesa, tres funciones» v4, «Del otro lado del salón» v5 y «Después del último detalle» v4 por repetir animaciones y efectos. Son referencias negativas; su control técnico aprobado no valida el resultado artístico. La configuración del motor dirigido v1, incluido su escenario central fijo, no es estilo aprobado. Las notas de producciones anteriores que siguen debajo son historia, no una plantilla obligatoria.
+
+Jorge quiere revisar únicamente el video terminado. La oficina debe resolver investigación, guion, dirección, edición, revisión interna y correcciones antes de entregarlo. No agregar aprobaciones intermedias de guion, storyboard o preview. La decisión final sobre cada versión, y la autorización de publicación/programación, siguen siendo suyas.
+
+La identidad moderna, cálida y elegante, los recursos musicales elegidos y la voz existente se conservan. Lo que debe variar es lo que ocurre: concepto, acción, objetos que interactúan, composición, ritmo y sonido. Un cambio de texto, fondo o zoom no demuestra variedad. Reutilizar un objeto está permitido cuando la acción y la función narrativa lo justifican; no imponer un catálogo cerrado como límite de producción. Las referencias de Cresova orientan el nivel de detalle y las técnicas, no transfieren colores, afirmaciones comerciales, voz ni permisos de activos a Glowfy.
+
+La crítica debe quedar vinculada al hash y versión revisados y entrar al contexto de los especialistas. No describir un archivo exportado como referencia aprobada, ni un análisis textual como inspección de imagen o escucha. Ver `../AUDITORIA-PRODUCCION-20261116.md` para límites observados y la ruta de corrección.
+
 La primera exportación pasó las comprobaciones técnicas y Jorge la rechazó: sin música, efectos casi imperceptibles, planos largos y voz plana. Los dos videos aportados siguen siendo la referencia mínima; resolución, score del guion y decodificación no prueban calidad estética.
 
 Dirección adoptada de `estudio-video/TASTE.md`, `scripts/voz_tomas.mjs` y `scripts/mezcla.mjs`: frases cortas, aproximadamente 40–50 palabras; acción completa desde el primer cuadro; cámara que conecta objetos; acciones visibles en la conversación y la reserva; música con desarrollo y efectos que acompañen contactos. No usar un zoom sobre una lámina como sustituto de animación.

@@ -26,7 +26,7 @@ export function createOrganicWorkflow({flow,runner,enabled=false,allowedJobIds=[
     // script and evidence; leave room for the runtime envelope (24,000 characters).
     const dependencies={research:[],strategy:['research'],script:['research','strategy'],creative_review:['strategy','script'],art_direction:['strategy','script'],edit_plan:['script','art_direction']}[stage];
     const previous=Object.fromEntries(dependencies.filter(k=>job.outputs[k]).map(k=>{const {provenance,inheritedFrom,...content}=job.outputs[k];return [k,content];}));
-    const history=recentVisualHistory(await flow.list(brand),id);
+    const history=recentVisualHistory(await flow.list(brand),id,brand);
     const q={brand,jobId:id,stage,prompt:organicPrompts[stage]+' '+directionRules+(job.brief.productionMode===MOTION_PROTOCOL?' '+productionBrief:''),input:{brief:job.brief,previous,feedback:job.organicFeedback??null,visualHistory:history},context:{workflow:ORGANIC_PROTOCOL,brand,brandProfile:brands[brand],version:job.version,editorId,restrictions:{noPaid:true,noPublish:true,noCloning:true,research:'supplied-evidence-only'}}};
     while(JSON.stringify(q).length>23000&&q.input.visualHistory.length)q.input.visualHistory.pop();
     if(JSON.stringify(q).length>23000)throw Error('SPECIALIST_CONTEXT_TOO_LARGE');
