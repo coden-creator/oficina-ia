@@ -130,3 +130,7 @@ Bloque «Revisar los efectos de sonido» contiguo a la música. Conserva paleta,
 Chromium local: 1440×1100 y 390×844, reproducción real, saltos a 1/12/36, descarga comprobada por SHA, teclado, cero errores JavaScript y sin desborde horizontal. Capturas de escritorio/móvil y 72 cuadros del MP4 revisados. El catálogo no afirma que los sonidos estén aprobados ni reparados; sirve para recibir la selección de Jorge.
 
 Comprobación real posterior al despliegue: mismas pruebas y capturas de escritorio/móvil aprobadas técnicamente, 36 entradas, descarga íntegra y sin errores JavaScript. No hubo modificación de la pieza en revisión ni aprobación automática.
+
+## Siete efectos regenerados
+
+Se conserva la estructura de revisión existente: tinta #0d0e12, superficie #171a22, borde #303644, texto #eef0f5, acento #c3afff y tipografía del sistema. La comparación nueva abre primero, con título, A anterior/B nueva propuesta y siete entradas usando los números originales. Un enlace permite volver al catálogo completo de 36; la selección queda en la URL y no agrega otro selector de marca. Los controles, descarga y distribución móvil se reutilizan. Comprobación local: siete capítulos y vuelta al catálogo original, reproducción, descarga por SHA, teclado, marca única y móvil; capturas inspeccionadas. Pendiente la comprobación del despliegue real.

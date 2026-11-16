@@ -13,3 +13,5 @@
 - Catálogo solicitado por Jorge: 36 efectos existentes, 144 reproducciones A/B identificadas, 4:16, sin nuevas generaciones ni reparaciones. Verificados audio contra fuentes, cuadros, descarga y navegación local. Integración en el Estudio preparada para revisión de Jorge.
 
 - Catálogo SFX desplegado por MCP en el mismo App, commit 2cabb30. Verificados HTTPS, reproducción, índice, rangos, descarga, escritorio/móvil y cero errores JavaScript. CPU 13,62%, RAM 34,49%; montajes y límites conservados. Sin producción ni consumo adicional; a la espera de la selección de Jorge.
+
+- Jorge solicita regenerar siete efectos: clic-boton-02, destello-particulas-01/02, golpe-grave-02, teclas-suaves-01 y tick-cursor-01/02. Siete generaciones completadas con ElevenLabs, 20,16465 créditos reportados; propuestas preparadas localmente y comparación numerada de 55,75 s. Pendientes de revisión humana antes de cambiar las fuentes de producción. No se regeneró música ni voz.

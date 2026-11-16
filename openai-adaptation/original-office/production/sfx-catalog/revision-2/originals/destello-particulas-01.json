@@ -1,0 +1,13 @@
+{
+  "id": "destello-particulas-01",
+  "generationId": "1Nbw6zkeegXXACFHYtpd",
+  "nodeId": "5ATQX3io1PQSerrfsr8b",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "A tiny crystal bell twinkle, bright high-pitched glass ping with a delicate sparkling decay, clean isolated sound.",
+  "duration": 1,
+  "price": {
+    "credits": 3.333,
+    "price_cents": 0.0606,
+    "cost_fiat_currency": "usd"
+  }
+}

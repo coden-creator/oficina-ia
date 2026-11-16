@@ -1,0 +1,205 @@
+{
+  "sha256": "9879c1bcc1fa206101388534924f2d4174ecd1839ee13e708934901aa54d1f66",
+  "bytes": 1452827,
+  "duration": 55.75,
+  "effects": 7,
+  "playbacksVerified": 28,
+  "minimumWaveformCorrelation": 0.96839,
+  "aacDecoded": true,
+  "fullVideoDecoded": true,
+  "chapters": 7,
+  "integratedLufs": -20.81,
+  "truePeakDbtp": -9.77,
+  "contactSheetFrames": 14,
+  "subjectiveListeningClaimed": false,
+  "newFilesPreparedLocally": true,
+  "completedPaidGenerations": 7,
+  "events": [
+    {
+      "id": "clic-boton-02",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99999
+    },
+    {
+      "id": "clic-boton-02",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99998
+    },
+    {
+      "id": "clic-boton-02",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99989
+    },
+    {
+      "id": "clic-boton-02",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99982
+    },
+    {
+      "id": "destello-particulas-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99655
+    },
+    {
+      "id": "destello-particulas-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99727
+    },
+    {
+      "id": "destello-particulas-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99999
+    },
+    {
+      "id": "destello-particulas-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99997
+    },
+    {
+      "id": "destello-particulas-02",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99792
+    },
+    {
+      "id": "destello-particulas-02",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99792
+    },
+    {
+      "id": "destello-particulas-02",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99992
+    },
+    {
+      "id": "destello-particulas-02",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99993
+    },
+    {
+      "id": "golpe-grave-02",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 1.0
+    },
+    {
+      "id": "golpe-grave-02",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99999
+    },
+    {
+      "id": "golpe-grave-02",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99999
+    },
+    {
+      "id": "golpe-grave-02",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 1.0
+    },
+    {
+      "id": "teclas-suaves-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99884
+    },
+    {
+      "id": "teclas-suaves-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99831
+    },
+    {
+      "id": "teclas-suaves-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.96839
+    },
+    {
+      "id": "teclas-suaves-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.9984
+    },
+    {
+      "id": "tick-cursor-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99999
+    },
+    {
+      "id": "tick-cursor-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99996
+    },
+    {
+      "id": "tick-cursor-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99995
+    },
+    {
+      "id": "tick-cursor-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99997
+    },
+    {
+      "id": "tick-cursor-02",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99985
+    },
+    {
+      "id": "tick-cursor-02",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99985
+    },
+    {
+      "id": "tick-cursor-02",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99999
+    },
+    {
+      "id": "tick-cursor-02",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99999
+    }
+  ],
+  "browserLocal": {
+    "live": false,
+    "effects": 7,
+    "duration": 55.75,
+    "videoPlayback": true,
+    "chapterSeeking": true,
+    "httpRanges": true,
+    "downloadHashVerified": true,
+    "brandIsolation": true,
+    "originalCatalogAccessible": true,
+    "keyboard": true,
+    "mobileNoOverflow": true,
+    "javascriptErrors": 0
+  },
+  "visualFramesInspected": 14,
+  "deployment": {
+    "verified": false
+  }
+}

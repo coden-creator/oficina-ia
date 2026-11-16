@@ -1,0 +1,7 @@
+00:05  13. Clic de botón 02  (clic-boton-02)
+00:10  16. Destello de partículas 01  (destello-particulas-01)
+00:17  17. Destello de partículas 02  (destello-particulas-02)
+00:25  22. Golpe grave 02  (golpe-grave-02)
+00:32  31. Teclas suaves 01  (teclas-suaves-01)
+00:41  33. Tick de cursor 01  (tick-cursor-01)
+00:46  34. Tick de cursor 02  (tick-cursor-02)

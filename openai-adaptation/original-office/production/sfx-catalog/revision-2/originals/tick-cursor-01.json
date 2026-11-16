@@ -1,0 +1,13 @@
+{
+  "id": "tick-cursor-01",
+  "generationId": "8bp6JAk7NaQ9fGaUmTo4",
+  "nodeId": "VVLIapkKppWyUIRaYauE",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One tiny dry wooden tick, light fingertip tap with a very short rounded attack, isolated and clean.",
+  "duration": 0.5,
+  "price": {
+    "credits": 1.6665,
+    "price_cents": 0.0303,
+    "cost_fiat_currency": "usd"
+  }
+}

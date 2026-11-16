@@ -1,0 +1,13 @@
+{
+  "id": "golpe-grave-02",
+  "generationId": "7pnbZlcSuFCzdqn4xDvG",
+  "nodeId": "SxniME1Jf8ROg5IRJpGx",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One deep muted bass drum thump, rounded low-frequency punch, dry short decay, clean and undistorted.",
+  "duration": 0.8,
+  "price": {
+    "credits": 2.6664000000000003,
+    "price_cents": 0.04848,
+    "cost_fiat_currency": "usd"
+  }
+}

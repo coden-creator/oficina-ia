@@ -1,0 +1,13 @@
+{
+  "id": "destello-particulas-02",
+  "generationId": "ba5zaJJSgcO9qS4DV2xj",
+  "nodeId": "6C8GY7MrdnIG2KtwXIZt",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "A brief ascending sweep of tiny glass wind chimes, delicate high-pitched tinkles with a soft shimmering tail, isolated.",
+  "duration": 1.25,
+  "price": {
+    "credits": 4.16625,
+    "price_cents": 0.07575,
+    "cost_fiat_currency": "usd"
+  }
+}

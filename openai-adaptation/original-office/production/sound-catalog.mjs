@@ -1,7 +1,10 @@
 import fs from 'node:fs';import {createHash} from 'node:crypto';
-let catalog,verified;
-const metadata=()=>catalog??=JSON.parse(fs.readFileSync(new URL('./audio/glowfy-sfx-catalog.json',import.meta.url),'utf8'));
-function asset(){if(verified)return verified;const data=fs.readFileSync(new URL('./audio/glowfy-sfx-catalog.mp4',import.meta.url)),m=metadata();if(data.length!==m.bytes||data.length>50*1024*1024||createHash('sha256').update(data).digest('hex')!==m.sha256)throw Error('CATALOG_INTEGRITY');return verified=data;}
+const catalogs=new Map([
+ ['/api/sound-catalog/glowfy',{file:'glowfy-sfx-catalog',download:'Glowfy-catalogo-efectos-v1.mp4',description:'A: original de ElevenLabs. B: versión procesada. Cada una se escucha dos veces, con nivel igualado.'}],
+ ['/api/sound-catalog/glowfy/revision-2',{file:'glowfy-sfx-revision-2',download:'Glowfy-efectos-regenerados-v2.mp4',description:'A: sonido anterior. B: nueva propuesta. Dos escuchas por versión, con nivel igualado. Se conservan los números del catálogo original; las nuevas propuestas están pendientes de tu revisión.'}]
+]);
+const metadata=c=>c.metadata??=JSON.parse(fs.readFileSync(new URL('./audio/'+c.file+'.json',import.meta.url),'utf8'));
+function asset(c){if(c.verified)return c.verified;const data=fs.readFileSync(new URL('./audio/'+c.file+'.mp4',import.meta.url)),m=metadata(c);if(data.length!==m.bytes||data.length>50*1024*1024||createHash('sha256').update(data).digest('hex')!==m.sha256)throw Error('CATALOG_INTEGRITY');return c.verified=data;}
 export function catalogRange(header,size){
  if(header===undefined)return {start:0,end:size-1,partial:false};
  const m=/^bytes=(\d*)-(\d*)$/.exec(header);if(!m||(!m[1]&&!m[2]))return null;
@@ -15,9 +18,11 @@ export function soundCatalogHttp(req,res){
  const json=(code,value)=>{const data=Buffer.from(JSON.stringify(value));res.writeHead(code,{...headers,'Content-Type':'application/json','Content-Length':data.length});res.end(req.method==='HEAD'?undefined:data);return true;};
  if(!['GET','HEAD'].includes(req.method))return json(405,{error:'METHOD_NOT_ALLOWED'});
  try{
-  if(req.url==='/api/sound-catalog/glowfy'){const m=metadata();return json(200,{brandId:'glowfy',title:m.title,duration:m.duration,count:m.tracks,url:'/api/sound-catalog/glowfy/video.mp4',chapters:m.chapters.map(({number,id,title,start})=>({number,id,title,start}))});}
-  if(!['/api/sound-catalog/glowfy/video.mp4','/api/sound-catalog/glowfy/video.mp4?download=1'].includes(req.url))return json(404,{error:'CATALOG_NOT_FOUND'});
-  const bytes=asset(),range=catalogRange(req.headers.range,bytes.length);if(!range){res.writeHead(416,{...headers,'Content-Range':`bytes */${bytes.length}`});res.end();return true;}
-  const {start,end,partial}=range;res.writeHead(partial?206:200,{...headers,'Content-Type':'video/mp4','Content-Length':end-start+1,'Accept-Ranges':'bytes',...(partial?{'Content-Range':`bytes ${start}-${end}/${bytes.length}`}:{ }),'Content-Disposition':`${req.url.endsWith('download=1')?'attachment':'inline'}; filename="Glowfy-catalogo-efectos-v1.mp4"`});res.end(req.method==='HEAD'?undefined:bytes.subarray(start,end+1));return true;
+  const entry=catalogs.get(req.url);
+  if(entry){const m=metadata(entry);return json(200,{brandId:'glowfy',title:m.title,description:entry.description,download:entry.download,duration:m.duration,count:m.tracks,url:req.url+'/video.mp4',chapters:m.chapters.map(({number,id,title,start})=>({number,id,title,start}))});}
+  const base=req.url.replace(/\/video\.mp4(?:\?download=1)?$/,'');const c=catalogs.get(base);
+  if(!c||base===req.url)return json(404,{error:'CATALOG_NOT_FOUND'});
+  const bytes=asset(c),range=catalogRange(req.headers.range,bytes.length);if(!range){res.writeHead(416,{...headers,'Content-Range':`bytes */${bytes.length}`});res.end();return true;}
+  const {start,end,partial}=range;res.writeHead(partial?206:200,{...headers,'Content-Type':'video/mp4','Content-Length':end-start+1,'Accept-Ranges':'bytes',...(partial?{'Content-Range':`bytes ${start}-${end}/${bytes.length}`}:{ }),'Content-Disposition':`${req.url.endsWith('download=1')?'attachment':'inline'}; filename="${c.download}"`});res.end(req.method==='HEAD'?undefined:bytes.subarray(start,end+1));return true;
  }catch{return json(503,{error:'CATALOG_UNAVAILABLE'});}
 }

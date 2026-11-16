@@ -1,0 +1,13 @@
+{
+  "id": "clic-boton-02",
+  "generationId": "4x7U2fPQ1vHJEtgOmkmF",
+  "nodeId": "SIaPmHftIJxoiBsntRs1",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One tactile push-button press and release, close-miked plastic switch, crisp dry click-clack, short and clean.",
+  "duration": 0.5,
+  "price": {
+    "credits": 1.6665,
+    "price_cents": 0.0303,
+    "cost_fiat_currency": "usd"
+  }
+}

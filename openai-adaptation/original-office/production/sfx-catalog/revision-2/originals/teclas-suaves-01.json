@@ -1,0 +1,13 @@
+{
+  "id": "teclas-suaves-01",
+  "generationId": "BwbR3McRz3E04FiiMh3o",
+  "nodeId": "emZp9eUdExg6TkliylTq",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "A short natural burst of gentle typing on a quiet laptop keyboard, soft dry fingertip key taps, close-miked.",
+  "duration": 1.5,
+  "price": {
+    "credits": 4.9995,
+    "price_cents": 0.09090000000000001,
+    "cost_fiat_currency": "usd"
+  }
+}
