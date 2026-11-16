@@ -1,3 +1,4 @@
+import {MOTION_PROTOCOL,productionBrief} from './motion-contract.mjs';
 import {directionRules,recentVisualHistory} from './audiovisual-standard.mjs';
 import {ORGANIC_PROTOCOL,organicPrompts,validateOrganicOutput} from './organic-contract.mjs';
 import {brands} from './video-flow.mjs';
@@ -16,17 +17,17 @@ export function createOrganicWorkflow({flow,runner,enabled=false,allowedJobIds=[
   const patch=async(fn,event)=>{job=await flow.updateOffice(brand,id,job.version,fn,event);return job;};
   await patch(j=>{j.state='running';j.blocker=null;j.execution={workflow:ORGANIC_PROTOCOL,phase,editorId,startedAt:new Date().toISOString()};},'organic_started');
   try{
-   const stages=phase==='prepare'?['research','strategy','script','creative_review']:['art_direction'];
+   const stages=phase==='prepare'?['research','strategy','script','creative_review']:job.brief.productionMode===MOTION_PROTOCOL?['art_direction','edit_plan']:['art_direction'];
    let index=0;
    while(index<stages.length){
     const stage=stages[index];if(job.outputs[stage]){index++;continue;}
     await patch(j=>{j.stage=stage;},'specialist_started');
     // Each specialist gets the facts and drafts it uses, once. Keep the exact
     // script and evidence; leave room for the runtime envelope (24,000 characters).
-    const dependencies={research:[],strategy:['research'],script:['research','strategy'],creative_review:['strategy','script'],art_direction:['strategy','script']}[stage];
+    const dependencies={research:[],strategy:['research'],script:['research','strategy'],creative_review:['strategy','script'],art_direction:['strategy','script'],edit_plan:['script','art_direction']}[stage];
     const previous=Object.fromEntries(dependencies.filter(k=>job.outputs[k]).map(k=>{const {provenance,inheritedFrom,...content}=job.outputs[k];return [k,content];}));
     const history=recentVisualHistory(await flow.list(brand),id);
-    const q={brand,jobId:id,stage,prompt:organicPrompts[stage]+' '+directionRules,input:{brief:job.brief,previous,feedback:job.organicFeedback??null,visualHistory:history},context:{workflow:ORGANIC_PROTOCOL,brand,brandProfile:brands[brand],version:job.version,editorId,restrictions:{noPaid:true,noPublish:true,noCloning:true,research:'supplied-evidence-only'}}};
+    const q={brand,jobId:id,stage,prompt:organicPrompts[stage]+' '+directionRules+(job.brief.productionMode===MOTION_PROTOCOL?' '+productionBrief:''),input:{brief:job.brief,previous,feedback:job.organicFeedback??null,visualHistory:history},context:{workflow:ORGANIC_PROTOCOL,brand,brandProfile:brands[brand],version:job.version,editorId,restrictions:{noPaid:true,noPublish:true,noCloning:true,research:'supplied-evidence-only'}}};
     while(JSON.stringify(q).length>23000&&q.input.visualHistory.length)q.input.visualHistory.pop();
     if(JSON.stringify(q).length>23000)throw Error('SPECIALIST_CONTEXT_TOO_LARGE');
     const result=await call(q);
@@ -40,7 +41,7 @@ export function createOrganicWorkflow({flow,runner,enabled=false,allowedJobIds=[
       await patch(j=>{j.state='changes_requested';j.blocker='CREATIVE_REJECTED';j.execution=null;},'creative_rejected');return job;
      }
      if(review.verdict==='changes'){
-      if((job.organicAttempts||0)>=2){await patch(j=>{j.state='changes_requested';j.blocker='CREATIVE_REVISION_LIMIT';j.execution=null;},'creative_limit');return job;}
+      if((job.organicAttempts||0)>=(job.brief.productionMode===MOTION_PROTOCOL?3:2)){await patch(j=>{j.state='changes_requested';j.blocker='CREATIVE_REVISION_LIMIT';j.execution=null;},'creative_limit');return job;}
       await patch(j=>{
        j.revisions||=[];j.revisions.push({version:j.version,outputs:copy(j.outputs),artifact:j.artifact,approval:j.approval,reason:'organic_creative_changes'});
        j.version++;j.organicAttempts=(j.organicAttempts||0)+1;j.organicFeedback=review.corrections;j.outputs={research:j.outputs.research,strategy:j.outputs.strategy};j.artifact=null;j.approval=null;j.stage='script';

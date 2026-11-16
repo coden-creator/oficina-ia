@@ -109,3 +109,5 @@ scripts/probe-tool-inventory.mjs
 !public/clip-preview.js
 !public/agent-motion.js
 !public/brand-direction.js
+
+!video/motion-contract.mjs

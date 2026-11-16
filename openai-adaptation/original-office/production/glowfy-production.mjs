@@ -1,3 +1,5 @@
+import {directedPlan,directedTiming,directedPublicPlan} from './glowfy/directed-plan.mjs';
+import {MOTION_PROTOCOL} from '../video/motion-contract.mjs';
 import {cinematicTiming,publicProductionPlan} from './glowfy/cinematic-plan.mjs';
 import fs from 'node:fs/promises';import path from 'node:path';import {fileURLToPath} from 'node:url';import {createHash} from 'node:crypto';
 import {batchPlan,validateBatchScript} from './glowfy/batch-plan.mjs';
@@ -5,23 +7,24 @@ import {socialSoundtrack} from './glowfy/mix-social.mjs';
 import {validateNarration,buildTiming} from './glowfy/timing.mjs';import {interfaceSounds} from './glowfy/sound.mjs';import {obtainNarration} from './voice-session.mjs';import {runProcess} from './process.mjs';
 const root=path.dirname(fileURLToPath(import.meta.url)),digest=b=>createHash('sha256').update(b).digest('hex');
 const loudness=s=>{const m=s.match(/\{\s*"input_i"[\s\S]*?\}/g);if(!m?.length)throw Error('AUDIO_MEASUREMENT_FAILED');return JSON.parse(m.at(-1));};
-export function createGlowfyProduction({dataDir,connectionStore,authorizedJobId,authorizedJobIds=[],voiceId,voiceTake=1,voiceProfile='standard'}){
+export function createGlowfyProduction({dataDir,connectionStore,authorizedJobId,authorizedJobIds=[],directedJobIds=[],voiceId,voiceTake=1,voiceProfile='standard'}){
  let tail=Promise.resolve();
- const permits=job=>job.brandId==='glowfy'&&((!!authorizedJobId&&job.id===authorizedJobId)||!!batchPlan(job,authorizedJobIds));
+ const authorizesDirected=(brand,id)=>brand==='glowfy'&&directedJobIds.includes(id);
+ const permits=job=>job.brandId==='glowfy'&&((!!authorizedJobId&&job.id===authorizedJobId)||!!batchPlan(job,authorizedJobIds)||(authorizesDirected(job.brandId,job.id)&&job.productionAuthorization?.protocol===MOTION_PROTOCOL));
  async function produce(job,onStage=async()=>{}){
   if(!permits(job))throw Error('VOICE_TEST_NOT_AUTHORIZED');if(!voiceId)throw Error('VOICE_CATALOG_SELECTION_REQUIRED');
-  const plan=batchPlan(job,authorizedJobIds),script=job.outputs.script?.detail,text=validateNarration(script);validateBatchScript(script,plan);
+  const plan=directedPlan(job,directedJobIds)||batchPlan(job,authorizedJobIds),script=job.outputs.script?.detail,text=validateNarration(script);validateBatchScript(script,plan);
   if(job.outputs.creative_review?.detail?.verdict!=='pass')throw Error('CREATIVE_PASS_REQUIRED');
   const jobDir=path.join(dataDir,job.brandId,job.id),outDir=path.join(jobDir,'v'+job.version);await fs.mkdir(outDir,{recursive:true,mode:0o700});
   // Scope validated above; each explicitly authorized take has its own one-request ledger.
   await onStage('production',plan?.cachedVoiceOnly?'Recuperando la narración guardada':'Preparando la narración de ElevenLabs');
   const take=plan?1:voiceTake;
   if(![1,2].includes(take))throw Error('VOICE_TEST_NOT_AUTHORIZED');
-  const voiceDir=plan?.cachedVoiceOnly?path.join(dataDir,job.brandId,plan.voiceSourceId):take===1?jobDir:path.join(jobDir,'voice-take-'+take);await fs.mkdir(voiceDir,{recursive:true,mode:0o700});
+  const voiceDir=plan?.directed?path.join(jobDir,'directed-voice-v'+job.version):plan?.cachedVoiceOnly?path.join(dataDir,job.brandId,plan.voiceSourceId):take===1?jobDir:path.join(jobDir,'voice-take-'+take);await fs.mkdir(voiceDir,{recursive:true,mode:0o700});
   const voice=await obtainNarration({store:connectionStore,jobDir:voiceDir,text,voiceId,profile:voiceProfile,cachedOnly:!!plan?.cachedVoiceOnly,...(plan?{authorization:plan.authorization}: {})});
-  const beats=buildTiming(script,voice.alignment,{social:voiceProfile==='social-v2'});if(plan){beats.uniqueProduction=true;beats.events.assistant=Math.min(beats.events.assistant,beats.events.phoneFocus+1);beats.variant=plan.variant;beats.sceneTitles=script.scenes.map(s=>s.text);beats.cta=script.closing;if(plan.cachedVoiceOnly)cinematicTiming(beats);}await fs.writeFile(path.join(outDir,'beats.json'),JSON.stringify(beats),{mode:0o600});
+  const beats=buildTiming(script,voice.alignment,{social:voiceProfile==='social-v2'});if(plan?.directed){directedTiming(beats,plan);}else if(plan){beats.uniqueProduction=true;beats.events.assistant=Math.min(beats.events.assistant,beats.events.phoneFocus+1);beats.variant=plan.variant;beats.sceneTitles=script.scenes.map(s=>s.text);beats.cta=script.closing;if(plan.cachedVoiceOnly)cinematicTiming(beats);}await fs.writeFile(path.join(outDir,'beats.json'),JSON.stringify(beats),{mode:0o600});
   if(voiceProfile!=='social-v2'){const sfx=interfaceSounds(beats);await fs.writeFile(path.join(outDir,'ui-sounds.wav'),sfx.bytes);await fs.writeFile(path.join(outDir,'sound-cues.json'),JSON.stringify(sfx.cues));}
-  await onStage('production',plan?.cachedVoiceOnly?'Construyendo los seis planos del piloto':'Animando las cuatro escenas y sus subtítulos');
+  await onStage('production',plan?.directed?'Animando los planos y movimientos decididos por la oficina':plan?.cachedVoiceOnly?'Construyendo los seis planos del piloto':'Animando las cuatro escenas y sus subtítulos');
   const config=path.join(outDir,'render.json');await fs.writeFile(config,JSON.stringify({outDir,beats,social:voiceProfile==='social-v2'}),{mode:0o600});
   let preview=null;
   if(plan?.cachedVoiceOnly){const previewConfig=path.join(outDir,'preview-render.json');await fs.writeFile(previewConfig,JSON.stringify({outDir,beats,social:true,preview:true,from:0,to:7}));await onStage('production','Preparando un fragmento audiovisual de siete segundos');await runProcess(process.execPath,[path.join(root,'glowfy/render.mjs'),previewConfig]);}
@@ -47,7 +50,7 @@ export function createGlowfyProduction({dataDir,connectionStore,authorizedJobId,
   const bytes=await fs.readFile(file),artifact={file,sha256:digest(bytes),bytes:bytes.length,version:job.version,kind:'narrated_brand_video',metadata:{width:1080,height:1920,fps:30,duration:beats.duration}};
   const qa={reviewScope:'Technical measurements are not an aesthetic or listening verdict',technical:{passed:true,width:1080,height:1920,fps:30,duration:beats.duration,audioCodec:'aac',sampleRate:48000,channels:2,integratedLufs:Number(levels.input_i),truePeakDbtp:Number(levels.input_tp),decoded:true},visual:'pending_owner_review',audio:'elevenlabs-with-character-alignment',commercialQuality:'pending_owner_review',subjectiveListeningVerified:false};
   await fs.writeFile(path.join(outDir,'qa.json'),JSON.stringify(qa,null,2));
-  return {artifact,preview,qa,production:{summary:voiceProfile==='social-v2'?'Reedición con tu voz dirigida, una variante musical de Glowfy, efectos sincronizados, cámara y subtítulos editoriales. Pendiente de tu revisión.':'Cuatro escenas ilustradas, narración ElevenLabs, subtítulos alineados y efectos de interfaz. Pendiente de revisión audiovisual de Jorge.',evidence:[],voice:{provider:'elevenlabs',voiceId,model:voice.model,settings:voice.settings,delivery:voice.delivery,profile:voiceProfile,take,characters:voice.characters,submittedCharacters:voice.submittedCharacters,cached:voice.cached},music:selectedMusic,plan:beats.cinematic?publicProductionPlan({...plan,shots:beats.shots}):null,batch:plan?{id:beats.cinematic?'glowfy-direction-pilot':'glowfy-batch-3',variant:plan.variant,authorization:plan.authorization}:null,sceneCount:beats.shots?.length||beats.scenes.length,provenance:{provider:'office-trusted-renderer',version:voiceProfile==='social-v2'?'glowfy-social-v2':'glowfy-v1'}}};
+  return {artifact,preview,qa,production:{summary:voiceProfile==='social-v2'?'Reedición con tu voz dirigida, una variante musical de Glowfy, efectos sincronizados, cámara y subtítulos editoriales. Pendiente de tu revisión.':'Cuatro escenas ilustradas, narración ElevenLabs, subtítulos alineados y efectos de interfaz. Pendiente de revisión audiovisual de Jorge.',evidence:[],voice:{provider:'elevenlabs',voiceId,model:voice.model,settings:voice.settings,delivery:voice.delivery,profile:voiceProfile,take,characters:voice.characters,submittedCharacters:voice.submittedCharacters,cached:voice.cached},music:selectedMusic,plan:beats.directed?directedPublicPlan(plan,beats):beats.cinematic?publicProductionPlan({...plan,shots:beats.shots}):null,batch:plan?{id:beats.directed?'glowfy-office-directed':beats.cinematic?'glowfy-direction-pilot':'glowfy-batch-3',variant:plan.variant,authorization:plan.authorization}:null,sceneCount:beats.shots?.length||beats.scenes.length,provenance:{provider:'office-trusted-renderer',version:voiceProfile==='social-v2'?'glowfy-social-v2':'glowfy-v1'}}};
  }
- return {permits,voiceConfigured:!!voiceId,render(job,stage){const next=tail.then(()=>produce(job,stage));tail=next.catch(()=>{});return next;}};
+ return {permits,authorizesDirected,voiceConfigured:!!voiceId,render(job,stage){const next=tail.then(()=>produce(job,stage));tail=next.catch(()=>{});return next;}};
 }

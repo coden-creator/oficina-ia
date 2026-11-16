@@ -1,0 +1,29 @@
+// Declarative direction only: no code, URLs, file paths or provider credentials.
+export const MOTION_PROTOCOL='glowfy-directed-motion-v1';
+const str=max=>({type:'string',minLength:1,maxLength:max});
+const en=values=>({type:'string',enum:values});
+const num=(minimum,maximum)=>({type:'integer',minimum,maximum});
+const obj=properties=>({type:'object',additionalProperties:false,required:Object.keys(properties),properties});
+const arr=(items,minItems,maxItems)=>({type:'array',items,minItems,maxItems});
+export const objectTypes=['desk','phone','agenda','hand','polish','mirror','chair','plant','message','envelope','clock','ribbon'];
+export const motionSchema=obj({
+ title:str(60),concept:str(300),difference:str(400),musicId:en(['glowfy-a','glowfy-b','glowfy-c','glowfy-d']),
+ shots:arr(obj({
+  scene:num(1,4),title:str(35),headline:arr(str(28),0,2),setting:en(['salon','tabletop','gallery','night']),
+  camera:en(['push','pull','track-left','track-right','orbit','overhead','locked']),transition:en(['cut','dissolve','wipe']),
+  objects:arr(obj({type:en(objectTypes),x:num(180,850),y:num(660,1160),scale:num(40,155),rotation:num(-25,25),
+   entry:en(['present','rise','left','right','unfold']),action:en(['rest','reveal','turn','withdraw','open','draw']),delay:num(0,30),
+   text:arr(str(24),0,3)}),1,5),
+  sound:arr(obj({name:en(['pop-ui-01','burbuja-mensaje-01','whoosh-corto-01','clic-boton-01','ding-confirmacion-01','destello-particulas-01','golpe-grave-01','tick-cursor-01']),at:num(0,85),gainDb:num(-20,-10),intention:str(90)}),1,3)
+ }),6,8)
+});
+export const motionPrompt='Editor de la oficina: convierte el guion y la dirección de arte en un montaje ejecutable con motionSchema. Elegí 6 a 8 planos, ordenados por scene 1,1,2,2,3,3,4 (o hasta dos por escena); cubrí las cuatro escenas. Cada plano dura su parte de la voz real. Usá exactamente los recursos del esquema. Coordenadas en lienzo 1080x1920: objetos solo entre y660-1160; titular hasta dos líneas arriba y subtítulos abajo. Tamaño base: teléfono 330x600, agenda 480x440, mesa 900x220, mano 250x500, mensaje 540x180, espejo 400x600, silla 330x400, esmalte 110x250, reloj 300x300, sobre 440x280, planta 200x450, cinta 600x350. scale es porcentaje; no superpongas objetos sin intención. Un protagonista grande, apoyos pequeños. Alterná planos generales y detalles, acciones y reposo; evitá collage de objetos. Cambiar texto no es una nueva producción. Mantené continuidad entre planos del mismo objeto. setting cambia arquitectura/materiales, camera cambia encuadre, entry controla entrada, action cambia el objeto. withdraw retira mano/objeto; open abre sobre/agenda; reveal despliega mensajes; turn gira; draw dibuja cinta. text es contenido visible breve y verdadero; usá horarios ficticios solo si guion los pide. Los dispositivos son ejemplos ilustrados. delay y sound.at son porcentajes del plano; los contactos coinciden con entradas/revelaciones (delay + 12 aproximadamente). Incluí 1–3 sonidos motivados por plano, no ruido continuo. Último plano: reposo y CTA, el motor añade logo y CTA exacta sin duplicarlos en headline. Elegí una de las cuatro músicas existentes. No escribas código, rutas ni URL. Todo lo decides vos a partir del concepto y guion; el activador no provee escenas. Respeta la diferenciación respecto al historial.';
+export function validateMotionPlan(plan){
+ function check(v,s){if(s.enum&&!s.enum.includes(v))throw Error('MOTION_ENUM');if(s.type==='object'){if(!v||Array.isArray(v)||Object.keys(v).length!==s.required.length||s.required.some(k=>!Object.hasOwn(v,k)))throw Error('MOTION_FIELDS');for(const k of s.required)check(v[k],s.properties[k]);}else if(s.type==='array'){if(!Array.isArray(v)||v.length<s.minItems||v.length>s.maxItems)throw Error('MOTION_ARRAY');for(const x of v)check(x,s.items);}else if(s.type==='string'){if(typeof v!=='string'||!v.trim()||v.length>(s.maxLength??Infinity)||/[\x00-\x1f]/.test(v))throw Error('MOTION_TEXT');}else if(s.type==='integer'&&(!Number.isInteger(v)||v<s.minimum||v>s.maximum))throw Error('MOTION_NUMBER');}
+ check(plan,motionSchema);
+ if([1,2,3,4].some(n=>!plan.shots.some(s=>s.scene===n))||plan.shots.some((s,i)=>i&&s.scene<plan.shots[i-1].scene)||[1,2,3,4].some(n=>plan.shots.filter(s=>s.scene===n).length>2))throw Error('MOTION_SCENE_ORDER');
+ if(new Set(plan.shots.map(s=>s.camera)).size<3||new Set(plan.shots.map(s=>s.setting)).size<2)throw Error('MOTION_VARIETY_REQUIRED');
+ if(plan.shots.every(s=>s.objects.every(o=>o.action==='rest')))throw Error('MOTION_ACTION_REQUIRED');
+ return plan;
+}
+export const productionBrief='Jorge solicita directamente VIDEO FINAL, no propuestas ni guiones para aprobar. Conservar el concepto elegido y los hechos de marca; la oficina decide guion, montaje y producción. Sustituye el alcance anterior de ideas sin locución. Narración hablada en español latino con voseo, voz existente autorizada de Jorge, música y efectos de la biblioteca Glowfy. Escribí EXACTAMENTE 4 escenas, narración total de 50–70 palabras y máximo 440 caracteres, narración completa igual a las cuatro narraciones de escena unidas con un espacio. narration contiene SOLO palabras pronunciadas, nunca instrucciones ni comillas ni etiquetas. Cada escena tiene texto visible de máximo 28 caracteres/5 palabras, acción visual concreta y recursos. La intención vocal y técnica va en action, no narration. No estás generando voz vos: el motor la genera después de pasar el comité. CTA exacta Conocé Glowfy, hablada al final. Comité: corrige dentro de las cuatro escenas, nunca pidas dos ni tres. La última escena es breve para dar tiempo al cierre. Montaje ilustrado 2.5D, 6–8 planos, distintas composiciones, movimiento de objetos, luz y materiales; identidad cálida y elegante. Evaluá claridad y atractivo sin exigir una película antes de escribirla; pasá si cumple el umbral, no inventes pruebas. La revisión de Jorge es sobre el MP4 terminado. No publicar ni programar.';

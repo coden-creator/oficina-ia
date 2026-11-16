@@ -13,7 +13,7 @@ export async function obtainNarration({store,jobDir,text,voiceId,profile='standa
  // Official TTS guidance: newer models use delivery tags, not speed/style settings.
  const spokenInput=tagged?('[curious] '+text).replace('Glowfy','[excited] Glowfy').replace(/(Vos seguí|Conocé Glowfy)/,'[warmly] $1'):text;
  const maximumCredits=Math.ceil(spokenInput.length*model.characterCostFactor);
- if(maximumCredits>1000||catalog.remainingCharacters<maximumCredits)throw Error('VOICE_INCLUDED_QUOTA_REQUIRED');
+ if(catalog.usageBasedBilling===true||maximumCredits>1000||catalog.remainingCharacters<maximumCredits)throw Error('VOICE_INCLUDED_QUOTA_REQUIRED');
  const settings=tagged?undefined:{stability:expressive?.3:.5,similarity_boost:.75,speed:expressive?1.12:1,...(model.style?{style:expressive?.55:.15}:{}),...(model.speakerBoost?{use_speaker_boost:true}:{})};
  const plan={model:model.id,settings};
  // A durable intent precedes the sole billable request; ambiguous outcomes never retry.

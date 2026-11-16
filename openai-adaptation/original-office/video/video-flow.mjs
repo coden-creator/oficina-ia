@@ -1,3 +1,4 @@
+import {MOTION_PROTOCOL,productionBrief} from './motion-contract.mjs';
 import {validateAudiovisualReview} from './audiovisual-standard.mjs';
 import {validateScriptForRenderer,validateVisualPlan} from './visual-contract.mjs';
 import {DIAGNOSTIC_STANDARD,validateQualityStandard,requireProductionCapability,productionCapability} from '../production/reference-standard.mjs';
@@ -12,7 +13,7 @@ export const brands = Object.freeze({
  purify:{name:'Purify',audience:'Hogares interesados en filtración de agua',focus:'Filtración doméstica sin promesas médicas',channels:['instagram','facebook','tiktok']},
  coden:{name:'CODEn',audience:'Negocios, emprendimientos y pymes',focus:'Glowfy y Velforce; asesoría secundaria',channels:['instagram','facebook']}
 });
-export const stages=['research','strategy','script','creative_review','art_direction','production','qa','owner_review'];
+export const stages=['research','strategy','script','creative_review','art_direction','edit_plan','production','qa','owner_review'];
 const roles={research:'Investigación: registra fuentes y fecha; sin navegación declara esa limitación; no inventes tendencias.',strategy:'Estrategia: dolor concreto, oferta comprobada y una sola llamada a la acción. No prometas ventas ni viralidad.',script:'Guion: hook en primeros dos segundos y escenas breves legibles en móvil. Devuelve scenes [{text,durationSeconds}], summary y evidence. Máximo 8 escenas, 60 segundos.',creative_review:'Evaluación independiente del guion: devuelve verdict pass o changes, summary, evidence y correcciones concretas. No sustituye aprobación humana.',art_direction:'Arte: composición, profundidad, entrada/reposo/salida, tres cuadros clave, movimiento determinista. No inventes logos, colores ni reutilices música sin licencia.'};
 const digest=b=>createHash('sha256').update(b).digest('hex');
 const clone=x=>JSON.parse(JSON.stringify(x));
@@ -20,13 +21,14 @@ const validId=x=>typeof x==='string'&&/^[a-z0-9-]{1,80}$/.test(x);
 function ensureBrand(b){if(!Object.hasOwn(brands,b))throw new Error('Marca no admitida');}
 function validateBrief(b){
  if(!b||typeof b!=='object'||Array.isArray(b))throw new Error('Brief requerido');
- const allowed=new Set(['objective','cta','voice','evidence','feedback','audience','channel','format','style','reference','qualityStandard','deliverable','paid','publish']);
+ const allowed=new Set(['objective','cta','voice','evidence','feedback','audience','channel','format','style','reference','qualityStandard','deliverable','productionMode','paid','publish']);
  for(const k of Object.keys(b))if(!allowed.has(k))throw new Error(`Campo de brief no admitido: ${k}`);
  if(b.qualityStandard!==undefined)validateQualityStandard(b.qualityStandard);
+ if(b.productionMode!==undefined&&b.productionMode!==MOTION_PROTOCOL)throw Error('INVALID_PRODUCTION_MODE');
  if(b.deliverable!==undefined&&!['video','idea'].includes(b.deliverable))throw Error('INVALID_DELIVERABLE');
  for(const k of ['objective','cta'])if(typeof b[k]!=='string'||!b[k].trim()||b[k].length>2000)throw new Error(`Brief inválido: ${k}`);
  for(const k of ['feedback','audience','channel','format','style','reference'])if(b[k]!==undefined&&(typeof b[k]!=='string'||b[k].length>4000))throw new Error(`Brief inválido: ${k}`);
- if(b.voice&&b.voice!=='none')throw new Error('Esta versión solo admite animática sin voz; no clona ni genera voz');
+ if(b.voice&&b.voice!=='none'&&!(b.productionMode===MOTION_PROTOCOL&&b.voice==='existing-authorized'))throw new Error('Esta versión solo admite animática sin voz; no clona ni genera voz');
  for(const k of ['paid','publish'])if(b[k]!==undefined&&b[k]!==false)throw new Error('Publicación/gasto no habilitados');
  if(b.evidence!==undefined){if(!Array.isArray(b.evidence)||b.evidence.length>30)throw new Error('Evidencia inválida');const ids=new Set();for(const e of b.evidence){if(!e||typeof e!=='object'||Array.isArray(e)||Object.keys(e).some(k=>!['id','text','source','date'].includes(k))||typeof e.id!=='string'||!/^[a-zA-Z0-9_-]{1,80}$/.test(e.id)||ids.has(e.id)||typeof e.text!=='string'||!e.text.trim()||e.text.length>8000)throw new Error('Evidencia inválida');ids.add(e.id);for(const k of ['source','date'])if(e[k]!==undefined&&(typeof e[k]!=='string'||e[k].length>2000))throw new Error('Fuente inválida');}}
  if(JSON.stringify(b).length>120000)throw new Error('Brief demasiado grande');
@@ -56,7 +58,7 @@ export function createVideoFlow({dataDir,adapters={},creativeRevision={}}){
  if(revisionPolicy.authorized&&(typeof revisionPolicy.source!=='string'||!revisionPolicy.source.trim()||revisionPolicy.source.length>1000))throw new Error('Fuente de autorización de producción requerida');
  if(!path.isAbsolute(dataDir))throw new Error('Directorio absoluto requerido');
  dataDir=path.resolve(dataDir);
- let referenceRunner=null,referenceCapability=null;
+ let referenceRunner=null,referenceCapability=null,referenceProducer=null;
  let tail=Promise.resolve();
  const serial=fn=>{const next=tail.then(async()=>{
   await safePath(dataDir,{directory:true,create:true});const lock=path.join(dataDir,'.flow.lock');let h;
@@ -131,6 +133,14 @@ export function createVideoFlow({dataDir,adapters={},creativeRevision={}}){
   event(j,'discarded',{...j.discard,previousApproval});await save(j);return publicJob(j);
  });}
  async function recordAudiovisualReview(b,id,review){return serial(async()=>{const j=await get(b,id);if(j.state!=='awaiting_review'||!j.artifact)throw Error('REVIEW_ARTIFACT_REQUIRED');const checked=validateAudiovisualReview(review,j);if(digest(await safeRead(j.artifact.file,256*1024*1024))!==review.artifactHash)throw Error('REVIEW_ARTIFACT_CHANGED');j.audiovisualReviews||=[];j.audiovisualReviews.push({...checked,at:new Date().toISOString(),source:'authenticated-production-review',scope:'observations_only_not_owner_approval'});event(j,'audiovisual_review_recorded',{version:j.version,artifactHash:review.artifactHash});await save(j);return publicJob(j);});}
+ async function prepareVideo(b,id,{version}){return serial(async()=>{const j=await get(b,id);
+  if(j.productionAuthorization?.protocol===MOTION_PROTOCOL)return clone(j);
+  if(j.version!==version||j.brief.deliverable!=='idea'||j.artifact||!['awaiting_review','changes_requested','blocked'].includes(j.state))throw Error('VIDEO_CONVERSION_CONFLICT');
+  j.revisions||=[];j.revisions.push({version:j.version,brief:clone(j.brief),outputs:clone(j.outputs),artifact:j.artifact,approval:j.approval,reason:'owner_requested_finished_video'});j.version++;
+  j.brief.deliverable='video';j.brief.productionMode=MOTION_PROTOCOL;j.brief.voice='existing-authorized';j.brief.evidence=j.brief.evidence.filter(e=>e.id!=='owner_request');j.brief.evidence.push({id:'owner_request',source:'Jorge: quiero ver el video finalizado, hacelos directo',text:productionBrief});
+  j.outputs=Object.fromEntries(['research','strategy'].filter(k=>j.outputs[k]).map(k=>[k,j.outputs[k]]));j.artifact=null;j.preview=null;j.approval=null;j.draftHash=null;j.organicAttempts=0;j.organicFeedback=null;j.execution=null;j.blocker=null;j.state='queued';j.stage='script';
+  j.productionAuthorization={protocol:MOTION_PROTOCOL,source:'authenticated-owner-video-trigger',at:new Date().toISOString(),includedVoiceOnly:true,publishing:false};event(j,'finished_video_requested',{version:j.version});await save(j);return clone(j);
+ });}
  async function updateOffice(b,id,version,change,type){return serial(async()=>{const j=await get(b,id);if(j.version!==version||['approved','discarded','awaiting_review'].includes(j.state))throw Error('PIECE_VERSION_CHANGED');change(j);if(j.version>100)throw Error('REVISION_LIMIT');j.draftHash=j.outputs.script?digest(JSON.stringify({brandId:j.brandId,version:j.version,brief:j.brief,script:j.outputs.script})):null;event(j,type,{stage:j.stage,version:j.version,editorId:j.execution?.editorId??null});await save(j);return clone(j);});}
- return {recordAudiovisualReview,updateOffice,setProductionCapability(fn){referenceCapability=fn;},setReferenceRunner(fn){referenceRunner=fn;},refreshConnection:()=>adapters.runner?.refresh?.(),create:args=>serial(()=>createInternal(args)),list,get,run:async(b,id)=>{const j=await get(b,id);if(j.brief.qualityStandard==='cresova-reference-v1'&&referenceRunner)return referenceRunner(b,id);return serial(()=>runInternal(b,id));},approve,requestChanges,discard,capabilities:()=>({brands:Object.keys(brands),stages,runnerConfigured:!!adapters.runner?.run,runnerConnected:adapters.runner?.status?.()?.connected===true,rendererConfigured:!!adapters.renderer?.render,rendererVerified:false,production:{...productionCapability(),...(referenceCapability?.()||{})},automaticCreativeRevision:{configuredMax:revisionPolicy.maxAttempts,authorized:revisionPolicy.authorized,finalHumanApprovalRequired:true},publish:false,paid:false,voice:false})};
+ return {prepareVideo,produce:(b,id,body)=>{if(!referenceProducer)throw Error('PRODUCTION_NOT_CONNECTED');return referenceProducer(b,id,body);},setReferenceProducer(fn){referenceProducer=fn;},recordAudiovisualReview,updateOffice,setProductionCapability(fn){referenceCapability=fn;},setReferenceRunner(fn){referenceRunner=fn;},refreshConnection:()=>adapters.runner?.refresh?.(),create:args=>serial(()=>createInternal(args)),list,get,run:async(b,id)=>{const j=await get(b,id);if(j.brief.qualityStandard==='cresova-reference-v1'&&referenceRunner)return referenceRunner(b,id);return serial(()=>runInternal(b,id));},approve,requestChanges,discard,capabilities:()=>({brands:Object.keys(brands),stages,runnerConfigured:!!adapters.runner?.run,runnerConnected:adapters.runner?.status?.()?.connected===true,rendererConfigured:!!adapters.renderer?.render,rendererVerified:false,production:{...productionCapability(),...(referenceCapability?.()||{})},automaticCreativeRevision:{configuredMax:revisionPolicy.maxAttempts,authorized:revisionPolicy.authorized,finalHumanApprovalRequired:true},publish:false,paid:false,voice:false})};
 }
