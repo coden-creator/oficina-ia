@@ -29,3 +29,6 @@
 - Corrección de reproducción desplegada en a29589b: comprobados saltos reales a 10,42 / 10,38 / 10,18 s y navegación escritorio/móvil de las tres piezas, cero errores JS. Diez pruebas de HTTP/rangos/catálogo pasaron. Sin cambio en archivos, versiones o aprobaciones; Codex conectado, cola vacía y publicación deshabilitada.
 
 - 2026-11-16 · Jorge autoriza incorporar seis mejoras de producción. Creada una ficha piloto separada para conservar los tres videos anteriores. Se prepara narración reutilizada, seis planos, sonido específico, historial de marca para especialistas y revisión audiovisual vinculada al archivo.
+
+### Ajuste de contexto del director de arte — 16/11/2026
+El primer intento del piloto se conservó bloqueado antes del render. Se reduce el contexto por dependencias de cada especialista, evitando repetir la evidencia y enviar investigación/revisión completas al director de arte. El guion y los hechos del brief se mantienen íntegros; el historial visual opcional cede espacio al alcanzar el presupuesto. La API autenticada expone un código de bloqueo acotado para diagnosticar, sin mensajes privados del proveedor. 12 pruebas de coordinación pasaron, incluidas conservación del guion y diagnóstico seguro. Pendiente validar la ejecución real del piloto tras este ajuste.
