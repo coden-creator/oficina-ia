@@ -1,15 +1,15 @@
 # Glowfy · tres nuevas producciones con escenas propias
 
 Fecha: 16 de noviembre de 2026 (America/Guatemala).
-Fase: lote rechazado por movimiento y transiciones; corrección de La cita, por dentro en preparación.
+Fase: lote rechazado por movimiento y transiciones; La cita, por dentro v3 en producción y revisión interna. Todavía no es un MP4 entregado.
 
 La oficina completó investigación sobre evidencia suministrada, estrategia, guion, comité, dirección, montaje, autoría vectorial, correcciones con imágenes reales, narración y exportación. Los nueve videos anteriores conservan versiones, hashes y aprobaciones.
 
 | Pieza | Versión | Duración | Estado |
 |---|---:|---:|---|
-| El trazo continúa | 7 | 20.73 s | Pendiente de Jorge |
-| La cita, por dentro | 2 | 21.20 s | Pendiente de Jorge |
-| La puerta y el vínculo | 5 | 21.07 s | Pendiente de Jorge |
+| El trazo continúa | 7 | 20.73 s | Rechazado por movimiento/transiciones |
+| La cita, por dentro | 2 | 21.20 s | Rechazado; v3 en corrección |
+| La puerta y el vínculo | 5 | 21.07 s | Rechazado por movimiento/transiciones |
 
 Cada pieza tiene objetos y acciones propios: manicura y consulta que llega a reserva; mecanismo articulado que cambia el horario; puerta de salón por la que pasan recordatorio y seguimiento. Esto no constituye aprobación estética ni equivalencia certificada con las referencias.
 
@@ -25,4 +25,6 @@ Las revisiones conservan diseños y resultados anteriores; el director recibe la
 
 [Evidencia por archivo y modelo](../evidence/glowfy-authored-astra-3.json).
 
-Corrección: superficies con perspectiva y grosor, cámara por escena y composición temporal de escenas saliente/entrante. Las referencias visuales se envían sólo al trabajador privado, no al repositorio ni al render. Dos revisiones internas separan composición y secuencias densas/uniones. Se preservan guion, voz y música; nueva narración deshabilitada en esta corrección. Veinte pruebas pertinentes pasaron, incluidas referencias privadas, reanudación, continuidad y conservación de voz/archivo. Falta prueba real de esta revisión.
+Corrección: superficies con perspectiva y grosor, cámara por escena y composición temporal de escenas saliente/entrante. Las referencias visuales se envían sólo al trabajador privado, no al repositorio ni al render. Dos revisiones internas separan composición y secuencias densas/uniones. Se preservan guion, voz y música; nueva narración deshabilitada en esta corrección. Cuarenta y tres pruebas pertinentes pasaron (22 autoría/coreografía, 20 coordinación/recuperación, 1 informe). En ejecución real, la revisión temporal rechazó incorporaciones y desapariciones de geometría entre escenas. Se transmiten todos los hallazgos y la pose final anterior al editor; seis rondas como máximo, persistidas al reanudar. Resultado final aún pendiente.
+
+La sexta ronda detectó un fundido translúcido causado por alpha aplicado a cada forma. Se corrige la composición de capas completas; la revisión nueva reutiliza los diseños existentes, exige imágenes/veredictos nuevos y limita dos correcciones adicionales. No se generó otra voz.

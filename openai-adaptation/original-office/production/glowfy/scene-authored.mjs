@@ -1,7 +1,7 @@
 import {drawSurface} from './motion-surface.mjs';
 import {createRequire} from 'node:module';
-const {Path2D}=createRequire(import.meta.url)('@napi-rs/canvas');
-const paths=new WeakMap(),clamp=x=>Math.max(0,Math.min(1,x));
+const {Path2D,createCanvas}=createRequire(import.meta.url)('@napi-rs/canvas');
+const paths=new WeakMap(),layers=new WeakMap(),clamp=x=>Math.max(0,Math.min(1,x));
 export function ease(x,k='smooth'){x=clamp(x);if(k==='linear')return x;if(k==='step')return x===1?1:0;if(k==='in')return x*x*x;if(k==='out')return 1-(1-x)**3;if(k==='inOut')return x<.5?4*x*x*x:1-(-2*x+2)**3/2;if(k==='back'){const z=x-1;return 1+2.70158*z*z*z+1.70158*z*z;}return x*x*(3-2*x);}
 export function sample(points,u,fallback){if(!points?.length)return fallback;if(u<=points[0][0])return points[0][1];for(let i=1;i<points.length;i++){const a=points[i-1],b=points[i];if(u<=b[0])return a[1]+(b[1]-a[1])*ease((u-a[0])/(b[0]-a[0]),b[2]);}return points.at(-1)[1];}
 function paint(c,value,g){if(!value||value==='none')return null;if(!value.startsWith('@'))return value;const a=g.gradients[value.slice(1)];const v=a.type==='radial'?c.createRadialGradient(...a.coords):c.createLinearGradient(...a.coords);for(const [p,color] of a.stops)v.addColorStop(p,color);return v;}
@@ -50,15 +50,23 @@ export function transitionAt(t,scenes){
  for(let i=1;i<scenes.length;i++){const incoming=scenes[i],tr=incoming.graph.transitionIn;if(!tr)continue;const start=incoming.start-tr.duration/2,end=incoming.start+tr.duration/2;if(t>=start&&t<end)return {outgoing:scenes[i-1],incoming,tr,p:(t-start)/tr.duration};}
  return null;
 }
-function transformed(c,tracks,p,draw){
+function transformed(c,tracks,p,draw,opaque=false){
  const v={x:0,y:0,sx:1,sy:1,rotate:0,alpha:1};for(const [k,pts] of Object.entries(tracks||{}))v[k]=sample(pts,p,v[k]);
+ if(opaque)v.alpha=1;
  c.save();c.globalAlpha*=clamp(v.alpha);c.translate(540+v.x,900+v.y);c.rotate(v.rotate*Math.PI/180);c.scale(v.sx,v.sy);c.translate(-540,-900);draw();c.restore();
 }
 export function drawChoreography(c,t,scenes,assets){
  const tr=transitionAt(t,scenes);const drawScene=s=>drawGraph(c,s.graph,clamp((t-s.start)/(s.end-s.start)),assets);
  if(!tr){drawScene(scenes.find(s=>t>=s.start&&t<s.end)||scenes.at(-1));return;}
+ // Opacity belongs to a completed scene layer. Applying it inside drawGraph makes
+ // every overlapping shape translucent, exposing concealed mechanisms and labels.
+ const layer=s=>{let frame=layers.get(s.graph);if(!frame){frame=createCanvas(1080,1920);layers.set(s.graph,frame);}const f=frame.getContext('2d');f.resetTransform();f.globalAlpha=1;f.clearRect(0,0,1080,1920);drawGraph(f,s.graph,clamp((t-s.start)/(s.end-s.start)),assets);return frame;};
+ const outgoing=layer(tr.outgoing),incoming=layer(tr.incoming),a=tr.tr.outgoing,b=tr.tr.incoming;
+ // Standard full-frame dissolve is incoming over opaque outgoing. Fading both
+ // against the backdrop would reduce coverage even when the two poses coincide.
+ const dissolve=!tr.tr.mask&&a?.alpha&&b?.alpha&&Object.keys(a).every(k=>k==='alpha')&&Object.keys(b).every(k=>k==='alpha')&&Math.abs(sample(a.alpha,tr.p,1)+sample(b.alpha,tr.p,1)-1)<1e-6;
  c.fillStyle=tr.incoming.graph.background;c.fillRect(0,0,1080,1920);
- transformed(c,tr.tr.outgoing,tr.p,()=>drawScene(tr.outgoing));
+ transformed(c,tr.tr.outgoing,tr.p,()=>c.drawImage(outgoing,0,0),dissolve);
  c.save();if(tr.tr.mask){const m={x:540,y:900,w:1080,h:1920,r:0};for(const [k,pts] of Object.entries(tr.tr.mask.tracks))m[k]=sample(pts,tr.p,m[k]);c.beginPath();if(tr.tr.mask.kind==='ellipse')c.ellipse(m.x,m.y,Math.max(.001,m.w/2),Math.max(.001,m.h/2),0,0,Math.PI*2);else c.roundRect(m.x-m.w/2,m.y-m.h/2,Math.max(.001,m.w),Math.max(.001,m.h),Math.max(0,Math.min(m.r,m.w/2,m.h/2)));c.clip();}
- transformed(c,tr.tr.incoming,tr.p,()=>drawScene(tr.incoming));c.restore();
+ transformed(c,tr.tr.incoming,tr.p,()=>c.drawImage(incoming,0,0));c.restore();
 }

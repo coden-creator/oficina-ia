@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';import path from 'node:path';import {createHas
 import {AUTHORED_PROTOCOL,validateAuthoredPlan,validateGraph,designPrompt,choreographyDesign} from '../../video/authored-motion.mjs';
 import {runProcess} from '../process.mjs';
 export const AUTHORED_RENDER_REVIEW='clean-brand-v3';
+export const CHOREOGRAPHY_RENDER_REVIEW='continuity-composite-v2';
 export const AUTHORED_MAX_REVISIONS=4;
 export function correctionFor(review,scene){const items=review?.output?.detail?.corrections?.filter(c=>c.scene===scene)||[];return items.length?{scene,instruction:items.map((c,i)=>`${i+1}. ${c.instruction}`).join('\n')}:null;}
 export function endingPose(graph){const g=structuredClone(graph);for(const n of g.nodes){for(const [k,points] of Object.entries(n.tracks||{}))n[k]=points.at(-1)[1];delete n.tracks;}if(g.camera){for(const [k,points] of Object.entries(g.camera.tracks||{}))g.camera[k]=points.at(-1)[1];delete g.camera.tracks;}delete g.transitionIn;g.sounds=[];return g;}
@@ -12,7 +13,7 @@ export function authoredPlan(job,ids){
  const p=validateAuthoredPlan(job.outputs.edit_plan.detail);return {...p,authored:true,directed:true,key:p.title.replace(/[^a-zA-Z0-9áéíóúñÁÉÍÓÚÑ -]/g,'').slice(0,60),variant:'authored',maxNarrationCharacters:480,authorization:'Jorge: tres NUEVOS videos completos y distintos; uso incluido y voz existente; 2026-11-16'};
 }
 export async function authorScenes({job,plan,beats,outDir,runner,onStage}){
- const choreography=job.motionChoreography==='continuity-v1',renderer=choreography?'continuity-v1':AUTHORED_RENDER_REVIEW,revisionLimit=choreography?6:AUTHORED_MAX_REVISIONS;
+ const choreography=job.motionChoreography==='continuity-v1',renderer=choreography?CHOREOGRAPHY_RENDER_REVIEW:AUTHORED_RENDER_REVIEW,revisionLimit=choreography?2:AUTHORED_MAX_REVISIONS;
  const folder=path.join(outDir,'authored');await fs.mkdir(folder,{recursive:true,mode:0o700});
  const sourceHash=hash({script:job.outputs.script.detail,plan,version:job.version});
  const read=async f=>{try{return JSON.parse(await fs.readFile(path.join(folder,f),'utf8'));}catch(e){if(e.code!=='ENOENT')throw e;return null;}};
@@ -27,6 +28,11 @@ export async function authorScenes({job,plan,beats,outDir,runner,onStage}){
    const correction=correctionFor(review,i+1);if(attempt&&!correction)continue;
    await onStage('production',`${attempt?'Corrigiendo':'Diseñando'} la escena ${i+1}/4 con ${job.outputs.edit_plan.provenance.model||'Codex'}${attempt?' · revisión '+attempt:''}`);
    const file=`scene-${i+1}-${renderer}-attempt-${attempt}.json`;let saved=await read(file);
+   if(!saved&&attempt===0&&choreography){
+    // Reinspect the completed designs after the layer-opacity fix. Do not repeat
+    // their inference or reuse a verdict made from the faulty compositor.
+    for(let old=6;old>=0;old--){const previousFile=`scene-${i+1}-continuity-v1-attempt-${old}.json`,prior=await read(previousFile);if(prior){if(prior.sourceHash!==sourceHash)throw Error('AUTHORED_CACHE_CONFLICT');saved={...prior,seededFrom:previousFile,renderReview:renderer};await write(file,saved);break;}}
+   }
    // Re-inspect the latest authored designs after a renderer fix; preserve prior inference/audio.
    if(!saved&&attempt===0&&!choreography){
     for(const prefix of ['isolated-tiles-v2-','']){for(let old=AUTHORED_MAX_REVISIONS;old>=0;old--){const previousFile=`scene-${i+1}-${prefix}attempt-${old}.json`,prior=await read(previousFile);if(prior){if(prior.sourceHash!==sourceHash)throw Error('AUTHORED_CACHE_CONFLICT');saved={...prior,seededFrom:previousFile,renderReview:renderer};await write(file,saved);break;}}if(saved)break;}
@@ -39,7 +45,7 @@ export async function authorScenes({job,plan,beats,outDir,runner,onStage}){
     const result=await call('motion_design',designPrompt+(choreography?'\n'+choreographyDesign:''),input,images);if(result.output.detail.scene!==i+1)throw Error('AUTHORED_SCENE_ORDER');
     saved={sourceHash,attempt,...result};await write(file,saved);
    }
-   scenes[i]={scene:i+1,start,end,graph:validateGraph(JSON.parse(saved.output.detail.graph)),provenance:saved.provenance,rationale:saved.output.detail.rationale,attempt};
+   scenes[i]={scene:i+1,start,end,graph:validateGraph(JSON.parse(saved.output.detail.graph)),provenance:saved.provenance,rationale:saved.output.detail.rationale,attempt,seededFrom:saved.seededFrom||null};
   }
   const imageConfig=path.join(folder,'preview-config.json');await fs.writeFile(imageConfig,JSON.stringify({outDir:folder,scenes,choreography,beats:{...beats,authored:true,authoredScenes:scenes}}));
   await runProcess(process.execPath,[new URL('./authored-previews.mjs',import.meta.url).pathname,imageConfig]);
@@ -69,6 +75,6 @@ export async function authorScenes({job,plan,beats,outDir,runner,onStage}){
   if(attempt===revisionLimit)throw Error('AUTHORED_VISUAL_REVISION_LIMIT');
  }
  beats.authored=true;beats.authoredScenes=scenes;beats.shots=scenes.map(s=>({id:'scene-'+s.scene,scene:s.scene,start:s.start,end:s.end}));
- return {scenes:scenes.map(s=>({scene:s.scene,start:s.start,end:s.end,nodeCount:s.graph.nodes.length,attempt:s.attempt,graphHash:hash(s.graph),provenance:s.provenance})),reviews:reviews.map(r=>({attempt:r.attempt,renderer:r.renderer,graphHash:r.graphHash,...r.output.detail,provenance:r.provenance})),reviewScope:choreography?'Composition, dense motion sequences and boundary windows; no subjective listening or owner approval':'Rendered image sequences only; owner evaluates the final audiovisual piece'};
+ return {scenes:scenes.map(s=>({scene:s.scene,start:s.start,end:s.end,nodeCount:s.graph.nodes.length,attempt:s.attempt,seededFrom:s.seededFrom,graphHash:hash(s.graph),provenance:s.provenance})),reviews:reviews.map(r=>({attempt:r.attempt,renderer:r.renderer,graphHash:r.graphHash,...r.output.detail,provenance:r.provenance})),reviewScope:choreography?'Composition, dense motion sequences and boundary windows; no subjective listening or owner approval':'Rendered image sequences only; owner evaluates the final audiovisual piece'};
 }
 export function authoredPublicPlan(plan,beats){return {title:plan.title,concept:plan.concept,difference:plan.difference,protocol:AUTHORED_PROTOCOL,shots:plan.scenes.map((s,i)=>({id:'scene-'+s.scene,title:s.title,action:s.action,camera:s.camera,sound:s.sound,start:beats.authoredScenes[i].start,end:beats.authoredScenes[i].end})),authoredScenes:beats.authoredScenes.map(s=>({scene:s.scene,nodes:s.graph.nodes.length,model:s.provenance.model}))};}

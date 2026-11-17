@@ -2,6 +2,12 @@ import test from 'node:test';import assert from 'node:assert/strict';import fs f
 import {drawGraph,drawChoreography,transitionAt} from './scene-authored.mjs';import {projectSurface} from './motion-surface.mjs';import {validateGraph,AUTHORED_PROTOCOL} from '../../video/authored-motion.mjs';import {createVideoFlow} from '../../video/video-flow.mjs';import {publicJob} from '../../video/http.mjs';
 const {createCanvas}=createRequire(import.meta.url)('@napi-rs/canvas');
 const graph=color=>({background:color,gradients:{},sounds:[],nodes:Array.from({length:8},(_,i)=>({id:'n'+i,kind:'rect',x:100+i*80,y:600,w:50,h:100,fill:color}))});
+test('a whole-frame dissolve preserves opaque nested artwork instead of fading each shape',()=>{
+ const a=graph('#FAF7FD');a.nodes[0]={id:'rear',kind:'rect',x:200,y:600,w:500,h:500,fill:'#FF0000'};a.nodes[1]={id:'front',kind:'rect',x:300,y:700,w:300,h:300,fill:'#0000FF'};
+ const b=structuredClone(a);b.transitionIn={duration:.7,intention:'Same pose, opaque handoff',outgoing:{alpha:[[0,1],[1,0,'smooth']]},incoming:{alpha:[[0,0],[1,1,'smooth']]}};
+ const c=createCanvas(1080,1920).getContext('2d'),scenes=[{start:0,end:3,graph:a},{start:3,end:6,graph:b}];
+ for(const t of [3,2.7,3.2,3]){drawChoreography(c,t,scenes,{});assert.deepEqual([...c.getImageData(400,850,1,1).data],[0,0,255,255]);assert.deepEqual([...c.getImageData(250,850,1,1).data],[255,0,0,255]);}
+});
 test('a boundary composites both scenes and converges to the incoming identity',()=>{
  const a=graph('#FF0000'),b=graph('#0000FF');b.transitionIn={duration:.6,intention:'Synthetic spatial continuity',outgoing:{x:[[0,0],[1,-1080,'inOut']]},incoming:{x:[[0,1080],[1,0,'inOut']]}};validateGraph(b);
  const scenes=[{start:0,end:3,graph:a},{start:3,end:6,graph:b}],canvas=createCanvas(1080,1920),c=canvas.getContext('2d');
@@ -37,10 +43,21 @@ test('the office attaches reference images and separately reviews dense motion b
  }finally{await fs.rm(dir,{recursive:true,force:true});}
 });
 
-test('the extended motion review budget persists across resume and cannot become an infinite correction loop',async()=>{
+test('the compositor repair budget persists across resume and cannot become an infinite correction loop',async()=>{
  const {authorScenes}=await import('./authored-plan.mjs'),dir=await fs.mkdtemp(path.join(os.tmpdir(),'motion-limit-'));try{
  const plan={title:'Fixture',scenes:[1,2,3,4].map(scene=>({scene}))},job={id:'fixture',version:1,motionChoreography:'continuity-v1',brief:{cta:'Conocé Glowfy'},outputs:{script:{detail:{}},edit_plan:{provenance:{model:'fixture'}},art_direction:{detail:{}}}},beats={duration:4,captions:[],words:[],scenes:[0,1,2,3].map(i=>({start:i,end:i+1,narration:'Fixture'}))};let calls=0;
  const runner={run:async q=>{calls++;return {status:'completed',provenance:{provider:'codex-chatgpt-plan',model:'fixture'},output:{detail:q.stage==='motion_design'?{scene:q.input.scene.scene,graph:JSON.stringify(graph('#FAF7FD')),rationale:'Synthetic'}:{verdict:'changes',observations:['Fixture unresolved'],corrections:[{scene:1,instruction:'Fixture unresolved'}]}}};}};
- await assert.rejects(authorScenes({job,plan,beats,outDir:dir,runner,onStage:async()=>{}}),/AUTHORED_VISUAL_REVISION_LIMIT/);const original=calls;assert.equal(calls,17);await assert.rejects(authorScenes({job,plan,beats,outDir:dir,runner,onStage:async()=>{}}),/AUTHORED_VISUAL_REVISION_LIMIT/);assert.equal(calls,original);assert.ok((await fs.stat(path.join(dir,'authored','review-continuity-v1-6.json'))).size>100);
+ await assert.rejects(authorScenes({job,plan,beats,outDir:dir,runner,onStage:async()=>{}}),/AUTHORED_VISUAL_REVISION_LIMIT/);const original=calls;assert.equal(calls,9);await assert.rejects(authorScenes({job,plan,beats,outDir:dir,runner,onStage:async()=>{}}),/AUTHORED_VISUAL_REVISION_LIMIT/);assert.equal(calls,original);assert.ok((await fs.stat(path.join(dir,'authored','review-continuity-composite-v2-2.json'))).size>100);
+ }finally{await fs.rm(dir,{recursive:true,force:true});}
+});
+
+test('the opacity repair reuses the latest authored geometry but inspects fresh rendered sequences',async()=>{
+ const {authorScenes}=await import('./authored-plan.mjs'),dir=await fs.mkdtemp(path.join(os.tmpdir(),'motion-opacity-cache-'));try{
+ const plan={title:'Fixture',scenes:[1,2,3,4].map(scene=>({scene}))},job={id:'fixture',version:3,motionChoreography:'continuity-v1',brief:{cta:'Conocé Glowfy'},outputs:{script:{detail:{}},edit_plan:{provenance:{model:'fixture'}},art_direction:{detail:{}}}},beats={duration:4,captions:[],words:[],scenes:[0,1,2,3].map(i=>({start:i,end:i+1,narration:'Fixture'}))};
+ const sourceHash=createHash('sha256').update(JSON.stringify({script:job.outputs.script.detail,plan,version:job.version})).digest('hex'),folder=path.join(dir,'authored');await fs.mkdir(folder);
+ for(let scene=1;scene<=4;scene++)for(const attempt of [0,6]){const g=graph('#FAF7FD');g.nodes[0].x=100+attempt;await fs.writeFile(path.join(folder,`scene-${scene}-continuity-v1-attempt-${attempt}.json`),JSON.stringify({sourceHash,attempt,provenance:{provider:'codex-chatgpt-plan',model:'fixture'},output:{detail:{scene,rationale:'Cached fixture',graph:JSON.stringify(g)}}}));}
+ let calls=0;const runner={run:async q=>{calls++;assert.equal(q.stage,'visual_review');assert.equal(q.images.length,4);return {status:'completed',provenance:{provider:'codex-chatgpt-plan',model:'fixture'},output:{detail:{verdict:'pass',observations:['Fresh fixture inspection'],corrections:[]}}};}};
+ const result=await authorScenes({job,plan,beats,outDir:dir,runner,onStage:async()=>{}});assert.equal(calls,2);assert.equal(beats.authoredScenes[0].graph.nodes[0].x,106);assert.match(result.scenes[0].seededFrom,/attempt-6/);assert.ok(result.reviews.every(r=>r.renderer==='continuity-composite-v2'));
+ await authorScenes({job,plan,beats,outDir:dir,runner,onStage:async()=>{}});assert.equal(calls,2);
  }finally{await fs.rm(dir,{recursive:true,force:true});}
 });
