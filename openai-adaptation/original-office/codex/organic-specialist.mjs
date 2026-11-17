@@ -3,7 +3,7 @@ const blocked=reason=>({status:'blocked',reason});
 export class CodexOrganicSpecialist{
  constructor({runtime}){this.runtime=runtime;}
  async run(q){
-  if(q?.context?.workflow!==ORGANIC_PROTOCOL||!organicStages.includes(q.stage)||!['glowfy','velforce','quiba','purify','coden'].includes(q.brand)||q.context.brand!==q.brand||typeof q.jobId!=='string'||!q.jobId||q.jobId.length>80||typeof q.prompt!=='string'||q.prompt.length>8000||typeof q.input?.brief?.cta!=='string'||!q.input.brief.cta.trim()||q.input.brief.cta.length>2000)return blocked('INVALID_ORGANIC_REQUEST');
+  if(q?.context?.workflow!==ORGANIC_PROTOCOL||!organicStages.includes(q.stage)||!['glowfy','velforce','quiba','purify','coden'].includes(q.brand)||q.context.brand!==q.brand||typeof q.jobId!=='string'||!q.jobId||q.jobId.length>80||typeof q.prompt!=='string'||q.prompt.length>(q.stage==='motion_design'?10000:8000)||typeof q.input?.brief?.cta!=='string'||!q.input.brief.cta.trim()||q.input.brief.cta.length>2000)return blocked('INVALID_ORGANIC_REQUEST');
   const s=this.runtime.status();if(!s.transportConnected||!s.chatgptAccountObserved||s.accountKind!=='chatgpt'||s.paidApiEnabled)return blocked('CHATGPT_PLAN_ACCOUNT_REQUIRED');
   const {images,...task}=q;const data=JSON.stringify(task);if(data.length>(['motion_design','visual_review'].includes(q.stage)?92000:60000))return blocked('SPECIALIST_CONTEXT_TOO_LARGE');
   try{

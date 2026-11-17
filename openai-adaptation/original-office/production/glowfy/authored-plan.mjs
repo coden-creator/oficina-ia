@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';import path from 'node:path';import {createHas
 import {AUTHORED_PROTOCOL,validateAuthoredPlan,validateGraph,designPrompt,choreographyDesign} from '../../video/authored-motion.mjs';
 import {runProcess} from '../process.mjs';
 export const AUTHORED_RENDER_REVIEW='clean-brand-v3';
-export const CHOREOGRAPHY_RENDER_REVIEW='continuity-composite-v2';
+export const CHOREOGRAPHY_RENDER_REVIEW='continuity-kinematics-v3';
 export const AUTHORED_MAX_REVISIONS=4;
 export function correctionFor(review,scene,pairBoundaries=false){
  const all=review?.output?.detail?.corrections||[],items=all.filter(c=>c.scene===scene);
@@ -10,6 +10,7 @@ export function correctionFor(review,scene,pairBoundaries=false){
  return items.length?{scene,instruction:items.map((c,i)=>`${i+1}. ${c.instruction}`).join('\n')}:null;
 }
 export function endingPose(graph){const g=structuredClone(graph);for(const n of g.nodes){for(const [k,points] of Object.entries(n.tracks||{}))n[k]=points.at(-1)[1];delete n.tracks;}if(g.camera){for(const [k,points] of Object.entries(g.camera.tracks||{}))g.camera[k]=points.at(-1)[1];delete g.camera.tracks;}delete g.transitionIn;g.sounds=[];return g;}
+export function motionTail(scene){const tail=n=>Object.fromEntries(Object.entries(n?.tracks||{}).map(([k,v])=>[k,v.slice(-3)]));return {durationSeconds:scene.end-scene.start,camera:tail(scene.graph.camera),nodes:scene.graph.nodes.filter(n=>Object.keys(n.tracks||{}).length).map(n=>({id:n.id,parent:n.parent||null,lastKeyframes:tail(n)}))};}
 const hash=x=>createHash('sha256').update(JSON.stringify(x)).digest('hex');
 export function authoredPlan(job,ids){
  if(job?.brandId!=='glowfy'||!ids.includes(job.id)||job.brief?.productionMode!==AUTHORED_PROTOCOL||job.productionAuthorization?.protocol!==AUTHORED_PROTOCOL)return null;
@@ -26,7 +27,8 @@ export async function authorScenes({job,plan,beats,outDir,runner,onStage}){
   const r=await runner.run({brand:'glowfy',jobId:job.id,stage,prompt,input:{brief:job.brief,...input},images,context:{workflow:'organic-v1',brand:'glowfy',version:job.version,restrictions:{noPaid:true,noPublish:true,noCloning:true}}});
   if(r?.status!=='completed')throw Error(r?.reason||'AUTHORED_SPECIALIST_FAILED');if(r.provenance?.provider!=='codex-chatgpt-plan')throw Error('UNVERIFIED_ORGANIC_PROVIDER');return r;
  };
- let scenes=[],review=null;const reviews=[];
+ let scenes=[],review=null;const reviews=[];let priorEvaluation=null;
+ if(choreography)for(let old=3;old>=0;old--){priorEvaluation=await read(`motion-review-continuity-composite-v2-${old}.json`)||await read(`review-continuity-composite-v2-${old}.json`);if(priorEvaluation)break;}
  for(let attempt=0;attempt<=revisionLimit;attempt++){
   for(let i=0;i<4;i++){
    // The final bounded escalation corrects both sides of an unresolved boundary.
@@ -37,7 +39,7 @@ export async function authorScenes({job,plan,beats,outDir,runner,onStage}){
    if(!saved&&attempt===0&&choreography){
     // Reinspect the completed designs after the layer-opacity fix. Do not repeat
     // their inference or reuse a verdict made from the faulty compositor.
-    for(let old=6;old>=0;old--){const previousFile=`scene-${i+1}-continuity-v1-attempt-${old}.json`,prior=await read(previousFile);if(prior){if(prior.sourceHash!==sourceHash)throw Error('AUTHORED_CACHE_CONFLICT');saved={...prior,seededFrom:previousFile,renderReview:renderer};await write(file,saved);break;}}
+    for(const previousRenderer of ['continuity-composite-v2','continuity-v1']){for(let old=6;old>=0;old--){const previousFile=`scene-${i+1}-${previousRenderer}-attempt-${old}.json`,prior=await read(previousFile);if(prior){if(prior.sourceHash!==sourceHash)throw Error('AUTHORED_CACHE_CONFLICT');saved={...prior,seededFrom:previousFile,renderReview:renderer};await write(file,saved);break;}}if(saved)break;}
    }
    // Re-inspect the latest authored designs after a renderer fix; preserve prior inference/audio.
    if(!saved&&attempt===0&&!choreography){
@@ -46,8 +48,9 @@ export async function authorScenes({job,plan,beats,outDir,runner,onStage}){
    const start=beats.scenes[i].start,end=i===3?beats.duration:beats.scenes[i+1].start;
    if(saved&&saved.sourceHash!==sourceHash)throw Error('AUTHORED_CACHE_CONFLICT');
    if(!saved){
-    const input={plan,scene:plan.scenes[i],...(i>0?{previousSceneGraph:endingPose(scenes[i-1].graph),continuity:'Previous scene graph is frozen at its exact final pose, including corrections made in this round. Preserve recognisable object geometry, labels and materials. Reframe purposefully; carry forward the completed state.'}:{}),spokenText:beats.scenes[i].narration,durationSeconds:end-start,wordTiming:beats.words.filter(w=>w.start>=start&&w.start<end).map(w=>({word:w.text,at:Number(((w.start-start)/(end-start)).toFixed(3))})),...(correction?{previousGraph:scenes[i].graph,correction:correction.instruction}:{}),artDirection:job.outputs.art_direction.detail};
-    const images=[...(choreography?(job.motionReferenceImages||[]):[]),...(correction?['data:image/jpeg;base64,'+(await fs.readFile(path.join(folder,`review-scene-${i+1}.jpg`))).toString('base64')]:[])].slice(0,4);
+    const input={plan,scene:plan.scenes[i],...(i>0?{previousSceneGraph:endingPose(scenes[i-1].graph),previousMotionTail:motionTail(scenes[i-1]),continuity:'Previous scene graph is frozen at its exact final pose, including corrections made in this round. previousMotionTail preserves the outgoing timing and easing: continue that motion rather than resetting its velocity. Preserve recognisable geometry, labels and materials.'}:{}),spokenText:beats.scenes[i].narration,durationSeconds:end-start,wordTiming:beats.words.filter(w=>w.start>=start&&w.start<end).map(w=>({word:w.text,at:Number(((w.start-start)/(end-start)).toFixed(3))})),...(correction?{previousGraph:scenes[i].graph,correction:correction.instruction}:{}),artDirection:job.outputs.art_direction.detail};
+    const previewKind=review?.scope==='dense-motion-and-boundaries'?'motion':'review';
+    const images=[...(choreography?(job.motionReferenceImages||[]):[]),...(correction?['data:image/jpeg;base64,'+(await fs.readFile(path.join(folder,`${previewKind}-scene-${i+1}.jpg`))).toString('base64')]:[])].slice(0,4);
     const result=await call('motion_design',designPrompt+(choreography?'\n'+choreographyDesign:''),input,images);if(result.output.detail.scene!==i+1)throw Error('AUTHORED_SCENE_ORDER');
     saved={sourceHash,attempt,...result};await write(file,saved);
    }
@@ -56,7 +59,7 @@ export async function authorScenes({job,plan,beats,outDir,runner,onStage}){
   const imageConfig=path.join(folder,'preview-config.json');await fs.writeFile(imageConfig,JSON.stringify({outDir:folder,scenes,choreography,beats:{...beats,authored:true,authoredScenes:scenes}}));
   await runProcess(process.execPath,[new URL('./authored-previews.mjs',import.meta.url).pathname,imageConfig]);
   await onStage('production','El director revisa cuatro secuencias de imágenes reales del render');
-  const previousReview=review;
+  const previousReview=review||priorEvaluation;
   const graphHash=hash({renderer,scenes:scenes.map(s=>s.graph)}),file=`review-${renderer}-${attempt}.json`;review=await read(file);
   if(review&&review.graphHash!==graphHash)throw Error('AUTHORED_REVIEW_CONFLICT');
   if(!review){
