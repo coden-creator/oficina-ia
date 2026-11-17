@@ -62,3 +62,5 @@ Durante la corrección real se guardaron dos rondas y hubo un reinicio del App, 
 
 ### Composición opaca del empalme · 16/11/2026, America/Guatemala
 La revisión de la sexta ronda bloqueó el resultado por transparencia y contornos superpuestos al entrar al cierre. Se reproduce y corrige un defecto del motor: alpha se aplicaba a las formas internas, no a una capa de escena terminada. Prueba de color antes/después confirma el arreglo; 23 pruebas pertinentes pasan. Revisión de compositor versionada, diseños recientes conservados sin nueva inferencia, dos correcciones como máximo, voz v2 reutilizada. Pendiente veredicto del render nuevo.
+
+La revisión siguiente localiza una oclusión en el empalme 3→4, originada en el plano saliente. Se agrega una última corrección de pareja tras dos rondas: mantiene la caché anterior y entrega a ambos editores el hallazgo, sin forzar aprobación. 24 pruebas pertinentes pasan. Resultado real pendiente.

@@ -4,7 +4,11 @@ import {runProcess} from '../process.mjs';
 export const AUTHORED_RENDER_REVIEW='clean-brand-v3';
 export const CHOREOGRAPHY_RENDER_REVIEW='continuity-composite-v2';
 export const AUTHORED_MAX_REVISIONS=4;
-export function correctionFor(review,scene){const items=review?.output?.detail?.corrections?.filter(c=>c.scene===scene)||[];return items.length?{scene,instruction:items.map((c,i)=>`${i+1}. ${c.instruction}`).join('\n')}:null;}
+export function correctionFor(review,scene,pairBoundaries=false){
+ const all=review?.output?.detail?.corrections||[],items=all.filter(c=>c.scene===scene);
+ if(pairBoundaries)for(const c of all.filter(c=>c.scene===scene+1&&/(empalme|relevo|primer cuadro|cuadro\s*0%|fotograma\s*0%|pose.*anterior)/i.test(c.instruction)))items.push({scene,instruction:`Corrección conjunta del empalme hacia escena ${scene+1}: ${c.instruction} El problema ya existe en el final de esta escena. Resuelve su geometría/orden de oclusión antes de entregar la pose siguiente, manteniendo las acciones anteriores. No retires piezas por transparencia ni cambies el guion.`});
+ return items.length?{scene,instruction:items.map((c,i)=>`${i+1}. ${c.instruction}`).join('\n')}:null;
+}
 export function endingPose(graph){const g=structuredClone(graph);for(const n of g.nodes){for(const [k,points] of Object.entries(n.tracks||{}))n[k]=points.at(-1)[1];delete n.tracks;}if(g.camera){for(const [k,points] of Object.entries(g.camera.tracks||{}))g.camera[k]=points.at(-1)[1];delete g.camera.tracks;}delete g.transitionIn;g.sounds=[];return g;}
 const hash=x=>createHash('sha256').update(JSON.stringify(x)).digest('hex');
 export function authoredPlan(job,ids){
@@ -13,7 +17,7 @@ export function authoredPlan(job,ids){
  const p=validateAuthoredPlan(job.outputs.edit_plan.detail);return {...p,authored:true,directed:true,key:p.title.replace(/[^a-zA-Z0-9áéíóúñÁÉÍÓÚÑ -]/g,'').slice(0,60),variant:'authored',maxNarrationCharacters:480,authorization:'Jorge: tres NUEVOS videos completos y distintos; uso incluido y voz existente; 2026-11-16'};
 }
 export async function authorScenes({job,plan,beats,outDir,runner,onStage}){
- const choreography=job.motionChoreography==='continuity-v1',renderer=choreography?CHOREOGRAPHY_RENDER_REVIEW:AUTHORED_RENDER_REVIEW,revisionLimit=choreography?2:AUTHORED_MAX_REVISIONS;
+ const choreography=job.motionChoreography==='continuity-v1',renderer=choreography?CHOREOGRAPHY_RENDER_REVIEW:AUTHORED_RENDER_REVIEW,revisionLimit=choreography?3:AUTHORED_MAX_REVISIONS;
  const folder=path.join(outDir,'authored');await fs.mkdir(folder,{recursive:true,mode:0o700});
  const sourceHash=hash({script:job.outputs.script.detail,plan,version:job.version});
  const read=async f=>{try{return JSON.parse(await fs.readFile(path.join(folder,f),'utf8'));}catch(e){if(e.code!=='ENOENT')throw e;return null;}};
@@ -25,7 +29,9 @@ export async function authorScenes({job,plan,beats,outDir,runner,onStage}){
  let scenes=[],review=null;const reviews=[];
  for(let attempt=0;attempt<=revisionLimit;attempt++){
   for(let i=0;i<4;i++){
-   const correction=correctionFor(review,i+1);if(attempt&&!correction)continue;
+   // The final bounded escalation corrects both sides of an unresolved boundary.
+   // Earlier cached rounds keep their original selection and graph hashes.
+   const correction=correctionFor(review,i+1,choreography&&attempt===3);if(attempt&&!correction)continue;
    await onStage('production',`${attempt?'Corrigiendo':'Diseñando'} la escena ${i+1}/4 con ${job.outputs.edit_plan.provenance.model||'Codex'}${attempt?' · revisión '+attempt:''}`);
    const file=`scene-${i+1}-${renderer}-attempt-${attempt}.json`;let saved=await read(file);
    if(!saved&&attempt===0&&choreography){

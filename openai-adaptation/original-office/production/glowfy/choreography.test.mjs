@@ -47,7 +47,7 @@ test('the compositor repair budget persists across resume and cannot become an i
  const {authorScenes}=await import('./authored-plan.mjs'),dir=await fs.mkdtemp(path.join(os.tmpdir(),'motion-limit-'));try{
  const plan={title:'Fixture',scenes:[1,2,3,4].map(scene=>({scene}))},job={id:'fixture',version:1,motionChoreography:'continuity-v1',brief:{cta:'Conocé Glowfy'},outputs:{script:{detail:{}},edit_plan:{provenance:{model:'fixture'}},art_direction:{detail:{}}}},beats={duration:4,captions:[],words:[],scenes:[0,1,2,3].map(i=>({start:i,end:i+1,narration:'Fixture'}))};let calls=0;
  const runner={run:async q=>{calls++;return {status:'completed',provenance:{provider:'codex-chatgpt-plan',model:'fixture'},output:{detail:q.stage==='motion_design'?{scene:q.input.scene.scene,graph:JSON.stringify(graph('#FAF7FD')),rationale:'Synthetic'}:{verdict:'changes',observations:['Fixture unresolved'],corrections:[{scene:1,instruction:'Fixture unresolved'}]}}};}};
- await assert.rejects(authorScenes({job,plan,beats,outDir:dir,runner,onStage:async()=>{}}),/AUTHORED_VISUAL_REVISION_LIMIT/);const original=calls;assert.equal(calls,9);await assert.rejects(authorScenes({job,plan,beats,outDir:dir,runner,onStage:async()=>{}}),/AUTHORED_VISUAL_REVISION_LIMIT/);assert.equal(calls,original);assert.ok((await fs.stat(path.join(dir,'authored','review-continuity-composite-v2-2.json'))).size>100);
+ await assert.rejects(authorScenes({job,plan,beats,outDir:dir,runner,onStage:async()=>{}}),/AUTHORED_VISUAL_REVISION_LIMIT/);const original=calls;assert.equal(calls,11);await assert.rejects(authorScenes({job,plan,beats,outDir:dir,runner,onStage:async()=>{}}),/AUTHORED_VISUAL_REVISION_LIMIT/);assert.equal(calls,original);assert.ok((await fs.stat(path.join(dir,'authored','review-continuity-composite-v2-3.json'))).size>100);
  }finally{await fs.rm(dir,{recursive:true,force:true});}
 });
 
@@ -60,4 +60,10 @@ test('the opacity repair reuses the latest authored geometry but inspects fresh 
  const result=await authorScenes({job,plan,beats,outDir:dir,runner,onStage:async()=>{}});assert.equal(calls,2);assert.equal(beats.authoredScenes[0].graph.nodes[0].x,106);assert.match(result.scenes[0].seededFrom,/attempt-6/);assert.ok(result.reviews.every(r=>r.renderer==='continuity-composite-v2'));
  await authorScenes({job,plan,beats,outDir:dir,runner,onStage:async()=>{}});assert.equal(calls,2);
  }finally{await fs.rm(dir,{recursive:true,force:true});}
+});
+
+
+test('the final boundary correction updates its outgoing scene without changing earlier cached selections',async()=>{
+ const {correctionFor}=await import('./authored-plan.mjs'),review={output:{detail:{corrections:[{scene:4,instruction:'Ocluir la varilla en el cuadro 0% sin tapar 17:00.'},{scene:4,instruction:'Conservar el contacto del apoyo.'}]}}};
+ assert.equal(correctionFor(review,3),null);assert.match(correctionFor(review,3,true).instruction,/escena 4/);assert.match(correctionFor(review,3,true).instruction,/orden de oclusión/);assert.match(correctionFor(review,4,true).instruction,/contacto del apoyo/);assert.equal(correctionFor(review,2,true),null);assert.equal(review.output.detail.corrections.length,2);
 });
