@@ -22,7 +22,7 @@ export function drawGraph(c,g,u,{logo,whiteLogo,poseOverrides,cameraOverride}={}
    c.font=`${n.weight||500} ${n.size}px "${n.font||'Montserrat'}"`;c.textAlign=n.align||'left';c.textBaseline='alphabetic';const text=n.text.replaceAll('{n}',String(Math.round(v.value)));
    if(v.reveal<1){const width=n.maxWidth||c.measureText(text).width,x=n.align==='center'?-width/2:n.align==='right'?-width:0;c.beginPath();c.rect(x,-n.size*1.25,width*clamp(v.reveal),n.size*1.6);c.clip();}
    if(n.tracking)c.letterSpacing=n.tracking+'px';if(fill){c.fillStyle=fill;n.maxWidth?c.fillText(text,0,0,n.maxWidth):c.fillText(text,0,0);}if(stroke){c.strokeStyle=stroke;c.strokeText(text,0,0);}c.letterSpacing='0px';
-  }else if(n.kind==='logo'){const im=n.white?whiteLogo:logo;if(im)c.drawImage(im,0,0,v.w||240,v.h||(v.w||240)*im.height/im.width);}
+  }else if(n.kind==='logo'){const im=n.white?whiteLogo:logo;if(im){const w=v.w||240,h=v.h||w*im.height/im.width,k=Math.min(w/im.width,h/im.height),dw=im.width*k,dh=im.height*k;c.drawImage(im,(w-dw)/2,(h-dh)/2,dw,dh);}}
   else{
    let p=null;if(n.kind==='path'){if(n.d2){let cached=morphedPaths.get(n);if(!cached||cached.m!==v.morph){cached={m:v.morph,path:new Path2D(morphPath(n,v.morph))};morphedPaths.set(n,cached);}p=cached.path;}else{p=paths.get(n);if(!p){p=new Path2D(n.d);paths.set(n,p);}}if(n.pathLength&&v.reveal<1){c.setLineDash([n.pathLength,n.pathLength]);c.lineDashOffset=n.pathLength*(1-clamp(v.reveal));}}
    else if(n.kind==='ellipse'){c.beginPath();c.ellipse(0,0,Math.max(.001,Math.abs(v.w)/2),Math.max(.001,Math.abs(v.h)/2),0,0,Math.PI*2);}

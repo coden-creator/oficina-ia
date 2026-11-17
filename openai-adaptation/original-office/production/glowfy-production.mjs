@@ -36,7 +36,7 @@ export function createGlowfyProduction({runner,dataDir,connectionStore,authorize
   const ff=async args=>runProcess('/usr/bin/ffmpeg',['-hide_banner','-nostdin','-y','-filter_complex_threads','1',...args]);
   await ff(['-i',voice.audioPath,'-af','loudnorm=I=-18:TP=-3:LRA=7','-ar','48000','-ac','2',voiceMix]);
   if(voiceProfile==='social-v2'){
-   const soundtrack=socialSoundtrack(beats,job,{musicId:plan?.musicId,updatedEffects:!!plan});selectedMusic=soundtrack.music;await fs.writeFile(path.join(outDir,'sound-cues.json'),JSON.stringify(soundtrack,null,2));
+   const soundtrack=socialSoundtrack(beats,job,{musicId:job.productionAuthorization?.preservedMusicId||plan?.musicId,updatedEffects:!!plan});selectedMusic=soundtrack.music;await fs.writeFile(path.join(outDir,'sound-cues.json'),JSON.stringify(soundtrack,null,2));
    await ff(['-i',voiceMix,...soundtrack.input,'-filter_complex',soundtrack.filters,'-map','[m]','-ar','48000','-ac','2',mix]);
   }else await ff(['-i',voiceMix,'-i',path.join(outDir,'ui-sounds.wav'),'-filter_complex',`[0:a]apad,atrim=duration=${beats.duration}[v];[v][1:a]amix=inputs=2:normalize=0:duration=first[m]`,'-map','[m]','-ar','48000','-ac','2',mix]);
   const measured=loudness((await ff(['-i',mix,'-af','loudnorm=I=-16:TP=-1.5:LRA=7:print_format=json','-f','null','-'])).stderr);

@@ -152,6 +152,7 @@ export function createVideoFlow({dataDir,adapters={},creativeRevision={}}){
   if(feedback){j.brief.feedback=feedback;delete j.outputs.art_direction;delete j.outputs.edit_plan;}
   if(referenceImages!==undefined)j.motionReferenceImages=clone(referenceImages);
   if(j.brief.productionMode===AUTHORED_PROTOCOL&&feedback)j.motionChoreography='continuity-v1';
+  if(j.brief.productionMode===AUTHORED_PROTOCOL&&!feedback){j.productionAuthorization.cachedAuthoredVersion=j.version;j.productionAuthorization.preservedMusicId=j.outputs.production.music?.id||null;}else{delete j.productionAuthorization.cachedAuthoredVersion;delete j.productionAuthorization.preservedMusicId;}
   j.productionAuthorization.cachedVoiceVersion=j.outputs.production.voice.cacheVersion||j.version;j.version++;j.renderRepair={sourceVersion:version,at:new Date().toISOString()};
   delete j.outputs.production;delete j.outputs.qa;j.artifact=null;j.preview=null;j.approval=null;j.draftHash=digest(JSON.stringify({brandId:j.brandId,version:j.version,brief:j.brief,script:j.outputs.script}));j.state='queued';j.stage='art_direction';j.blocker=null;j.execution=null;event(j,'visual_render_repair',{version:j.version,reusesNarration:true});await save(j);return clone(j);
  });}

@@ -1,8 +1,8 @@
 import fs from 'node:fs/promises';import path from 'node:path';import {createHash} from 'node:crypto';
 import {AUTHORED_PROTOCOL,validateAuthoredPlan,validateGraph,designPrompt,choreographyDesign} from '../../video/authored-motion.mjs';
 import {runProcess} from '../process.mjs';
-export const AUTHORED_RENDER_REVIEW='clean-brand-v3';
-export const CHOREOGRAPHY_RENDER_REVIEW='continuity-kinematics-v3';
+export const AUTHORED_RENDER_REVIEW='clean-brand-v4';
+export const CHOREOGRAPHY_RENDER_REVIEW='continuity-brand-v4';
 export const AUTHORED_MAX_REVISIONS=4;
 export function correctionFor(review,scene,pairBoundaries=false){
  const all=review?.output?.detail?.corrections||[],items=all.filter(c=>c.scene===scene);
@@ -36,14 +36,22 @@ export async function authorScenes({job,plan,beats,outDir,runner,onStage}){
    const correction=correctionFor(review,i+1,choreography&&attempt===3);if(attempt&&!correction)continue;
    await onStage('production',`${attempt?'Corrigiendo':'Diseñando'} la escena ${i+1}/4 con ${job.outputs.edit_plan.provenance.model||'Codex'}${attempt?' · revisión '+attempt:''}`);
    const file=`scene-${i+1}-${renderer}-attempt-${attempt}.json`;let saved=await read(file);
+   if(!saved&&attempt===0&&job.productionAuthorization?.cachedAuthoredVersion!==undefined){
+    const v=job.productionAuthorization.cachedAuthoredVersion;
+    if(!Number.isInteger(v)||v<1||v>=job.version||job.renderRepair?.sourceVersion!==v)throw Error('AUTHORED_CACHE_VERSION_INVALID');
+    const priorHash=hash({script:job.outputs.script.detail,plan,version:v}),priorFolder=path.join(path.dirname(outDir),'v'+v,'authored');
+    for(const prefix of [renderer,'continuity-kinematics-v3','continuity-composite-v2','continuity-v1','clean-brand-v3']){for(let old=6;old>=0;old--){const name=`scene-${i+1}-${prefix}-attempt-${old}.json`;let prior;try{prior=JSON.parse(await fs.readFile(path.join(priorFolder,name),'utf8'));}catch(e){if(e.code==='ENOENT')continue;throw e;}if(prior.sourceHash!==priorHash||prior.provenance?.provider!=='codex-chatgpt-plan')throw Error('AUTHORED_CACHE_CONFLICT');saved={...prior,sourceHash,seededFrom:`v${v}/authored/${name}`,renderReview:renderer};await write(file,saved);break;}if(saved)break;}
+    if(!saved)throw Error('AUTHORED_CACHE_REQUIRED');
+    if(!priorEvaluation)for(let old=6;old>=0;old--){try{const r=JSON.parse(await fs.readFile(path.join(priorFolder,`motion-review-continuity-kinematics-v3-${old}.json`),'utf8'));if(r.sourceHash!==priorHash)throw Error('AUTHORED_CACHE_CONFLICT');priorEvaluation=r;break;}catch(e){if(e.code!=='ENOENT')throw e;}}
+   }
    if(!saved&&attempt===0&&choreography){
     // Reinspect the completed designs after the layer-opacity fix. Do not repeat
     // their inference or reuse a verdict made from the faulty compositor.
-    for(const previousRenderer of ['continuity-composite-v2','continuity-v1']){for(let old=6;old>=0;old--){const previousFile=`scene-${i+1}-${previousRenderer}-attempt-${old}.json`,prior=await read(previousFile);if(prior){if(prior.sourceHash!==sourceHash)throw Error('AUTHORED_CACHE_CONFLICT');saved={...prior,seededFrom:previousFile,renderReview:renderer};await write(file,saved);break;}}if(saved)break;}
+    for(const previousRenderer of ['continuity-kinematics-v3','continuity-composite-v2','continuity-v1']){for(let old=6;old>=0;old--){const previousFile=`scene-${i+1}-${previousRenderer}-attempt-${old}.json`,prior=await read(previousFile);if(prior){if(prior.sourceHash!==sourceHash)throw Error('AUTHORED_CACHE_CONFLICT');saved={...prior,seededFrom:previousFile,renderReview:renderer};await write(file,saved);break;}}if(saved)break;}
    }
    // Re-inspect the latest authored designs after a renderer fix; preserve prior inference/audio.
    if(!saved&&attempt===0&&!choreography){
-    for(const prefix of ['isolated-tiles-v2-','']){for(let old=AUTHORED_MAX_REVISIONS;old>=0;old--){const previousFile=`scene-${i+1}-${prefix}attempt-${old}.json`,prior=await read(previousFile);if(prior){if(prior.sourceHash!==sourceHash)throw Error('AUTHORED_CACHE_CONFLICT');saved={...prior,seededFrom:previousFile,renderReview:renderer};await write(file,saved);break;}}if(saved)break;}
+    for(const prefix of ['clean-brand-v3-','isolated-tiles-v2-','']){for(let old=AUTHORED_MAX_REVISIONS;old>=0;old--){const previousFile=`scene-${i+1}-${prefix}attempt-${old}.json`,prior=await read(previousFile);if(prior){if(prior.sourceHash!==sourceHash)throw Error('AUTHORED_CACHE_CONFLICT');saved={...prior,seededFrom:previousFile,renderReview:renderer};await write(file,saved);break;}}if(saved)break;}
    }
    const start=beats.scenes[i].start,end=i===3?beats.duration:beats.scenes[i+1].start;
    if(saved&&saved.sourceHash!==sourceHash)throw Error('AUTHORED_CACHE_CONFLICT');
