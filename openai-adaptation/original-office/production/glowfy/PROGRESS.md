@@ -1,7 +1,7 @@
 # Glowfy · tres nuevas producciones con escenas propias
 
 Fecha: 16 de noviembre de 2026 (America/Guatemala).
-Fase: tres MP4 nuevos terminados y disponibles en el Estudio para revisión de Jorge.
+Fase: lote rechazado por movimiento y transiciones; corrección de La cita, por dentro en preparación.
 
 La oficina completó investigación sobre evidencia suministrada, estrategia, guion, comité, dirección, montaje, autoría vectorial, correcciones con imágenes reales, narración y exportación. Los nueve videos anteriores conservan versiones, hashes y aprobaciones.
 
@@ -24,3 +24,5 @@ La ruta nueva sigue acotada a tres IDs autorizados. No habilita producción paga
 Las revisiones conservan diseños y resultados anteriores; el director recibe la revisión previa y tiene un límite de cuatro rondas por ficha y revisión del compositor, conservado al reanudar. El compositor impide rutas de audio suministradas por el modelo; únicamente selecciona sonidos autorizados de la biblioteca. Quince pruebas pertinentes pasaron; se distinguen de los resultados reales.
 
 [Evidencia por archivo y modelo](../evidence/glowfy-authored-astra-3.json).
+
+Corrección: superficies con perspectiva y grosor, cámara por escena y composición temporal de escenas saliente/entrante. Las referencias visuales se envían sólo al trabajador privado, no al repositorio ni al render. Dos revisiones internas separan composición y secuencias densas/uniones. Se preservan guion, voz y música; nueva narración deshabilitada en esta corrección. Veinte pruebas pertinentes pasaron, incluidas referencias privadas, reanudación, continuidad y conservación de voz/archivo. Falta prueba real de esta revisión.

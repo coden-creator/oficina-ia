@@ -19,7 +19,7 @@ services:
       traefik.enable: 'false'
       office.purpose: jorge-codex-worker
     environment:
-      OFFICE_WORKER_RELEASE: authored-motion-astra-v5
+      OFFICE_WORKER_RELEASE: authored-continuity-astra-v1
       OFFICE_CODEX_ENABLE: '1'
       OFFICE_CODEX_ISOLATION_VERIFIED: '1'
       # Pinned for this authorized production release; Compose .env resolution varies by rootPath.

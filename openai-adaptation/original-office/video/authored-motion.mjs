@@ -15,8 +15,8 @@ FORMATO graph:
 Cada nodo tiene id único, kind (group, rect, ellipse, path, text o logo). Campos opcionales: parent (id de group ANTERIOR), x,y (origen local), w,h, r (radio rect), fill (color CSS o @nombreGradiente o none), stroke, sw, alpha, rotate (grados), sx,sy (escala), shadow {color,blur,dx,dy}, clip {x,y,w,h,r}, d (trazado SVG Path2D, sólo kind path), text (sólo text), size, font (Montserrat o Instrument Serif), weight (400/500/600/700), align (left/center/right), maxWidth, pathLength (longitud aproximada para dibujar trazo), reveal (0–1, recorta anchura rect/text o traza path), tracking (espacio letras), dash [longitudes], tracks {propiedad:[[u,valor,easing],...]}. Propiedades animables: x,y,w,h,r,alpha,rotate,sx,sy,reveal,value. Easing en cada punto controla el tramo HASTA ese punto: linear, smooth, in, out, inOut, back, step. Coordenadas pueden ser negativas fuera del cuadro con intención. Elipses: x,y es centro, w,h diámetros. Rect: x,y esquina; rotación se hace alrededor del origen del nodo; para girar sobre centro usa grupo cuyo origen está en centro y rect hijo x=-w/2. Text: y es línea base, no esquina. value en texto reemplaza {n} con número entero. Logo: ancho w, alto h, white:true para oficial blanco. Groups no dibujan nada y heredan alpha/transform/clip. Orden de nodes es orden de dibujo y los hijos quedan dentro del padre. No enlaces, imágenes, código o filtros CSS. Gradientes: linear 4 coords o radial 6 coords (cx0,cy0,r0,cx1,cy1,r1), stops 2–6. Colores rgba son válidos.
 LIENZO 1080x1920. Diseña y ocupa el área y180–1550, no un pequeño collage en el centro. Subtítulos automáticos se colocan a y1710: no agregues textos allí. No dupliques logo/CTA final, el motor los añade en últimos 2 segundos. Paleta elegante Glowfy, espacio negativo, iluminación direccional suave, sombras de contacto, bordes con brillo fino, jerarquía de tipos. No emojis. Interfaz ficticia sólo como ejemplo, etiquetas grandes legibles >=28px, pocas palabras. Titular breve opcional >=60px. No uses rectángulos como sustituto de TODO: dibuja siluetas/trazos reconocibles cuando corresponda. Evita escalas negativas, objetos cortados, textos bajo objetos, superposición de mensajes. Si hay un cursor, debe tener forma de flecha y apuntar al control que responde exactamente al contacto. Los cambios de estado son en el mismo objeto, no cuatro iconos que aparecen. Biblioteca SFX: pop-ui-01, burbuja-mensaje-01, whoosh-corto-01, clic-boton-01, ding-confirmacion-01, destello-particulas-01, golpe-grave-01, tick-cursor-01. 0–4 por escena, elige sólo contactos visibles, sin sonido en cada entrada. No música adicional. Cada sonido.at debe coincidir con un keyframe/contacto real.
 En una corrección, conserva composición y acciones buenas y arregla específicamente los hallazgos de las imágenes. Devuelve la escena completa actualizada.`;
-const kinds=new Set(['group','rect','ellipse','path','text','logo']);
-const props=new Set(['x','y','w','h','r','alpha','rotate','sx','sy','reveal','value']);
+const kinds=new Set(['group','plane','rect','ellipse','path','text','logo']);
+const props=new Set(['x','y','w','h','r','alpha','rotate','sx','sy','reveal','value','tiltX','tiltY','skewX','skewY']);
 const easing=new Set(['linear','smooth','in','out','inOut','back','step']);
 const sounds=new Set(['pop-ui-01','burbuja-mensaje-01','whoosh-corto-01','clic-boton-01','ding-confirmacion-01','destello-particulas-01','golpe-grave-01','tick-cursor-01']);
 const color=s=>typeof s==='string'&&s.length<=80&&(/^(#[0-9a-fA-F]{3,8}|rgba?\([0-9., %]+\)|transparent|none)$/.test(s));
@@ -24,7 +24,7 @@ export function validateGraph(g){
  if(!g||!color(g.background)||!g.gradients||typeof g.gradients!=='object'||Array.isArray(g.gradients)||!Array.isArray(g.nodes)||g.nodes.length<8||g.nodes.length>150||!Array.isArray(g.sounds)||g.sounds.length>4||JSON.stringify(g).length>65000)throw Error('AUTHORED_GRAPH_INVALID');
  for(const [id,v] of Object.entries(g.gradients)){if(!/^[\w-]{1,60}$/.test(id)||!['linear','radial'].includes(v?.type)||!Array.isArray(v.coords)||v.coords.length!==(v.type==='linear'?4:6)||v.coords.some(x=>!Number.isFinite(x)||Math.abs(x)>10000)||!Array.isArray(v.stops)||v.stops.length<2||v.stops.length>6||v.stops.some(s=>!Array.isArray(s)||s.length!==2||!Number.isFinite(s[0])||s[0]<0||s[0]>1||!color(s[1])))throw Error('AUTHORED_GRADIENT_INVALID');}
  const ids=new Map();for(const n of g.nodes){
-  if(!n||!kinds.has(n.kind)||typeof n.id!=='string'||!/^[\w-]{1,80}$/.test(n.id)||ids.has(n.id)||(n.parent&&ids.get(n.parent)!=='group'))throw Error('AUTHORED_NODE_INVALID');ids.set(n.id,n.kind);
+  if(!n||!kinds.has(n.kind)||typeof n.id!=='string'||!/^[\w-]{1,80}$/.test(n.id)||ids.has(n.id)||(n.parent&&!['group','plane'].includes(ids.get(n.parent))))throw Error('AUTHORED_NODE_INVALID');ids.set(n.id,n.kind);
   for(const k of props)if(n[k]!==undefined&&(!Number.isFinite(n[k])||Math.abs(n[k])>10000))throw Error('AUTHORED_NUMBER_INVALID');
   for(const k of ['fill','stroke'])if(n[k]!==undefined&&!color(n[k])&&!(typeof n[k]==='string'&&n[k].startsWith('@')&&Object.hasOwn(g.gradients,n[k].slice(1))))throw Error('AUTHORED_COLOR_INVALID');
   if(n.kind==='path'&&(typeof n.d!=='string'||n.d.length>8000||!/^[MmZzLlHhVvCcSsQqTtAaEe0-9+.,\s-]+$/.test(n.d)))throw Error('AUTHORED_PATH_INVALID');
@@ -36,6 +36,45 @@ export function validateGraph(g){
   for(const [p,points] of Object.entries(n.tracks||{})){if(!props.has(p)||!Array.isArray(points)||points.length<1||points.length>16||points.some((v,i)=>!Array.isArray(v)||v.length<2||v.length>3||!Number.isFinite(v[0])||v[0]<0||v[0]>1||!Number.isFinite(v[1])||Math.abs(v[1])>10000||(v[2]&&!easing.has(v[2]))||(i&&v[0]<=points[i-1][0])))throw Error('AUTHORED_TRACK_INVALID');}
  }
  if(g.sounds.some(c=>!c||Object.keys(c).some(k=>!['name','at','gainDb','intention'].includes(k))||!sounds.has(c.name)||!Number.isFinite(c.at)||c.at<0||c.at>.95||!Number.isFinite(c.gainDb)||c.gainDb< -24||c.gainDb> -8||typeof c.intention!=='string'||c.intention.length>150))throw Error('AUTHORED_SOUND_INVALID');
+ validateChoreography(g);
  return g;
 }
 export function validateAuthoredPlan(p){if(p.scenes.length!==4||p.scenes.some((s,i)=>s.scene!==i+1))throw Error('AUTHORED_SCENE_ORDER');return p;}
+
+// Optional v3 motion vocabulary. Existing authored graphs remain valid and render unchanged.
+const motionProps=new Set(['x','y','sx','sy','rotate','alpha']);
+function tracksWithin(tracks,allowed){
+ if(!tracks||typeof tracks!=='object'||Array.isArray(tracks))throw Error('AUTHORED_MOTION_TRACK_INVALID');
+ for(const [key,points] of Object.entries(tracks)){
+  if(!allowed.has(key)||!Array.isArray(points)||points.length<1||points.length>20||points.some((v,i)=>!Array.isArray(v)||v.length<2||v.length>3||!Number.isFinite(v[0])||v[0]<0||v[0]>1||!Number.isFinite(v[1])||Math.abs(v[1])>10000||(v[2]&&!easing.has(v[2]))||(i&&v[0]<=points[i-1][0])))throw Error('AUTHORED_MOTION_TRACK_INVALID');
+ }
+}
+function validateChoreography(g){
+ if(g.camera){
+  if(Object.keys(g.camera).some(k=>!['x','y','zoom','rotate','tracks'].includes(k)))throw Error('AUTHORED_CAMERA_INVALID');
+  for(const k of ['x','y','zoom','rotate'])if(g.camera[k]!==undefined&&(!Number.isFinite(g.camera[k])||Math.abs(g.camera[k])>10000))throw Error('AUTHORED_CAMERA_INVALID');
+  tracksWithin(g.camera.tracks||{},new Set(['x','y','zoom','rotate']));
+  if((g.camera.zoom!==undefined&&(g.camera.zoom<.25||g.camera.zoom>4))||(g.camera.tracks?.zoom||[]).some(p=>p[1]<.25||p[1]>4))throw Error('AUTHORED_CAMERA_INVALID');
+ }
+ const tr=g.transitionIn;if(tr){
+  if(Object.keys(tr).some(k=>!['duration','outgoing','incoming','mask','intention'].includes(k))||!Number.isFinite(tr.duration)||tr.duration<.15||tr.duration>1||typeof tr.intention!=='string'||tr.intention.length>400)throw Error('AUTHORED_TRANSITION_INVALID');
+  tracksWithin(tr.outgoing||{},motionProps);tracksWithin(tr.incoming||{},motionProps);
+  if(tr.mask){if(!['ellipse','rect'].includes(tr.mask.kind)||Object.keys(tr.mask).some(k=>!['kind','tracks'].includes(k)))throw Error('AUTHORED_TRANSITION_INVALID');tracksWithin(tr.mask.tracks,new Set(['x','y','w','h','r']));}
+ }
+ let planes=0;const byId=new Map(g.nodes.map(n=>[n.id,n]));
+ for(const n of g.nodes){
+  if(n.kind==='plane'){
+   planes++;if(planes>4||!Number.isFinite(n.w)||!Number.isFinite(n.h)||n.w<32||n.h<32||n.w>1200||n.h>1400||(n.depth!==undefined&&(!Number.isFinite(n.depth)||n.depth<0||n.depth>80))||(n.side!==undefined&&!color(n.side)))throw Error('AUTHORED_PLANE_INVALID');
+   let ancestor=byId.get(n.parent);while(ancestor){if(ancestor.kind==='plane')throw Error('AUTHORED_PLANE_NESTING');ancestor=byId.get(ancestor.parent);}
+  }
+  for(const k of ['tiltX','tiltY','skewX','skewY'])if((n[k]!==undefined&&Math.abs(n[k])>65)||(n.tracks?.[k]||[]).some(p=>Math.abs(p[1])>65))throw Error('AUTHORED_TILT_INVALID');
+ }
+}
+export const choreographyDirection=`CORRECCIÓN DE JORGE: los últimos tres videos fueron rechazados por escaso movimiento y malas transiciones. No basta tener objetos distintos o exportar bien. Mantén el guion y la voz ya existentes. Diseña una coreografía continua: anticipación breve, acción principal, respuesta secundaria y reencuadre; pausas de lectura vivas. Las cuatro escenas son segmentos de voz, NO cuatro diapositivas ni cuatro planos obligatorios. Dentro de cada una usa 2–3 momentos con cambios reales de estado y de foco. No añadas movimiento aleatorio a todos los elementos. La cámara sigue la acción, cambia escala y ángulo, y conserva dirección y objeto de referencia al pasar de escena. Evita reinstalar el mismo objeto en otro sitio con corte abrupto. El final de cada escena prepara la siguiente. Planea cómo sale una y entra la otra durante 0.35–0.8 segundos, incluyendo el punto visual compartido. Los ejemplos adjuntos son referencias de oficio: profundidad, interacción de interfaz, jerarquía, cambios de encuadre y continuidad; no copiar marca/textos/afirmaciones/audio. Usa los materiales de Glowfy, luces y sombras con volumen, superficies con perspectiva cuando aporten. El acabado cálido/elegante no significa casi inmóvil. Narración, música y biblioteca sonora se conservan; nada de nuevas síntesis.`;
+export const choreographyDesign=choreographyDirection+`
+EXTENSIONES REALES DEL MOTOR (elige lo que sirva a esta escena; no son objetos prefabricados):
+1. camera:{x:540,y:900,zoom:1,rotate:0,tracks:{x:[[0,540],[1,600,"inOut"]],zoom:[[0,1.25],[.35,1,"out"],[1,1.06,"smooth"]]}}. x/y es centro de atención en el mundo, fijado en pantalla(540,900); zoom 0.25–4. Diseña primero la escena completa y luego usa la cámara para seguir contactos, no cortar textos. Fondo permanece a pantalla completa.
+2. Nodo kind:"plane": grupo con cara texturizada y grosor proyectados en perspectiva real. x,y es CENTRO de la superficie; w/h hasta1200/1400, depth0–80, side color del canto, tiltX/tiltY -65..65 grados animables. Sus hijos usan coordenadas locales(0,0) esquina superior izquierda hasta(w,h), igual que una interfaz dibujada sobre papel/vidrio. No anidar planos. Usa curvas suaves y posición coherente, no balanceo gratuito. El nodo rotate gira la superficie en pantalla. Un borde/brillo/contacto bien compuesto vale más que muchos adornos.
+3. skewX/skewY -65..65 grados animables en nodos normales para perspectiva ilustrada.
+4. transitionIn en escenas2–4: {duration:0.6,intention:"explica continuidad y punto de atención",outgoing:{x:[[0,0],[1,-1080,"inOut"]]},incoming:{x:[[0,1080],[1,0,"inOut"]]}}. Opciones de ambas transformaciones: x,y,rotate,sx,sy,alpha, tracks en u0..1 de la transición. O mask:{kind:"ellipse",tracks:{x:[[0,540],[1,540]],y:[[0,800],[1,800]],w:[[0,0],[1,4500,"inOut"]],h:[[0,0],[1,4500,"inOut"]]}} para atravesar un control o revelar desde el objeto. El compositor mezcla SALIENTE e ENTRANTE durante la transición, centrada en el inicio del nuevo segmento. NO usar siempre el mismo barrido, ni disolver si no conserva foco. Termina incoming con transformada identidad; outgoing debe salir/ocultarse o mask debe descubrir la pantalla entera. La escena siguiente ya debe tener objeto legible durante el cambio.
+Elabora al menos tres acciones conectadas en escenas de 4–6s, pequeñas respuestas mecánicas/de interfaz con solapamiento de 50–100ms, asentamiento y pausas legibles. Un nodo que sólo se desplaza 5px durante 5s no es una acción. Describe el montaje en rationale. No dejes el cierre inmóvil 4s: llega a la composición final con movimiento motivado y sostené CTA legible2s. Los subtítulos y logo inferiores son del compositor. No inventes marcas de terceros ni recursos externos. Los sonidos se alinean con contactos e impulso/salida de transición, usando la biblioteca existente.`;

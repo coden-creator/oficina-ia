@@ -143,10 +143,15 @@ export function createVideoFlow({dataDir,adapters={},creativeRevision={}}){
   j.outputs=Object.fromEntries(['research','strategy'].filter(k=>j.outputs[k]).map(k=>[k,j.outputs[k]]));j.artifact=null;j.preview=null;j.approval=null;j.draftHash=null;j.organicAttempts=0;j.organicFeedback=null;j.execution=null;j.blocker=null;j.state='queued';j.stage='script';
   j.productionAuthorization={protocol:productionMode,source:'authenticated-owner-video-trigger',at:new Date().toISOString(),includedVoiceOnly:true,publishing:false};event(j,'finished_video_requested',{version:j.version});await save(j);return clone(j);
  });}
- async function prepareRerender(b,id,{version}){return serial(async()=>{const j=await get(b,id);
+ async function prepareRerender(b,id,{version,feedback,referenceImages}){return serial(async()=>{const j=await get(b,id);
   if(j.state==='queued'&&j.renderRepair?.sourceVersion===version)return clone(j);
-  if(j.version!==version||j.state!=='awaiting_review'||!j.artifact||j.brief.productionMode!==MOTION_PROTOCOL||!j.outputs.production?.voice||!j.outputs.edit_plan)throw Error('RENDER_REPAIR_CONFLICT');
+  if(j.version!==version||j.state!=='awaiting_review'||!j.artifact||![MOTION_PROTOCOL,AUTHORED_PROTOCOL].includes(j.brief.productionMode)||!j.outputs.production?.voice||!j.outputs.edit_plan)throw Error('RENDER_REPAIR_CONFLICT');
+  if(feedback!==undefined&&(typeof feedback!=='string'||!feedback.trim()||feedback.length>4000))throw Error('RENDER_FEEDBACK_INVALID');
+  if(referenceImages!==undefined){if(!Array.isArray(referenceImages)||referenceImages.length>3||referenceImages.some(x=>typeof x!=='string'||x.length>400000||!/^data:image\/jpeg;base64,[A-Za-z0-9+/]+=*$/.test(x)||!Buffer.from(x.split(',')[1],'base64').subarray(0,3).equals(Buffer.from([255,216,255]))))throw Error('RENDER_REFERENCE_INVALID');}
   j.revisions||=[];j.revisions.push({version:j.version,brief:clone(j.brief),outputs:clone(j.outputs),artifact:j.artifact,approval:j.approval,reason:'renderer_correction_reuse_exact_narration'});
+  if(feedback){j.brief.feedback=feedback;delete j.outputs.art_direction;delete j.outputs.edit_plan;}
+  if(referenceImages!==undefined)j.motionReferenceImages=clone(referenceImages);
+  if(j.brief.productionMode===AUTHORED_PROTOCOL&&feedback)j.motionChoreography='continuity-v1';
   j.productionAuthorization.cachedVoiceVersion=j.outputs.production.voice.cacheVersion||j.version;j.version++;j.renderRepair={sourceVersion:version,at:new Date().toISOString()};
   delete j.outputs.production;delete j.outputs.qa;j.artifact=null;j.preview=null;j.approval=null;j.draftHash=digest(JSON.stringify({brandId:j.brandId,version:j.version,brief:j.brief,script:j.outputs.script}));j.state='queued';j.stage='art_direction';j.blocker=null;j.execution=null;event(j,'visual_render_repair',{version:j.version,reusesNarration:true});await save(j);return clone(j);
  });}

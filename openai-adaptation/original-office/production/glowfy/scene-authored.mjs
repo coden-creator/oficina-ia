@@ -1,3 +1,4 @@
+import {drawSurface} from './motion-surface.mjs';
 import {createRequire} from 'node:module';
 const {Path2D}=createRequire(import.meta.url)('@napi-rs/canvas');
 const paths=new WeakMap(),clamp=x=>Math.max(0,Math.min(1,x));
@@ -8,11 +9,12 @@ function rounded(c,x,y,w,h,r=0){c.beginPath();c.roundRect(x,y,Math.max(.001,w),M
 export function drawGraph(c,g,u,{logo,whiteLogo}={}){
  c.fillStyle=g.background;c.fillRect(0,0,1080,1920);
  const children=new Map();for(const n of g.nodes){const k=n.parent||'';if(!children.has(k))children.set(k,[]);children.get(k).push(n);}
- const node=n=>{
+ const node=(c,n)=>{
   const v={x:0,y:0,w:0,h:0,r:0,alpha:1,rotate:0,sx:1,sy:1,reveal:1,value:0,...n};for(const [p,points] of Object.entries(n.tracks||{}))v[p]=sample(points,u,v[p]);
-  if(v.alpha<=0||v.sx===0||v.sy===0)return;c.save();c.globalAlpha*=clamp(v.alpha);c.translate(v.x,v.y);c.rotate(v.rotate*Math.PI/180);c.scale(v.sx,v.sy);
+  if(v.alpha<=0||v.sx===0||v.sy===0)return;c.save();c.globalAlpha*=clamp(v.alpha);c.translate(v.x,v.y);c.rotate(v.rotate*Math.PI/180);c.scale(v.sx,v.sy);if(v.skewX||v.skewY)c.transform(1,Math.tan((v.skewY||0)*Math.PI/180),Math.tan((v.skewX||0)*Math.PI/180),1,0,0);
   if(n.clip){const q=n.clip;rounded(c,q.x,q.y,q.w,q.h,q.r);c.clip();}
-  if(n.kind==='group'){for(const child of children.get(n.id)||[])node(child);c.restore();return;}
+  if(n.kind==='group'){for(const child of children.get(n.id)||[])node(c,child);c.restore();return;}
+  if(n.kind==='plane'){drawSurface(c,n,v,f=>{for(const child of children.get(n.id)||[])node(f,child);});c.restore();return;}
   const fill=paint(c,n.fill??(n.kind==='text'?'#21102E':'none'),g),stroke=paint(c,n.stroke,g);c.lineWidth=n.sw??1;c.lineCap='round';c.lineJoin='round';if(n.dash)c.setLineDash(n.dash);
   if(n.shadow){c.shadowColor=n.shadow.color;c.shadowBlur=n.shadow.blur;c.shadowOffsetX=n.shadow.dx;c.shadowOffsetY=n.shadow.dy;}
   if(n.kind==='text'){
@@ -28,12 +30,13 @@ export function drawGraph(c,g,u,{logo,whiteLogo}={}){
   }
   c.restore();
  };
- for(const n of children.get('')||[])node(n);
+ c.save();if(g.camera){const a={x:540,y:900,zoom:1,rotate:0,...g.camera};for(const [k,points] of Object.entries(g.camera.tracks||{}))a[k]=sample(points,u,a[k]);c.translate(540,900);c.scale(a.zoom,a.zoom);c.rotate(a.rotate*Math.PI/180);c.translate(-a.x,-a.y);}
+ for(const n of children.get('')||[])node(c,n);c.restore();
 }
 export function lightBackground(color){const m=/^#([0-9a-f]{6}|[0-9a-f]{3})$/i.exec(color);if(!m)return false;const hex=m[1].length===3?[...m[1]].map(x=>x+x).join(''):m[1];const rgb=[0,2,4].map(i=>parseInt(hex.slice(i,i+2),16));return rgb[0]*.2126+rgb[1]*.7152+rgb[2]*.0722>150;}
 export function hasAuthoredClosing(graph){return graph.nodes.some(n=>n.kind==='logo')&&graph.nodes.some(n=>n.kind==='text'&&/conoc[eé]\s+glowfy/i.test(n.text));}
 export function draw(c,t,{width=1080,height=1920,beats:b,logo,whiteLogo}){
- c.save();c.scale(width/1080,height/1920);const s=b.authoredScenes.find(s=>t>=s.start&&t<s.end)||b.authoredScenes.at(-1),u=clamp((t-s.start)/(s.end-s.start));drawGraph(c,s.graph,u,{logo,whiteLogo});
+ c.save();c.scale(width/1080,height/1920);const s=b.authoredScenes.find(s=>t>=s.start&&t<s.end)||b.authoredScenes.at(-1),u=clamp((t-s.start)/(s.end-s.start));drawChoreography(c,t,b.authoredScenes,{logo,whiteLogo});
  // Shared accessibility/brand layer; the entire scene above is authored per project.
  const cap=b.captions.find(g=>t>=g.start&&t<g.end),closing=t>b.duration-2.3;
  if(cap&&!closing){const text=cap.words.map(w=>w.text).join(' ');c.font='600 44px Montserrat';const w=Math.min(940,c.measureText(text).width+56);rounded(c,(1080-w)/2,1654,w,88,22);c.fillStyle='rgba(33,16,46,0.91)';c.fill();c.textAlign='center';c.fillStyle='#FAF7FD';c.fillText(text,540,1713,900);}
@@ -41,4 +44,21 @@ export function draw(c,t,{width=1080,height=1920,beats:b,logo,whiteLogo}){
  if(closing&&(!ownCTA||!ownLogo)){const p=ease((t-(b.duration-2.3))/.45,'out');c.globalAlpha=p;c.textAlign='center';c.fillStyle=light?'#21102E':'#FAF7FD';c.font='400 70px "Instrument Serif"';if(!ownCTA)c.fillText('Conocé Glowfy',540,1650);const mark=light?logo:whiteLogo;if(!ownLogo&&mark)c.drawImage(mark,420,1700,240,240*mark.height/mark.width);c.globalAlpha=1;}
  const ownNote=s.graph.nodes.some(n=>n.kind==='text'&&/ejemplo\s+ilustrado|seg[uú]n tu plan/i.test(n.text));
  if(!ownNote){c.textAlign='center';c.font='400 28px Montserrat';c.fillStyle=light?'#61466F':'#D8C4E5';c.fillText('Ejemplo ilustrado · Según tu plan',540,1845);}c.restore();
+}
+
+export function transitionAt(t,scenes){
+ for(let i=1;i<scenes.length;i++){const incoming=scenes[i],tr=incoming.graph.transitionIn;if(!tr)continue;const start=incoming.start-tr.duration/2,end=incoming.start+tr.duration/2;if(t>=start&&t<end)return {outgoing:scenes[i-1],incoming,tr,p:(t-start)/tr.duration};}
+ return null;
+}
+function transformed(c,tracks,p,draw){
+ const v={x:0,y:0,sx:1,sy:1,rotate:0,alpha:1};for(const [k,pts] of Object.entries(tracks||{}))v[k]=sample(pts,p,v[k]);
+ c.save();c.globalAlpha*=clamp(v.alpha);c.translate(540+v.x,900+v.y);c.rotate(v.rotate*Math.PI/180);c.scale(v.sx,v.sy);c.translate(-540,-900);draw();c.restore();
+}
+export function drawChoreography(c,t,scenes,assets){
+ const tr=transitionAt(t,scenes);const drawScene=s=>drawGraph(c,s.graph,clamp((t-s.start)/(s.end-s.start)),assets);
+ if(!tr){drawScene(scenes.find(s=>t>=s.start&&t<s.end)||scenes.at(-1));return;}
+ c.fillStyle=tr.incoming.graph.background;c.fillRect(0,0,1080,1920);
+ transformed(c,tr.tr.outgoing,tr.p,()=>drawScene(tr.outgoing));
+ c.save();if(tr.tr.mask){const m={x:540,y:900,w:1080,h:1920,r:0};for(const [k,pts] of Object.entries(tr.tr.mask.tracks))m[k]=sample(pts,tr.p,m[k]);c.beginPath();if(tr.tr.mask.kind==='ellipse')c.ellipse(m.x,m.y,Math.max(.001,m.w/2),Math.max(.001,m.h/2),0,0,Math.PI*2);else c.roundRect(m.x-m.w/2,m.y-m.h/2,Math.max(.001,m.w),Math.max(.001,m.h),Math.max(0,Math.min(m.r,m.w/2,m.h/2)));c.clip();}
+ transformed(c,tr.tr.incoming,tr.p,()=>drawScene(tr.incoming));c.restore();
 }

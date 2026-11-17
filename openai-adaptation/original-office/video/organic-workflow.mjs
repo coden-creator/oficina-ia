@@ -1,4 +1,4 @@
-import {AUTHORED_PROTOCOL,authoredBrief,authoredPlanPrompt} from './authored-motion.mjs';
+import {AUTHORED_PROTOCOL,authoredBrief,authoredPlanPrompt,choreographyDirection} from './authored-motion.mjs';
 import {MOTION_PROTOCOL,productionBrief} from './motion-contract.mjs';
 import {directionRules,recentVisualHistory} from './audiovisual-standard.mjs';
 import {ORGANIC_PROTOCOL,organicPrompts,validateOrganicOutput} from './organic-contract.mjs';
@@ -28,9 +28,9 @@ export function createOrganicWorkflow({flow,runner,enabled=false,allowedJobIds=[
     const dependencies={research:[],strategy:['research'],script:['research','strategy'],creative_review:['strategy','script'],art_direction:['strategy','script'],edit_plan:['script','art_direction']}[stage];
     const previous=Object.fromEntries(dependencies.filter(k=>job.outputs[k]).map(k=>{const {provenance,inheritedFrom,...content}=job.outputs[k];return [k,content];}));
     const history=recentVisualHistory(await flow.list(brand),id,brand);
-    const q={brand,jobId:id,stage,prompt:(stage==='edit_plan'&&job.brief.productionMode===AUTHORED_PROTOCOL?authoredPlanPrompt:organicPrompts[stage])+' '+directionRules+(job.brief.productionMode===AUTHORED_PROTOCOL?' '+authoredBrief:job.brief.productionMode===MOTION_PROTOCOL?' '+productionBrief:''),input:{brief:job.brief,previous,feedback:job.organicFeedback??null,visualHistory:history},context:{workflow:ORGANIC_PROTOCOL,brand,brandProfile:brands[brand],version:job.version,editorId,restrictions:{noPaid:true,noPublish:true,noCloning:true,research:'supplied-evidence-only'}}};
-    while(JSON.stringify(q).length>58000&&q.input.visualHistory.length)q.input.visualHistory.pop();
-    if(JSON.stringify(q).length>58000)throw Error('SPECIALIST_CONTEXT_TOO_LARGE');
+    const q={brand,jobId:id,stage,...(job.motionChoreography?{images:job.motionReferenceImages||[]}:{}),prompt:(stage==='edit_plan'&&job.brief.productionMode===AUTHORED_PROTOCOL?authoredPlanPrompt:organicPrompts[stage])+(job.motionChoreography?' '+choreographyDirection:'')+' '+directionRules+(job.brief.productionMode===AUTHORED_PROTOCOL?' '+authoredBrief:job.brief.productionMode===MOTION_PROTOCOL?' '+productionBrief:''),input:{brief:job.brief,previous,feedback:job.organicFeedback??null,visualHistory:history},context:{workflow:ORGANIC_PROTOCOL,brand,brandProfile:brands[brand],version:job.version,editorId,restrictions:{noPaid:true,noPublish:true,noCloning:true,research:'supplied-evidence-only'}}};
+    while(JSON.stringify({...q,images:undefined}).length>58000&&q.input.visualHistory.length)q.input.visualHistory.pop();
+    if(JSON.stringify({...q,images:undefined}).length>58000)throw Error('SPECIALIST_CONTEXT_TOO_LARGE');
     const result=await call(q);
     if(result?.status!=='completed')throw Error(result?.reason||'ORGANIC_STAGE_FAILED');
     const output=validateOrganicOutput(result.output,{stage,brand,brief:job.brief});
