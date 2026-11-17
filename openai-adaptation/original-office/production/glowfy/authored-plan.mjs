@@ -18,7 +18,7 @@ export function authoredPlan(job,ids){
  const p=validateAuthoredPlan(job.outputs.edit_plan.detail);return {...p,authored:true,directed:true,key:p.title.replace(/[^a-zA-Z0-9áéíóúñÁÉÍÓÚÑ -]/g,'').slice(0,60),variant:'authored',maxNarrationCharacters:480,authorization:'Jorge: tres NUEVOS videos completos y distintos; uso incluido y voz existente; 2026-11-16'};
 }
 export async function authorScenes({job,plan,beats,outDir,runner,onStage}){
- const choreography=job.motionChoreography==='continuity-v1',renderer=choreography?CHOREOGRAPHY_RENDER_REVIEW:AUTHORED_RENDER_REVIEW,revisionLimit=choreography?3:AUTHORED_MAX_REVISIONS;
+ const choreography=job.motionChoreography==='continuity-v1',renderer=choreography?CHOREOGRAPHY_RENDER_REVIEW:AUTHORED_RENDER_REVIEW,revisionLimit=AUTHORED_MAX_REVISIONS;
  const folder=path.join(outDir,'authored');await fs.mkdir(folder,{recursive:true,mode:0o700});
  const sourceHash=hash({script:job.outputs.script.detail,plan,version:job.version});
  const read=async f=>{try{return JSON.parse(await fs.readFile(path.join(folder,f),'utf8'));}catch(e){if(e.code!=='ENOENT')throw e;return null;}};
