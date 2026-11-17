@@ -40,3 +40,6 @@ La revisión cinemática real confirma flexión y continuidad en las tres unione
 La v3 completó composición, movimiento y exportación; SHA256 `66b342f8cce9de37c1843c0c5eb34464705ed3e9d85514a1f26f7cc017e2ed93`. Inspección del MP4 y reproducción/seek en escritorio y móvil comprobados. La música resultó A, una de las cuatro autorizadas, en lugar de la B anterior: no se afirma mezcla idéntica. La voz se recuperó de v2.
 
 La inspección final localizó un logo estirado por el marco 300×100 frente a su proporción oficial 480×128. Se corrige el ajuste proporcional dentro del marco. El nuevo render reutiliza los cuatro grafos de la versión anterior, valida su hash de guion/plan/versión y procedencia, conserva voz y música real, y exige revisiones nuevas con imágenes nuevas. No se vuelve a diseñar la pieza para corregir el compositor. V4 pendiente de ejecutar.
+
+## Resultado verificado
+V4 completó ambas revisiones nuevas sin rediseñar escenas. Los cuatro grafos son idénticos a v3 y el flujo AAC también. Logo ajustado proporcionalmente; MP4 de 21,20 s, SHA256 `937a52ea0c38933b0dcc1c49179a98670db818cf79e7e86d36449b7024d1aeba`. Descarga/hash, mediciones, inspección de cuadros y reproducción/seek del archivo exacto comprobados. Sin escucha subjetiva, aprobación de Jorge ni afirmación de equivalencia con las referencias. Los otros dos ejemplos no se rehicieron en este paso.

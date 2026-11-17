@@ -67,3 +67,10 @@ La revisión siguiente localiza una oclusión en el empalme 3→4, originada en 
 
 ### Capacidad de flexión y sincronización de pose · 16/11/2026
 La ronda de pareja resolvió la oclusión y pasó composición, pero el inspector temporal mantiene hallazgos. Se corrigen capacidades del motor (flexión de curvas y pose compartida al mezclar escenas) y el contexto temporal del editor. 27 pruebas pasan, incluyendo actor sin pose futura, anclajes de flexión, prompt real dentro del límite del trabajador y entrega de imágenes densas al corregir. Se conservan diseños, voz, críticas y límites de revisión. Producción real aún pendiente.
+
+### Corrección temporal terminada · 16/11/2026, America/Guatemala
+La cita, por dentro v4: SHA256 `937a52ea0c38933b0dcc1c49179a98670db818cf79e7e86d36449b7024d1aeba`, 21,20 s, 1080×1920/30 H.264 + AAC. Astra/high completó dirección, edición, escenas y dos inspecciones de imágenes; etapas iniciales Sol conservadas. Flexión, contacto, pulsación, retirada y plegado visibles; las tres uniones fueron inspeccionadas en el MP4.
+
+La v3 quedó registrada con un defecto de proporción del logo. La v4 conserva exactamente sus cuatro grafos y corrige el ajuste del recurso, con nuevas revisiones. El flujo AAC es idéntico al de v3; voz de caché v2, música A autorizada y efectos existentes. La música cambió de B a A durante v3 y se documenta expresamente. Treinta pruebas pertinentes pasaron; no se fuerza aprobación de ningún inspector.
+
+Descarga, hash, mediciones, inspección y reproducción/seek de v4 comprobados en escritorio/móvil, sin desborde ni errores JS. Sin escucha subjetiva ni equivalencia artística certificada con las referencias. Los otros once videos se conservan. No se aprobaron, programaron ni publicaron piezas. Ver evidencia glowfy-motion-correction-v4.json.
