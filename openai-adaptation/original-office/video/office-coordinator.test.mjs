@@ -70,3 +70,11 @@ test('creative revision limit remains visible to the owner without approving the
  const {publicJob}=await import('./http.mjs');const j={id:'test',brandId:'glowfy',version:3,state:'changes_requested',stage:'creative_review',outputs:{},brief:{...brief,deliverable:'idea'},blocker:'CREATIVE_REVISION_LIMIT'};
  const v=publicJob(j);assert.equal(v.blockerCode,'CREATIVE_REVISION_LIMIT');assert.match(v.blocker,/correcciones automáticas/);assert.equal(v.approval,null);assert.equal(v.artifact,null);
 });
+
+test('restart recovery waits for an earlier private inference before reserving another job',async t=>{
+ const flow=createVideoFlow({dataDir:await tmp(t)}),j=await flow.create({brandId:'glowfy',brief});let busy=true,calls=0;
+ const runner={status:()=>({...status(),busy}),refresh:async()=>({...status(),busy})},workflow={permits:()=>true,execute:async()=>{calls++;}};
+ const office=createOfficeCoordinator({flow,runner,workflow,enabled:true,resourceMonitor:async()=>({ready:true})});
+ await office.tick();assert.equal(calls,0);const waiting=await office.snapshot('glowfy');assert.equal(waiting.coordination.codexBusy,true);assert.equal(waiting.coordination.reason,'CODEX_BUSY');assert.equal((await flow.get('glowfy',j.id)).state,'queued');
+ busy=false;await office.tick();assert.equal(calls,1);await office.stop();
+});

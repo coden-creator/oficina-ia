@@ -4,8 +4,8 @@ const [input]=process.argv.slice(2),config=JSON.parse(await fs.readFile(input)),
 for(const f of assets.fonts)GlobalFonts.register(Buffer.from(f.base64,'base64'),f.family);const logo=await loadImage(Buffer.from(assets.logo.base64,'base64')),whiteLogo=createCanvas(logo.width,logo.height),lc=whiteLogo.getContext('2d');lc.drawImage(logo,0,0);lc.globalCompositeOperation='source-in';lc.fillStyle='#FFF';lc.fillRect(0,0,logo.width,logo.height);
 for(const scene of config.scenes){
  const canvas=createCanvas(720,1336),c=canvas.getContext('2d');c.imageSmoothingEnabled=true;c.imageSmoothingQuality='high';c.fillStyle='#21102E';c.fillRect(0,0,720,1336);
+ const frame=createCanvas(1080,1920),f=frame.getContext('2d');
  for(const [i,u] of [0,.28,.58,.88].entries()){
-  const frame=createCanvas(1080,1920),f=frame.getContext('2d');
   if(config.beats)draw(f,scene.start+(scene.end-scene.start)*u,{width:1080,height:1920,beats:config.beats,logo,whiteLogo});else drawGraph(f,scene.graph,u,{logo,whiteLogo});
   const x=i%2*360,y=Math.floor(i/2)*668;c.drawImage(frame,x,y,360,640);
   c.fillStyle='#FFF';c.font='16px sans-serif';c.fillText(`Escena ${scene.scene} · ${Math.round(u*100)}%`,x+12,y+658);
@@ -18,8 +18,9 @@ if(config.choreography){
   const sheet=createCanvas(880,1660),c=sheet.getContext('2d');c.fillStyle='#21102E';c.fillRect(0,0,880,1660);
   const start=scene.start,end=scene.end;
   const times=scene.scene===1?Array.from({length:16},(_,i)=>start+(end-start-.03)*i/15):[start-.36,start-.24,start-.12,start, ...Array.from({length:12},(_,i)=>start+.12+(end-start-.15)*i/11)];
+  const frame=createCanvas(1080,1920);
   for(const [i,t] of times.entries()){
-   const frame=createCanvas(1080,1920);draw(frame.getContext('2d'),Math.max(0,t),{beats:config.beats,logo,whiteLogo});
+   draw(frame.getContext('2d'),Math.max(0,t),{beats:config.beats,logo,whiteLogo});
    const x=i%4*220,y=Math.floor(i/4)*415;c.drawImage(frame,x,y,220,391);c.fillStyle='#FFF';c.font='14px sans-serif';c.fillText(`${t.toFixed(2)}s`,x+8,y+409);
   }
   await fs.writeFile(config.outDir+'/motion-scene-'+scene.scene+'.jpg',sheet.toBuffer('image/jpeg',86));
