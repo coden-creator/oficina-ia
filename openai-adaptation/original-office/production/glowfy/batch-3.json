@@ -1,0 +1,29 @@
+[
+  {
+    "key": "reserva",
+    "variant": "booking",
+    "id": "62ff9b0a-8653-4f23-b16f-08b8d00f62cb",
+    "objective": "Glowfy · Agendar sin tantos mensajes",
+    "musicId": "glowfy-a",
+    "authorization": "Jorge: hagamos 3 videos mas, pon a la oficina a trabajar; 2026-11-16",
+    "maxNarrationCharacters": 480
+  },
+  {
+    "key": "recordatorio",
+    "variant": "reminder",
+    "id": "60dce0a0-6d3c-4254-87d1-d7782c8de951",
+    "objective": "Glowfy · Que tu cita no se pierda en el chat",
+    "musicId": "glowfy-b",
+    "authorization": "Jorge: hagamos 3 videos mas, pon a la oficina a trabajar; 2026-11-16",
+    "maxNarrationCharacters": 480
+  },
+  {
+    "key": "horario",
+    "variant": "reschedule",
+    "id": "35b0d07e-4983-4d80-b638-b39c2cfd556c",
+    "objective": "Glowfy · Cambiar de horario sin enredos",
+    "musicId": "glowfy-d",
+    "authorization": "Jorge: hagamos 3 videos mas, pon a la oficina a trabajar; 2026-11-16",
+    "maxNarrationCharacters": 480
+  }
+]

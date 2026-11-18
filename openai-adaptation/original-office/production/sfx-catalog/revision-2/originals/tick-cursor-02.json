@@ -1,0 +1,13 @@
+{
+  "id": "tick-cursor-02",
+  "generationId": "bX2N8RisVVwavtzJM640",
+  "nodeId": "agUICTsBRbZV29bBVJ6W",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "One tiny muted glass tick, a light clean high-pitched tap with a very short decay, isolated.",
+  "duration": 0.5,
+  "price": {
+    "credits": 1.6665,
+    "price_cents": 0.0303,
+    "cost_fiat_currency": "usd"
+  }
+}

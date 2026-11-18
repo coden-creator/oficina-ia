@@ -1,0 +1,81 @@
+# Private worker only. Existing public office, router and data are not adopted.
+# The existing verified CLI image is reused with explicitly versioned read-only code files.
+services:
+  codex:
+    image: ${OFFICE_IMAGE:-oficina-runtime:33a3edc}
+    pull_policy: never
+    command: [node, codex/start-broker.mjs]
+    user: '1000:1000'
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ['no-new-privileges:true']
+    cpus: '1.0'
+    mem_limit: 768m
+    pids_limit: 128
+    restart: 'on-failure:3'
+    stop_grace_period: 20s
+    tmpfs: ['/tmp:rw,nosuid,nodev,size=134217728,mode=1777']
+    labels:
+      traefik.enable: 'false'
+      office.purpose: jorge-codex-worker
+    environment:
+      OFFICE_WORKER_RELEASE: authored-kinematics-astra-v3
+      OFFICE_CODEX_ENABLE: '1'
+      OFFICE_CODEX_ISOLATION_VERIFIED: '1'
+      # Pinned for this authorized production release; Compose .env resolution varies by rootPath.
+      OFFICE_CODEX_MODEL: gpt-6-astra
+      OFFICE_CODEX_SOCKET: /run/office/codex.sock
+    volumes:
+      - auth:/home/node/codex-isolated
+      - ipc:/run/office
+    configs:
+      - source: adapter
+        target: /app/codex/adapter.mjs
+      - source: runtime
+        target: /app/codex/chatgpt-runtime.mjs
+      - source: broker
+        target: /app/codex/start-broker.mjs
+      - source: isolation
+        target: /app/codex/worker-isolation.mjs
+      - source: protocol
+        target: /app/codex/broker.mjs
+      - source: organic
+        target: /app/codex/organic-specialist.mjs
+      - source: organic_contract
+        target: /app/video/organic-contract.mjs
+      - source: motion_contract
+        target: /app/video/motion-contract.mjs
+      - source: authored_contract
+        target: /app/video/authored-motion.mjs
+      - source: event_stream
+        target: /app/codex/event-stream.mjs
+      - source: specialist
+        target: /app/codex/video-specialist.mjs
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "const h=require('http');const q=h.get({socketPath:'/run/office/codex.sock',path:'/status'},r=>{let b='';r.on('data',x=>b+=x);r.on('end',()=>{try{const s=JSON.parse(b);process.exit(r.statusCode===200&&s.connected===true&&s.paidApiEnabled===false&&s.publishingEnabled===false?0:1)}catch{process.exit(1)}})});q.setTimeout(5000,()=>q.destroy());q.on('error',()=>process.exit(1));"
+      interval: 20s
+      timeout: 8s
+      start_period: 30s
+      retries: 3
+configs:
+  adapter: {file: ../codex/adapter.mjs}
+  runtime: {file: ../codex/chatgpt-runtime.mjs}
+  broker: {file: ../codex/start-broker.mjs}
+  isolation: {file: ../codex/worker-isolation.mjs}
+  protocol: {file: ../codex/broker.mjs}
+  organic: {file: ../codex/organic-specialist.mjs}
+  organic_contract: {file: ../video/organic-contract.mjs}
+  motion_contract: {file: ../video/motion-contract.mjs}
+  specialist: {file: ../codex/video-specialist.mjs}
+  authored_contract: {file: ../video/authored-motion.mjs}
+  event_stream: {file: ../codex/event-stream.mjs}
+volumes:
+  auth:
+    external: true
+    name: ${OFFICE_AUTH_VOLUME:-oficina-jorge-codex-auth}
+  ipc:
+    name: oficina-jorge-codex-ipc-r1

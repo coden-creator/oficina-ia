@@ -1,0 +1,426 @@
+{
+  "schemaVersion": 1,
+  "brandId": "glowfy",
+  "title": "7 efectos regenerados",
+  "purpose": "Comparación para revisión de Jorge: no es un video de publicación",
+  "duration": 55.75,
+  "width": 720,
+  "height": 1280,
+  "fps": 24,
+  "sampleRate": 48000,
+  "tracks": 7,
+  "playbacks": 28,
+  "newPaidGenerations": 7,
+  "listeningProcessing": "Constant scalar gain per source to approximately -10 dBTP. B uses new prepared files: DC removal, silent margins trimmed, 1 ms attack and 8 ms release fades; ticks additionally band-limited and shortened to 160 ms with 12 ms release. Details in generation-manifest.json. Originals preserved; AAC is lossy.",
+  "chapters": [
+    {
+      "number": 13,
+      "id": "clic-boton-02",
+      "title": "Clic de botón 02",
+      "start": 5.0,
+      "events": [
+        {
+          "number": 13,
+          "id": "clic-boton-02",
+          "version": "original",
+          "repeat": 1,
+          "tick": 46,
+          "ticks": 4,
+          "start": 5.75,
+          "duration": 0.48,
+          "gainDb": -9.05,
+          "sourceSha256": "e0c091a03dd5d56705f0e92d88826c871c69b54d77b41c842b9650ac845b64e7"
+        },
+        {
+          "number": 13,
+          "id": "clic-boton-02",
+          "version": "original",
+          "repeat": 2,
+          "tick": 54,
+          "ticks": 4,
+          "start": 6.75,
+          "duration": 0.48,
+          "gainDb": -9.05,
+          "sourceSha256": "e0c091a03dd5d56705f0e92d88826c871c69b54d77b41c842b9650ac845b64e7"
+        },
+        {
+          "number": 13,
+          "id": "clic-boton-02",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 64,
+          "ticks": 3,
+          "start": 8.0,
+          "duration": 0.2602,
+          "gainDb": -4.0,
+          "sourceSha256": "aeb4ca56d2eda98b5089c98874183a88b1ee79557f4229aaa91a4b60fecc9fe3"
+        },
+        {
+          "number": 13,
+          "id": "clic-boton-02",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 71,
+          "ticks": 3,
+          "start": 8.875,
+          "duration": 0.2602,
+          "gainDb": -4.0,
+          "sourceSha256": "aeb4ca56d2eda98b5089c98874183a88b1ee79557f4229aaa91a4b60fecc9fe3"
+        }
+      ],
+      "technicalReview": false,
+      "end": 10.0
+    },
+    {
+      "number": 16,
+      "id": "destello-particulas-01",
+      "title": "Destello de partículas 01",
+      "start": 10.0,
+      "events": [
+        {
+          "number": 16,
+          "id": "destello-particulas-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 86,
+          "ticks": 8,
+          "start": 10.75,
+          "duration": 1.0,
+          "gainDb": -9.03,
+          "sourceSha256": "34a335ef68dda115992d0b4d0bef18fc9950e44f9bcc4afb2a3e8fd0345d9db6"
+        },
+        {
+          "number": 16,
+          "id": "destello-particulas-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 98,
+          "ticks": 8,
+          "start": 12.25,
+          "duration": 1.0,
+          "gainDb": -9.03,
+          "sourceSha256": "34a335ef68dda115992d0b4d0bef18fc9950e44f9bcc4afb2a3e8fd0345d9db6"
+        },
+        {
+          "number": 16,
+          "id": "destello-particulas-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 112,
+          "ticks": 8,
+          "start": 14.0,
+          "duration": 1.0,
+          "gainDb": -4.0,
+          "sourceSha256": "2725863af4c5acc045f4d9ce8eacb6e03907331ccf4986886e950aad85210be2"
+        },
+        {
+          "number": 16,
+          "id": "destello-particulas-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 124,
+          "ticks": 8,
+          "start": 15.5,
+          "duration": 1.0,
+          "gainDb": -4.0,
+          "sourceSha256": "2725863af4c5acc045f4d9ce8eacb6e03907331ccf4986886e950aad85210be2"
+        }
+      ],
+      "technicalReview": false,
+      "end": 17.25
+    },
+    {
+      "number": 17,
+      "id": "destello-particulas-02",
+      "title": "Destello de partículas 02",
+      "start": 17.25,
+      "events": [
+        {
+          "number": 17,
+          "id": "destello-particulas-02",
+          "version": "original",
+          "repeat": 1,
+          "tick": 144,
+          "ticks": 8,
+          "start": 18.0,
+          "duration": 1.0,
+          "gainDb": -9.14,
+          "sourceSha256": "1a7cd3a8365f644c1265548e9f747825b74c419bc9d8d33b8ea290a0d6457352"
+        },
+        {
+          "number": 17,
+          "id": "destello-particulas-02",
+          "version": "original",
+          "repeat": 2,
+          "tick": 156,
+          "ticks": 8,
+          "start": 19.5,
+          "duration": 1.0,
+          "gainDb": -9.14,
+          "sourceSha256": "1a7cd3a8365f644c1265548e9f747825b74c419bc9d8d33b8ea290a0d6457352"
+        },
+        {
+          "number": 17,
+          "id": "destello-particulas-02",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 170,
+          "ticks": 10,
+          "start": 21.25,
+          "duration": 1.24,
+          "gainDb": -4.0,
+          "sourceSha256": "fe275a697a16000a8267e02a77eaf9a0553ba6fc3784f2a268de3df53fe41ca3"
+        },
+        {
+          "number": 17,
+          "id": "destello-particulas-02",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 184,
+          "ticks": 10,
+          "start": 23.0,
+          "duration": 1.24,
+          "gainDb": -4.0,
+          "sourceSha256": "fe275a697a16000a8267e02a77eaf9a0553ba6fc3784f2a268de3df53fe41ca3"
+        }
+      ],
+      "technicalReview": false,
+      "end": 25.0
+    },
+    {
+      "number": 22,
+      "id": "golpe-grave-02",
+      "title": "Golpe grave 02",
+      "start": 25.0,
+      "events": [
+        {
+          "number": 22,
+          "id": "golpe-grave-02",
+          "version": "original",
+          "repeat": 1,
+          "tick": 206,
+          "ticks": 8,
+          "start": 25.75,
+          "duration": 1.0,
+          "gainDb": -9.0,
+          "sourceSha256": "02269315e1ab41954b6fdf8f58ab9351b1e867130062b8d91e116de8e0818417"
+        },
+        {
+          "number": 22,
+          "id": "golpe-grave-02",
+          "version": "original",
+          "repeat": 2,
+          "tick": 218,
+          "ticks": 8,
+          "start": 27.25,
+          "duration": 1.0,
+          "gainDb": -9.0,
+          "sourceSha256": "02269315e1ab41954b6fdf8f58ab9351b1e867130062b8d91e116de8e0818417"
+        },
+        {
+          "number": 22,
+          "id": "golpe-grave-02",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 232,
+          "ticks": 7,
+          "start": 29.0,
+          "duration": 0.8,
+          "gainDb": -4.0,
+          "sourceSha256": "8573fe2b6bbc869549fa83b5f527b24112b2930ba686df4d26e16aa01e454b26"
+        },
+        {
+          "number": 22,
+          "id": "golpe-grave-02",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 243,
+          "ticks": 7,
+          "start": 30.375,
+          "duration": 0.8,
+          "gainDb": -4.0,
+          "sourceSha256": "8573fe2b6bbc869549fa83b5f527b24112b2930ba686df4d26e16aa01e454b26"
+        }
+      ],
+      "technicalReview": false,
+      "end": 32.0
+    },
+    {
+      "number": 31,
+      "id": "teclas-suaves-01",
+      "title": "Teclas suaves 01",
+      "start": 32.0,
+      "events": [
+        {
+          "number": 31,
+          "id": "teclas-suaves-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 262,
+          "ticks": 12,
+          "start": 32.75,
+          "duration": 1.4555,
+          "gainDb": -9.17,
+          "sourceSha256": "9a908ea29cb2310f01f20bd6b681f6170a5c2abeeeb2bc133d978c55f72fd81f"
+        },
+        {
+          "number": 31,
+          "id": "teclas-suaves-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 278,
+          "ticks": 12,
+          "start": 34.75,
+          "duration": 1.4555,
+          "gainDb": -9.17,
+          "sourceSha256": "9a908ea29cb2310f01f20bd6b681f6170a5c2abeeeb2bc133d978c55f72fd81f"
+        },
+        {
+          "number": 31,
+          "id": "teclas-suaves-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 296,
+          "ticks": 12,
+          "start": 37.0,
+          "duration": 1.3901,
+          "gainDb": -4.0,
+          "sourceSha256": "4470e8bbc55628de449269be106c4fd19d1203d7238ddc32c05afd2098f75fb7"
+        },
+        {
+          "number": 31,
+          "id": "teclas-suaves-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 312,
+          "ticks": 12,
+          "start": 39.0,
+          "duration": 1.3901,
+          "gainDb": -4.0,
+          "sourceSha256": "4470e8bbc55628de449269be106c4fd19d1203d7238ddc32c05afd2098f75fb7"
+        }
+      ],
+      "technicalReview": false,
+      "end": 41.25
+    },
+    {
+      "number": 33,
+      "id": "tick-cursor-01",
+      "title": "Tick de cursor 01",
+      "start": 41.25,
+      "events": [
+        {
+          "number": 33,
+          "id": "tick-cursor-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 336,
+          "ticks": 4,
+          "start": 42.0,
+          "duration": 0.48,
+          "gainDb": -9.62,
+          "sourceSha256": "0afac3bf29f8ff609ec950215a5bef262e603438f695c36695c6bf806eb2972c"
+        },
+        {
+          "number": 33,
+          "id": "tick-cursor-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 344,
+          "ticks": 4,
+          "start": 43.0,
+          "duration": 0.48,
+          "gainDb": -9.62,
+          "sourceSha256": "0afac3bf29f8ff609ec950215a5bef262e603438f695c36695c6bf806eb2972c"
+        },
+        {
+          "number": 33,
+          "id": "tick-cursor-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 354,
+          "ticks": 2,
+          "start": 44.25,
+          "duration": 0.16,
+          "gainDb": -4.0,
+          "sourceSha256": "f93e7d873ed0c4649b609f7bb0c1903817738b1cdf815946cf20d9c38e03c057"
+        },
+        {
+          "number": 33,
+          "id": "tick-cursor-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 360,
+          "ticks": 2,
+          "start": 45.0,
+          "duration": 0.16,
+          "gainDb": -4.0,
+          "sourceSha256": "f93e7d873ed0c4649b609f7bb0c1903817738b1cdf815946cf20d9c38e03c057"
+        }
+      ],
+      "technicalReview": false,
+      "end": 46.0
+    },
+    {
+      "number": 34,
+      "id": "tick-cursor-02",
+      "title": "Tick de cursor 02",
+      "start": 46.0,
+      "events": [
+        {
+          "number": 34,
+          "id": "tick-cursor-02",
+          "version": "original",
+          "repeat": 1,
+          "tick": 374,
+          "ticks": 4,
+          "start": 46.75,
+          "duration": 0.48,
+          "gainDb": -9.08,
+          "sourceSha256": "5ccaacbf1a79ba94afa07ef2755540c16146e8482f96839ebf3fa02b459974f7"
+        },
+        {
+          "number": 34,
+          "id": "tick-cursor-02",
+          "version": "original",
+          "repeat": 2,
+          "tick": 382,
+          "ticks": 4,
+          "start": 47.75,
+          "duration": 0.48,
+          "gainDb": -9.08,
+          "sourceSha256": "5ccaacbf1a79ba94afa07ef2755540c16146e8482f96839ebf3fa02b459974f7"
+        },
+        {
+          "number": 34,
+          "id": "tick-cursor-02",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 392,
+          "ticks": 2,
+          "start": 49.0,
+          "duration": 0.16,
+          "gainDb": -4.0,
+          "sourceSha256": "2f458cf9beafd434f6b7abf62ff359bb9bbafbb1c6f57c5ae465d2ab2c806dd8"
+        },
+        {
+          "number": 34,
+          "id": "tick-cursor-02",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 398,
+          "ticks": 2,
+          "start": 49.75,
+          "duration": 0.16,
+          "gainDb": -4.0,
+          "sourceSha256": "2f458cf9beafd434f6b7abf62ff359bb9bbafbb1c6f57c5ae465d2ab2c806dd8"
+        }
+      ],
+      "technicalReview": false,
+      "end": 50.75
+    }
+  ],
+  "file": "glowfy-sfx-revision-2.mp4",
+  "bytes": 1452827,
+  "sha256": "9879c1bcc1fa206101388534924f2d4174ecd1839ee13e708934901aa54d1f66"
+}

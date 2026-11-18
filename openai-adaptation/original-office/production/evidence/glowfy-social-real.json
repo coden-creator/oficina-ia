@@ -1,0 +1,199 @@
+{
+  "verifiedAt": "2026-11-15T19:56:50.048046-06:00",
+  "timezone": "America/Guatemala",
+  "jobId": "92c020c2-0833-43ea-99ba-a47f42555b96",
+  "version": 3,
+  "state": "awaiting_review",
+  "deployedCodeCommit": "3c7d72b5196ea3903de861125d2d5e46f4120d4d",
+  "reviewUrl": "https://service-oficina-jorge.flb2mp.easypanel.host/?brand=glowfy#/estudio?pieza=92c020c2-0833-43ea-99ba-a47f42555b96",
+  "artifact": {
+    "sha256": "020fd68ffd43f8f998aedbcffaf6df38592cc2b66f9bf7089a48f6f67846aab1",
+    "bytes": 3537388,
+    "duration": 18.1,
+    "video": {
+      "codec_name": "h264",
+      "width": 1080,
+      "height": 1920,
+      "r_frame_rate": "30/1",
+      "nb_frames": "543"
+    },
+    "audio": {
+      "codec_name": "aac",
+      "sample_rate": "48000",
+      "channels": 2
+    }
+  },
+  "voice": {
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "selectedExistingVoice": "Jorge Q",
+    "take": 2,
+    "submittedCharacters": 289,
+    "providerReportedChargedCharacters": null,
+    "delivery": [
+      "curious",
+      "excited",
+      "warmly"
+    ],
+    "cloningPerformed": false
+  },
+  "quota": {
+    "lastObservedBefore": 63365,
+    "after": 63238,
+    "usageBasedBilling": false,
+    "note": "Account quota snapshots, not a per-request billing receipt; provider did not return charged-character count."
+  },
+  "technicalQA": {
+    "decoded": true,
+    "integratedLufs": -16.32,
+    "truePeakDbtp": -1.52,
+    "loudnessRangeLu": 10.5,
+    "musicPresenceVerifiedFromExport": true,
+    "openingSoundEffectsMeasured": [
+      {
+        "name": "golpe-grave-01",
+        "expectedSecond": 0,
+        "estimatedGainDb": -7.1,
+        "correlationAtCue": 0.533
+      },
+      {
+        "name": "burbuja-mensaje-01",
+        "expectedSecond": 0.25,
+        "estimatedGainDb": -8.19,
+        "correlationAtCue": 0.305
+      },
+      {
+        "name": "pop-ui-01",
+        "expectedSecond": 1.15,
+        "estimatedGainDb": -9.52,
+        "correlationAtCue": 0.2
+      },
+      {
+        "name": "tick-cursor-01",
+        "expectedSecond": 2.05,
+        "estimatedGainDb": -10.2,
+        "correlationAtCue": 0.438
+      }
+    ],
+    "musicStereoCorrelation": [
+      {
+        "second": 1,
+        "musicStereoCorrelation": 0.874,
+        "estimatedMusicGainDb": -14.61,
+        "sideRmsDbfs": -46.32
+      },
+      {
+        "second": 2,
+        "musicStereoCorrelation": 0.77,
+        "estimatedMusicGainDb": -16.11,
+        "sideRmsDbfs": -47.34
+      },
+      {
+        "second": 3,
+        "musicStereoCorrelation": 0.984,
+        "estimatedMusicGainDb": -12.13,
+        "sideRmsDbfs": -45.01
+      },
+      {
+        "second": 4,
+        "musicStereoCorrelation": 0.378,
+        "estimatedMusicGainDb": -17.15,
+        "sideRmsDbfs": -42.06
+      },
+      {
+        "second": 5,
+        "musicStereoCorrelation": 0.96,
+        "estimatedMusicGainDb": -15.7,
+        "sideRmsDbfs": -48.52
+      },
+      {
+        "second": 6,
+        "musicStereoCorrelation": 0.951,
+        "estimatedMusicGainDb": -14.75,
+        "sideRmsDbfs": -46.29
+      },
+      {
+        "second": 7,
+        "musicStereoCorrelation": 0.164,
+        "estimatedMusicGainDb": -14.15,
+        "sideRmsDbfs": -29.02
+      },
+      {
+        "second": 8,
+        "musicStereoCorrelation": 0.626,
+        "estimatedMusicGainDb": -14.85,
+        "sideRmsDbfs": -43.4
+      },
+      {
+        "second": 9,
+        "musicStereoCorrelation": 0.975,
+        "estimatedMusicGainDb": -15.81,
+        "sideRmsDbfs": -44.83
+      },
+      {
+        "second": 10,
+        "musicStereoCorrelation": 0.226,
+        "estimatedMusicGainDb": -13.12,
+        "sideRmsDbfs": -29.67
+      },
+      {
+        "second": 11,
+        "musicStereoCorrelation": 0.97,
+        "estimatedMusicGainDb": -13.04,
+        "sideRmsDbfs": -41.95
+      },
+      {
+        "second": 12,
+        "musicStereoCorrelation": 0.95,
+        "estimatedMusicGainDb": -14.52,
+        "sideRmsDbfs": -47.33
+      },
+      {
+        "second": 13,
+        "musicStereoCorrelation": 0.97,
+        "estimatedMusicGainDb": -12.69,
+        "sideRmsDbfs": -44.27
+      },
+      {
+        "second": 14,
+        "musicStereoCorrelation": 0.939,
+        "estimatedMusicGainDb": -13.56,
+        "sideRmsDbfs": -42.77
+      },
+      {
+        "second": 15,
+        "musicStereoCorrelation": 0.988,
+        "estimatedMusicGainDb": -10.73,
+        "sideRmsDbfs": -35.15
+      },
+      {
+        "second": 16,
+        "musicStereoCorrelation": 1.0,
+        "estimatedMusicGainDb": -10.21,
+        "sideRmsDbfs": -34.77
+      }
+    ],
+    "browserDesktopAndMobile": true,
+    "javascriptErrors": 0
+  },
+  "visualReview": {
+    "sampledFrames": 36,
+    "sampleIntervalSeconds": 0.5,
+    "framesCoverFullDuration": true,
+    "captionTagsHidden": true,
+    "subjectiveListeningVerified": false,
+    "referenceEquivalenceCertified": false,
+    "ownerApprovalPending": true
+  },
+  "resources": {
+    "appCpuLimit": 1,
+    "appMemoryMiB": 768,
+    "observedHostCpuDuringRenderPercent": 17.32,
+    "observedHostMemoryDuringRenderPercent": 35.97
+  },
+  "approval": null,
+  "published": false,
+  "scheduled": false,
+  "originalTakePreserved": true,
+  "newMusicOrSfxGeneration": false
+}

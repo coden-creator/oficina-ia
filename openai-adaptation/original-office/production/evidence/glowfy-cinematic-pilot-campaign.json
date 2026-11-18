@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "campaign_id": "glowfy-direction-pilot-20261116",
+  "brand": "Glowfy",
+  "updated_at": "2026-11-16T15:43:42.742Z",
+  "display_timezone": "America/Guatemala",
+  "objective": "Aplicar seis mejoras de producción audiovisual al piloto El hilo de una cita",
+  "status": "awaiting_owner_review",
+  "current_version": 1,
+  "sources": [
+    {
+      "type": "owner_instruction",
+      "text": "Incorporar historia visual, cámara/materiales, variedad, voz con intención, diseño sonoro y revisión del render; calidad por encima de rapidez."
+    },
+    {
+      "type": "prior_job",
+      "id": "62ff9b0a-8653-4f23-b16f-08b8d00f62cb",
+      "version": 3,
+      "reused": "Investigación, estrategia, guion y revisión creativa de Reserva, con procedencia heredada explícita; narración exacta en caché."
+    }
+  ],
+  "decisions": [
+    {
+      "by": "assistant",
+      "decision": "Nueva ficha independiente; seis planos 2.5D diseñados e implementados; arte preproducido con Codex; biblioteca sonora existente."
+    },
+    {
+      "by": "assistant",
+      "decision": "Contexto por dependencias, máximo 23.000 caracteres y respuesta breve de arte después de dos bloqueos ORGANIC_STAGE_FAILED. El siguiente intento completó dirección y render; no se atribuye una causa más específica sin logs del trabajador."
+    }
+  ],
+  "assets": {
+    "voiceId": "hLV6NMOMeGIqdvcW8Uxr",
+    "voiceSourceJob": "62ff9b0a-8653-4f23-b16f-08b8d00f62cb",
+    "newAudioGenerations": 0,
+    "musicId": "glowfy-c",
+    "soundCues": 14,
+    "soundSource": "Biblioteca existente con sustituciones r2/r3 seleccionadas por Jorge"
+  },
+  "deliverables": [
+    {
+      "job_id": "2b030761-811d-4ab0-8417-8a4b4c2e1d87",
+      "url": "https://service-oficina-jorge.flb2mp.easypanel.host/?brand=glowfy#/estudio?pieza=2b030761-811d-4ab0-8417-8a4b4c2e1d87",
+      "version": 1,
+      "artifact": {
+        "sha256": "5ddca37cb6d4f8effe16fb8291a6566d05122e1669e738e8355b03ad05cd4277",
+        "version": 1,
+        "bytes": 3119750,
+        "kind": "narrated_brand_video",
+        "url": "/api/video-workflows/glowfy/2b030761-811d-4ab0-8417-8a4b4c2e1d87/artifact?v=1"
+      },
+      "preview": {
+        "sha256": "6e5e04c0f097559cec80ca284109f1cc5cd9fb0bcbb2c3358b02578665a19805",
+        "version": 1,
+        "bytes": 522721,
+        "kind": "audiovisual_preview",
+        "duration": 7,
+        "url": "/api/video-workflows/glowfy/2b030761-811d-4ab0-8417-8a4b4c2e1d87/preview?v=1"
+      },
+      "plan": {
+        "title": "El hilo de una cita",
+        "concept": "Una conversación encuentra su camino: del desorden de mensajes a una cita que toma forma.",
+        "difference": "Escenario de estudio con materiales, planos de detalle y una cinta que conecta cada transformación. Se abandona la composición frontal constante de los videos anteriores.",
+        "voiceDirection": "Usar el máster de Reserva sin volver a generar voz. Mantener sus pausas y alinear la imagen a sus palabras reales. En futuros guiones: frases conversadas, intención por escena y aclaraciones en pantalla cuando corresponda.",
+        "soundDirection": "Anticipar el cambio de escena, acompañar los contactos y dejar descansar el oído al elegir horario. Música C de la biblioteca seleccionada, con reducción bajo la voz.",
+        "shots": [
+          {
+            "id": "detail",
+            "title": "Una pregunta abre la historia",
+            "scale": "detalle",
+            "action": "Una tarjeta de conversación entra en primer plano; nuevas preguntas se superponen con profundidad.",
+            "camera": "Acercamiento inicial y retirada que descubre el espacio.",
+            "transition": "La retirada conecta con el recorrido de los mensajes.",
+            "sound": "Tres contactos de mensajes; ambiente musical cálido.",
+            "start": 0,
+            "end": 1.8095999999999999
+          },
+          {
+            "id": "thread",
+            "title": "La conversación encuentra un camino",
+            "scale": "general",
+            "action": "Una cinta luminosa recoge los mensajes y los conduce hacia dos horarios.",
+            "camera": "Desplazamiento lateral con capas de distinta profundidad.",
+            "transition": "La cinta continúa dentro del siguiente plano.",
+            "sound": "Barrido breve que empieza antes del cambio; textura contenida.",
+            "start": 1.8095999999999999,
+            "end": 3.8200000000000003
+          },
+          {
+            "id": "availability",
+            "title": "Dos opciones, una elección",
+            "scale": "medio",
+            "action": "11:00 y 16:00 aparecen como piezas con espesor; la elegida se eleva.",
+            "camera": "Órbita leve y acercamiento a la selección.",
+            "transition": "La forma y el color de 16:00 se conservan al transformarse.",
+            "sound": "Aparición escalonada, clic y breve espacio sin efectos.",
+            "start": 3.8200000000000003,
+            "end": 7.996560000000001
+          },
+          {
+            "id": "choice",
+            "title": "La elección toma forma",
+            "scale": "detalle",
+            "action": "El horario elegido se acerca; el mensaje de respuesta recorre la cinta.",
+            "camera": "Seguimiento de la selección y cambio de escala.",
+            "transition": "La tarjeta elegida se convierte en el encabezado de una reserva.",
+            "sound": "Respuesta y desplazamiento sincronizados; sin ruido continuo.",
+            "start": 7.996560000000001,
+            "end": 10.296999999999999
+          },
+          {
+            "id": "ticket",
+            "title": "Del chat a la agenda",
+            "scale": "cenital",
+            "action": "Una reserva se despliega sobre una base con luz, relieve y sello de confirmación.",
+            "camera": "Giro hacia una vista superior y asentamiento.",
+            "transition": "La cámara se retira conservando la misma reserva.",
+            "sound": "Despliegue, contacto y confirmación.",
+            "start": 10.296999999999999,
+            "end": 13.9
+          },
+          {
+            "id": "closing",
+            "title": "Conocé Glowfy",
+            "scale": "general",
+            "action": "La reserva queda integrada en una composición final de marca, con una sola llamada a la acción.",
+            "camera": "Retirada suave y reposo para leer.",
+            "transition": "Cierre sostenido, sin flash.",
+            "sound": "Resolución musical y cola corta; voz clara.",
+            "start": 13.9,
+            "end": 17.366666666666667
+          }
+        ]
+      }
+    }
+  ],
+  "approvals": [],
+  "publishingEnabled": false,
+  "validation": {
+    "technical": [
+      {
+        "media": "pilot",
+        "id": "2b030761-811d-4ab0-8417-8a4b4c2e1d87",
+        "version": 1,
+        "sha256": "5ddca37cb6d4f8effe16fb8291a6566d05122e1669e738e8355b03ad05cd4277",
+        "bytes": 3119750,
+        "duration": 17.366667,
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "videoCodec": "h264",
+        "audioCodec": "aac",
+        "lufs": -16.41,
+        "truePeakDb": -2.56,
+        "fullDecode": true,
+        "approved": false,
+        "published": false
+      },
+      {
+        "media": "preview",
+        "id": "2b030761-811d-4ab0-8417-8a4b4c2e1d87",
+        "version": 1,
+        "sha256": "6e5e04c0f097559cec80ca284109f1cc5cd9fb0bcbb2c3358b02578665a19805",
+        "bytes": 522721,
+        "duration": 7.0,
+        "width": 540,
+        "height": 960,
+        "fps": 12,
+        "videoCodec": "h264",
+        "audioCodec": "aac",
+        "lufs": -16.13,
+        "truePeakDb": -3.11,
+        "fullDecode": true,
+        "approved": false,
+        "published": false
+      }
+    ],
+    "browser": {
+      "jobId": "2b030761-811d-4ab0-8417-8a4b4c2e1d87",
+      "version": 1,
+      "artifactHash": "5ddca37cb6d4f8effe16fb8291a6566d05122e1669e738e8355b03ad05cd4277",
+      "fullPlaybackToEnd": true,
+      "duration": 17.366667,
+      "exactSeeking": true,
+      "previewDuration": 7,
+      "previewPlays": true,
+      "toggleFullAndPreview": true,
+      "shotPlanCount": 6,
+      "reviewCriteriaCount": 6,
+      "keyboardDetails": true,
+      "mobileNoOverflow": true,
+      "javascriptErrors": 0,
+      "mutedPlayback": true,
+      "ownerApproval": false,
+      "savedReviewVisible": true,
+      "observedCriteria": 4,
+      "pendingListeningCriteria": 2
+    },
+    "reviewedFinalFrames": 69,
+    "samplingFps": 4,
+    "audiovisualReview": {
+      "version": 1,
+      "artifactHash": "5ddca37cb6d4f8effe16fb8291a6566d05122e1669e738e8355b03ad05cd4277",
+      "criteria": [
+        {
+          "id": "story",
+          "status": "checked",
+          "note": "Se revisaron 69 cuadros del archivo final a 4 fps: preguntas → disponibilidad → selección de 16:00 → reserva. La acción conserva el horario y el cierre muestra una sola CTA. El relato reutiliza el guion de Reserva; esta pieza prueba una nueva producción visual."
+        },
+        {
+          "id": "craft",
+          "status": "checked",
+          "note": "Se observaron las seis composiciones, materiales ilustrados, sombras y relieve. Titulares y subtítulos quedan separados de los objetos; lectura comprobada en la oficina a 390 px. Es profundidad 2.5D, no render 3D fotorrealista. Las notas secundarias son pequeñas, sin información esencial."
+        },
+        {
+          "id": "motion",
+          "status": "checked",
+          "note": "Reproducción completa comprobada en navegador a 30 fps. Revisión visual de entradas, cambios de escala y transformación de horario a reserva; transiciones de 0,24 s por disolución y cierre sostenido. Sin errores de decodificación o cuadros vacíos observados en el muestreo."
+        },
+        {
+          "id": "voice",
+          "status": "not_checked",
+          "note": "Se reutilizó el máster de Reserva con la voz de Jorge y sus tiempos de alineación; no se generó otra toma. La interpretación y naturalidad de esta voz requieren escucha de Jorge; la prueba de navegador se hizo silenciada."
+        },
+        {
+          "id": "sound",
+          "status": "not_checked",
+          "note": "Música C y 14 efectos de la biblioteca colocados según acciones; reducción musical bajo voz. Mezcla final medida en −16,41 LUFS y −2,56 dBTP, sin fallos de decodificación. Estas medidas no sustituyen la escucha del balance y del carácter de cada efecto."
+        },
+        {
+          "id": "originality",
+          "status": "checked",
+          "note": "Comparado con Reserva v3: cambia el escenario oscuro frontal por estudio claro/berenjena, seis escalas y composiciones, selección en primer plano y transformación continua en una reserva con relieve. Conserva marca y relato como comparación controlada; no se presenta como una idea comercial nueva."
+        }
+      ],
+      "at": "2026-11-16T15:43:19.990Z",
+      "source": "authenticated-production-review",
+      "scope": "observations_only_not_owner_approval"
+    },
+    "priorVideosUnchanged": [
+      {
+        "id": "62ff9b0a-8653-4f23-b16f-08b8d00f62cb",
+        "version": 3,
+        "state": "awaiting_review",
+        "sha256": "afa1f90a8b51add8d6320fd22ffe18e263ff03fa3dce267836d5934fb4ed2c8d"
+      },
+      {
+        "id": "60dce0a0-6d3c-4254-87d1-d7782c8de951",
+        "version": 2,
+        "state": "awaiting_review",
+        "sha256": "850887a51ff38fbbc5afe841b1fc0d91d722a01eccd493e6d5015af1c9041c65"
+      },
+      {
+        "id": "35b0d07e-4983-4d80-b638-b39c2cfd556c",
+        "version": 2,
+        "state": "awaiting_review",
+        "sha256": "a4bef163fe488493703815c02a32c49558f0eecacb80e0f9322f4680ebc17776"
+      },
+      {
+        "id": "92c020c2-0833-43ea-99ba-a47f42555b96",
+        "version": 3,
+        "state": "awaiting_review",
+        "sha256": "020fd68ffd43f8f998aedbcffaf6df38592cc2b66f9bf7089a48f6f67846aab1"
+      }
+    ],
+    "remainingElevenLabsCharacters": 61617,
+    "usageBasedBilling": false,
+    "resourcesObserved": {
+      "beforeCpuPercent": 33.07,
+      "beforeMemoryPercent": 35.03,
+      "duringCpuPercent": 26.26,
+      "duringMemoryPercent": 36.48,
+      "afterCpuPercent": 7.12,
+      "afterMemoryPercent": 34.88,
+      "webCpuLimit": 1,
+      "workerCpuLimit": 1
+    },
+    "tests": {
+      "passed": 35,
+      "failed": 0,
+      "scope": [
+        "pilot seed and timing",
+        "cached narration",
+        "office coordination",
+        "authenticated media and exact-version review",
+        "packaging"
+      ]
+    }
+  },
+  "limits": [
+    "Interpretación y balance subjetivo requieren escucha; navegador probado silenciado.",
+    "Sin predicción de viralidad ni aprobación del propietario.",
+    "Preproducción recibe reglas e historial, pero los nuevos conceptos requieren implementar una escena compatible; el trabajador no ejecuta código libre ni hace QA audiovisual automático."
+  ]
+}

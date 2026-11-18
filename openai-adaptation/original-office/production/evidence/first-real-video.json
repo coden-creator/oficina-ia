@@ -1,0 +1,53 @@
+{
+  "scope": "Live owner ChatGPT-plan workflow; not a fixture or commercial-quality acceptance",
+  "verifiedAtGuatemala": "2026-11-15T15:34:39.589934-06:00",
+  "workerRelease": "codex/worker-r4",
+  "workerCommit": "fc4e8b99b765aec87ead7988306e90a433e1621b",
+  "workerHealthyAfterRestartAndInference": true,
+  "webHealthy": true,
+  "officialLoginPreserved": true,
+  "jobId": "3c2cd214-41cf-4126-a41f-5d0647a7ad6c",
+  "brandId": "glowfy",
+  "version": 2,
+  "state": "awaiting_review",
+  "realCompletedStages": [
+    "research",
+    "strategy",
+    "script",
+    "creative_review",
+    "art_direction"
+  ],
+  "technicalQa": "passed",
+  "artifact": {
+    "sha256": "3cf27039185076ac8e7e36ba7266c6ef3ba18fe5fdc92367468afd15637fabde",
+    "bytes": 256363,
+    "kind": "silent_animatic",
+    "url": "/api/video-workflows/glowfy/3c2cd214-41cf-4126-a41f-5d0647a7ad6c/artifact?v=2"
+  },
+  "downloadHashVerified": true,
+  "fullVideoDecodePassed": true,
+  "probe": {
+    "durationSeconds": 9,
+    "width": 360,
+    "height": 640,
+    "fps": 30,
+    "codec": "h264",
+    "audioStreams": 0
+  },
+  "sampleFramesInspectedAtSeconds": [
+    1.5,
+    4.5,
+    7.5
+  ],
+  "ownerApproval": null,
+  "paidApiEnabled": false,
+  "publishingEnabled": false,
+  "commercialQualityAccepted": false,
+  "revisionNote": "Version 1 retained by normal changes workflow; version 2 explicitly requested after correcting the reviewer canonical-format instruction. No automatic repair loop enabled.",
+  "ownerFeedback": {
+    "date": "2026-11-15",
+    "creativeResult": "rejected",
+    "reason": "Jorge rechazó las tarjetas y aportó dos referencias como mínimo audiovisual.",
+    "recordedIn": "repository only; live job state not changed in this revision"
+  }
+}

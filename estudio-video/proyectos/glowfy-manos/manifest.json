@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "assets": [
+    {
+      "family": "Montserrat",
+      "path": "../../assets/fonts/Montserrat/Montserrat[wght].ttf",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "../../assets/fonts/Montserrat/OFL.txt",
+      "source": "existing user-provided repository; copyright and source URLs retained in OFL file",
+      "sha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7",
+      "used_in": [
+        "src/scene.mjs",
+        "plan/design.html"
+      ]
+    },
+    {
+      "family": "Instrument Serif",
+      "path": "../../assets/fonts/Instrument Serif/InstrumentSerif-Italic.ttf",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "../../assets/fonts/Instrument Serif/OFL.txt",
+      "source": "existing user-provided repository; copyright and source URLs retained in OFL file",
+      "sha256": "08939b8bdf534afec24ae0ef5e03f948940cd9a8fe08e7fecbad040e62327385",
+      "used_in": [
+        "src/scene.mjs",
+        "plan/design.html"
+      ]
+    },
+    {
+      "path": "assets/logo.json",
+      "source": "https://getglowfy.com/",
+      "sha256": "b4c77b378af56c82b0e966c517323e34432b0449994e9ab81be63c6937bc9361",
+      "rights": "Jorge brand project; exact public logo capture, no redraw; proposed internal review use",
+      "processing": "exact header logo browser capture; transparent surrounding DOM; no redraw",
+      "used_in": [
+        "src/scene.mjs",
+        "plan/design.html"
+      ]
+    }
+  ],
+  "illustration": "original code for this proposal",
+  "audio": {
+    "source": "src/sound.py mathematical synthesis",
+    "thirdPartySamples": false,
+    "voice": false,
+    "music": false
+  },
+  "creditsConsumed": 0,
+  "publicationApproved": false
+}

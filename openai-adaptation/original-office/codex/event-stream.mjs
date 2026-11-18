@@ -4,7 +4,7 @@ export class OfficeEventStream {
   constructor(adapter, { instructions = '', timeoutMs = 60000 } = {}) {
     this.adapter = adapter; this.instructions = instructions; this.timeoutMs = timeoutMs;
   }
-  async *stream(prompt, { signal, outputSchema } = {}) {
+  async *stream(prompt, { signal, outputSchema, images } = {}) {
     if (signal?.aborted) throw new Error('ABORTED');
     const rpc = this.adapter.client;
     const queue = []; let wake, failure, done = false; let activeTurn;
@@ -22,7 +22,7 @@ export class OfficeEventStream {
     const timer = setTimeout(() => { failure = new Error('TURN_TIMEOUT'); this.interrupt().catch(() => {}); notify(); }, this.timeoutMs);
     try {
       if (signal?.aborted) throw new Error('ABORTED');
-      const started = await this.adapter.startTurn(this.threadId, prompt, {outputSchema});
+      const started = await this.adapter.startTurn(this.threadId, prompt, {outputSchema,images});
       this.turnId = activeTurn = started?.turn?.id;
       if (!activeTurn) throw new Error('INVALID_TURN_RESPONSE');
       this.adapter.readOnlyToolBridge?.bind(this.threadId,activeTurn);

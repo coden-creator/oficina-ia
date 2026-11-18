@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-16",
+  "timezone": "America/Guatemala",
+  "requestedIdeas": 3,
+  "source": "Owner asked the office to create ideas; assistant supplied only trigger and existing brand evidence",
+  "ideas": [
+    {
+      "id": "1d88f434-f3d4-44be-916d-9808f3dda238",
+      "state": "awaiting_review",
+      "version": 2,
+      "stage": "owner_review",
+      "realStages": [
+        "research",
+        "strategy",
+        "script",
+        "creative_review",
+        "art_direction"
+      ],
+      "editorialVerdict": "pass",
+      "editorialScore": 46,
+      "videoProduced": false,
+      "ownerApproval": null
+    },
+    {
+      "id": "ddfc7eca-9be7-4f06-9976-4721576cbc3a",
+      "state": "awaiting_review",
+      "version": 2,
+      "stage": "owner_review",
+      "realStages": [
+        "research",
+        "strategy",
+        "script",
+        "creative_review",
+        "art_direction"
+      ],
+      "editorialVerdict": "pass",
+      "editorialScore": 48,
+      "videoProduced": false,
+      "ownerApproval": null
+    },
+    {
+      "id": "4a6b05da-8246-428c-bbbb-74b772616e7c",
+      "state": "changes_requested",
+      "version": 3,
+      "stage": "creative_review",
+      "realStages": [
+        "research",
+        "strategy",
+        "script",
+        "creative_review"
+      ],
+      "editorialVerdict": "changes",
+      "editorialScore": 41,
+      "videoProduced": false,
+      "ownerApproval": null
+    }
+  ],
+  "externalResearch": false,
+  "newPaidMediaGeneration": false,
+  "published": false,
+  "technicalInterventions": [
+    "idea-only trigger and persistent scoped authorization",
+    "180-second specialist timeout and 210-second socket timeout",
+    "bounded failure diagnostics",
+    "schema enum for actual evidence IDs"
+  ],
+  "initialFailures": [
+    "ORGANIC_STAGE_FAILED",
+    "SPECIALIST_UNSUPPORTED_EVIDENCE",
+    "INTERRUPTED_STAGE"
+  ],
+  "liveWorkingAgentMotionObserved": true,
+  "ownerReviewPending": true
+}

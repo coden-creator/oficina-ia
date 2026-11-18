@@ -4,7 +4,7 @@ import { AppServerClient, OfficeAdapter, checkResources } from '../src/adapter.m
 function fixture(account = 'chatgpt') {
   const sent = []; let rpc;
   rpc = new AppServerClient(m => { sent.push(m); if (!m.method || m.id === undefined) return;
-    const result = m.method === 'account/read' ? { account: { type: account } } : m.method === 'thread/start' ? {thread:{id:'t1'}} : {turn:{id:'u1'}};
+    const result = m.method === 'account/read' ? { account: { type: account } } : m.method === 'account/rateLimits/read' ? {ordinaryUsageAllowed:true} : m.method === 'thread/start' ? {thread:{id:'t1'}} : {turn:{id:'u1'}};
     queueMicrotask(() => rpc.receive({id:m.id,result}));
   });
   const adapter = new OfficeAdapter(rpc,{workspace:'/tmp/isolated-office',model:'test-model'}); return {rpc,adapter,sent};

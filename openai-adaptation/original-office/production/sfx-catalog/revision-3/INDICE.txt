@@ -1,0 +1,4 @@
+00:05  16. Destello de partículas 01  (destello-particulas-01)
+00:12  17. Destello de partículas 02  (destello-particulas-02)
+00:20  33. Tick de cursor 01  (tick-cursor-01)
+00:24  34. Tick de cursor 02  (tick-cursor-02)

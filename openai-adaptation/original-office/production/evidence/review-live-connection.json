@@ -1,0 +1,28 @@
+{
+  "scope": "First owner-run VPS review deployment, 15 November 2026",
+  "originTlsVerifiedByOwnerScript": true,
+  "officeConnected": true,
+  "jobId": "3c2cd214-41cf-4126-a41f-5d0647a7ad6c",
+  "brand": "glowfy",
+  "version": 1,
+  "firstAttempt": {
+    "state": "blocked",
+    "stage": "script",
+    "blocker": "INVALID_SPECIALIST_OUTPUT",
+    "realCompletedStages": ["research", "strategy"],
+    "outputChars": 1935,
+    "mp4Generated": false,
+    "approved": false,
+    "published": false
+  },
+  "specificFailedValidationRule": "unknown; rejected model response was not retained",
+  "workerCorrectionLocalTests": {
+    "passed": 35,
+    "specialists": "simulated",
+    "includesResumeWithoutRepeatingCompletedStages": true,
+    "includesIncludedUsageGuard": true,
+    "twoContainerMp4AndPersistence": "passed"
+  },
+  "paidApiEnabled": false,
+  "publishingEnabled": false
+}

@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "campaign_id": "glowfy-tres-piezas-20261116",
+  "brand": "Glowfy",
+  "updated_at": "2026-11-16T04:30:49.347Z",
+  "objective": "Tres videos orgánicos con producciones y animaciones distintas para revisión de Jorge",
+  "audience": "Profesionales y negocios de belleza que coordinan citas por WhatsApp",
+  "status": "awaiting_owner_review",
+  "current_version": "unique-production-r1",
+  "sources": [
+    {
+      "id": "glowfy-commercial-pdf",
+      "title": "Glowfy_Presentacion_Comercial.pdf",
+      "url": "https://drive.google.com/file/d/1dqCQWgGxyrvrRIANwfgoeWJCPO9tv_hg/view",
+      "retrieved_at": "2026-11-16",
+      "scope": "Funciones comerciales; recordatorios según plan"
+    },
+    {
+      "id": "owner-visual-correction",
+      "type": "conversation",
+      "text": "CADA VIDEO debería tener una producción increíble y único; no basta cambiar textos."
+    }
+  ],
+  "assets": [
+    {
+      "type": "voice",
+      "id": "hLV6NMOMeGIqdvcW8Uxr",
+      "name": "Jorge Q",
+      "cloning": false
+    },
+    {
+      "type": "music",
+      "ids": [
+        "glowfy-a",
+        "glowfy-b",
+        "glowfy-d"
+      ],
+      "source": "Biblioteca aprobada por Jorge; reutilización"
+    },
+    {
+      "type": "sfx",
+      "source": "Revisiones aprobadas r2 y aceptadas para continuar r3; fuentes originales preservadas"
+    }
+  ],
+  "decisions": [
+    {
+      "by": "Jorge",
+      "decision": "Producir tres videos adicionales de Glowfy"
+    },
+    {
+      "by": "Jorge",
+      "decision": "Animaciones y producción únicas por pieza"
+    },
+    {
+      "by": "assistant",
+      "decision": "Tres módulos de escenas y mapas sonoros independientes; reutilizar guiones y narraciones ya generadas"
+    }
+  ],
+  "approvals": [],
+  "deliverables": [
+    {
+      "key": "reserva",
+      "job_id": "62ff9b0a-8653-4f23-b16f-08b8d00f62cb",
+      "url": "https://service-oficina-jorge.flb2mp.easypanel.host/?brand=glowfy#/estudio?pieza=62ff9b0a-8653-4f23-b16f-08b8d00f62cb",
+      "version": 3,
+      "artifact_sha256": "afa1f90a8b51add8d6320fd22ffe18e263ff03fa3dce267836d5934fb4ed2c8d",
+      "state": "awaiting_review",
+      "music": {
+        "id": "glowfy-a",
+        "title": "Variante A"
+      },
+      "audio": {
+        "provider": "elevenlabs",
+        "model": "eleven_v4",
+        "characters": null,
+        "submittedCharacters": 295
+      },
+      "stages": [
+        {
+          "id": "research",
+          "status": "completed",
+          "source": "codex-chatgpt-plan"
+        },
+        {
+          "id": "strategy",
+          "status": "completed",
+          "source": "codex-chatgpt-plan"
+        },
+        {
+          "id": "script",
+          "status": "completed",
+          "source": "codex-chatgpt-plan"
+        },
+        {
+          "id": "creative_review",
+          "status": "completed",
+          "source": "codex-chatgpt-plan"
+        },
+        {
+          "id": "art_direction",
+          "status": "completed",
+          "source": "codex-chatgpt-plan"
+        },
+        {
+          "id": "production",
+          "status": "completed",
+          "source": "not-verified"
+        },
+        {
+          "id": "qa",
+          "status": "completed",
+          "source": "not-verified"
+        },
+        {
+          "id": "owner_review",
+          "status": "awaiting_owner_review",
+          "source": "not-verified"
+        }
+      ]
+    },
+    {
+      "key": "recordatorio",
+      "job_id": "60dce0a0-6d3c-4254-87d1-d7782c8de951",
+      "url": "https://service-oficina-jorge.flb2mp.easypanel.host/?brand=glowfy#/estudio?pieza=60dce0a0-6d3c-4254-87d1-d7782c8de951",
+      "version": 2,
+      "artifact_sha256": "850887a51ff38fbbc5afe841b1fc0d91d722a01eccd493e6d5015af1c9041c65",
+      "state": "awaiting_review",
+      "music": {
+        "id": "glowfy-b",
+        "title": "Variante B"
+      },
+      "audio": {
+        "provider": "elevenlabs",
+        "model": "eleven_v4",
+        "characters": null,
+        "submittedCharacters": 267
+      },
+      "stages": [
+        {
+          "id": "research",
+          "status": "completed",
+          "source": "codex-chatgpt-plan"
+        },
+        {
+          "id": "strategy",
+          "status": "completed",
+          "source": "codex-chatgpt-plan"
+        },
+        {
+          "id": "script",
+          "status": "completed",
+          "source": "codex-chatgpt-plan"
+        },
+        {
+          "id": "creative_review",
+          "status": "completed",
+          "source": "codex-chatgpt-plan"
+        },
+        {
+          "id": "art_direction",
+          "status": "completed",
+          "source": "codex-chatgpt-plan"
+        },
+        {
+          "id": "production",
+          "status": "completed",
+          "source": "not-verified"
+        },
+        {
+          "id": "qa",
+          "status": "completed",
+          "source": "not-verified"
+        },
+        {
+          "id": "owner_review",
+          "status": "awaiting_owner_review",
+          "source": "not-verified"
+        }
+      ]
+    },
+    {
+      "key": "horario",
+      "job_id": "35b0d07e-4983-4d80-b638-b39c2cfd556c",
+      "url": "https://service-oficina-jorge.flb2mp.easypanel.host/?brand=glowfy#/estudio?pieza=35b0d07e-4983-4d80-b638-b39c2cfd556c",
+      "version": 2,
+      "artifact_sha256": "a4bef163fe488493703815c02a32c49558f0eecacb80e0f9322f4680ebc17776",
+      "state": "awaiting_review",
+      "music": {
+        "id": "glowfy-d",
+        "title": "Variante D"
+      },
+      "audio": {
+        "provider": "elevenlabs",
+        "model": "eleven_v4",
+        "characters": null,
+        "submittedCharacters": 264
+      },
+      "stages": [
+        {
+          "id": "research",
+          "status": "completed",
+          "source": "codex-chatgpt-plan"
+        },
+        {
+          "id": "strategy",
+          "status": "completed",
+          "source": "codex-chatgpt-plan"
+        },
+        {
+          "id": "script",
+          "status": "completed",
+          "source": "codex-chatgpt-plan"
+        },
+        {
+          "id": "creative_review",
+          "status": "completed",
+          "source": "codex-chatgpt-plan"
+        },
+        {
+          "id": "art_direction",
+          "status": "completed",
+          "source": "codex-chatgpt-plan"
+        },
+        {
+          "id": "production",
+          "status": "completed",
+          "source": "not-verified"
+        },
+        {
+          "id": "qa",
+          "status": "completed",
+          "source": "not-verified"
+        },
+        {
+          "id": "owner_review",
+          "status": "awaiting_owner_review",
+          "source": "not-verified"
+        }
+      ]
+    }
+  ],
+  "qa": [
+    {
+      "type": "technical",
+      "evidence": "glowfy-batch-3-technical.json",
+      "passed": true
+    },
+    {
+      "type": "browser",
+      "evidence": "glowfy-batch-3-browser.json",
+      "passed": true,
+      "note": "Los tres videos reproducen y alcanzan exactamente el segundo solicitado después de corregir rangos HTTP; escritorio/móvil sin desbordamiento de página ni errores JS."
+    },
+    {
+      "type": "visual_review",
+      "method": "Secuencias extraídas a 2 fps de los tres MP4 completos, aperturas, transiciones y cierres; navegador escritorio/móvil",
+      "result": "Sin recortes de texto persistentes o fallos de composición evidentes; pendiente de evaluación estética de Jorge."
+    },
+    {
+      "type": "subjective_audio",
+      "passed": null,
+      "result": "Sin escucha subjetiva verificada; niveles, flujo y decodificación comprobados. Evaluación de voz/mezcla a cargo de Jorge."
+    },
+    {
+      "type": "http_ranges",
+      "tests": 10,
+      "passed": true,
+      "scope": "Rangos parciales, sufijos, errores 416, HEAD, rechazo sin credenciales, versión anterior y catálogo de sonidos"
+    }
+  ],
+  "publication": null,
+  "consumption": {
+    "credits": null,
+    "currency": null,
+    "cost": null,
+    "evidence": "Tres narraciones con Eleven v4 y una toma máxima por ficha; la voz de Reserva ya guardada se reutiliza al cambiar visuales. Sin nueva música, SFX ni clonación. Sobreconsumo desactivado. La cuota global bajó 363 unidades entre las consultas anterior y posterior; no se obtuvo costo por solicitud ni moneda y no se atribuye ese delta como facturación individual."
+  },
+  "next_action": "Jorge revisa las tres piezas, solicita cambios o aprueba cada versión; publicación separada.",
+  "blockers": [],
+  "storage": {
+    "location": "production/evidence/glowfy-batch-3-campaign.json",
+    "retrieved_at": "2026-11-16T04:25:22.017Z",
+    "evidence": "Tres fichas y artefactos descargados por HTTPS autenticado; hashes verificados, persistencia en la oficina."
+  },
+  "limitations": [
+    "Investigación del trabajador sobre evidencia suministrada, sin navegación externa ni tendencias actuales verificadas.",
+    "Tres módulos de animación específicos implementados en código; no generación ilimitada de escenas nuevas.",
+    "Los guiones iniciales de Reserva y Recordatorio se conservaron para reutilizar la narración; la dirección de arte posterior y los módulos de producción reemplazan sus antiguas indicaciones visuales.",
+    "Guion y revisión creativa no acreditan calidad estética ni viralidad.",
+    "No se pudo cargar el validador empaquetado de la skill; se validó JSON, campos requeridos y referencias de estas entregas localmente."
+  ],
+  "deployment": "a29589b47ee076e19bab4c69a78c194096250909"
+}

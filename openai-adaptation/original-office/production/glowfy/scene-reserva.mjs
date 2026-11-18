@@ -1,0 +1,22 @@
+import {C,at,mix,rect,oval,text,shadow,noShadow,gradient,line,clamp,label,center,heading,captions,brand,check,sparkle,footnote,cta,curved} from './unique-common.mjs';
+function bubble(c,{x,y,w=520,h=124,angle=0,s=1,message,sub='WHATSAPP',fill='#FFF9FF',alpha=1}){c.save();c.translate(x,y);c.rotate(angle);c.scale(s,s);c.globalAlpha*=alpha;shadow(c,.26,36,18);rect(c,-w/2,-h/2,w,h,25,fill);noShadow(c);oval(c,-w/2+45,0,23,23,'#DDB5F2');text(c,'···',-w/2+29,5,24,C.dark,700);label(c,sub,-w/2+84,-20,15,'#856596',700,w-120);label(c,message,-w/2+84,22,28,C.ink,600,w-120);c.restore();}
+function slot(c,x,y,time,selected,p=1){c.save();c.globalAlpha*=p;shadow(c,.15,22,12);rect(c,x,y,274,145,24,selected?'#B85AE6':'#FFFFFF');noShadow(c);center(c,time,x+137,y+86,51,selected?'#FFFFFF':C.ink,700);if(selected)check(c,x+240,y+25,1,'#FFFFFF');c.restore();}
+function ticket(c,x,y,s,p=1){c.save();c.translate(x,y);c.scale(s,s);c.globalAlpha*=p;shadow(c,.28,50,25);rect(c,-345,-245,690,490,35,'#FFF9FF');noShadow(c);rect(c,-345,-245,690,122,[35,35,0,0],'#E9CFF9');label(c,'TU PRÓXIMA CITA',-297,-172,34,C.dark,700,590);label(c,'Manicure',-297,-63,62,C.ink,700,580);label(c,'MAÑANA',-297,1,25,'#8F739E',600);label(c,'16:00',-297,104,92,C.purple,700);oval(c,245,61,52,52,'#E1F2EA');check(c,245,62,1);c.setLineDash([8,10]);line(c,[[-330,158],[330,158]],'#DBC8E5',2);c.setLineDash([]);center(c,'Del chat a tu agenda',0,209,30,C.dark,600);c.restore();}
+export function draw(c,t,{width=1080,height=1920,beats:b,logo,whiteLogo}={}){
+ const e=b.events,p=at(t,e.phoneFocus,.75),book=at(t,e.calendar,.9),close=at(t,e.closing,.65);c.save();c.scale(width/1080,height/1920);
+ c.fillStyle=gradient(c,0,0,1080,1920,['#21102E','#41204F','#160C25']);c.fillRect(0,0,1080,1920);
+ c.save();c.globalAlpha=.32;for(let i=0;i<14;i++){const x=i*100-100+Math.sin(t*.17)*18;line(c,[[x,530],[x+310,1460]],'#765483',1);}for(let i=0;i<10;i++)line(c,[[0,590+i*100],[1080,700+i*100]],'#765483',1);c.restore();
+ const haze=c.createRadialGradient(560,900,0,560,900,660);haze.addColorStop(0,'#B65BE12C');haze.addColorStop(1,'#B65BE100');c.fillStyle=haze;c.fillRect(0,300,1080,1300);
+ brand(c,whiteLogo||logo);const idx=t<e.phoneFocus?0:t<e.calendar?1:t<e.closing?2:3;
+ const titles=[['MUCHAS PREGUNTAS.','UNA CITA.'],['ELEGIR HORARIO','PUEDE SER SIMPLE.'],['LA CONVERSACIÓN','TOMA FORMA.'],['TU NEGOCIO,','EN MOVIMIENTO.']];heading(c,titles[idx],t,[0,e.phoneFocus,e.calendar,e.closing][idx],{size:78,color:'#FFF7FF',accent:'#D49BEF'});
+ // Every opening message has its own trajectory; the chosen conversation becomes the booking surface.
+ const data=[['¿Tenés lugar?',340,720,-.07],['¿Mañana?',695,880,.06],['¿A qué hora?',350,1060,-.045],['Para manicure',690,1230,.05]];
+ data.forEach(([message,x,y,a],i)=>{const enter=i===0?1:at(t,.25+i*.44,.35),out=at(t,e.phoneFocus-.15+i*.07,.65);bubble(c,{x:mix(x,540,out),y:mix(y,940,out)+Math.sin(t*.9+i)*10,w:490,s:(.9+enter*.1)*(1-out*.65),angle:a*(1-out),alpha:enter*(1-out),message});});
+ // A flowing dotted trail connects two offers with the client's selection.
+ if(p>0&&book<1){c.save();c.globalAlpha=p*(1-book);c.translate(0,50*(1-p)-book*200);const push=at(t,e.phoneFocus+.6,Math.max(1,e.reply-e.phoneFocus));c.translate(520,970);c.scale(1+push*.12,1+push*.12);c.translate(-520,-970);curved(c,[[300,760],[900,700],[50,1120],[750,1170]],'#84559E',5);c.setLineDash([4,16]);c.lineDashOffset=-t*25;curved(c,[[300,760],[900,700],[50,1120],[750,1170]],'#F4D9FF',3);c.setLineDash([]);
+ bubble(c,{x:510,y:720,message:'¿Para mañana?',sub:'TU CLIENTA',w:650});
+ const offers=at(t,e.assistant,.45),selection=at(t,e.reply,.35);c.globalAlpha*=offers;center(c,'Disponibilidad',520,875,27,'#E7CFF1',600);slot(c,220,925,'11:00',false,offers);slot(c,530,925,'16:00',selection>.4,at(t,e.assistant+.18,.4));
+ c.globalAlpha=p*(1-book);const reply=at(t,e.reply+.12,.4);bubble(c,{x:mix(900,540,reply),y:1170,w:490,message:'16:00, por favor.',sub:'HORARIO ELEGIDO',fill:'#EAD2F7',alpha:reply});sparkle(c,855,940,t,e.reply,35,'#F1C5FF');c.restore();}
+ if(book>0){const scale=mix(.38,.98,book)*(1-close*.2);ticket(c,mix(680,520,book),mix(1140,970,book)-close*90,scale*(1+.025*at(t,e.calendar+1,2)),book);sparkle(c,210,740,t,e.calendar+.7,36,'#E2B7F6');sparkle(c,830,1160,t,e.calendar+.9,23,'#E2B7F6');}
+ if(!close)footnote(c,undefined,true,1390);if(close)cta(c,t,b,{y:1220,dark:true});captions(c,t,b,{y:1550,color:'#FFF7FF',accent:'#E5AEFF'});c.restore();
+}

@@ -1,0 +1,304 @@
+{
+  "recordedAt": "2026-11-17T03:15:32.310844+00:00",
+  "timezone": "America/Guatemala",
+  "request": "Corregir movimiento y transiciones del lote rechazado; primera pieza La cita, por dentro",
+  "id": "0515e9c0-4c58-4420-a19f-61e94b6cf8f1",
+  "version": 4,
+  "artifact": {
+    "sha256": "937a52ea0c38933b0dcc1c49179a98670db818cf79e7e86d36449b7024d1aeba",
+    "version": 4,
+    "bytes": 3398099,
+    "kind": "narrated_brand_video",
+    "posterUrl": "/api/video-workflows/glowfy/0515e9c0-4c58-4420-a19f-61e94b6cf8f1/poster?v=4",
+    "url": "/api/video-workflows/glowfy/0515e9c0-4c58-4420-a19f-61e94b6cf8f1/artifact?v=4"
+  },
+  "codeCommit": "e2ea7ca5b430258e7f33b473f00bd3827ac90777",
+  "workerSourceCommit": "0a77524f81bb3e8966bf926b10e352f21db9473d",
+  "workerBranch": "codex/worker-kinematics-r3",
+  "creativeModels": {
+    "model": "gpt-6-astra",
+    "reasoning": "high",
+    "modelsByStage": {
+      "research": "gpt-6.1-sol",
+      "strategy": "gpt-6.1-sol",
+      "script": "gpt-6.1-sol",
+      "creative_review": "gpt-6.1-sol",
+      "art_direction": "gpt-6-astra",
+      "edit_plan": "gpt-6-astra"
+    }
+  },
+  "finalMusic": {
+    "id": "glowfy-a",
+    "title": "Variante A"
+  },
+  "musicChangedFromSource": true,
+  "observations": {
+    "version": 4,
+    "artifactHash": "937a52ea0c38933b0dcc1c49179a98670db818cf79e7e86d36449b7024d1aeba",
+    "criteria": [
+      {
+        "id": "story",
+        "status": "checked",
+        "note": "Se inspeccionó el MP4 final: solicitud, opciones, pulsación, cambio 11:00→17:00 y cierre. Nombre y servicio permanecen visibles. El guion coincide con la versión anterior. Observación interna, no aprobación de Jorge."
+      },
+      {
+        "id": "craft",
+        "status": "checked",
+        "note": "MP4 final inspeccionado: placa, alas, selector, transmisión y apoyos legibles con cantos y sombras ilustrados. Se corrigió la proporción del logo, conservando sus dimensiones relativas dentro del marco. Los cuatro diseños se reutilizaron sin cambios desde v3; esto no acredita equivalencia artística con las referencias ni aprobación de Jorge."
+      },
+      {
+        "id": "motion",
+        "status": "checked",
+        "note": "Inspección de las tres uniones en pasos de 80 ms, y acciones a 4 fps: flexión inicial, liberación, apertura, selector, pulsación y plegado visibles. No se observa un reinicio completo de objetos en las uniones. Hay reposo final para lectura. Son muestras, no verificación manual de cada fotograma ni una puntuación artística."
+      },
+      {
+        "id": "voice",
+        "status": "not_checked",
+        "note": "Narración Eleven v4 recuperada de la caché obligatoria v2. El flujo AAC final es idéntico al de v3. No se realizó escucha subjetiva; la prueba de navegador fue silenciada."
+      },
+      {
+        "id": "sound",
+        "status": "not_checked",
+        "note": "AAC estéreo idéntico a v3; −16,11 LUFS y −3,49 dBTP medidos. Música A de las cuatro autorizadas, conservada desde v3; la v2 usaba B. Efectos existentes, sin nueva síntesis. Falta escucha subjetiva de mezcla y contactos."
+      },
+      {
+        "id": "originality",
+        "status": "not_checked",
+        "note": "Se corrigió una pieza existente. Los otros dos ejemplos no se rehicieron en esta corrección; no se atribuye variedad nueva al lote ni aprobación del estilo por Jorge."
+      }
+    ]
+  },
+  "designReuse": {
+    "graphsIdenticalToV3": true,
+    "scenes": 4,
+    "seededFrom": [
+      "v3/authored/scene-1-continuity-kinematics-v3-attempt-1.json",
+      "v3/authored/scene-2-continuity-kinematics-v3-attempt-2.json",
+      "v3/authored/scene-3-continuity-kinematics-v3-attempt-2.json",
+      "v3/authored/scene-4-continuity-kinematics-v3-attempt-4.json"
+    ]
+  },
+  "audioReuse": {
+    "audioIdenticalToV3": true,
+    "v3AacSha256": "37afba44425ad879f2ca0bce1ed021c2c40bd8752fb1b5491f636b2f0b695675",
+    "v4AacSha256": "37afba44425ad879f2ca0bce1ed021c2c40bd8752fb1b5491f636b2f0b695675"
+  },
+  "source": {
+    "sourceVersion": 2,
+    "sourceSha256": "e9ea0ad5f053cc965d2c3e443ae918eb1738f0a2ab62808af34297b359311ed4",
+    "sourceAudio": {
+      "provider": "elevenlabs",
+      "model": "eleven_v4",
+      "characters": null,
+      "submittedCharacters": 334
+    },
+    "sourceMusic": {
+      "id": "glowfy-b",
+      "title": "Variante B"
+    },
+    "ownerFeedback": "Carente de movimiento, pésimas transiciones; mejoró pero no al nivel de la oficina Claude.",
+    "scope": "Rehacer dirección y movimiento de una pieza, mantener guion y narración; no aprobación/publicación.",
+    "sourceModelStages": {
+      "research": "gpt-6.1-sol",
+      "strategy": "gpt-6.1-sol",
+      "script": "gpt-6.1-sol",
+      "creative_review": "gpt-6.1-sol",
+      "art_direction": "gpt-6.1-sol",
+      "edit_plan": "gpt-6-astra"
+    }
+  },
+  "measured": [
+    {
+      "id": "0515e9c0-4c58-4420-a19f-61e94b6cf8f1",
+      "hash": "937a52ea0c38933b0dcc1c49179a98670db818cf79e7e86d36449b7024d1aeba",
+      "duration": 21.2,
+      "width": 1080,
+      "height": 1920,
+      "fps": "30/1",
+      "audio": "aac",
+      "modelConfigured": "gpt-6-astra",
+      "approved": false,
+      "published": false
+    }
+  ],
+  "audioMeasurement": {
+    "integratedLufs": -16.11,
+    "truePeakDbtp": -3.49,
+    "loudnessRange": 13.6,
+    "subjectiveListeningVerified": false
+  },
+  "browser": {
+    "tlsVerified": true,
+    "videos": [
+      {
+        "id": "0515e9c0-4c58-4420-a19f-61e94b6cf8f1",
+        "duration": 21.2,
+        "width": 1080,
+        "height": 1920,
+        "error": null,
+        "source": "/api/video-workflows/glowfy/0515e9c0-4c58-4420-a19f-61e94b6cf8f1/artifact?v=4",
+        "playback": true,
+        "seek": true,
+        "mobileOverflow": false,
+        "mutedBrowserTest": true
+      }
+    ],
+    "javascriptErrors": [],
+    "readOnly": true
+  },
+  "motionDiagnostic": [
+    {
+      "name": "previous",
+      "samples": 253,
+      "meanChangedAreaFraction": 0.0186,
+      "nearlyStaticIntervals": [
+        [
+          3.0,
+          3.58
+        ],
+        [
+          5.58,
+          6.83
+        ],
+        [
+          8.33,
+          8.83
+        ],
+        [
+          10.0,
+          10.75
+        ],
+        [
+          13.5,
+          14.75
+        ],
+        [
+          18.0,
+          21.08
+        ]
+      ],
+      "scope": "ROI excludes captions and branding, includes camera, lights and shadows. Diagnostic only; does not prove motion quality."
+    },
+    {
+      "name": "corrected",
+      "samples": 253,
+      "meanChangedAreaFraction": 0.0492,
+      "nearlyStaticIntervals": [
+        [
+          6.42,
+          7.08
+        ],
+        [
+          11.0,
+          11.67
+        ],
+        [
+          19.17,
+          21.08
+        ]
+      ],
+      "scope": "ROI excludes captions and branding, includes camera, lights and shadows. Diagnostic only; does not prove motion quality."
+    }
+  ],
+  "reviewNamespace": "continuity-brand-v4",
+  "internalFinalReviews": [
+    {
+      "attempt": 0,
+      "renderer": "continuity-brand-v4",
+      "graphHash": "c8a0bc63fe7950b43bbca3fab6acfa6505b4a0b0fda63533c8739cccfee95715",
+      "model": "gpt-6-astra",
+      "verdict": "pass",
+      "observations": [
+        "Escena 1: al 28% se distingue la curvatura del cuello rosa bajo «Necesito otro horario»; al 58% el pestillo está levantado y al 88% las alas están separadas. «Ana · Manicura» y «11:00» permanecen legibles, sin recortes.",
+        "Escena 2: las ventanas todavía vacías al 28% muestran «15:00» y «17:00» al 58%. El selector se reconoce bajo la opción izquierda al 58% y bajo la derecha al 88%, sin tapar las cifras. La petición y la identidad conservan su separación.",
+        "Escena 3: al 28% la transmisión se distingue a la derecha del cuerpo; al 58% la tecla «17:00» presenta un canto inferior más expuesto y el tambor ya muestra «17:00». La varilla bordea la ventana horaria sin ocultar sus números ni «Ana · Manicura». El giro intermedio no puede verificarse con estas muestras.",
+        "Escena 4: las alas pasan de abiertas a formar apoyos bajo el cuerpo. Al 58% y 88% sus extremos alcanzan la sombra de contacto; el cuello rosa permanece dentro de una guía visible. La hora actualizada queda expuesta.",
+        "En el cierre, CTA, marca y subtítulo ocupan líneas separadas, sin solaparse con el mecanismo. El espacio superior queda ampliamente libre, pero la composición inferior conserva una jerarquía clara. No se observan textos esenciales cortados ni sombras que dificulten la lectura.",
+        "La valoración comprende composición y diferencias visibles entre los cuatro momentos de cada escena. No permite comprobar continuidad entre muestras, velocidad, pausas, transiciones completas, audio ni sincronía exacta."
+      ],
+      "corrections": []
+    },
+    {
+      "attempt": 0,
+      "renderer": "continuity-brand-v4",
+      "scope": "dense-motion-and-boundaries",
+      "graphHash": "c8a0bc63fe7950b43bbca3fab6acfa6505b4a0b0fda63533c8739cccfee95715",
+      "model": "gpt-6-astra",
+      "verdict": "pass",
+      "observations": [
+        "Escena 1, 0.56–1.95 s: el cuello rosa se curva, el pestillo se eleva y las alas empiezan a separarse. La acción se entiende por cambios del objeto, no sólo por el reencuadre. Identidad y hora permanecen reconocibles.",
+        "Uniones en torno a 4.20, 8.92 y 15.04 s: cuerpo, bisagra y ventanas conservan referencias de posición y orientación. No se aprecia desaparición por corte, reinicio de la apertura ni salto de escala injustificado en las muestras.",
+        "Escena 2, 4.74–8.89 s: las alas exponen las ventanas y el selector recorre de «15:00» a «17:00». La pausa bajo la primera opción permite leer; después hay desplazamiento y anticipación ante la segunda. El encuadre mantiene visibles las opciones y la identidad.",
+        "Escena 3, 10.67–12.84 s: se distingue la elevación de la tecla «17:00», la transmisión conectada y el cambio de hora del cuerpo. «Ana · Manicura» permanece estable. Entre 11.75 y 12.30 s no hay muestras suficientes para verificar el giro completo de las cifras; no corresponde afirmar que exista un corte.",
+        "Escena 3, 13.38–15.01 s, y escena 4, 15.16–17.35 s: el selector se retira, las alas bajan y sus extremos aparecen bajo el cuerpo como apoyos. El mecanismo conserva su identidad durante el plegado; la cámara mantiene la transformación dentro del encuadre.",
+        "Escena 4, 16.80–18.98 s: el cuello rosa permanece contenido por una guía visible durante el descenso. El cierre conserva «17:00». CTA y marca son visibles desde la muestra de 17.89 s, mientras continúa el subtítulo de cierre.",
+        "Escena 4, 19.53–21.17 s: la quietud final sostiene la lectura de la cita y la CTA después del asentamiento. No constituye por sí sola un reposo excesivo. Las mediciones de cambio de píxeles no prueban la calidad del movimiento.",
+        "Evaluación visual y creativa limitada a las imágenes adjuntas. Sin audio no se evaluaron voz, música, mezcla ni sincronía sonora; tampoco se verificó la continuidad de todos los fotogramas del MP4 exacto."
+      ],
+      "corrections": []
+    }
+  ],
+  "sceneCapabilities": [
+    {
+      "scene": 1,
+      "correction": 0,
+      "nodes": 65,
+      "deformingPaths": 4,
+      "projectedPlanes": 0
+    },
+    {
+      "scene": 2,
+      "correction": 0,
+      "nodes": 83,
+      "deformingPaths": 0,
+      "projectedPlanes": 0
+    },
+    {
+      "scene": 3,
+      "correction": 0,
+      "nodes": 97,
+      "deformingPaths": 1,
+      "projectedPlanes": 0
+    },
+    {
+      "scene": 4,
+      "correction": 0,
+      "nodes": 102,
+      "deformingPaths": 0,
+      "projectedPlanes": 0
+    }
+  ],
+  "verification": {
+    "otherVideosPreserved": true,
+    "unchangedCount": 11,
+    "sourceNarrationUnchanged": true,
+    "previousCount": 12,
+    "nowCount": 12
+  },
+  "ownerApproved": false,
+  "published": false,
+  "scheduled": false,
+  "subjectiveListeningVerified": false,
+  "referenceQualityEquivalenceVerified": false,
+  "tested": {
+    "authoredChoreographyAndReport": 30,
+    "coordinationAndRecovery": 20,
+    "closingBudgetRerun": 12,
+    "note": "The 12 closing tests are a subset, not 12 additional distinct tests."
+  },
+  "limitations": [
+    "Illustrated vectors with gradients/shadows; the final scene graphs do not use projected planes or native 3D.",
+    "Visual inspection uses sampled frames, including dense transition windows. Browser playback was muted.",
+    "Motion pixel diagnostics are not a quality score; final artistic judgment belongs to Jorge."
+  ],
+  "resourcesObserved": {
+    "hostCpuPercent": 13.2,
+    "hostMemoryPercent": 30.79,
+    "appCpuLimit": 1,
+    "workerCpuLimit": 1,
+    "appMemoryMiB": 768,
+    "workerMemoryMiB": 768,
+    "serialRender": true,
+    "scope": "A point-in-time observation, not continuous host monitoring."
+  }
+}

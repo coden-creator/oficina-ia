@@ -1,0 +1,9 @@
+{
+  "brandId": "glowfy",
+  "source": "Jorge: los demás están buenos; mejorar ambos destellos y ambos ticks de cursor",
+  "approvedRevision2": ["clic-boton-02", "golpe-grave-02", "teclas-suaves-01"],
+  "changesRequestedRevision2": ["destello-particulas-01", "destello-particulas-02", "tick-cursor-01", "tick-cursor-02"],
+  "otherEffects": "No new approval inferred",
+  "newRevision": 3,
+  "newRevisionApproved": false
+}

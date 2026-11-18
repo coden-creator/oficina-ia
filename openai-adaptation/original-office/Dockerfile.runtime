@@ -3,7 +3,9 @@
 FROM node:22.16.0-bookworm-slim AS codex-install
 WORKDIR /install
 COPY runtime-package/package.json runtime-package/package-lock.json ./
-RUN npm ci --omit=dev --ignore-scripts --no-audit --no-fund \
+RUN --mount=type=secret,id=npm_ca \
+    if [ -f /run/secrets/npm_ca ]; then export npm_config_cafile=/run/secrets/npm_ca; fi \
+ && npm ci --omit=dev --ignore-scripts --no-audit --no-fund \
  && node node_modules/@openai/codex/bin/codex.js --version | grep -Fx 'codex-cli 0.167.0-alpha.4' \
  && bin="$(find node_modules/@openai -type f -path '*/vendor/*/bin/codex')" \
  && test "$(printf '%s\n' "$bin" | wc -l)" -eq 1 \
@@ -16,12 +18,12 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends ffmpeg=7:5.1.9-0+deb12u1 fonts-dejavu-core ca-certificates \
  && test "$(dpkg-query -W -f='${Version}' ffmpeg)" = '7:5.1.9-0+deb12u1' \
  && rm -rf /var/lib/apt/lists/*
-COPY --from=codex-install /codex-vendor/ /opt/codex-vendor/
+COPY --from=codex-install --chmod=755 /codex-vendor/ /opt/codex-vendor/
 RUN ln -s /opt/codex-vendor/bin/codex /usr/local/bin/codex
 RUN /usr/local/bin/codex --version | grep -Fx 'codex-cli 0.167.0-alpha.4' \
- && mkdir -p /data /home/node/codex-isolated /home/node/empty-workspace \
- && chown -R node:node /data /home/node/codex-isolated /home/node/empty-workspace \
- && chmod 700 /data /home/node/codex-isolated /home/node/empty-workspace
+ && mkdir -p /data/video /run/office /home/node/codex-isolated /home/node/empty-workspace \
+ && chown -R node:node /data /run/office /home/node/codex-isolated /home/node/empty-workspace \
+ && chmod 700 /data /data/video /run/office /home/node/codex-isolated /home/node/empty-workspace
 COPY runtime-package/requirements.toml /etc/codex/requirements.toml
 RUN chown root:root /etc/codex/requirements.toml && chmod 644 /etc/codex/requirements.toml
 WORKDIR /app
@@ -29,6 +31,13 @@ ENV NODE_ENV=production HOST=0.0.0.0 PORT=3000 OFFICE_VIDEO_DATA_DIR=/data/video
 COPY --chown=node:node server.mjs start.mjs agents-display.json ./
 COPY --chown=node:node public/ ./public/
 COPY --chown=node:node video/ ./video/
+COPY --chown=node:node connections/ ./connections/
+COPY --chown=node:node production/reference-standard.mjs ./production/reference-standard.mjs
+COPY --chown=node:node production/music-library.mjs ./production/music-library.mjs
+COPY --chown=node:node production/sound-catalog.mjs ./production/sound-catalog.mjs
+COPY --chown=node:node production/sfx-review-plan.mjs production/sfx-review-batch.mjs ./production/
+COPY --chown=node:node production/sfx-catalog/review-decisions.json ./production/sfx-catalog/review-decisions.json
+COPY --chown=node:node production/audio/glowfy-* ./production/audio/
 COPY --chown=node:node codex/ ./codex/
 COPY --chown=node:node scripts/ ./scripts/
 USER node

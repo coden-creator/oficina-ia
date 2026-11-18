@@ -1,13 +1,31 @@
 # Original shell + protected internal video workflow
 
-Local review build. No push, no deploy, no logged-in model or real AI generation has been verified.
+## Producción por proyecto · 16 de noviembre de 2026
+
+La oficina está conectada al trabajador `gpt-6-astra` con razonamiento `high`, mediante el uso incluido de ChatGPT. El plan de edición, la autoría de escenas y la revisión de imágenes del lote nuevo usan ese modelo. Las etapas iniciales de las dos primeras fichas comenzaron con Sol; se conserva la procedencia por etapa. [Estado y entregables](production/glowfy/PROGRESS.md).
+
+El protocolo `glowfy-authored-motion-v2` permite construir geometría vectorial, jerarquías, materiales, animación y contactos sonoros por proyecto. El especialista entrega datos validados, sin ejecutar JavaScript generado ni cargar URLs/recursos arbitrarios. El director recibe cuatro secuencias de imágenes renderizadas y solicita correcciones concretas; su revisión no equivale a la aprobación audiovisual de Jorge.
+
+La ruta se activa únicamente para los IDs autorizados en `OFFICE_AUTHORED_VIDEO_JOB_IDS`, con autorización registrada en cada ficha. Usa la voz existente autorizada de ElevenLabs, música y efectos de la biblioteca elegida, guarda los resultados en el volumen privado y reutiliza la voz al corregir imágenes. No hay publicación ni programación automática. La investigación sigue limitada a evidencia suministrada; no se afirma investigación web autónoma.
+
+Las observaciones de cada render se vinculan a su versión y hash. Los cuadros de revisión se renderizan individualmente a 1080×1920 antes de componer el contacto visual. El cierre conserva fondos claros/oscuros y evita repetir logo, CTA o aclaraciones ya presentes. Las correcciones del compositor invalidan la revisión de imágenes y conservan los diseños previos; no autorizan nueva síntesis de voz.
+
+> Los apartados siguientes conservan el historial de integración. Sus restricciones por defecto y resultados simulados no sustituyen la evidencia de producción vigente enlazada arriba.
+
+> Registro histórico (código entonces pendiente de despliegue): [recuperación del departamento orgánico](production/RECUPERACION-CONTENIDO-ORGANICO.md) identifica el motor original y lo que falta portar. Se añade [configuración de ElevenLabs en Conexiones](connections/README.md) y descarte de ideas con historial; no se habilita síntesis ni publicación.
+
+> Corrección creativa: Jorge rechazó el acabado de tarjetas y fijó dos referencias como mínimo audiovisual. Ver [directrices vigentes](production/ESTANDAR-AUDIOVISUAL.md). La prueba de conexión sigue siendo evidencia técnica, no aceptación del video.
+
+> Estado verificado (15 noviembre 2026): Jorge completó el login oficial; el trabajador privado de Codex ya está desplegado y Docker lo reportó saludable. La web de revisión y el trabajador están saludables. La ficha Glowfy, versión 2, completó las cinco etapas con Codex real y generó un MP4 silencioso de 9 segundos; descarga, SHA256 y decodificación comprobados. Permanece pendiente de aprobación de Jorge. Ver [evidencia del video real](production/evidence/first-real-video.json). La entrega vigente usa un trabajador Compose y una web Swarm porque CodeNet no es attachable. Consultar [IMPLEMENTACION.md](deployment-review/IMPLEMENTACION.md) para el procedimiento y los límites actuales. Los apartados posteriores conservan evidencia histórica; no describen por sí solos el despliegue vigente.
+
+Historical local-build notes follow; current deployment status is recorded above.
 
 ## Real functionality
 - Preserves original office canvas, rooms, navigation and visual styles with audited unavailable states.
 - Optional video panel saves requests for five separate brands, with objective and CTA.
 - Authenticated HTTP workflow connects to createVideoFlow: create/list/get/run/requestChanges/accept version+hash.
 - API exposes artifact URL only, never absolute file path. Download authenticates, checks brand/job/version, real path confinement, MP4 kind/size and SHA256.
-- Accept means accept_artifact_only, not publication. API has no publisher, credential setup or spending action. Paid calls, voice and cloning unsupported.
+- Accept means accept_artifact_only, not publication. API has no publisher or spending action. Optional credential setup is described above. Paid calls, voice and cloning unsupported.
 - Workflow storage and model runtime are separate. Server starts no model process and uses no adapter by default. Without connected runner, run persists blocked rather than inventing content.
 
 ## Deployment behavior

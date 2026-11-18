@@ -1,4 +1,16 @@
-# Runtime packaging: prepared, not deployed or authenticated
+# Empaquetado y despliegue · historial técnico
+
+## Ruta de producción vigente · 16 de noviembre de 2026
+
+`Dockerfile.easypanel` empaqueta el compositor de escenas por proyecto y su inspector de imágenes. El App existente y el trabajador privado conservan 1 CPU/768 MiB cada uno. Un render simultáneo; consultas de uso incluido antes de inferencia. El trabajador utiliza `gpt-6-astra`/`high`, con sesión del propietario en el volumen privado, y acepta imágenes generadas de revisión a través del socket privado. No recibe credenciales de ElevenLabs ni el socket Docker.
+
+Los grafos generados, narraciones, imágenes de revisión y MP4 viven en el volumen de videos; el ZIP privado de Motion Video Director y los videos de referencia no se redistribuyen en la imagen ni el repositorio. Las pruebas sintéticas del contrato y los renders/consultas reales se registran separadamente. Ver [estado de las tres nuevas piezas](production/glowfy/PROGRESS.md).
+
+Los bloques siguientes son registros históricos. No interpretarlos como ausencia actual de login, inferencia, Canvas o voz.
+
+> Corrección creativa: Jorge rechazó el acabado de tarjetas y fijó dos referencias como mínimo audiovisual. Ver [directrices vigentes](production/ESTANDAR-AUDIOVISUAL.md). La prueba de conexión sigue siendo evidencia técnica, no aceptación del video.
+
+> Estado verificado (15 noviembre 2026): Jorge completó el login oficial; el trabajador privado de Codex ya está desplegado y Docker lo reportó saludable. La web de revisión y el trabajador están saludables. La ficha Glowfy, versión 2, completó las cinco etapas con Codex real y generó un MP4 silencioso de 9 segundos; descarga, SHA256 y decodificación comprobados. Permanece pendiente de aprobación de Jorge. Ver [evidencia del video real](production/evidence/first-real-video.json). La entrega vigente usa un trabajador Compose y una web Swarm porque CodeNet no es attachable. Consultar [IMPLEMENTACION.md](deployment-review/IMPLEMENTACION.md) para el procedimiento y los límites actuales. Los apartados posteriores conservan evidencia histórica; no describen por sí solos el despliegue vigente.
 
 ## Verified inputs
 - Official npm `@openai/codex@0.167.0-alpha.4`; package-lock includes platform packages with SHA512 integrity. `npm ci --ignore-scripts` succeeded in the build investigation environment.
@@ -41,3 +53,14 @@ The parallel CLI investigation verified the staged managed requirements in a bwr
 
 ## Optional Canvas laboratory adapter (disabled)
 `OFFICE_ENABLE_CANVAS_DEMO=1` additionally requires `OFFICE_CANVAS_DEPENDENCIES_VERIFIED=1` and cannot coexist with local-render flag. This operator declaration is not proof: deployment must first verify native @napi-rs/canvas 0.1.100, FFmpeg, fonts and sandbox. Images currently do not install Canvas, so DO NOT set these flags in a release yet. No Codex runner is connected by enabling a renderer. Jobs require explicit `style: technical-canvas-demo`; UI displays the resulting artifact as a technical illustration, not real product UI or final commercial production. There is intentionally no one-click default demo generation or fake agents. HTTP supports authenticated/hash-checked MP4 kind technical_canvas_demo and silent_animatic only. POSIX owned-process-group supervisor terminates worker/descendants on timeout/output caps and awaits closure, with regression tests; this does not prove cgroup/network isolation. The real HTTP test uses fixture specialist outputs, never model inference.
+
+2026-11-16: `Dockerfile.easypanel` añade un stage de dependencias de render con npm ci y lockfile de Canvas 0.1.100. Incorpora únicamente módulos propios de producción, fuentes OFL y logo público de Glowfy. La clave ElevenLabs y los archivos privados generados nunca entran al contexto de build. El render es serial, con un thread de codificación, dentro del límite de 1 CPU/768 MiB del App existente. No cambia volúmenes, redes ni el servicio de login.
+
+### Glowfy social revision
+
+The app image includes the existing studio music and seven SFX named in `production/audio/manifest.json`. Docker context explicitly permits these files. It adds a separate `voice-take-2` ledger for the owner-requested correction; existing audio, Codex authentication and persistent mounts remain intact. Model metadata and included quota are checked before the single synthesis request. This profile is scoped to the same test job; it does not enable general paid production or publication.
+
+
+### Biblioteca musical Glowfy v1
+
+La imagen incorpora cuatro MP3 de 20 segundos seleccionados por Jorge y su manifiesto, sin URLs temporales, credenciales ni audios de voz. Los tres Dockerfiles contemplan las dependencias de la nueva ruta privada de música. No se cambian el trabajador, la sesión de Codex, los montajes ni los límites de recursos. Las pistas se comprueban por SHA-256 al servirlas o seleccionarlas para mezclar.

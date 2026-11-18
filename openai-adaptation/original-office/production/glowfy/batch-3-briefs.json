@@ -1,0 +1,125 @@
+[
+  {
+    "key": "reserva",
+    "variant": "booking",
+    "objective": "Glowfy · Agendar sin tantos mensajes",
+    "cta": "Conocé Glowfy",
+    "audience": "Profesionales y dueñas de negocios de belleza que gestionan sus citas por WhatsApp",
+    "channel": "instagram",
+    "qualityStandard": "cresova-reference-v1",
+    "evidence": [
+      {
+        "id": "glowfy_product",
+        "text": "Glowfy reúne agenda, atención por WhatsApp y automatizaciones para negocios de belleza. La IA comparte disponibilidad y ayuda a agendar o modificar citas. Envía recordatorios y seguimientos según el plan. No prometer resultados, reducciones numéricas, cero olvidos, precios ni promociones. La presentación comercial se recuperó para esta producción; no se verificó una tendencia externa.",
+        "source": "https://drive.google.com/file/d/1dqCQWgGxyrvrRIANwfgoeWJCPO9tv_hg/view",
+        "date": "2026-11-16"
+      },
+      {
+        "id": "brand_assets",
+        "text": "Logo oficial y fuentes Montserrat e Instrument Serif disponibles en el render de la oficina. Paleta violeta #AD52E0, berenjena #23152F, marfil #FAF7FD. URL getglowfy.com. Recursos dibujados y animables: salón, manos de manicure, teléfono y mensajes, reloj, agenda y cita. Toda interfaz es ejemplo ilustrado; no captura real del producto. Música Glowfy A/B/C/D ya elegida por Jorge, efectos de biblioteca actualizada.",
+        "source": "Repositorio oficina-ia, production/glowfy/assets.json y biblioteca de Glowfy",
+        "date": "2026-11-16"
+      },
+      {
+        "id": "owner_request",
+        "text": "Jorge solicita exactamente tres videos más de Glowfy mediante el proceso de la oficina, continuando el estilo social ya trabajado, con su voz existente hLV6NMOMeGIqdvcW8Uxr. Una narración por pieza, sin clonar ni generar música/efectos nuevos. Entregar para revisión; no aprobar, publicar ni agendar. Los efectos v3 mejoraron y su perfeccionamiento se pospone.",
+        "source": "Solicitud de Jorge: hagamos 3 videos mas, pon a la oficina a trabajar",
+        "date": "2026-11-16"
+      },
+      {
+        "id": "production_contract",
+        "text": "Formato vertical 1080x1920 a 30 fps; objetivo 18–25 s determinado por voz real. Exactamente CUATRO escenas. Narración natural en español, voseo coherente, 40–50 palabras TOTAL y máximo 480 caracteres; narration debe ser concatenación exacta de scenes[].narration en orden. Cada text de escena debe tener máximo 5 palabras y 28 caracteres, titulares específicos (no instrucciones). Última escena y última frase: Conocé Glowfy. No leer URL ni etiquetas técnicas. Solo animación de los recursos disponibles. Un único CTA. Investigación basada en evidencia aportada. Evaluar el ángulo específico, no repetir el anterior ¿Justo ahora?/Mientras atendés.",
+        "source": "Dirección de producción del lote y límites del motor existente",
+        "date": "2026-11-16"
+      },
+      {
+        "id": "piece_direction",
+        "text": "Dolor: ida y vuelta de mensajes para acordar hora. Apertura: demasiadas preguntas para una cita. Recorrido: 1 teléfono con mensajes y profesional en salón; 2 conversación cliente pide mañana, asistente ofrece 11:00 o 16:00, cliente elige 16:00; 3 se transforma en cita de agenda; 4 cierre. No afirmar que un mensaje completa todo, ni disponibilidad real.",
+        "source": "Dirección creativa específica de esta pieza",
+        "date": "2026-11-16"
+      }
+    ]
+  },
+  {
+    "key": "recordatorio",
+    "variant": "reminder",
+    "objective": "Glowfy · Que tu cita no se pierda en el chat",
+    "cta": "Conocé Glowfy",
+    "audience": "Profesionales y dueñas de negocios de belleza que gestionan sus citas por WhatsApp",
+    "channel": "instagram",
+    "qualityStandard": "cresova-reference-v1",
+    "evidence": [
+      {
+        "id": "glowfy_product",
+        "text": "Glowfy reúne agenda, atención por WhatsApp y automatizaciones para negocios de belleza. La IA comparte disponibilidad y ayuda a agendar o modificar citas. Envía recordatorios y seguimientos según el plan. No prometer resultados, reducciones numéricas, cero olvidos, precios ni promociones. La presentación comercial se recuperó para esta producción; no se verificó una tendencia externa.",
+        "source": "https://drive.google.com/file/d/1dqCQWgGxyrvrRIANwfgoeWJCPO9tv_hg/view",
+        "date": "2026-11-16"
+      },
+      {
+        "id": "brand_assets",
+        "text": "Logo oficial y fuentes Montserrat e Instrument Serif disponibles en el render de la oficina. Paleta violeta #AD52E0, berenjena #23152F, marfil #FAF7FD. URL getglowfy.com. Recursos dibujados y animables: salón, manos de manicure, teléfono y mensajes, reloj, agenda y cita. Toda interfaz es ejemplo ilustrado; no captura real del producto. Música Glowfy A/B/C/D ya elegida por Jorge, efectos de biblioteca actualizada.",
+        "source": "Repositorio oficina-ia, production/glowfy/assets.json y biblioteca de Glowfy",
+        "date": "2026-11-16"
+      },
+      {
+        "id": "owner_request",
+        "text": "Jorge solicita exactamente tres videos más de Glowfy mediante el proceso de la oficina, continuando el estilo social ya trabajado, con su voz existente hLV6NMOMeGIqdvcW8Uxr. Una narración por pieza, sin clonar ni generar música/efectos nuevos. Entregar para revisión; no aprobar, publicar ni agendar. Los efectos v3 mejoraron y su perfeccionamiento se pospone.",
+        "source": "Solicitud de Jorge: hagamos 3 videos mas, pon a la oficina a trabajar",
+        "date": "2026-11-16"
+      },
+      {
+        "id": "production_contract",
+        "text": "Formato vertical 1080x1920 a 30 fps; objetivo 18–25 s determinado por voz real. Exactamente CUATRO escenas. Narración natural en español, voseo coherente, 40–50 palabras TOTAL y máximo 480 caracteres; narration debe ser concatenación exacta de scenes[].narration en orden. Cada text de escena debe tener máximo 5 palabras y 28 caracteres, titulares específicos (no instrucciones). Última escena y última frase: Conocé Glowfy. No leer URL ni etiquetas técnicas. Solo animación de los recursos disponibles. Un único CTA. Investigación basada en evidencia aportada. Evaluar el ángulo específico, no repetir el anterior ¿Justo ahora?/Mientras atendés.",
+        "source": "Dirección de producción del lote y límites del motor existente",
+        "date": "2026-11-16"
+      },
+      {
+        "id": "piece_direction",
+        "text": "Dolor: una cita se pierde entre conversaciones. Recorrido: 1 mensajes y una cita pendiente de recordar; 2 teléfono envía recordatorio ilustrado para mañana 16:00 y clienta dice Gracias; 3 agenda destaca cita y recordatorio enviado; 4 cierre. No afirmar asistencia garantizada ni confirmar confirmaciones automáticas para todos los planes. Expresar según tu plan en voz o pantalla.",
+        "source": "Dirección creativa específica de esta pieza",
+        "date": "2026-11-16"
+      }
+    ]
+  },
+  {
+    "key": "horario",
+    "variant": "reschedule",
+    "objective": "Glowfy · Cambiar de horario sin enredos",
+    "cta": "Conocé Glowfy",
+    "audience": "Profesionales y dueñas de negocios de belleza que gestionan sus citas por WhatsApp",
+    "channel": "instagram",
+    "qualityStandard": "cresova-reference-v1",
+    "evidence": [
+      {
+        "id": "glowfy_product",
+        "text": "Glowfy reúne agenda, atención por WhatsApp y automatizaciones para negocios de belleza. La IA comparte disponibilidad y ayuda a agendar o modificar citas. Envía recordatorios y seguimientos según el plan. No prometer resultados, reducciones numéricas, cero olvidos, precios ni promociones. La presentación comercial se recuperó para esta producción; no se verificó una tendencia externa.",
+        "source": "https://drive.google.com/file/d/1dqCQWgGxyrvrRIANwfgoeWJCPO9tv_hg/view",
+        "date": "2026-11-16"
+      },
+      {
+        "id": "brand_assets",
+        "text": "Logo oficial y fuentes Montserrat e Instrument Serif disponibles en el render de la oficina. Paleta violeta #AD52E0, berenjena #23152F, marfil #FAF7FD. URL getglowfy.com. Recursos dibujados y animables: salón, manos de manicure, teléfono y mensajes, reloj, agenda y cita. Toda interfaz es ejemplo ilustrado; no captura real del producto. Música Glowfy A/B/C/D ya elegida por Jorge, efectos de biblioteca actualizada.",
+        "source": "Repositorio oficina-ia, production/glowfy/assets.json y biblioteca de Glowfy",
+        "date": "2026-11-16"
+      },
+      {
+        "id": "owner_request",
+        "text": "Jorge solicita exactamente tres videos más de Glowfy mediante el proceso de la oficina, continuando el estilo social ya trabajado, con su voz existente hLV6NMOMeGIqdvcW8Uxr. Una narración por pieza, sin clonar ni generar música/efectos nuevos. Entregar para revisión; no aprobar, publicar ni agendar. Los efectos v3 mejoraron y su perfeccionamiento se pospone.",
+        "source": "Solicitud de Jorge: hagamos 3 videos mas, pon a la oficina a trabajar",
+        "date": "2026-11-16"
+      },
+      {
+        "id": "production_contract",
+        "text": "Formato vertical 1080x1920 a 30 fps; objetivo 18–25 s determinado por voz real. Exactamente CUATRO escenas. Narración natural en español, voseo coherente, 40–50 palabras TOTAL y máximo 480 caracteres; narration debe ser concatenación exacta de scenes[].narration en orden. Cada text de escena debe tener máximo 5 palabras y 28 caracteres, titulares específicos (no instrucciones). Última escena y última frase: Conocé Glowfy. No leer URL ni etiquetas técnicas. Solo animación de los recursos disponibles. Un único CTA. Investigación basada en evidencia aportada. Evaluar el ángulo específico, no repetir el anterior ¿Justo ahora?/Mientras atendés.",
+        "source": "Dirección de producción del lote y límites del motor existente",
+        "date": "2026-11-16"
+      },
+      {
+        "id": "piece_direction",
+        "text": "Dolor: clienta necesita mover una cita de 11:00 a 16:00. Recorrido: 1 mensaje pidiendo cambio en salón; 2 teléfono clienta pide otro horario, asistente ofrece 16:00, clienta acepta; 3 bloque de calendario se mueve visualmente de 11:00 a 16:00 y muestra cita actualizada; 4 cierre. No afirmar ausencia de conflictos garantizada; ayuda a modificar citas.",
+        "source": "Dirección creativa específica de esta pieza",
+        "date": "2026-11-16"
+      }
+    ]
+  }
+]

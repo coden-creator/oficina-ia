@@ -1,4 +1,5 @@
 # Producción multimarcas: integración propuesta
+> Directriz vigente de Jorge: los dos videos aportados el 15 de noviembre son el mínimo visual y audiovisual. Ver [estándar y cambios requeridos](ESTANDAR-AUDIOVISUAL.md). Las tarjetas fueron rechazadas; el ensayo ilustrado posterior tampoco acredita equivalencia con las referencias.
 Corte de inspección local: 15 noviembre 2026. Documento de diseño, NO prueba de producción autónoma ni despliegue.
 
 ## Inventario comprobado

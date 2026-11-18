@@ -1,0 +1,925 @@
+{
+  "sha256": "3d73fd595807e4e26c41562c6a46ce4c27a3eb88607bf929079f06d4dc2a8806",
+  "bytes": 7706372,
+  "duration": 255.75,
+  "effects": 36,
+  "playbacksVerified": 144,
+  "minimumWaveformCorrelation": 0.99001,
+  "aacDecoded": true,
+  "fullVideoDecoded": true,
+  "chapters": 36,
+  "integratedLufs": -22.99,
+  "truePeakDbtp": -9.88,
+  "contactSheetFrames": 72,
+  "subjectiveListeningClaimed": false,
+  "repairsApplied": false,
+  "paidRequests": 0,
+  "events": [
+    {
+      "id": "apagado-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99999
+    },
+    {
+      "id": "apagado-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 1.0
+    },
+    {
+      "id": "apagado-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 1.0
+    },
+    {
+      "id": "apagado-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99999
+    },
+    {
+      "id": "apagado-02",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 1.0
+    },
+    {
+      "id": "apagado-02",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99998
+    },
+    {
+      "id": "apagado-02",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 1.0
+    },
+    {
+      "id": "apagado-02",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 1.0
+    },
+    {
+      "id": "bloques-madera-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99987
+    },
+    {
+      "id": "bloques-madera-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99995
+    },
+    {
+      "id": "bloques-madera-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99997
+    },
+    {
+      "id": "bloques-madera-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99997
+    },
+    {
+      "id": "bombillo-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.9999
+    },
+    {
+      "id": "bombillo-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99992
+    },
+    {
+      "id": "bombillo-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99989
+    },
+    {
+      "id": "bombillo-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99984
+    },
+    {
+      "id": "burbuja-mensaje-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99999
+    },
+    {
+      "id": "burbuja-mensaje-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99999
+    },
+    {
+      "id": "burbuja-mensaje-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99996
+    },
+    {
+      "id": "burbuja-mensaje-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99996
+    },
+    {
+      "id": "burbuja-mensaje-02",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99999
+    },
+    {
+      "id": "burbuja-mensaje-02",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99999
+    },
+    {
+      "id": "burbuja-mensaje-02",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99999
+    },
+    {
+      "id": "burbuja-mensaje-02",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99995
+    },
+    {
+      "id": "cajas-carton-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99997
+    },
+    {
+      "id": "cajas-carton-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99997
+    },
+    {
+      "id": "cajas-carton-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99997
+    },
+    {
+      "id": "cajas-carton-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99997
+    },
+    {
+      "id": "calendario-arrancar-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99954
+    },
+    {
+      "id": "calendario-arrancar-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99957
+    },
+    {
+      "id": "calendario-arrancar-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99922
+    },
+    {
+      "id": "calendario-arrancar-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.9992
+    },
+    {
+      "id": "campana-recepcion-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99996
+    },
+    {
+      "id": "campana-recepcion-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99998
+    },
+    {
+      "id": "campana-recepcion-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99994
+    },
+    {
+      "id": "campana-recepcion-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99993
+    },
+    {
+      "id": "campana-recepcion-02",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99998
+    },
+    {
+      "id": "campana-recepcion-02",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99998
+    },
+    {
+      "id": "campana-recepcion-02",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99997
+    },
+    {
+      "id": "campana-recepcion-02",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99998
+    },
+    {
+      "id": "check-lapiz-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99688
+    },
+    {
+      "id": "check-lapiz-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99811
+    },
+    {
+      "id": "check-lapiz-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99596
+    },
+    {
+      "id": "check-lapiz-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99628
+    },
+    {
+      "id": "clic-boton-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99987
+    },
+    {
+      "id": "clic-boton-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99989
+    },
+    {
+      "id": "clic-boton-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99981
+    },
+    {
+      "id": "clic-boton-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99984
+    },
+    {
+      "id": "clic-boton-02",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99998
+    },
+    {
+      "id": "clic-boton-02",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99999
+    },
+    {
+      "id": "clic-boton-02",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99998
+    },
+    {
+      "id": "clic-boton-02",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99999
+    },
+    {
+      "id": "cuaderno-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99949
+    },
+    {
+      "id": "cuaderno-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99955
+    },
+    {
+      "id": "cuaderno-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.9989
+    },
+    {
+      "id": "cuaderno-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99783
+    },
+    {
+      "id": "cuchara-taza-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99984
+    },
+    {
+      "id": "cuchara-taza-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99991
+    },
+    {
+      "id": "cuchara-taza-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99982
+    },
+    {
+      "id": "cuchara-taza-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99984
+    },
+    {
+      "id": "destello-particulas-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99774
+    },
+    {
+      "id": "destello-particulas-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99716
+    },
+    {
+      "id": "destello-particulas-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99685
+    },
+    {
+      "id": "destello-particulas-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99734
+    },
+    {
+      "id": "destello-particulas-02",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99893
+    },
+    {
+      "id": "destello-particulas-02",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99884
+    },
+    {
+      "id": "destello-particulas-02",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99814
+    },
+    {
+      "id": "destello-particulas-02",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99805
+    },
+    {
+      "id": "ding-confirmacion-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 1.0
+    },
+    {
+      "id": "ding-confirmacion-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99999
+    },
+    {
+      "id": "ding-confirmacion-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 1.0
+    },
+    {
+      "id": "ding-confirmacion-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 1.0
+    },
+    {
+      "id": "ding-confirmacion-02",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 1.0
+    },
+    {
+      "id": "ding-confirmacion-02",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99999
+    },
+    {
+      "id": "ding-confirmacion-02",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99999
+    },
+    {
+      "id": "ding-confirmacion-02",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99999
+    },
+    {
+      "id": "engranes-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99976
+    },
+    {
+      "id": "engranes-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99969
+    },
+    {
+      "id": "engranes-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99967
+    },
+    {
+      "id": "engranes-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99001
+    },
+    {
+      "id": "golpe-grave-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 1.0
+    },
+    {
+      "id": "golpe-grave-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 1.0
+    },
+    {
+      "id": "golpe-grave-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 1.0
+    },
+    {
+      "id": "golpe-grave-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99994
+    },
+    {
+      "id": "golpe-grave-02",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99973
+    },
+    {
+      "id": "golpe-grave-02",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 1.0
+    },
+    {
+      "id": "golpe-grave-02",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 1.0
+    },
+    {
+      "id": "golpe-grave-02",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 1.0
+    },
+    {
+      "id": "hoja-arrugada-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99975
+    },
+    {
+      "id": "hoja-arrugada-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99976
+    },
+    {
+      "id": "hoja-arrugada-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99941
+    },
+    {
+      "id": "hoja-arrugada-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99934
+    },
+    {
+      "id": "llave-candado-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99989
+    },
+    {
+      "id": "llave-candado-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99936
+    },
+    {
+      "id": "llave-candado-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99838
+    },
+    {
+      "id": "llave-candado-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99837
+    },
+    {
+      "id": "papel-hojas-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99987
+    },
+    {
+      "id": "papel-hojas-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99986
+    },
+    {
+      "id": "papel-hojas-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.9993
+    },
+    {
+      "id": "papel-hojas-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99937
+    },
+    {
+      "id": "planta-crece-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99879
+    },
+    {
+      "id": "planta-crece-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99897
+    },
+    {
+      "id": "planta-crece-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99704
+    },
+    {
+      "id": "planta-crece-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99707
+    },
+    {
+      "id": "pop-ui-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99999
+    },
+    {
+      "id": "pop-ui-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99999
+    },
+    {
+      "id": "pop-ui-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99999
+    },
+    {
+      "id": "pop-ui-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99999
+    },
+    {
+      "id": "pop-ui-02",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99995
+    },
+    {
+      "id": "pop-ui-02",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99999
+    },
+    {
+      "id": "pop-ui-02",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99998
+    },
+    {
+      "id": "pop-ui-02",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99999
+    },
+    {
+      "id": "sello-tinta-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99991
+    },
+    {
+      "id": "sello-tinta-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99991
+    },
+    {
+      "id": "sello-tinta-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99989
+    },
+    {
+      "id": "sello-tinta-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.9999
+    },
+    {
+      "id": "sobre-abrir-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99894
+    },
+    {
+      "id": "sobre-abrir-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99974
+    },
+    {
+      "id": "sobre-abrir-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99949
+    },
+    {
+      "id": "sobre-abrir-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99895
+    },
+    {
+      "id": "teclas-suaves-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99912
+    },
+    {
+      "id": "teclas-suaves-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99955
+    },
+    {
+      "id": "teclas-suaves-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99879
+    },
+    {
+      "id": "teclas-suaves-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99886
+    },
+    {
+      "id": "teclas-suaves-02",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99842
+    },
+    {
+      "id": "teclas-suaves-02",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99838
+    },
+    {
+      "id": "teclas-suaves-02",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99157
+    },
+    {
+      "id": "teclas-suaves-02",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99541
+    },
+    {
+      "id": "tick-cursor-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99998
+    },
+    {
+      "id": "tick-cursor-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99998
+    },
+    {
+      "id": "tick-cursor-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99999
+    },
+    {
+      "id": "tick-cursor-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99999
+    },
+    {
+      "id": "tick-cursor-02",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99988
+    },
+    {
+      "id": "tick-cursor-02",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99988
+    },
+    {
+      "id": "tick-cursor-02",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.9998
+    },
+    {
+      "id": "tick-cursor-02",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99987
+    },
+    {
+      "id": "whoosh-corto-01",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 0.99999
+    },
+    {
+      "id": "whoosh-corto-01",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99999
+    },
+    {
+      "id": "whoosh-corto-01",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99999
+    },
+    {
+      "id": "whoosh-corto-01",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99999
+    },
+    {
+      "id": "whoosh-corto-02",
+      "version": "original",
+      "repeat": 1,
+      "correlation": 1.0
+    },
+    {
+      "id": "whoosh-corto-02",
+      "version": "original",
+      "repeat": 2,
+      "correlation": 0.99999
+    },
+    {
+      "id": "whoosh-corto-02",
+      "version": "processed",
+      "repeat": 1,
+      "correlation": 0.99999
+    },
+    {
+      "id": "whoosh-corto-02",
+      "version": "processed",
+      "repeat": 2,
+      "correlation": 0.99999
+    }
+  ],
+  "browserLocal": {
+    "live": false,
+    "effects": 36,
+    "duration": 255.75,
+    "videoPlayback": true,
+    "chapterSeeking": true,
+    "httpRanges": true,
+    "downloadHashVerified": true,
+    "brandIsolation": true,
+    "keyboard": true,
+    "mobileNoOverflow": true,
+    "javascriptErrors": 0
+  },
+  "visualFramesInspected": 72,
+  "deployment": {
+    "verified": true,
+    "commit": "2cabb30c9b1e3e0607dd3d0807ffabaa78a56891",
+    "url": "https://service-oficina-jorge.flb2mp.easypanel.host/?brand=glowfy#/estudio?efectos=1",
+    "existingApp": true,
+    "mountsAndLimitsPreserved": true,
+    "resourcesAfter": {
+      "cpuPercent": 13.62,
+      "memoryPercent": 34.49
+    },
+    "codexConnected": true,
+    "existingVideoUnchanged": true,
+    "approved": false,
+    "published": false
+  },
+  "browserLive": {
+    "live": true,
+    "effects": 36,
+    "duration": 255.75,
+    "videoPlayback": true,
+    "chapterSeeking": true,
+    "httpRanges": true,
+    "downloadHashVerified": true,
+    "brandIsolation": true,
+    "keyboard": true,
+    "mobileNoOverflow": true,
+    "javascriptErrors": 0
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "date": "2026-11-16",
+  "timezone": "America/Guatemala",
+  "scope": "Three existing Glowfy ideas promoted to finished videos at owner request",
+  "status": "awaiting_owner_review",
+  "renderer": "glowfy-directed-motion-v1",
+  "creativeContentSource": "office Codex worker, not activator-authored scripts or edit plans",
+  "clips": [
+    {
+      "id": "1d88f434-f3d4-44be-916d-9808f3dda238",
+      "version": 4,
+      "duration": 24.1,
+      "sha256": "4f82be37c64adcdc6d73c4679faf6e79116fc916b2063bae80c272e6e0d1e858",
+      "bytes": 2645873,
+      "voice": {
+        "provider": "elevenlabs",
+        "model": "eleven_v4",
+        "characters": null,
+        "submittedCharacters": 379
+      },
+      "music": {
+        "id": "glowfy-b",
+        "title": "Variante B"
+      },
+      "realStages": [
+        "research",
+        "strategy",
+        "script",
+        "creative_review",
+        "art_direction",
+        "edit_plan"
+      ],
+      "ownerApproval": null,
+      "technicalPassed": true
+    },
+    {
+      "id": "ddfc7eca-9be7-4f06-9976-4721576cbc3a",
+      "version": 5,
+      "duration": 21.133333,
+      "sha256": "159e3c0fd67de90a03f79ca1488593677220b926de1cde5daa4377aa36acecb1",
+      "bytes": 2170951,
+      "voice": {
+        "provider": "elevenlabs",
+        "model": "eleven_v4",
+        "characters": null,
+        "submittedCharacters": 337
+      },
+      "music": {
+        "id": "glowfy-a",
+        "title": "Variante A"
+      },
+      "realStages": [
+        "research",
+        "strategy",
+        "script",
+        "creative_review",
+        "art_direction",
+        "edit_plan"
+      ],
+      "ownerApproval": null,
+      "technicalPassed": true
+    },
+    {
+      "id": "4a6b05da-8246-428c-bbbb-74b772616e7c",
+      "version": 4,
+      "duration": 22.733333,
+      "sha256": "3104d0420597f68223d8cdf40e48ba9550dfeb9958193c2238ff6decfe9d6a85",
+      "bytes": 2473940,
+      "voice": {
+        "provider": "elevenlabs",
+        "model": "eleven_v4",
+        "characters": null,
+        "submittedCharacters": 361
+      },
+      "music": {
+        "id": "glowfy-b",
+        "title": "Variante B"
+      },
+      "realStages": [
+        "research",
+        "strategy",
+        "script",
+        "creative_review",
+        "art_direction",
+        "edit_plan"
+      ],
+      "ownerApproval": null,
+      "technicalPassed": true
+    }
+  ],
+  "verification": {
+    "downloadHashChecked": true,
+    "serverTechnicalQaPassed": true,
+    "localContactSheetsReviewed": true,
+    "subjectiveListeningVerified": false,
+    "browserPlayback": "pending final release check"
+  },
+  "notes": [
+    "One versioned speech request per clip; first two renderer-only repairs require the exact cached narration and cannot request synthesis.",
+    "Third edit plan initially failed camera/setting diversity validation; resumed with explicit constraints and passed.",
+    "No owner approval, scheduling or publication.",
+    "Renderer uses a finite trusted illustration vocabulary; no claim of arbitrary video synthesis or aesthetic equivalence to the references."
+  ]
+}

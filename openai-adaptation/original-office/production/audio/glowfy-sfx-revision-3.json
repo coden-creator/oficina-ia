@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 1,
+  "brandId": "glowfy",
+  "title": "4 efectos nuevos con SFX v3",
+  "purpose": "Comparación para revisión de Jorge: no es un video de publicación",
+  "duration": 33.5,
+  "width": 720,
+  "height": 1280,
+  "fps": 24,
+  "sampleRate": 48000,
+  "tracks": 4,
+  "playbacks": 16,
+  "newPaidGenerations": 4,
+  "listeningProcessing": "A uses the rejected revision-2 prepared WAV. B uses SFX v3, with DC removal, silent margin trimming, 1/8 ms edge fades and peak gain; no EQ or fixed-duration truncation. Audition uses scalar gain to approximately -10 dBTP. AAC is lossy.",
+  "chapters": [
+    {
+      "number": 16,
+      "id": "destello-particulas-01",
+      "title": "Destello de partículas 01",
+      "start": 5.0,
+      "events": [
+        {
+          "number": 16,
+          "id": "destello-particulas-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 46,
+          "ticks": 8,
+          "start": 5.75,
+          "duration": 1.0,
+          "gainDb": -4.0,
+          "sourceSha256": "2725863af4c5acc045f4d9ce8eacb6e03907331ccf4986886e950aad85210be2"
+        },
+        {
+          "number": 16,
+          "id": "destello-particulas-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 58,
+          "ticks": 8,
+          "start": 7.25,
+          "duration": 1.0,
+          "gainDb": -4.0,
+          "sourceSha256": "2725863af4c5acc045f4d9ce8eacb6e03907331ccf4986886e950aad85210be2"
+        },
+        {
+          "number": 16,
+          "id": "destello-particulas-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 72,
+          "ticks": 8,
+          "start": 9.0,
+          "duration": 0.9134,
+          "gainDb": -4.0,
+          "sourceSha256": "01ba7fc1379a56a4a8eb5e5fb9608b18af1e4310d6ba526fe24ce44129639914"
+        },
+        {
+          "number": 16,
+          "id": "destello-particulas-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 84,
+          "ticks": 8,
+          "start": 10.5,
+          "duration": 0.9134,
+          "gainDb": -4.0,
+          "sourceSha256": "01ba7fc1379a56a4a8eb5e5fb9608b18af1e4310d6ba526fe24ce44129639914"
+        }
+      ],
+      "technicalReview": false,
+      "end": 12.25
+    },
+    {
+      "number": 17,
+      "id": "destello-particulas-02",
+      "title": "Destello de partículas 02",
+      "start": 12.25,
+      "events": [
+        {
+          "number": 17,
+          "id": "destello-particulas-02",
+          "version": "original",
+          "repeat": 1,
+          "tick": 104,
+          "ticks": 10,
+          "start": 13.0,
+          "duration": 1.24,
+          "gainDb": -4.0,
+          "sourceSha256": "fe275a697a16000a8267e02a77eaf9a0553ba6fc3784f2a268de3df53fe41ca3"
+        },
+        {
+          "number": 17,
+          "id": "destello-particulas-02",
+          "version": "original",
+          "repeat": 2,
+          "tick": 118,
+          "ticks": 10,
+          "start": 14.75,
+          "duration": 1.24,
+          "gainDb": -4.0,
+          "sourceSha256": "fe275a697a16000a8267e02a77eaf9a0553ba6fc3784f2a268de3df53fe41ca3"
+        },
+        {
+          "number": 17,
+          "id": "destello-particulas-02",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 134,
+          "ticks": 9,
+          "start": 16.75,
+          "duration": 1.0494,
+          "gainDb": -4.0,
+          "sourceSha256": "5d1b597049e913ee12db03c96a2dc89cd61e3e74d10020d1f5898ac4ecaccac6"
+        },
+        {
+          "number": 17,
+          "id": "destello-particulas-02",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 147,
+          "ticks": 9,
+          "start": 18.375,
+          "duration": 1.0494,
+          "gainDb": -4.0,
+          "sourceSha256": "5d1b597049e913ee12db03c96a2dc89cd61e3e74d10020d1f5898ac4ecaccac6"
+        }
+      ],
+      "technicalReview": false,
+      "end": 20.25
+    },
+    {
+      "number": 33,
+      "id": "tick-cursor-01",
+      "title": "Tick de cursor 01",
+      "start": 20.25,
+      "events": [
+        {
+          "number": 33,
+          "id": "tick-cursor-01",
+          "version": "original",
+          "repeat": 1,
+          "tick": 168,
+          "ticks": 2,
+          "start": 21.0,
+          "duration": 0.16,
+          "gainDb": -4.0,
+          "sourceSha256": "f93e7d873ed0c4649b609f7bb0c1903817738b1cdf815946cf20d9c38e03c057"
+        },
+        {
+          "number": 33,
+          "id": "tick-cursor-01",
+          "version": "original",
+          "repeat": 2,
+          "tick": 174,
+          "ticks": 2,
+          "start": 21.75,
+          "duration": 0.16,
+          "gainDb": -4.0,
+          "sourceSha256": "f93e7d873ed0c4649b609f7bb0c1903817738b1cdf815946cf20d9c38e03c057"
+        },
+        {
+          "number": 33,
+          "id": "tick-cursor-01",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 182,
+          "ticks": 2,
+          "start": 22.75,
+          "duration": 0.202,
+          "gainDb": -4.0,
+          "sourceSha256": "c563b2b22749ccb11b0d98e7a70577c3be776b3ec4f959d70080d4ec76d697d7"
+        },
+        {
+          "number": 33,
+          "id": "tick-cursor-01",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 188,
+          "ticks": 2,
+          "start": 23.5,
+          "duration": 0.202,
+          "gainDb": -4.0,
+          "sourceSha256": "c563b2b22749ccb11b0d98e7a70577c3be776b3ec4f959d70080d4ec76d697d7"
+        }
+      ],
+      "technicalReview": false,
+      "end": 24.5
+    },
+    {
+      "number": 34,
+      "id": "tick-cursor-02",
+      "title": "Tick de cursor 02",
+      "start": 24.5,
+      "events": [
+        {
+          "number": 34,
+          "id": "tick-cursor-02",
+          "version": "original",
+          "repeat": 1,
+          "tick": 202,
+          "ticks": 2,
+          "start": 25.25,
+          "duration": 0.16,
+          "gainDb": -4.0,
+          "sourceSha256": "2f458cf9beafd434f6b7abf62ff359bb9bbafbb1c6f57c5ae465d2ab2c806dd8"
+        },
+        {
+          "number": 34,
+          "id": "tick-cursor-02",
+          "version": "original",
+          "repeat": 2,
+          "tick": 208,
+          "ticks": 2,
+          "start": 26.0,
+          "duration": 0.16,
+          "gainDb": -4.0,
+          "sourceSha256": "2f458cf9beafd434f6b7abf62ff359bb9bbafbb1c6f57c5ae465d2ab2c806dd8"
+        },
+        {
+          "number": 34,
+          "id": "tick-cursor-02",
+          "version": "processed",
+          "repeat": 1,
+          "tick": 216,
+          "ticks": 1,
+          "start": 27.0,
+          "duration": 0.0582,
+          "gainDb": -4.0,
+          "sourceSha256": "29fad18a6e72d3996f23b1bb7d4c47e5a6d9c58e7cfe690f8b9d9e2736b6f181"
+        },
+        {
+          "number": 34,
+          "id": "tick-cursor-02",
+          "version": "processed",
+          "repeat": 2,
+          "tick": 221,
+          "ticks": 1,
+          "start": 27.625,
+          "duration": 0.0582,
+          "gainDb": -4.0,
+          "sourceSha256": "29fad18a6e72d3996f23b1bb7d4c47e5a6d9c58e7cfe690f8b9d9e2736b6f181"
+        }
+      ],
+      "technicalReview": false,
+      "end": 28.5
+    }
+  ],
+  "file": "glowfy-sfx-revision-3.mp4",
+  "bytes": 777064,
+  "sha256": "146f443869423e6cab17584072802f0596a429b0b635782ab167c423c14bc5f0"
+}

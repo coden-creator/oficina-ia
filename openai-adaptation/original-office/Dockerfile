@@ -2,10 +2,17 @@
 FROM node:22.16.0-bookworm-slim
 WORKDIR /app
 ENV NODE_ENV=production HOST=0.0.0.0 PORT=3000 OFFICE_VIDEO_DATA_DIR=/data/video
-RUN mkdir -p /data && chown node:node /data && chmod 700 /data
+RUN mkdir -p /data/video && chown node:node /data /data/video && chmod 700 /data /data/video
 COPY --chown=node:node server.mjs start.mjs agents-display.json ./
 COPY --chown=node:node public/ ./public/
 COPY --chown=node:node video/ ./video/
+COPY --chown=node:node connections/ ./connections/
+COPY --chown=node:node production/reference-standard.mjs ./production/reference-standard.mjs
+COPY --chown=node:node production/music-library.mjs ./production/music-library.mjs
+COPY --chown=node:node production/sound-catalog.mjs ./production/sound-catalog.mjs
+COPY --chown=node:node production/sfx-review-plan.mjs production/sfx-review-batch.mjs ./production/
+COPY --chown=node:node production/sfx-catalog/review-decisions.json ./production/sfx-catalog/review-decisions.json
+COPY --chown=node:node production/audio/glowfy-* ./production/audio/
 USER node
 EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 CMD node -e "require('http').get('http://127.0.0.1:3000/health',r=>{r.resume();process.exit(r.statusCode===200?0:1)}).on('error',()=>process.exit(1))"

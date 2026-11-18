@@ -1,0 +1,15 @@
+{
+  "image": "oficina-runtime:implementation-r1",
+  "realAccountUsed": false,
+  "inferenceUsed": false,
+  "productionModified": false,
+  "unrelatedVolumeRefused": true,
+  "freshVolumePermissions": {
+    "uid": 1000,
+    "mode": "700"
+  },
+  "persistsAfterContainerRemoved": true,
+  "unauthenticatedStatusConfirmed": true,
+  "imageId": "sha256:da248f4a392dbc43ffa2ee565db92de679b7381eccf51c68034a7a3b1552d96a",
+  "scope": "Local Docker only; owner device authorization and VPS connection remain pending."
+}

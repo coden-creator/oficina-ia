@@ -1,0 +1,215 @@
+{
+  "date": "2026-11-16",
+  "timezone": "America/Guatemala",
+  "skill": {
+    "name": "Motion Video Director",
+    "version": "3.5.2",
+    "uploadedZipSha256": "cf64e540971b181a486b4dc52bc05024cee4aaafac29d75dfbd9ad85bb593890",
+    "scope": "Read all unique guides, scripts and templates; duplicate license/readme/release files checked against package",
+    "privateLocalUse": true,
+    "installedInProductionWorker": false,
+    "protectedMaterialsRedistributed": false
+  },
+  "referenceAnalysis": {
+    "earlierReferences": [
+      "Final 2026-11-15-16-32.mp4",
+      "Final 2026-11-15-16-47.mp4"
+    ],
+    "additionalReferences": [
+      {
+        "id": "ref-3",
+        "file": "Final 2026-11-15-17-56 (1).mp4",
+        "sha256": "29ca96c47a216585499a84443b63cfc904ecdd46ee9e82d279898c2aee297e03",
+        "duration": 22.066667,
+        "width": 1080,
+        "height": 1920,
+        "fps": "30/1",
+        "audio": [
+          {
+            "codec_name": "aac",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ]
+      },
+      {
+        "id": "ref-4",
+        "file": "Final 2026-11-15-17-56.mp4",
+        "sha256": "4e6126c178e35e9f6c281c1658e98a5ff7451a8b872c30477788f76815c4123a",
+        "duration": 21.9,
+        "width": 1080,
+        "height": 1920,
+        "fps": "30/1",
+        "audio": [
+          {
+            "codec_name": "aac",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ]
+      },
+      {
+        "id": "ref-5",
+        "file": "Final 2026-11-15-17-42.mp4",
+        "sha256": "d8d904648fb145d4b2705073821a34d80733ec8ed374c1ab5a0be8de00498341",
+        "duration": 22.7,
+        "width": 1080,
+        "height": 1920,
+        "fps": "30/1",
+        "audio": [
+          {
+            "codec_name": "aac",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ]
+      }
+    ],
+    "additionalFramesAt4Fps": 267,
+    "hookFramesAt30Fps": 270,
+    "visualInspection": "Full-duration overview and dense action ranges for all three additional files; earlier reference overviews and hook sheets revisited",
+    "subjectiveAudioListening": false,
+    "referenceAssetsReusedInDeliverables": false
+  },
+  "planDiagnostics": [
+    {
+      "id": "1d88f434-f3d4-44be-916d-9808f3dda238",
+      "title": "Una mesa, tres funciones",
+      "shots": 7,
+      "allObjectsRest": 4,
+      "restDurationFraction": 0.535,
+      "phoneInShot": 6,
+      "review": null,
+      "durations": [
+        2.27,
+        2.27,
+        4.87,
+        4.87,
+        3.17,
+        3.16,
+        3.49
+      ],
+      "cameras": [
+        "push",
+        "push",
+        "locked",
+        "pull",
+        "locked",
+        "overhead",
+        "locked"
+      ]
+    },
+    {
+      "id": "ddfc7eca-9be7-4f06-9976-4721576cbc3a",
+      "title": "Del otro lado del salón",
+      "shots": 7,
+      "allObjectsRest": 5,
+      "restDurationFraction": 0.756,
+      "phoneInShot": 7,
+      "review": null,
+      "durations": [
+        2.16,
+        2.16,
+        3.0,
+        3.0,
+        3.63,
+        3.63,
+        3.56
+      ],
+      "cameras": [
+        "locked",
+        "push",
+        "locked",
+        "track-right",
+        "pull",
+        "orbit",
+        "locked"
+      ]
+    },
+    {
+      "id": "4a6b05da-8246-428c-bbbb-74b772616e7c",
+      "title": "Después del último detalle",
+      "shots": 7,
+      "allObjectsRest": 3,
+      "restDurationFraction": 0.445,
+      "phoneInShot": 7,
+      "review": null,
+      "durations": [
+        3.02,
+        3.02,
+        2.41,
+        2.41,
+        4.16,
+        4.16,
+        3.56
+      ],
+      "cameras": [
+        "push",
+        "pull",
+        "locked",
+        "push",
+        "locked",
+        "pull",
+        "locked"
+      ]
+    }
+  ],
+  "diagnosticLimit": "Rest fractions describe declared object actions, not all pixel motion or perceived quality. Phone repetition alone is not an artistic rejection rule.",
+  "officeReviewWrite": {
+    "recorded": [
+      {
+        "id": "1d88f434-f3d4-44be-916d-9808f3dda238",
+        "version": 4,
+        "hash": "4f82be37c64adcdc6d73c4679faf6e79116fc916b2063bae80c272e6e0d1e858",
+        "needsChanges": [
+          "story",
+          "craft",
+          "motion",
+          "sound",
+          "originality"
+        ]
+      },
+      {
+        "id": "ddfc7eca-9be7-4f06-9976-4721576cbc3a",
+        "version": 5,
+        "hash": "159e3c0fd67de90a03f79ca1488593677220b926de1cde5daa4377aa36acecb1",
+        "needsChanges": [
+          "story",
+          "craft",
+          "motion",
+          "sound",
+          "originality"
+        ]
+      },
+      {
+        "id": "4a6b05da-8246-428c-bbbb-74b772616e7c",
+        "version": 4,
+        "hash": "3104d0420597f68223d8cdf40e48ba9550dfeb9958193c2238ff6decfe9d6a85",
+        "needsChanges": [
+          "story",
+          "craft",
+          "motion",
+          "sound",
+          "originality"
+        ]
+      }
+    ],
+    "allNineFilesPreserved": true,
+    "noNewJobs": true,
+    "noInference": true,
+    "noGeneration": true,
+    "noPublication": true
+  },
+  "tests": {
+    "passed": 31,
+    "providerCalls": 0,
+    "scope": [
+      "exact-version audiovisual history",
+      "office coordinator",
+      "directed production regression"
+    ]
+  },
+  "newVideosGenerated": 0,
+  "newAudioGenerated": 0,
+  "rendererReplaced": false
+}

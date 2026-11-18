@@ -1,0 +1,17 @@
+{
+  "duration": 12,
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "timingBasis": "visual prototype, no narration timing claimed",
+  "events": {
+    "messageOne": 0.9,
+    "messageTwo": 2.0,
+    "phoneFocus": 3.5,
+    "customer": 4.25,
+    "assistant": 5.1,
+    "reply": 6.35,
+    "appointment": 7.45,
+    "closing": 9.3
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "scope": "Four music variants selected by Jorge for Glowfy; videos still require separate review",
+  "musicGeneratedCount": 4,
+  "estimatedCreditsAuthorized": 2200,
+  "reportedFinalCredits": 1199.73,
+  "newProviderCallsForIntegration": 0,
+  "nodeTests": {
+    "passed": 50,
+    "note": "28 core tests including corrected HTTP transport test; 22 navigation/data/voice-ledger regression tests. Synthetic production inputs are not new AI outputs."
+  },
+  "localBrowser": {
+    "tracks": 4,
+    "audioPlayback": true,
+    "downloadHashVerified": true,
+    "brandIsolation": true,
+    "keyboard": true,
+    "mobileNoOverflow": true,
+    "javascriptErrors": 0
+  },
+  "liveDeployment": {
+    "codeCommit": "a1317c05cfd5c1b0e6c5dc4be2b0078a505c4340",
+    "url": "https://service-oficina-jorge.flb2mp.easypanel.host/?brand=glowfy#/estudio?musica=1",
+    "healthMarkerVerified": true,
+    "browser": {
+      "tracks": 4,
+      "audioPlayback": true,
+      "singlePlayback": true,
+      "downloadHashVerified": true,
+      "brandIsolation": true,
+      "keyboard": true,
+      "mobileNoOverflow": true,
+      "javascriptErrors": 0
+    },
+    "existingJobVersion": 3,
+    "existingJobState": "awaiting_review",
+    "existingArtifactHashUnchanged": "020fd68ffd43f8f998aedbcffaf6df38592cc2b66f9bf7089a48f6f67846aab1",
+    "codexConnected": true,
+    "mountsUnchanged": true,
+    "limitsUnchanged": true
+  },
+  "existingVideoRerendered": false,
+  "published": false
+}

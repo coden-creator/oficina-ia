@@ -1,7 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
 test('runtime build pins official Codex package and Debian FFmpeg, does not autoauthenticate',()=>{
  const pkg=JSON.parse(fs.readFileSync(new URL('./runtime-package/package.json',import.meta.url)));const lock=JSON.parse(fs.readFileSync(new URL('./runtime-package/package-lock.json',import.meta.url)));assert.equal(pkg.dependencies['@openai/codex'],'0.167.0-alpha.4');const p=lock.packages['node_modules/@openai/codex'];assert.equal(p.version,pkg.dependencies['@openai/codex']);assert.match(p.resolved,/^https:\/\/registry\.npmjs\.org\/@openai\/codex\//);assert.match(p.integrity,/^sha512-/);
- const docker=fs.readFileSync(new URL('./Dockerfile.runtime',import.meta.url),'utf8');assert.match(docker,/ffmpeg=7:5\.1\.9-0\+deb12u1/);assert.match(docker,/npm ci --omit=dev --ignore-scripts/);assert.match(docker,/USER node/);assert.match(docker,/CMD \["node","start.mjs"\]/);assert.ok(!/codex login|auth\.json|COPY \. /i.test(docker));
+ const docker=fs.readFileSync(new URL('./Dockerfile.runtime',import.meta.url),'utf8');assert.match(docker,/ffmpeg=7:5\.1\.9-0\+deb12u1/);assert.match(docker,/npm ci --omit=dev --ignore-scripts/);assert.match(docker,/COPY --from=codex-install --chmod=755 \/codex-vendor\//);assert.match(docker,/USER node/);assert.match(docker,/CMD \["node","start.mjs"\]/);assert.ok(!/codex login|auth\.json|COPY \. /i.test(docker));
  const start=fs.readFileSync(new URL('./start.mjs',import.meta.url),'utf8');assert.ok(!/launchIsolatedCodex|ChatGPTDraftRuntime|\.connect\(/.test(start));
 });
 test('deny-all Docker context includes transitive static and worker code, excludes tests and secrets',()=>{

@@ -1,33 +1,42 @@
-// Compatibility boot: original HTML/CSS/OfficeHQ retained; original operational JS NOT loaded.
+// The original office scene is preserved. Operational views use the adapted backend.
+import {mountOfficePanel} from './office-panel.js';
 import {OfficeHQ} from './officehq.js';
 import {mountVideoPanel} from './video-panel.js';
 import {mountNavigation} from './navigation.js';
-const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const notice=$('#compat-notice');
-const config=await fetch('/api/config').then(r=>{if(!r.ok)throw Error('config');return r.json();}).catch(()=>{notice.textContent='No se pudo cargar la oficina. Revisa la conexión o vuelve a iniciar sesión. Las acciones siguen deshabilitadas.';throw new Error('OFFICE_CONFIG_UNAVAILABLE');});
-// Disable original operational forms before exposing navigation. No data keys or outbound actions.
-for(const e of $$('input,textarea,select,button'))e.disabled=true;
-for(const f of $$('form'))f.addEventListener('submit',e=>e.preventDefault());
-for(const b of $$('.brand-text b'))b.textContent='Oficina';
+import {createBrandContext} from './brand-context.js';
+import {mountConnectionsPanel} from './connections-panel.js';
+import {mountWorkspacePages} from './workspace-pages.js';
+import {createWorkspaceData,pageHeader,button} from './ui.js';
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],notice=$('#compat-notice');
+const config=await fetch('/api/config').then(response=>{if(!response.ok)throw Error('config');return response.json();}).catch(()=>{notice.textContent='No se pudo cargar la oficina. Recargá la página o volvé a iniciar sesión.';throw Error('OFFICE_CONFIG_UNAVAILABLE');});
+for(const control of $$('input,textarea,select,button'))control.disabled=true;
+for(const form of $$('form'))form.addEventListener('submit',event=>event.preventDefault());
+for(const node of $$('.brand-text b'))node.textContent='Oficina';
+for(const node of $$('.brand-text small'))node.textContent='Contenido';
 $('#run-all').hidden=true;$('#demo-day').hidden=true;
-const openChat=id=>{
- $('#side-chat').hidden=false;$('#side-chat-head').textContent=(config.agents.find(a=>a.id===id)?.nombre||id)+' · Sin conexión';
- $('#side-chat-msgs').textContent='Este chat conserva su lugar en la oficina original. Todavía no tiene IA conectada; no se enviará ningún mensaje.';
-};
-const office=new OfficeHQ($('#office'),$('#overlay'),config.agents,{onApprovalClick:()=>{},onOpenChat:openChat,onOpenGroup:openChat,onOpenRoom:()=>{location.hash='#/oficina';}});
-for(const a of office.people)office.setAgent(a.id,{status:'unavailable',text:'Sin IA conectada',lastRun:null});
-for(const b of $$('[data-side-close]')){b.disabled=false;b.addEventListener('click',()=>{$('#side-chat').hidden=true;});}
-$('#ticker').textContent='Personajes y salas originales. Animación ambiental, no ejecución de agentes.';
-for(const view of $$('.view'))if(view.dataset.view!=='oficina'){
- for(const child of [...view.children]){child.hidden=true;child.classList.add('compat-preserved-unavailable');}
- const banner=document.createElement('div');banner.className='compat-unavailable';
- const title=document.createElement('h2');title.textContent=view.dataset.view;
- const detail=document.createElement('p');detail.textContent='Sección original conservada. Su conexión está pendiente; no mostramos datos de ejemplo ni resultados en cero.';
- banner.append(title,detail);view.prepend(banner);
-}
-$('#clock').textContent=new Date().toLocaleString('es-MX',{timeZone:config.timezone});
-notice.textContent='Interfaz original recuperada · Sin IA ni servicios conectados. La animación es visual, no trabajo real.';
-
-let videoPanel;
-const navigation=mountNavigation({config,office,onBrandChange:brand=>videoPanel?.setBrand(brand)??true});
-if(config.features.videoWorkflow==='internal-workflow-only')videoPanel=mountVideoPanel(document.querySelector('[data-view="estudio"]'),{onBrandChange:brand=>navigation.syncBrand(brand)});
+const office=new OfficeHQ($('#office'),$('#overlay'),config.agents);
+for(const close of $$('[data-side-close]')){close.disabled=false;close.addEventListener('click',()=>{$('#side-chat').hidden=true;});}
+$('#ticker').textContent='Cada puesto muestra su tarea. La animación de trabajo solo se activa con una ejecución registrada.';
+for(const view of $$('.view'))if(view.dataset.view!=='oficina')for(const child of [...view.children]){child.hidden=true;child.classList.add('compat-preserved-unavailable');}
+$('#stats').hidden=true;
+$('#clock').textContent=new Intl.DateTimeFormat('es-GT',{dateStyle:'medium',timeZone:config.timezone}).format(new Date());
+const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');let paused=reducedMotion.matches,painted=false;
+const originalUpdate=office.update.bind(office),originalDraw=office.draw.bind(office),originalFit=office.fit.bind(office);
+office.update=delta=>{if(!paused&&!document.hidden&&$('[data-view="oficina"]').classList.contains('active'))originalUpdate(delta);};
+office.draw=()=>{if(!paused||!painted){originalDraw();painted=true;}};
+office.fit=(...args)=>{painted=false;return originalFit(...args);};
+const originalSetAgent=office.setAgent.bind(office);office.setAgent=(...args)=>{painted=false;return originalSetAgent(...args);};
+const animation=button(paused?'Reanudar animación':'Pausar animación',()=>{paused=!paused;painted=false;animation.querySelector('span').textContent=paused?'Reanudar animación':'Pausar animación';});
+animation.classList.add('office-animation-toggle');
+reducedMotion.addEventListener('change',event=>{paused=event.matches;painted=false;animation.querySelector('span').textContent=paused?'Reanudar animación':'Pausar animación';});
+$('[data-view="oficina"]').prepend(pageHeader('Oficina y equipo','Un equipo compartido para tus marcas, con tareas y responsabilidades visibles.',animation));
+const brandContext=createBrandContext(new URL(location.href).searchParams.get('brand'));
+const {pages,route}=mountNavigation({office,brandContext});
+const data=createWorkspaceData({brandContext,enabled:config.features.videoWorkflow==='internal-workflow-only',includeOffice:true});
+const {voiceContainer}=mountWorkspacePages({pages,config,data,brandContext});
+mountConnectionsPanel(voiceContainer);
+mountVideoPanel(pages.estudio,{brandContext,data});
+mountOfficePanel({office,view:$('[data-view="oficina"]'),data,config});
+setInterval(()=>{if(!document.hidden&&!brandContext.get().busy&&!document.querySelector('dialog[open]'))void data.refresh({quiet:true});},10000);
+for(const heading of $$('h1'))heading.tabIndex=-1;
+document.body.classList.add('office-ui');notice.hidden=true;route();

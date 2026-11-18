@@ -68,11 +68,15 @@ export class OfficeAdapter {
     if (!r?.thread?.id) throw new Error('INVALID_THREAD_RESPONSE');
     this.threads.add(r.thread.id); return r.thread.id;
   }
-  async startTurn(threadId, text, { outputSchema } = {}) {
+  async startTurn(threadId, text, { outputSchema, images = [] } = {}) {
     if (!this.ready || !this.threads.has(threadId)) throw new Error('UNKNOWN_THREAD');
     if (typeof text !== 'string' || !text.trim()) throw new Error('TEXT_REQUIRED');
     await this.checkAccount();
-    return this.client.request('turn/start', { threadId, input: [{ type: 'text', text }], ...(outputSchema ? {outputSchema} : {}) });
+    // Never infer included usage from remaining credits or percentage snapshots.
+    const usage = await this.client.request('account/rateLimits/read', { excludeResetCreditDetails: true, supportsLunaReserve: false });
+    if (usage?.ordinaryUsageAllowed !== true) throw new Error('INCLUDED_USAGE_NOT_CONFIRMED');
+    if(!Array.isArray(images)||images.length>4||images.some(x=>typeof x!=='string'||x.length>1000000||!/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(x)))throw Error('INVALID_PREVIEW_IMAGES');
+    return this.client.request('turn/start', { threadId, effort:'high', input: [{ type: 'text', text },...images.map(url=>({type:'image',url}))], ...(outputSchema ? {outputSchema} : {}) });
   }
   async interrupt(threadId, turnId) {
     if (!this.threads.has(threadId) || !turnId) throw new Error('UNKNOWN_TURN');
